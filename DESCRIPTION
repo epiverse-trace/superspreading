@@ -1,16 +1,17 @@
-Package: readepi
-Title: Import Epidemiological Data into R
+Package: superspreading
+Title: Estimate individual level variation in transmission
 Version: 0.0.1
 Authors@R: 
-    c(person("Thibaut", "Jombart", , "thibaut@data.org", role = c("aut", "cre")),
-      person("Avinash", "Laddha", , "avinash@data.org", role = c("aut")))
-Description: This package implements functions to read epidemiological data from health information systems.
+    c(person("Adam", "Kucharski", , "adam.kucharski@lshtm.ac.uk", role = c("aut", "cre")),
+      person("Seb", "Funk", , "sebastian.funk@lshtm.ac.uk", role = c("aut")))
+Description: This package implements functions to estimate individual level variation in transmission
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Imports:
     checkmate
+    bpmodels
 Suggests: 
     covr,
     testthat (>= 3.0.0)

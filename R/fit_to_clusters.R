@@ -12,7 +12,7 @@
 #' some_path <- "path to your file"
 #' read_stuff(some_path)
 
-read_stuff <- function(x) {
+fit_to_clusters <- function(x) {
   # check inputs
   checkmate::assertCharacter(x, len = 1L)
 
