@@ -34,8 +34,8 @@ not ready for use outside of the development team.
 
 Contributors to the project include:
 
--   Adam Kucharski (author)
--   Sebastian Funk (contributor)
+- Adam Kucharski (author)
+- Sebastian Funk (contributor)
 
 ### Code of Conduct
 
