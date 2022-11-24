@@ -67,6 +67,7 @@
 <div class="section level2">
 <h2 id="example-calculate-probability-of-large-epidemic">Example: calculate probability of large epidemic<a class="anchor" aria-label="anchor" href="#example-calculate-probability-of-large-epidemic"></a>
 </h2>
+<p>Case study using data from early Ebola outbreak in Guinea in 2014, stratified by index and non-index cases, as in <a href="https://doi.org/10.3201%2Feid2201.151410" class="external-link">Kucharski et al (EID, 2016)</a></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lbbe.univ-lyon1.fr/fr/fitdistrplus" class="external-link">fitdistrplus</a></span><span class="op">)</span></span>
 <span></span>
@@ -82,8 +83,8 @@
 <span><span class="va">non_index_cases</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">secondary_case_transmission</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">n_non_index</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">secondary_case_transmission</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># Transmission from all non-index cases</span></span>
 <span></span>
 <span><span class="co"># Estimate R and k for index and non-index cases</span></span>
-<span><span class="va">param_index</span> <span class="op">&lt;-</span> <span class="fu">fitdist</span><span class="op">(</span><span class="va">index_cases</span>,<span class="st">"nbinom"</span><span class="op">)</span> </span>
-<span><span class="va">param_non_index</span> <span class="op">&lt;-</span> <span class="fu">fitdist</span><span class="op">(</span><span class="va">non_index_cases</span>,<span class="st">"nbinom"</span><span class="op">)</span> </span>
+<span><span class="va">param_index</span> <span class="op">&lt;-</span> <span class="fu">fitdistrplus</span><span class="fu">::</span><span class="fu">fitdist</span><span class="op">(</span><span class="va">index_cases</span>,<span class="st">"nbinom"</span><span class="op">)</span> </span>
+<span><span class="va">param_non_index</span> <span class="op">&lt;-</span> <span class="fu">fitdistrplus</span><span class="fu">::</span><span class="fu">fitdist</span><span class="op">(</span><span class="va">non_index_cases</span>,<span class="st">"nbinom"</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="co"># Compare probability of a large outbreak when k varies according to index/non-index values, </span></span>
 <span><span class="co"># assuming R=2 and 3 initial spillover infections</span></span>
@@ -92,10 +93,10 @@
 <span><span class="va">initial_infections</span> <span class="op">=</span> <span class="fl">3</span></span>
 <span></span>
 <span><span class="co"># Probability of epidemic using k estimate from index cases</span></span>
-<span><span class="fu"><a href="reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span>R<span class="op">=</span><span class="va">R_input</span>, k<span class="op">=</span><span class="va">param_index</span><span class="op">$</span><span class="va">estimate</span><span class="op">[[</span><span class="st">"size"</span><span class="op">]</span><span class="op">]</span>,a <span class="op">=</span> <span class="va">initial_infections</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span>R <span class="op">=</span> <span class="va">R_input</span>, k <span class="op">=</span> <span class="va">param_index</span><span class="op">$</span><span class="va">estimate</span><span class="op">[[</span><span class="st">"size"</span><span class="op">]</span><span class="op">]</span>,a <span class="op">=</span> <span class="va">initial_infections</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Probability of epidemic using k estimate from non-index cases</span></span>
-<span><span class="fu"><a href="reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span>R<span class="op">=</span><span class="va">R_input</span>, k<span class="op">=</span><span class="va">param_non_index</span><span class="op">$</span><span class="va">estimate</span><span class="op">[[</span><span class="st">"size"</span><span class="op">]</span><span class="op">]</span>,a <span class="op">=</span> <span class="va">initial_infections</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span>R <span class="op">=</span> <span class="va">R_input</span>, k <span class="op">=</span> <span class="va">param_non_index</span><span class="op">$</span><span class="va">estimate</span><span class="op">[[</span><span class="st">"size"</span><span class="op">]</span><span class="op">]</span>,a <span class="op">=</span> <span class="va">initial_infections</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="development">Development<a class="anchor" aria-label="anchor" href="#development"></a>
