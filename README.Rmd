@@ -32,6 +32,40 @@ You can install the development version of _superspreading_ from
 remotes::install_github("epiverse-trace/superspreading")
 ```
 
+## Example: calculate probability of large epidemic
+
+``` r
+
+library(fitdistrplus)
+
+# Load data on transmission from index and secondary cases for Ebola in 2014
+# Source: Faye et al (https://doi.org/10.1016/S1473-3099(14)71075-8) & Althaus et al: https://doi.org/10.1016/S1473-3099(15)70135-0
+
+n_all <- 152 # Total cases
+index_case_transmission <- c(2,17,5,1,8,2,14)
+secondary_case_transmission <- c(1,2,1,4,4,1,3,3,1,1,4,9,9,1,2,1,1,1,4,3,3,4,2,5,1,2,2,1,9,1,3,1,2,1,1,2) 
+
+# Format data into index and non-index cases
+n_non_index <- sum(c(index_case_transmission,secondary_case_transmission)) # Total non-index cases
+non_index_cases <- c(secondary_case_transmission,rep(0,n_non_index-length(secondary_case_transmission))) # Transmission from all non-index cases
+
+# Estimate R and k for index and non-index cases
+param_index <- fitdist(index_cases,"nbinom") 
+param_non_index <- fitdist(non_index_cases,"nbinom") 
+
+# Compare probability of a large outbreak when k varies according to index/non-index values, 
+# assuming R=2 and 3 initial spillover infections
+
+R_input = 2
+initial_infections = 3
+
+# Probability of epidemic using k estimate from index cases
+probability_epidemic(R = R_input, k = param_index$estimate[["size"]],a = initial_infections)
+
+# Probability of epidemic using k estimate from non-index cases
+probability_epidemic(R = R_input, k = param_non_index$estimate[["size"]],a = initial_infections)
+
+```
 
 ## Development
 
