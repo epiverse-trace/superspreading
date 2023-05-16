@@ -10,6 +10,9 @@ variation in transmission
 
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![R-CMD-check](https://github.com/epiverse-trace/superspreading/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/superspreading/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/epiverse-trace/superspreading/branch/main/graph/badge.svg)](https://app.codecov.io/gh/epiverse-trace/superspreading?branch=main)
 <!-- badges: end -->
 
 ## Installation
@@ -29,6 +32,7 @@ stratified by index and non-index cases, as in [Kucharski et al (EID,
 2016)](https://doi.org/10.3201%2Feid2201.151410)
 
 ``` r
+
 library(fitdistrplus)
 
 # Load data on transmission from index and secondary cases for Ebola in 2014
@@ -71,8 +75,9 @@ not ready for use outside of the development team.
 
 Contributors to the project include:
 
--   Adam Kucharski (author)
--   Sebastian Funk (contributor)
+- Adam Kucharski (author)
+- Joshua W. Lambert (author)
+- Sebastian Funk (contributor)
 
 ### Code of Conduct
 
