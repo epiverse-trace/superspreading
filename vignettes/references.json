@@ -1,0 +1,52 @@
+[
+	{
+		"id": "lloyd-smithSuperspreadingEffectIndividual2005",
+		"type": "article-journal",
+		"container-title": "Nature",
+		"DOI": "10.1038/nature04153",
+		"ISSN": "0028-0836, 1476-4687",
+		"issue": "7066",
+		"journalAbbreviation": "Nature",
+		"language": "en",
+		"page": "355-359",
+		"source": "DOI.org (Crossref)",
+		"title": "Superspreading and the effect of individual variation on disease emergence",
+		"URL": "http://www.nature.com/articles/nature04153",
+		"volume": "438",
+		"author": [
+			{
+				"family": "Lloyd-Smith",
+				"given": "J. O."
+			},
+			{
+				"family": "Schreiber",
+				"given": "S. J."
+			},
+			{
+				"family": "Kopp",
+				"given": "P. E."
+			},
+			{
+				"family": "Getz",
+				"given": "W. M."
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2023",
+					5,
+					16
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2005",
+					11
+				]
+			]
+		}
+	}
+]
