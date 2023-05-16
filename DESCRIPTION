@@ -1,14 +1,35 @@
 Package: superspreading
 Title: Estimate individual level variation in transmission
-Version: 0.0.1
+Version: 0.0.0.9000
 Authors@R: 
-    c(person("Adam", "Kucharski", , "adam.kucharski@lshtm.ac.uk", role = c("aut", "cre")),
-      person("Seb", "Funk", , "sebastian.funk@lshtm.ac.uk", role = c("aut")))
-Description: This package implements functions to estimate individual level variation in transmission
+    c(
+        person(
+            given = "Adam", 
+            family = "Kucharski",
+            role = c("aut", "cre", "cph"),
+            email = "adam.kucharski@lshtm.ac.uk", 
+            comment = c(ORCID = "https://orcid.org/0000-0001-8814-9421")
+        ),
+        person(
+            given = "Joshua W.",
+            family = "Lambert",
+            role = c("aut", "cph"),
+            email = "joshua.lambert@lshtm.ac.uk",
+            comment = c(ORCID = "https://orcid.org/0000-0001-5218-3046")
+        ),
+        person(
+            given = "Sebastian",
+            family = "Funk",
+            role = "ctb",
+            email = "sebastian.funk@lshtm.ac.uk",
+            comment = c(ORCID = "0000-0002-2842-3406"))
+    )
+Description: Implements functions to estimate individual level variation in 
+    transmission.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Imports:
     checkmate
 Suggests: 
