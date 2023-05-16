@@ -33,6 +33,13 @@ RoxygenNote: 7.2.3
 Imports:
     checkmate
 Suggests: 
+    epiparameter,
     covr,
+    knitr,
+    bookdown,
+    rmarkdown,
     testthat (>= 3.0.0)
+Remotes:
+    epiverse-trace/epiparameter
 Config/testthat/edition: 3
+VignetteBuilder: knitr

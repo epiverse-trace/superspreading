@@ -1,0 +1,84 @@
+---
+title: "Getting started with {superspreading}"
+output: 
+  bookdown::html_vignette2:
+    code_folding: show
+pkgdown:
+  as_is: true
+bibliography: references.json
+link-citations: true
+vignette: >
+  %\VignetteIndexEntry{Getting started with {superspreading}}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The {superspreading} R package provides a set of functions for understanding
+individual-level tranmsission dynamics, and thus whether there is evidence of
+superspreading or superspreading events (SSE).
+
+Superspreading is the heterogeneity in disease transmission, beyond 
+stochasticity, such that some individuals transmit to many infectees while other
+infectors infect few or zero individuals @lloyd-smithSuperspreadingEffectIndividual2005.
+
+```{r setup}
+library(superspreading)
+library(epiparameter)
+```
+
+## Probability of epidemic
+
+The probability that a novel disease will cause a epidemic (i.e. sustained 
+transmission in the population) is determined by the nature of that diseases
+transmission heterogeneity. This variability may be an intrinsic property of 
+the disease, or a product of human behaviour and social mixing patterns.
+
+For a given value of R, that is the number of secondary cases caused by a 
+primary case, if the variability is high, the probability that the outbreak 
+will cause epidemic is low as the superspreading events are rare. Whereas for
+lower variability the probability is higher as more individuals are closer to the 
+mean (R). The `probability_epidemic()` function in {superspreading} can calculate
+this probability. `k` is the variability.
+
+```{r, prob-epidemic-k}
+probability_epidemic(R = 1.5, k = 1, a = 1)
+probability_epidemic(R = 1.5, k = 0.5, a = 1)
+probability_epidemic(R = 1.5, k = 0.1, a = 1)
+```
+
+In the above code `k` is the overdispersion parameter of a negative binomial
+distribution. Values above to one are low heterogeneity (in the case `k` 
+&rarr; $\infty$ it is a poisson distribution), and as it decreases to zero 
+heterogeneity increases. When `k` equals 1 the distribution geometric.
+
+When the value of R increases, this inevitably causes the probability of an 
+epidemic to increase.
+
+```{r, prob-epidemic-R}
+probability_epidemic(R = 0.5, k = 1, a = 1)
+probability_epidemic(R = 1.0, k = 1, a = 1)
+probability_epidemic(R = 1.5, k = 1, a = 1)
+probability_epidemic(R = 5, k = 1, a = 1)
+```
+
+Any value of R less than or equal to one will have zero probability of causing
+a sustained epidemic.
+
+Lastly on the probability of transmission dynamics causing an epidemic, the 
+number of initial infections seeding the outbreak will influence the probability.
+In `probability_epidemic()` `a` is the number of initial infections.
+
+```{r, prob-epidemic-a}
+probability_epidemic(R = 1.5, k = 1, a = 1)
+probability_epidemic(R = 1.5, k = 1, a = 10)
+probability_epidemic(R = 1.5, k = 1, a = 100)
+```
+
+## References
