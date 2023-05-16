@@ -8,9 +8,11 @@
 probability_epidemic(R, k, a)
 }
 \arguments{
-\item{R}{A \code{number} specifying the R parameter (i.e. average secondary cases per infectious individual)}
+\item{R}{A \code{number} specifying the R parameter (i.e. average secondary cases
+per infectious individual)}
 
-\item{k}{A \code{number} specifying the  k parameter (i.e. overdispersion in offspring distribution from fitted negative binomial)}
+\item{k}{A \code{number} specifying the  k parameter (i.e. overdispersion in
+offspring distribution from fitted negative binomial)}
 
 \item{a}{A \code{count} specifying the number of initial infections}
 }
