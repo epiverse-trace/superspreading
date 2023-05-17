@@ -7,7 +7,7 @@
 #' offspring distribution from fitted negative binomial)
 #' @param a A `count` specifying the number of initial infections
 #'
-#' @return A value with the probablity of a large epidemic
+#' @return A value with the probability of a large epidemic
 #' @export
 #'
 #' @examples
