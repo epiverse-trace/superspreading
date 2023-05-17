@@ -26,26 +26,28 @@ superspreading or superspreading events (SSE).
 
 Superspreading is the heterogeneity in disease transmission, beyond 
 stochasticity, such that some individuals transmit to many infectees while other
-infectors infect few or zero individuals @lloyd-smithSuperspreadingEffectIndividual2005.
+infectors infect few or zero individuals (@lloyd-smithSuperspreadingEffectIndividual2005).
 
 ```{r setup}
 library(superspreading)
 library(epiparameter)
+library(distributional)
 ```
 
 ## Probability of epidemic
 
 The probability that a novel disease will cause a epidemic (i.e. sustained 
-transmission in the population) is determined by the nature of that diseases
+transmission in the population) is determined by the nature of that diseases'
 transmission heterogeneity. This variability may be an intrinsic property of 
 the disease, or a product of human behaviour and social mixing patterns.
 
-For a given value of R, that is the number of secondary cases caused by a 
+For a given value of $R$ (or $R_0$), that is the number of secondary cases caused by a 
 primary case, if the variability is high, the probability that the outbreak 
-will cause epidemic is low as the superspreading events are rare. Whereas for
+will cause epidemic is lower as the superspreading events are rare. Whereas for
 lower variability the probability is higher as more individuals are closer to the 
-mean (R). The `probability_epidemic()` function in {superspreading} can calculate
-this probability. `k` is the variability.
+mean ($R$). The `probability_epidemic()` function in {superspreading} can calculate
+this probability. `k` is the dispersion parameter of a negative binomial distribution
+and controls the variability of individual-level transmission.
 
 ```{r, prob-epidemic-k}
 probability_epidemic(R = 1.5, k = 1, a = 1)
@@ -53,12 +55,13 @@ probability_epidemic(R = 1.5, k = 0.5, a = 1)
 probability_epidemic(R = 1.5, k = 0.1, a = 1)
 ```
 
-In the above code `k` is the overdispersion parameter of a negative binomial
-distribution. Values above to one are low heterogeneity (in the case `k` 
+In the above code values above to one are low heterogeneity (in the case `k` 
 &rarr; $\infty$ it is a poisson distribution), and as it decreases to zero 
-heterogeneity increases. When `k` equals 1 the distribution geometric.
+heterogeneity increases. When `k` equals 1 the distribution geometric. Values
+of `k` less than one indicate overdispersion of disease tranmsission, a signature
+of superspreading.
 
-When the value of R increases, this inevitably causes the probability of an 
+When the value of $R$ increases, this inevitably causes the probability of an 
 epidemic to increase.
 
 ```{r, prob-epidemic-R}
@@ -68,17 +71,71 @@ probability_epidemic(R = 1.5, k = 1, a = 1)
 probability_epidemic(R = 5, k = 1, a = 1)
 ```
 
-Any value of R less than or equal to one will have zero probability of causing
+Any value of $R$ less than or equal to one will have zero probability of causing
 a sustained epidemic.
 
 Lastly on the probability of transmission dynamics causing an epidemic, the 
-number of initial infections seeding the outbreak will influence the probability.
-In `probability_epidemic()` `a` is the number of initial infections.
+number of initial infections seeding the outbreak will influence the probability;
+`a` is the number of initial infections.
 
 ```{r, prob-epidemic-a}
 probability_epidemic(R = 1.5, k = 1, a = 1)
 probability_epidemic(R = 1.5, k = 1, a = 10)
 probability_epidemic(R = 1.5, k = 1, a = 100)
 ```
+
+## Empirical superspreading
+
+Given `probability_epidemic()` it is possible to determine the probability of 
+an epidemic for diseases for which parameters of an offspring distribution have 
+been estimated. An offspring distribution is simply the distribution of the 
+number of secondary infections caused by a primary infection. It is the distribution
+of $R$, with the mean of the distribution given as $R$.
+
+Here we can use {epiparameter} to load in offspring distributions for multiple 
+diseases and evaluate how likely they are to cause epidemics.
+
+```{r, epiparam}
+sars <- epidist_db(
+  disease = "SARS", 
+  epi_dist = "offspring_distribution"
+)
+evd <- epidist_db(
+  disease = "Ebola Virus Disease", 
+  epi_dist = "offspring_distribution"
+)
+```
+
+The parameters of each distribution can be extracted:
+
+```{r, params}
+sars_params <- parameters(sars)
+sars_params
+evd_params <- parameters(evd)
+evd_params
+```
+
+```{r, prob-epidemic-empiric}
+family(sars)
+probability_epidemic(
+  R = sars_params[["mean"]], 
+  k = sars_params[["dispersion"]], 
+  a = 1
+)
+family(evd)
+# k is set to infinite as the distribution for EVD is poisson
+probability_epidemic(R = evd_params[["mean"]], k = Inf, a = 1)
+```
+
+In the above example we assume the initial pool of infectors is one (`a = 1`) 
+but this can easily be adjusted in the case there is evidence for a larger initial
+seeding of infections.
+
+We can see that the probability of an epidemic given the estimates of 
+@lloyd-smithSuperspreadingEffectIndividual2005 is greater for SARS than Ebola. 
+This is due to the offspring distribution of Ebola being poisson distributed 
+with a smaller mean (mean $R$ = `r evd_params[["mean"]]`), 
+compared to SARS, which is negative binomially distributed with a relatively
+small dispersion (k = `r sars_params[["dispersion"]]`) 
 
 ## References
