@@ -17,7 +17,7 @@ offspring distribution from fitted negative binomial)}
 \item{a}{A \code{count} specifying the number of initial infections}
 }
 \value{
-A value with the probablity of a large epidemic
+A value with the probability of a large epidemic
 }
 \description{
 Calculates the probability a branching process will cause an epidemic
