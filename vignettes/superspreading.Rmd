@@ -24,9 +24,13 @@ The {superspreading} R package provides a set of functions for understanding
 individual-level tranmsission dynamics, and thus whether there is evidence of
 superspreading or superspreading events (SSE).
 
+::: {.alert .alert-info}
+**Definition:**
+
 Superspreading is the heterogeneity in disease transmission, beyond 
 stochasticity, such that some individuals transmit to many infectees while other
 infectors infect few or zero individuals (@lloyd-smithSuperspreadingEffectIndividual2005).
+:::
 
 ```{r setup}
 library(superspreading)
@@ -136,6 +140,6 @@ We can see that the probability of an epidemic given the estimates of
 This is due to the offspring distribution of Ebola being poisson distributed 
 with a smaller mean (mean $R$ = `r evd_params[["mean"]]`), 
 compared to SARS, which is negative binomially distributed with a relatively
-small dispersion (k = `r sars_params[["dispersion"]]`) 
+small dispersion (k = `r sars_params[["dispersion"]]`).
 
 ## References
