@@ -132,7 +132,7 @@ probability_epidemic(R = evd_params[["mean"]], k = Inf, a = 1)
 
 In the above example we assume the initial pool of infectors is one (`a = 1`) 
 but this can easily be adjusted in the case there is evidence for a larger initial
-seeding of infections.
+seeding of infections, whether from animal-to-human spillover or imported cases from outside the area of interest.
 
 We can see that the probability of an epidemic given the estimates of 
 @lloyd-smithSuperspreadingEffectIndividual2005 is greater for SARS than Ebola. 
