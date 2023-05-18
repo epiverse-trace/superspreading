@@ -2,3 +2,4 @@
 
 export(cases_to_transmission)
 export(probability_epidemic)
+export(proportion_cluster_size)
