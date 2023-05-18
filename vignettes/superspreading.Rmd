@@ -58,9 +58,9 @@ probability_epidemic(R = 1.5, k = 0.5, a = 1)
 probability_epidemic(R = 1.5, k = 0.1, a = 1)
 ```
 
-In the above code values above to one are low heterogeneity (in the case `k` 
-&rarr; $\infty$ it is a poisson distribution), and as it decreases to zero 
-heterogeneity increases. When `k` equals 1 the distribution geometric. Values
+In the above code, `k` values above one represent low heterogeneity (in the case `k` 
+&rarr; $\infty$ it is a poisson distribution), and as `k` decreases,
+heterogeneity increases. When `k` equals 1, the distribution is geometric. Values
 of `k` less than one indicate overdispersion of disease tranmsission, a signature
 of superspreading.
 
