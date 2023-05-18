@@ -2,9 +2,10 @@
 % Please edit documentation in R/cases_to_transmission.R
 \name{cases_to_transmission}
 \alias{cases_to_transmission}
-\title{Estimate what proportion of cases cause a certain proportion of transmission}
+\title{Estimate what proportion of cases that cause a certain proportion of
+transmission}
 \usage{
-cases_to_transmission(R, k, percent_transmission)
+cases_to_transmission(R, k, percent_transmission, sim = FALSE)
 }
 \arguments{
 \item{R}{A \code{number} specifying the R parameter (i.e. average secondary cases
@@ -15,6 +16,9 @@ offspring distribution from fitted negative binomial)}
 
 \item{percent_transmission}{A \code{number} of the percentage transmission
 for which a proportion of cases has produced}
+
+\item{sim}{A \code{logical} whether the calculation should be done numerically
+(i.e. simulate secondary contacts) or analytically}
 }
 \value{
 A data frame with the value for the proportion of cases for a given
@@ -32,6 +36,10 @@ This can be calculated using \code{cases_to_transmission()} at varying values of
 \details{
 Multiple values of R and k can be supplied and a data frame of
 every combination of these will be returned.
+
+The numerical calculation uses random number generation to simulate secondary
+contacts so the answers may minimally vary between calls. The number of
+simulation replicates is fixed to \code{1e5}.
 }
 \examples{
 # example of single values of R and k
