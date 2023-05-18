@@ -18,6 +18,9 @@ probability_epidemic <- function(R, k, a) { # nolint
   checkmate::assertNumber(k)
   checkmate::assertCount(a)
 
+  # change Inf k to 1e10 to prevent issue with grid search
+  if (is.infinite(k)) k <- 1e10
+
   # calculate probability of outbreak based solving g(s)=s in
   # generating function for branching process
   if (R <= 1) prob_est <- 1 # If R<=1, P(extinction)=1
