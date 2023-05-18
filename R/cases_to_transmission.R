@@ -52,7 +52,7 @@
 #'   k = k,
 #'   percent_transmission = percent_transmission
 #' )
-cases_to_transmission <- function(R, k, percent_transmission, sim = FALSE) {
+cases_to_transmission <- function(R, k, percent_transmission, sim = FALSE) { # nolint
 
   # check input
   checkmate::assert_numeric(R)
@@ -80,7 +80,7 @@ cases_to_transmission <- function(R, k, percent_transmission, sim = FALSE) {
     }
 
     # df is ways i x 3 so insert value into col 3
-    df[i, 3] <- paste0(round(prop * 100, digits = 1),"%")
+    df[i, 3] <- paste0(round(prop * 100, digits = 1), "%")
   }
   return(df)
 }
@@ -91,7 +91,7 @@ cases_to_transmission <- function(R, k, percent_transmission, sim = FALSE) {
 #' @return A numeric
 #' @keywords internal
 #' @noRd
-.cases_to_transmission_analytical <- function(R, k, percent_transmission) {
+.cases_to_transmission_analytical <- function(R, k, percent_transmission) { # nolint
 
   xm1 <- stats::qnbinom(1 - percent_transmission, k + 1, mu = R * (k + 1) / k)
   remq <- 1 - percent_transmission -
@@ -109,7 +109,7 @@ cases_to_transmission <- function(R, k, percent_transmission, sim = FALSE) {
 #' @return A numeric
 #' @keywords internal
 #' @noRd
-.cases_to_transmission_numerical <- function(R, k, percent_transmission) {
+.cases_to_transmission_numerical <- function(R, k, percent_transmission) { # nolint
 
   nsim <- 1e5
   simulate_secondary <- stats::rnbinom(

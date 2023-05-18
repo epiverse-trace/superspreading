@@ -8,7 +8,12 @@ test_that("cases_to_transmission works as expected for single R and k", {
     c("numeric", "numeric", "character")
   )
 
-  res <- cases_to_transmission(R = 2, k = 0.5, percent_transmission = 0.8, sim = TRUE)
+  res <- cases_to_transmission(
+    R = 2,
+    k = 0.5,
+    percent_transmission = 0.8,
+    sim = TRUE
+  )
 
   expect_s3_class(res, "data.frame")
   expect_identical(dim(res), c(1L, 3L))
