@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 ```
 
 The {superspreading} R package provides a set of functions for understanding
-individual-level tranmsission dynamics, and thus whether there is evidence of
+individual-level transmission dynamics, and thus whether there is evidence of
 superspreading or superspreading events (SSE).
 
 ::: {.alert .alert-info}
