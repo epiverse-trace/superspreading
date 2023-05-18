@@ -27,8 +27,7 @@ superspreading or superspreading events (SSE).
 ::: {.alert .alert-info}
 **Definition:**
 
-Superspreading is the heterogeneity in disease transmission, beyond 
-stochasticity, such that some individuals transmit to many infectees while other
+Superspreading describes individual heterogeneity in disease transmission, such that some individuals transmit to many infectees while other
 infectors infect few or zero individuals (@lloyd-smithSuperspreadingEffectIndividual2005).
 :::
 
