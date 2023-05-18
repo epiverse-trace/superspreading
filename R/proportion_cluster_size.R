@@ -49,7 +49,11 @@ proportion_cluster_size <- function(R, k, cluster_size) {
 
   for (i in seq_len(nrow(df))) {
     nsim <- 1e5
-    simulate_secondary <- stats::rnbinom(n = nsim, mu = df[i, "R"], size = df[i, "k"])
+    simulate_secondary <- stats::rnbinom(
+      n = nsim,
+      mu = df[i, "R"],
+      size = df[i, "k"]
+    )
     propn_cluster <- vapply(cluster_size, function(x) {
       sum(simulate_secondary[simulate_secondary >= x]) / sum(simulate_secondary)
     }, FUN.VALUE = numeric(1))

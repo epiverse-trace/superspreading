@@ -8,6 +8,10 @@ test_that("probability_epidemic works for R > 1", {
   expect_equal(probability_epidemic(R = 1.5, k = 0.5, a = 1), 0.232)
 })
 
+test_that("probability_epidemic works for k == Inf", {
+  expect_equal(probability_epidemic(R = 1.5, k = Inf, a = 1), 0.583)
+})
+
 test_that("probability_epidemic works for different k & a", {
   res1 <- probability_epidemic(R = 1.5, k = 0.5, a = 1)
   res2 <- probability_epidemic(R = 1.5, k = 0.2, a = 1)
