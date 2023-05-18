@@ -77,9 +77,9 @@ probability_epidemic(R = 5, k = 1, a = 1)
 Any value of $R$ less than or equal to one will have zero probability of causing
 a sustained epidemic.
 
-Lastly on the probability of transmission dynamics causing an epidemic, the 
-number of initial infections seeding the outbreak will influence the probability;
-`a` is the number of initial infections.
+Finally, the probability that a new infection will cause a large epidemic is influenced by the
+number of initial infections seeding the outbreak. We define
+`a` to be this number of initial infections.
 
 ```{r, prob-epidemic-a}
 probability_epidemic(R = 1.5, k = 1, a = 1)
