@@ -64,8 +64,8 @@ heterogeneity increases. When `k` equals 1, the distribution is geometric. Value
 of `k` less than one indicate overdispersion of disease tranmsission, a signature
 of superspreading.
 
-When the value of $R$ increases, this inevitably causes the probability of an 
-epidemic to increase.
+When the value of $R$ increases, this causes the probability of an 
+epidemic to increase, if `k` remains the same.
 
 ```{r, prob-epidemic-R}
 probability_epidemic(R = 0.5, k = 1, a = 1)
