@@ -68,3 +68,11 @@ cases_to_transmission(
   percent_transmission = percent_transmission
 )
 }
+\references{
+The analytical calculation is from:
+
+Endo, A., Abbott, S., Kucharski, A. J., & Funk, S. (2020)
+Estimating the overdispersion in COVID-19 transmission using outbreak
+sizes outside China. Wellcome Open Research, 5.
+<doi.org/10.12688/wellcomeopenres.15842.3>
+}
