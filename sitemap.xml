@@ -22,9 +22,15 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/cases_to_transmission.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
     <loc>/reference/probability_epidemic.html</loc>
+  </url>
+  <url>
+    <loc>/reference/proportion_cluster_size.html</loc>
   </url>
 </urlset>
