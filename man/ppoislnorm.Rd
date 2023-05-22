@@ -27,5 +27,6 @@ The function is vectorised so a vector of quantiles can be input
 and the output will have an equal length.
 }
 \examples{
-a = 1
+ppoislnorm(q = 10, meanlog = 1, sdlog = 2)
+ppoislnorm(q = 1:10, meanlog = 1, sdlog = 2)
 }
