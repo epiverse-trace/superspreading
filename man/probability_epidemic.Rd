@@ -2,8 +2,8 @@
 % Please edit documentation in R/probability_epidemic.R
 \name{probability_epidemic}
 \alias{probability_epidemic}
-\title{Calculates the probability a branching process will cause an epidemic
-(i.e. probability will fail to go extinct) based on R, k and initial cases}
+\title{Calculate the probability a disease will cause an outbreak based on R, k
+and initial cases}
 \usage{
 probability_epidemic(R, k, a)
 }
@@ -24,5 +24,14 @@ Calculates the probability a branching process will cause an epidemic
 (i.e. probability will fail to go extinct) based on R, k and initial cases
 }
 \examples{
-probability_epidemic(1.5, 0.1, 10)
+probability_epidemic(R = 1.5, k = 0.1, a = 10)
+}
+\references{
+Kucharski, A. J., Russell, T. W., Diamond, C., Liu, Y., Edmunds, J.,
+Funk, S. & Eggo, R. M. (2020). Early dynamics of transmission and control
+of COVID-19: a mathematical modelling study. The Lancet Infectious Diseases,
+20(5), 553-558. \url{https://doi.org/10.1016/S1473-3099(20)30144-4}
+}
+\seealso{
+\code{\link[=probability_extinct]{probability_extinct()}}
 }
