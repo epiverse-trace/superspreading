@@ -33,5 +33,14 @@ test_that("probability_epidemic fails correctly", {
     probability_epidemic(R = 1, k = 1, a = "1"),
     regexp = "(Assertion on 'a' failed)"
   )
+})
 
+test_that("probability_extinct works for R < 1", {
+  expect_equal(probability_extinct(R = 0.5, k = 0.5, a = 1), 1L)
+  expect_equal(probability_extinct(R = 0.5, k = 0.1, a = 1), 1L)
+  expect_equal(probability_extinct(R = 0.5, k = 0.5, a = 50), 1L)
+})
+
+test_that("probability_epidemic works for R > 1", {
+  expect_equal(probability_extinct(R = 1.5, k = 0.5, a = 1), 0.768)
 })
