@@ -1,4 +1,7 @@
-#' Calculates the probability a branching process will cause an epidemic
+#' Calculate the probability a disease will cause an outbreak based on R, k
+#' and initial cases
+#'
+#' @description Calculates the probability a branching process will cause an epidemic
 #' (i.e. probability will fail to go extinct) based on R, k and initial cases
 #'
 #' @param R A `number` specifying the R parameter (i.e. average secondary cases
@@ -9,9 +12,17 @@
 #'
 #' @return A value with the probability of a large epidemic
 #' @export
+#' @seealso [probability_extinct()]
+#'
+#' @references
+#'
+#' Kucharski, A. J., Russell, T. W., Diamond, C., Liu, Y., Edmunds, J.,
+#' Funk, S. & Eggo, R. M. (2020). Early dynamics of transmission and control
+#' of COVID-19: a mathematical modelling study. The Lancet Infectious Diseases,
+#' 20(5), 553-558. <https://doi.org/10.1016/S1473-3099(20)30144-4>
 #'
 #' @examples
-#' probability_epidemic(1.5, 0.1, 10)
+#' probability_epidemic(R = 1.5, k = 0.1, a = 10)
 probability_epidemic <- function(R, k, a) { # nolint
   # check inputs
   checkmate::assertNumber(R)
@@ -40,3 +51,30 @@ probability_epidemic <- function(R, k, a) { # nolint
 
   return(prob_epidemic)
 }
+
+#' Calculates the probability a branching process will go extinct based on
+#' R, k and initial cases
+#'
+#' @description Calculates the probability a branching process will not causes
+#' an epidemic and will go extinct. This is the complement of the probability
+#' of a disease causing an epidemic ([`probability_epidemic()`]).
+#'
+#' @inheritParams probability_epidemic
+#'
+#' @return A value with the probability of going extinct
+#' @export
+#' @seealso [probability_epidemic()]
+#'
+#' @references
+#'
+#' Lloyd-Smith, J. O., Schreiber, S. J., Kopp, P. E., & Getz, W. M. (2005).
+#' Superspreading and the effect of individual variation on disease emergence.
+#' Nature, 438(7066), 355-359. <https://doi.org/10.1038/nature04153>
+#'
+#' @examples
+#' probability_extinct(R = 1.5, k = 0.1, a = 10)
+probability_extinct <- function(R, k, a) {
+  # input checking done in probability_epidemic
+  1 - probability_epidemic(R = R, k = k, a = a)
+}
+
