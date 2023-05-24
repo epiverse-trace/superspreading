@@ -104,7 +104,7 @@ These values match those reported in @althausEbolaSuperspreading2015 and here
 we reproduce figure 1 from that paper to display the tail of the distribution
 from which superspreading events can be possible.
 
-```{r, plot-nbinom}
+```{r, prep-plot-nbinom}
 # tally cases
 tally <- table(all_cases)
 
@@ -127,7 +127,9 @@ nbinom_data <- data.frame(
     mu = nbinom_fit$estimate[["mu"]]
   )
 )
+```
 
+```{r, plot-nbinom, class.source = 'fold-hide', fig.cap="Number of secondary cases from the empirical data (bar plot) and the density of the negative binomial with the maximum likelihood estimates when fit to the empirical data (points and line). This plot is reproduced from Althaus (2015) figure 1.", fig.width = 8, fig.height = 5}
 # make plot
 ggplot2::ggplot(data = nbinom_data) +
   ggplot2::geom_col(mapping = ggplot2::aes(x = x, y = prop_num_cases), fill = "cyan3", colour = "black") +
@@ -229,3 +231,49 @@ knitr::kable(
 )
 ```
 
+The negative binomial is still be best fitting model, even with the addition of the Poisson-lognormal
+and Poisson-Weibull models. The second best model, the Poisson-Weibull, has a similar fit to the 
+negative binomial ($\Delta$AIC < 2 & $\Delta$BIC < 2).
+
+Here we plot the density of each distribution given the maximum likelihood estimates to inspect differences
+between the two distributions.
+
+
+```{r, prep-plot-dists}
+# create data frame with proportion of cases, density of each distribution
+dist_compare_data <- data.frame(
+  x = seq(0, 20, 1), 
+  prop_num_cases = c(prop_num_cases, rep(0, 21)),
+  dens = c(
+    dnbinom(
+      x = seq(0, 20, 1), 
+      size = nbinom_fit$estimate[["size"]], 
+      mu = nbinom_fit$estimate[["mu"]]
+    ),
+    poisweibull_density = dpoisweibull(
+      x = seq(0, 20, 1),
+      shape = poisweibull_fit$estimate[["shape"]],
+      scale = poisweibull_fit$estimate[["scale"]]
+    )
+  ),
+  dist = c(rep("Negative Binomial", 21), rep("Poisson-Weibull", 21))
+)
+```
+
+```{r, plot-dists, class.source = 'fold-hide', fig.cap="Number of secondary cases from the empirical data (bar plot) and the density of the negative binomial (orange) and poisson-Weibull (pink) with the maximum likelihood estimates when fit to the empirical data (points and line).", fig.width = 8, fig.height = 5}
+# make plot
+ggplot2::ggplot(data = dist_compare_data) +
+  ggplot2::geom_col(mapping = ggplot2::aes(x = x, y = prop_num_cases), fill = "cyan3", colour = "black") +
+  ggplot2::geom_point(mapping = ggplot2::aes(x = x, y = dens, colour = dist), size = 2) +
+  ggplot2::geom_line(mapping = ggplot2::aes(x = x, y = dens, colour = dist)) +
+  ggplot2::scale_x_continuous(name = "Number of secondary cases") +
+  ggplot2::scale_y_continuous(name = "Frequency") +
+  ggplot2::scale_colour_manual(name = "Distribution", values = c("coral", "deeppink")) +
+  ggplot2::theme_bw() +
+  ggplot2::theme(legend.position = "top")
+```
+
+The fit of each model is very similar, as expected from the close AIC and BIC (these models have the same numbers of free parameters). 
+The Poisson-Weibull compound distribution can adequately capture the overdispersion in the EVD transmission data. A noticable difference
+between the models fitting to the number of cases that caused a single secondary cases. Here the negative binomial matches the empirical
+data, whereas the Poisson-Weibull overestimates the number.
