@@ -36,6 +36,7 @@ Imports:
 Suggests: 
     epiparameter,
     distributional,
+    fitdistrplus,
     covr,
     knitr,
     bookdown,
