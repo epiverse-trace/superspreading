@@ -1,6 +1,12 @@
 ---
 title: "Estimate individual-level transmission"
-output: rmarkdown::html_vignette
+output: 
+  bookdown::html_vignette2:
+    code_folding: show
+pkgdown:
+   as_is: true
+bibliography: references.json
+link-citations: true
 vignette: >
   %\VignetteIndexEntry{Estimate individual-level transmission}
   %\VignetteEngine{knitr::rmarkdown}
@@ -14,6 +20,11 @@ knitr::opts_chunk$set(
 )
 ```
 
+The rate of growth or decline in the incidence of a transmissible infectious disease
+is often quantified as the population-level reproduction number ($R$). However,
+this assumes individuals have similar patterns of disease spread, and conceals
+possible individual-level heterogeneity of contagion. 
+
 In their seminal work @lloyd-smithSuperspreadingEffectIndividual2005 showed
 that variation in individual-level disease transmission exceed that of a poisson
 model and in some cases that of a geometric model. They fit a negative binomial
@@ -25,9 +36,15 @@ This vignette demonstrates how to use the {superspreading} and {fitdistrplus} R
 packages to estimate the parameters of individual-level transmission and select
 the best fitting model.
 
+Additionally, {ggplot2} is used for plotting, {quickfit} is used to assist with
+multiple model fitting and comparison, and {kableExtra} is used for formatting
+tables.
+
 ```{r setup}
 library(superspreading)
 library(fitdistrplus)
+library(ggplot2)
+library(kableExtra)
 ```
 
 For this example we use tranmission chain data from @fayeChainsTransmissionControl2015 from the Ebola virus disease outbreak in West Africa from February to August 2014. Specifically, this data reconstructs the pathway of Ebola transmission in Conakry, Guinea.
@@ -36,7 +53,7 @@ This data has been used by @althausEbolaSuperspreading2015 to show that the Ebol
 
 ## Transmission data
 
-```{r}
+```{r, prep-data}
 # total number of cases (i.e. individuals in transmission chain)
 n <- 152
 
@@ -48,7 +65,9 @@ all_cases_transmission <- c(
 
 # add zeros for each cases that did not cause a secondary case (i.e. did not transmit)
 all_cases <- c(all_cases_transmission, rep(0, n - length(all_cases_transmission)))
+```
 
+```{r, fit-dists}
 # fit a standard set of offspring distribution models:
 # - Poisson
 # - Geometric
@@ -58,18 +77,22 @@ all_cases <- c(all_cases_transmission, rep(0, n - length(all_cases_transmission)
 pois_fit <- fitdistrplus::fitdist(data = all_cases, distr = "pois")
 geom_fit <- fitdistrplus::fitdist(data = all_cases, distr = "geom")
 nbinom_fit <- fitdistrplus::fitdist(data = all_cases, distr = "nbinom")
-knitr::kable(
+```
+
+```{r, fit-table}
+tbl <- kbl(
   data.frame(
     distribution = c(pois_fit$distname, geom_fit$distname, nbinom_fit$distname),
     AIC = c(pois_fit$aic, geom_fit$aic, nbinom_fit$aic),
     BIC = c(pois_fit$bic, geom_fit$bic, nbinom_fit$bic)
   )
 )
+kable_styling(kable_input = tbl, position = "center")
 ```
 
 The best fit model, for both AIC and BIC comparison, is the negative binomial.
 
-```{r}
+```{r, nbinom-estim}
 nbinom_fit$estimate
 ```
 
@@ -81,40 +104,48 @@ These values match those reported in @althausEbolaSuperspreading2015 and here
 we reproduce figure 1 from that paper to display the tail of the distribution
 from which superspreading events can be possible.
 
-```{r}
-# TODO: could use ggplot to polish
-plot(
+```{r, plot-nbinom}
+# tally cases
+tally <- table(all_cases)
+
+# pad with zeros when number of cases not in tally
+num_cases <- rep(0, 21)
+names(num_cases) <- as.character(seq(0, 20, 1))
+num_cases[names(tally)] <- tally
+
+# convert cases to proportional of total cases to plot on the same scale as 
+# the density
+prop_num_cases <- num_cases / sum(num_cases)
+
+# create data frame with proportion of cases, density and number of secondary cases
+nbinom_data <- data.frame(
   x = seq(0, 20, 1), 
-  y = dnbinom(
+  prop_num_cases = prop_num_cases,
+  density = dnbinom(
     x = seq(0, 20, 1), 
     size = nbinom_fit$estimate[["size"]], 
     mu = nbinom_fit$estimate[["mu"]]
-  ), 
-  xlab = "Number of secondary cases", 
-  ylab = "Frequency", 
-  type = "b"
-)
-barplot(
-  height = dnbinom(
-    x = seq(0, 20, 1), 
-    size = nbinom_fit$estimate[["size"]], 
-    mu = nbinom_fit$estimate[["mu"]]), 
-  width = 1, 
-  xlab = "Number of secondary cases", 
-  ylab = "Frequency"
+  )
 )
 
+# make plot
+ggplot2::ggplot(data = nbinom_data) +
+  ggplot2::geom_col(mapping = ggplot2::aes(x = x, y = prop_num_cases), fill = "cyan3", colour = "black") +
+  ggplot2::geom_point(mapping = ggplot2::aes(x = x, y = density), colour = "coral", size = 2) +
+  ggplot2::geom_line(mapping = ggplot2::aes(x = x, y = density), colour = "coral") +
+  ggplot2::scale_x_continuous(name = "Number of secondary cases") +
+  ggplot2::scale_y_continuous(name = "Frequency") +
+  ggplot2::theme_bw()
 ```
 
 Next we partitioned the data into index cases and secondary cases following @kucharskiEffectivenessRingVaccination2016.
 
-```{r}
+```{r, split-data}
 index_case_transmission <- c(2, 17, 5, 1, 8, 2, 14)
 secondary_case_transmission <- c(
   1, 2, 1, 4, 4, 1, 3, 3, 1, 1, 4, 9, 9, 1, 2, 1, 1, 1, 4, 3, 3, 4, 2, 
   5, 1, 2, 2, 1, 9, 1, 3, 1, 2, 1, 1, 2
 ) 
-
 
 # Format data into index and non-index cases
 
@@ -122,7 +153,6 @@ secondary_case_transmission <- c(
 n_non_index <- sum(c(index_case_transmission, secondary_case_transmission)) 
 # transmission from all non-index cases
 non_index_cases <- c(secondary_case_transmission, rep(0, n_non_index - length(secondary_case_transmission))) 
-
 
 # Estimate R and k for index and non-index cases
 param_index <- fitdistrplus::fitdist(data = index_case_transmission, distr = "nbinom") 
@@ -159,7 +189,9 @@ Hereafter we refer to it is the negative binomial.
 R has the density functions and cumulative distribution functions for the Poisson 
 (`dpois()` and `ppois()`), Geometric (`dgeom()` and `pgeom()`) and Negative binomial
 (`dnbinom()` and `pnbinom()`), but does not supply either for Poisson compound 
-distributions. In the {superspreading} R package we supply the density and cumulative
+distributions. 
+
+In the {superspreading} R package we supply the density and cumulative
 distribution functions for the Poisson-lognormal (`dpoislnorm()` and `ppoislnorm()`) 
 and Poisson-weibull (`dpoisweibull()` and `ppoisweibull()`).
 
