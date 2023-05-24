@@ -19,10 +19,6 @@ dpoislnorm <- Vectorize(function(x, meanlog, sdlog) {
 
   # cannot input check with asserts due to {fitdistrplus}
 
-  #checkmate::assert_number(x, lower = 0) # delete
-  #checkmate::assert_number(meanlog) # delete
-  #checkmate::assert_number(sdlog, lower = 0) # delete
-
   integrand <- function(lambda) {
     lambda ^ (x - 1) / (factorial(x) * sdlog * sqrt(2 * pi)) *
       exp(-lambda - ((log(lambda) - meanlog)^2) / (2 * sdlog^2))
@@ -33,16 +29,6 @@ dpoislnorm <- Vectorize(function(x, meanlog, sdlog) {
     error = function(cnd) return(0),
     warning = function(cnd) return(0)
   )
-
-  # alternative method, not used
-  # integrand <- function(lambda, x) {
-  #   dnorm(lambda, 0, 1) * dpois(x, exp(lambda * sdlog + meanlog))
-  # }
-  # out <- tryCatch(
-  #   stats::integrate(f = integrand, lower = -Inf, upper = Inf, x = x)$value,
-  #   error = function(cnd) return(0),
-  #   warning = function(cnd) return(0)
-  # )
 
   return(out)
 })
