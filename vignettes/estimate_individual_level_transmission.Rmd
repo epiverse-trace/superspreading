@@ -57,12 +57,16 @@ n <- 152
 
 # number of secondary cases for all cases
 all_cases_transmission <- c(
-  1, 2, 2, 5, 14, 1, 4, 4, 1, 3, 3, 8, 2, 1, 1, 4, 9, 9, 1, 1, 17, 2, 1, 
+  1, 2, 2, 5, 14, 1, 4, 4, 1, 3, 3, 8, 2, 1, 1, 4, 9, 9, 1, 1, 17, 2, 1,
   1, 1, 4, 3, 3, 4, 2, 5, 1, 2, 2, 1, 9, 1, 3, 1, 2, 1, 1, 2
 )
 
-# add zeros for each cases that did not cause a secondary case (i.e. did not transmit)
-all_cases <- c(all_cases_transmission, rep(0, n - length(all_cases_transmission)))
+# add zeros for each cases that did not cause a secondary case
+# (i.e. cases that did not transmit)
+all_cases <- c(
+  all_cases_transmission,
+  rep(0, n - length(all_cases_transmission))
+)
 ```
 
 ```{r, fit-dists}
@@ -72,18 +76,19 @@ all_cases <- c(all_cases_transmission, rep(0, n - length(all_cases_transmission)
 # - Negative Binomial
 
 # TODO: use {quickfit} for model comparison
-pois_fit <- fitdistrplus::fitdist(data = all_cases, distr = "pois")
-geom_fit <- fitdistrplus::fitdist(data = all_cases, distr = "geom")
-nbinom_fit <- fitdistrplus::fitdist(data = all_cases, distr = "nbinom")
+pois_fit <- fitdist(data = all_cases, distr = "pois")
+geom_fit <- fitdist(data = all_cases, distr = "geom")
+nbinom_fit <- fitdist(data = all_cases, distr = "nbinom")
 ```
 
 ```{r, fit-table}
-kable(
+knitr::kable(
   data.frame(
     distribution = c(pois_fit$distname, geom_fit$distname, nbinom_fit$distname),
     AIC = c(pois_fit$aic, geom_fit$aic, nbinom_fit$aic),
     BIC = c(pois_fit$bic, geom_fit$bic, nbinom_fit$bic)
   )
+)
 ```
 
 The best fit model, for both AIC and BIC comparison, is the negative binomial.
@@ -110,17 +115,18 @@ num_cases <- rep(0, 21)
 names(num_cases) <- as.character(seq(0, 20, 1))
 num_cases[names(tally)] <- tally
 
-# convert cases to proportional of total cases to plot on the same scale as 
+# convert cases to proportional of total cases to plot on the same scale as
 # the density
 prop_num_cases <- num_cases / sum(num_cases)
 
-# create data frame with proportion of cases, density and number of secondary cases
+# create data frame with proportion of cases, density and number of secondary
+# cases
 nbinom_data <- data.frame(
-  x = seq(0, 20, 1), 
+  x = seq(0, 20, 1),
   prop_num_cases = prop_num_cases,
   density = dnbinom(
-    x = seq(0, 20, 1), 
-    size = nbinom_fit$estimate[["size"]], 
+    x = seq(0, 20, 1),
+    size = nbinom_fit$estimate[["size"]],
     mu = nbinom_fit$estimate[["mu"]]
   )
 )
@@ -128,13 +134,24 @@ nbinom_data <- data.frame(
 
 ```{r, plot-nbinom, class.source = 'fold-hide', fig.cap="Number of secondary cases from the empirical data (bar plot) and the density of the negative binomial with the maximum likelihood estimates when fit to the empirical data (points and line). This plot is reproduced from Althaus (2015) figure 1.", fig.width = 8, fig.height = 5}
 # make plot
-ggplot2::ggplot(data = nbinom_data) +
-  ggplot2::geom_col(mapping = ggplot2::aes(x = x, y = prop_num_cases), fill = "cyan3", colour = "black") +
-  ggplot2::geom_point(mapping = ggplot2::aes(x = x, y = density), colour = "coral", size = 2) +
-  ggplot2::geom_line(mapping = ggplot2::aes(x = x, y = density), colour = "coral") +
-  ggplot2::scale_x_continuous(name = "Number of secondary cases") +
-  ggplot2::scale_y_continuous(name = "Frequency") +
-  ggplot2::theme_bw()
+ggplot(data = nbinom_data) +
+  geom_col(
+    mapping = aes(x = x, y = prop_num_cases),
+    fill = "cyan3",
+    colour = "black"
+  ) +
+  geom_point(
+    mapping = aes(x = x, y = density),
+    colour = "coral",
+    size = 2
+  ) +
+  geom_line(
+    mapping = aes(x = x, y = density),
+    colour = "coral"
+  ) +
+  scale_x_continuous(name = "Number of secondary cases") +
+  scale_y_continuous(name = "Frequency") +
+  theme_bw()
 ```
 
 Next we partitioned the data into index cases and secondary cases following @kucharskiEffectivenessRingVaccination2016.
@@ -142,25 +159,34 @@ Next we partitioned the data into index cases and secondary cases following @kuc
 ```{r, split-data}
 index_case_transmission <- c(2, 17, 5, 1, 8, 2, 14)
 secondary_case_transmission <- c(
-  1, 2, 1, 4, 4, 1, 3, 3, 1, 1, 4, 9, 9, 1, 2, 1, 1, 1, 4, 3, 3, 4, 2, 
+  1, 2, 1, 4, 4, 1, 3, 3, 1, 1, 4, 9, 9, 1, 2, 1, 1, 1, 4, 3, 3, 4, 2,
   5, 1, 2, 2, 1, 9, 1, 3, 1, 2, 1, 1, 2
-) 
+)
 
 # Format data into index and non-index cases
 
 # total non-index cases
-n_non_index <- sum(c(index_case_transmission, secondary_case_transmission)) 
+n_non_index <- sum(c(index_case_transmission, secondary_case_transmission))
 # transmission from all non-index cases
-non_index_cases <- c(secondary_case_transmission, rep(0, n_non_index - length(secondary_case_transmission))) 
+non_index_cases <- c(
+  secondary_case_transmission,
+  rep(0, n_non_index - length(secondary_case_transmission))
+)
 ```
 
 We fit the negative binomial model for both the index and non-index case tranmission events.
 
 ```{r, fit-nbinom}
 # Estimate R and k for index and non-index cases
-param_index <- fitdistrplus::fitdist(data = index_case_transmission, distr = "nbinom") 
+param_index <- fitdist(
+  data = index_case_transmission,
+  distr = "nbinom"
+)
 param_index
-param_non_index <- fitdistrplus::fitdist(data = non_index_cases, distr = "nbinom") 
+param_non_index <- fitdist(
+  data = non_index_cases,
+  distr = "nbinom"
+)
 param_non_index
 ```
 
@@ -209,25 +235,43 @@ These functions can be used with {fitdistrplus}, as shown for the other distribu
 # - Poisson-Weibull compound
 
 # TODO: use {quickfit} for model comparison
-pois_fit <- fitdistrplus::fitdist(data = all_cases, distr = "pois")
-geom_fit <- fitdistrplus::fitdist(data = all_cases, distr = "geom")
-nbinom_fit <- fitdistrplus::fitdist(data = all_cases, distr = "nbinom")
-poislnorm_fit <- fitdistrplus::fitdist(
-  data = all_cases, 
-  distr = "poislnorm", 
+pois_fit <- fitdist(data = all_cases, distr = "pois")
+geom_fit <- fitdist(data = all_cases, distr = "geom")
+nbinom_fit <- fitdist(data = all_cases, distr = "nbinom")
+poislnorm_fit <- fitdist(
+  data = all_cases,
+  distr = "poislnorm",
   start = list(meanlog = 1, sdlog = 1)
 )
-poisweibull_fit <- fitdistrplus::fitdist(
-  data = all_cases, 
-  distr = "poisweibull", 
+poisweibull_fit <- fitdist(
+  data = all_cases,
+  distr = "poisweibull",
   start = list(shape = 1, scale = 1)
 )
 
-kable(
+knitr::kable(
   data.frame(
-    distribution = c(pois_fit$distname, geom_fit$distname, nbinom_fit$distname, poislnorm_fit$distname, poisweibull_fit$distname),
-    AIC = c(pois_fit$aic, geom_fit$aic, nbinom_fit$aic, poislnorm_fit$aic, poisweibull_fit$aic),
-    BIC = c(pois_fit$bic, geom_fit$bic, nbinom_fit$bic, poislnorm_fit$bic, poisweibull_fit$bic)
+    distribution = c(
+      pois_fit$distname,
+      geom_fit$distname,
+      nbinom_fit$distname,
+      poislnorm_fit$distname,
+      poisweibull_fit$distname
+    ),
+    AIC = c(
+      pois_fit$aic,
+      geom_fit$aic,
+      nbinom_fit$aic,
+      poislnorm_fit$aic,
+      poisweibull_fit$aic
+    ),
+    BIC = c(
+      pois_fit$bic,
+      geom_fit$bic,
+      nbinom_fit$bic,
+      poislnorm_fit$bic,
+      poisweibull_fit$bic
+    )
   )
 )
 ```
@@ -243,12 +287,12 @@ between the two distributions.
 ```{r, prep-plot-dists}
 # create data frame with proportion of cases, density of each distribution
 dist_compare_data <- data.frame(
-  x = seq(0, 20, 1), 
+  x = seq(0, 20, 1),
   prop_num_cases = c(prop_num_cases, rep(0, 21)),
   dens = c(
     dnbinom(
-      x = seq(0, 20, 1), 
-      size = nbinom_fit$estimate[["size"]], 
+      x = seq(0, 20, 1),
+      size = nbinom_fit$estimate[["size"]],
       mu = nbinom_fit$estimate[["mu"]]
     ),
     poisweibull_density = dpoisweibull(
@@ -263,15 +307,29 @@ dist_compare_data <- data.frame(
 
 ```{r, plot-dists, class.source = 'fold-hide', fig.cap="Number of secondary cases from the empirical data (bar plot) and the density of the negative binomial (orange) and poisson-Weibull (pink) with the maximum likelihood estimates when fit to the empirical data (points and line).", fig.width = 8, fig.height = 5}
 # make plot
-ggplot2::ggplot(data = dist_compare_data) +
-  ggplot2::geom_col(mapping = ggplot2::aes(x = x, y = prop_num_cases), fill = "cyan3", colour = "black") +
-  ggplot2::geom_point(mapping = ggplot2::aes(x = x, y = dens, colour = dist), size = 2) +
-  ggplot2::geom_line(mapping = ggplot2::aes(x = x, y = dens, colour = dist)) +
-  ggplot2::scale_x_continuous(name = "Number of secondary cases") +
-  ggplot2::scale_y_continuous(name = "Frequency") +
-  ggplot2::scale_colour_manual(name = "Distribution", values = c("coral", "deeppink")) +
-  ggplot2::theme_bw() +
-  ggplot2::theme(legend.position = "top")
+ggplot(data = dist_compare_data) +
+  geom_col(
+    mapping = aes(x = x, y = prop_num_cases),
+    fill = "cyan3",
+    colour = "black"
+  ) +
+  geom_point(
+    mapping = aes(
+      x = x,
+      y = dens,
+      colour = dist
+    ),
+    size = 2
+  ) +
+  geom_line(mapping = aes(x = x, y = dens, colour = dist)) +
+  scale_x_continuous(name = "Number of secondary cases") +
+  scale_y_continuous(name = "Frequency") +
+  scale_colour_manual(
+    name = "Distribution",
+    values = c("coral", "deeppink")
+  ) +
+  theme_bw() +
+  theme(legend.position = "top")
 ```
 
 The fit of each model is very similar, as expected from the close AIC and BIC (these models have the same numbers of free parameters). 
