@@ -25,29 +25,27 @@ is often quantified as the population-level reproduction number ($R$). However,
 this assumes individuals have similar patterns of disease spread, and conceals
 possible individual-level heterogeneity of contagion. 
 
-In their seminal work @lloyd-smithSuperspreadingEffectIndividual2005 showed
+In their seminal work, @lloyd-smithSuperspreadingEffectIndividual2005 showed
 that variation in individual-level disease transmission exceed that of a poisson
 model and in some cases that of a geometric model. They fit a negative binomial
 distribution to show that the distribution of secondary cases displayed overdispersion,
-in other words the variance exceeded the mean. In the negative binomial distribution
+in other words, the variance exceeded the mean. In the negative binomial distribution
 this is quantified by the dispersion ($k$) parameter being less than 1.
 
 This vignette demonstrates how to use the {superspreading} and {fitdistrplus} R
 packages to estimate the parameters of individual-level transmission and select
 the best fitting model.
 
-Additionally, {ggplot2} is used for plotting, {quickfit} is used to assist with
-multiple model fitting and comparison, and {kableExtra} is used for formatting
-tables.
+Additionally, {ggplot2} is used for plotting and {quickfit} is used to assist with
+multiple model fitting and comparison.
 
 ```{r setup}
 library(superspreading)
 library(fitdistrplus)
 library(ggplot2)
-library(kableExtra)
 ```
 
-For this example we use tranmission chain data from @fayeChainsTransmissionControl2015 from the Ebola virus disease outbreak in West Africa from February to August 2014. Specifically, this data reconstructs the pathway of Ebola transmission in Conakry, Guinea.
+For this example we use tranmission chain data from @fayeChainsTransmissionControl2015 from the Ebola virus disease outbreak in West Africa, between the period from February to August 2014. Specifically, this data reconstructs the pathway of Ebola transmission in Conakry, Guinea.
 
 This data has been used by @althausEbolaSuperspreading2015 to show that the Ebola outbreak in Conakry displayed signatures of overdispersion (i.e. superspreading events), and by @kucharskiEffectivenessRingVaccination2016 to determine the effectiveness of ring- and mass-vaccination campaigns for ongoing Ebola outbreaks.
 
@@ -80,14 +78,12 @@ nbinom_fit <- fitdistrplus::fitdist(data = all_cases, distr = "nbinom")
 ```
 
 ```{r, fit-table}
-tbl <- kbl(
+kable(
   data.frame(
     distribution = c(pois_fit$distname, geom_fit$distname, nbinom_fit$distname),
     AIC = c(pois_fit$aic, geom_fit$aic, nbinom_fit$aic),
     BIC = c(pois_fit$bic, geom_fit$bic, nbinom_fit$bic)
   )
-)
-kable_styling(kable_input = tbl, position = "center")
 ```
 
 The best fit model, for both AIC and BIC comparison, is the negative binomial.
@@ -96,9 +92,10 @@ The best fit model, for both AIC and BIC comparison, is the negative binomial.
 nbinom_fit$estimate
 ```
 
-The parameter for the negative binomial show that there is overdispersion in
+The parameter for the negative binomial show that there is overdispersion 
+(`size` is the dispersion parameter $k$, and `mu` is the mean, or $R$) in
 transmission and thus the EVD transmission chain data shows that superspreading
-events are possible realisation of EVD transmission dynamics.
+events are a possible realisation of EVD transmission dynamics.
 
 These values match those reported in @althausEbolaSuperspreading2015 and here 
 we reproduce figure 1 from that paper to display the tail of the distribution
@@ -155,7 +152,11 @@ secondary_case_transmission <- c(
 n_non_index <- sum(c(index_case_transmission, secondary_case_transmission)) 
 # transmission from all non-index cases
 non_index_cases <- c(secondary_case_transmission, rep(0, n_non_index - length(secondary_case_transmission))) 
+```
 
+We fit the negative binomial model for both the index and non-index case tranmission events.
+
+```{r, fit-nbinom}
 # Estimate R and k for index and non-index cases
 param_index <- fitdistrplus::fitdist(data = index_case_transmission, distr = "nbinom") 
 param_index
@@ -180,7 +181,7 @@ binomial.
 @kremerQuantifyingSuperspreadingCOVID192021 showed for SARS-CoV-2 that superspreading
 may be better modelled by a Poisson mixture distribution (or Poisson compound distribution).
 Four Poisson mixture distribution were applied: Poisson-Gamma, Poisson-Lognormal, Poisson-Weibull,
-and Poisson-Generalised-Gamma; finding the Poisson-lognormal and Poisson-weibull fit best
+and Poisson-Generalised-Gamma; finding the Poisson-lognormal and Poisson-Weibull fit best
 for three data sets.
 
 ::: {.alert .alert-warning}
@@ -188,14 +189,14 @@ The Poisson-Gamma distribution is the same as the negative binomial distribution
 Hereafter we refer to it is the negative binomial.
 :::
 
-R has the density functions and cumulative distribution functions for the Poisson 
-(`dpois()` and `ppois()`), Geometric (`dgeom()` and `pgeom()`) and Negative binomial
-(`dnbinom()` and `pnbinom()`), but does not supply either for Poisson compound 
+R has the density functions and cumulative distribution functions for the poisson 
+(`dpois()` and `ppois()`), geometric (`dgeom()` and `pgeom()`) and negative binomial
+(`dnbinom()` and `pnbinom()`) distributions, but does not supply Poisson compound 
 distributions. 
 
 In the {superspreading} R package we supply the density and cumulative
 distribution functions for the Poisson-lognormal (`dpoislnorm()` and `ppoislnorm()`) 
-and Poisson-weibull (`dpoisweibull()` and `ppoisweibull()`).
+and Poisson-Weibull (`dpoisweibull()` and `ppoisweibull()`).
 
 These functions can be used with {fitdistrplus}, as shown for the other distributions above.
 
@@ -222,7 +223,7 @@ poisweibull_fit <- fitdistrplus::fitdist(
   start = list(shape = 1, scale = 1)
 )
 
-knitr::kable(
+kable(
   data.frame(
     distribution = c(pois_fit$distname, geom_fit$distname, nbinom_fit$distname, poislnorm_fit$distname, poisweibull_fit$distname),
     AIC = c(pois_fit$aic, geom_fit$aic, nbinom_fit$aic, poislnorm_fit$aic, poisweibull_fit$aic),
@@ -277,3 +278,6 @@ The fit of each model is very similar, as expected from the close AIC and BIC (t
 The Poisson-Weibull compound distribution can adequately capture the overdispersion in the EVD transmission data. A noticable difference
 between the models fitting to the number of cases that caused a single secondary cases. Here the negative binomial matches the empirical
 data, whereas the Poisson-Weibull overestimates the number.
+
+Overall, {superspreading} and {fitdistrplus} (or another fitting package of your choice) can be used to estimate and 
+understand individual-level transmission dynamics when tranmission chain data is available.
