@@ -24,7 +24,7 @@ The rate of growth or decline in the incidence of a transmissible infectious dis
 is often quantified as the population-level reproduction number ($R$). However,
 there may be individual-level heterogeneity in transmission that this metric does not capture. 
 
-In their seminal work, @lloyd-smithSuperspreadingEffectIndividual2005 showed
+In their landmark work, @lloyd-smithSuperspreadingEffectIndividual2005 showed
 that variation in individual-level disease transmission exceed that of a poisson
 model and in some cases that of a geometric model. They fit a negative binomial
 distribution to show that the distribution of secondary cases displayed overdispersion,
