@@ -44,7 +44,7 @@ library(fitdistrplus)
 library(ggplot2)
 ```
 
-For this example we use tranmission chain data from @fayeChainsTransmissionControl2015 from the Ebola virus disease outbreak in West Africa, between the period from February to August 2014. Specifically, this data reconstructs the pathway of Ebola transmission in Conakry, Guinea.
+For this example we use transmission chain data from @fayeChainsTransmissionControl2015 from the Ebola virus disease outbreak in West Africa, between the period from February to August 2014. Specifically, this data reconstructs the pathway of Ebola transmission in Conakry, Guinea.
 
 This data has been used by @althausEbolaSuperspreading2015 to show that the Ebola outbreak in Conakry displayed signatures of overdispersion (i.e. superspreading events), and by @kucharskiEffectivenessRingVaccination2016 to determine the effectiveness of ring- and mass-vaccination campaigns for ongoing Ebola outbreaks.
 
