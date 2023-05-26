@@ -90,7 +90,7 @@ knitr::kable(
 )
 ```
 
-The best fit model, for both AIC and BIC comparison, is the negative binomial.
+The best performing model, for both AIC and BIC comparison, is the negative binomial.
 
 ```{r, nbinom-estim}
 nbinom_fit$estimate
