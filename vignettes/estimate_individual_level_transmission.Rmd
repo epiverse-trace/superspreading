@@ -275,8 +275,8 @@ knitr::kable(
 )
 ```
 
-The negative binomial is still be best fitting model, even with the addition of the Poisson-lognormal
-and Poisson-Weibull models. The second best model, the Poisson-Weibull, has a similar fit to the 
+The negative binomial is still the best performing fitting model, even with the addition of the Poisson-lognormal
+and Poisson-Weibull models. Although the second best model, the Poisson-Weibull, performs similarly well to the 
 negative binomial ($\Delta$AIC < 2 & $\Delta$BIC < 2).
 
 Here we plot the density of each distribution given the maximum likelihood estimates to inspect differences
