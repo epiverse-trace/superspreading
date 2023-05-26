@@ -22,8 +22,7 @@ knitr::opts_chunk$set(
 
 The rate of growth or decline in the incidence of a transmissible infectious disease
 is often quantified as the population-level reproduction number ($R$). However,
-this assumes individuals have similar patterns of disease spread, and conceals
-possible individual-level heterogeneity of contagion. 
+there may be individual-level heterogeneity in transmission that this metric does not capture. 
 
 In their seminal work, @lloyd-smithSuperspreadingEffectIndividual2005 showed
 that variation in individual-level disease transmission exceed that of a poisson
