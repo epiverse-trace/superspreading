@@ -43,6 +43,12 @@
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="articles/estimate_individual_level_transmission.html">Estimate individual-level transmission</a>
+  </div>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -89,8 +95,8 @@
 <span><span class="va">non_index_cases</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">secondary_case_transmission</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">n_non_index</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">secondary_case_transmission</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># Transmission from all non-index cases</span></span>
 <span></span>
 <span><span class="co"># Estimate R and k for index and non-index cases</span></span>
-<span><span class="va">param_index</span> <span class="op">&lt;-</span> <span class="fu">fitdistrplus</span><span class="fu">::</span><span class="fu">fitdist</span><span class="op">(</span><span class="va">index_cases</span>,<span class="st">"nbinom"</span><span class="op">)</span> </span>
-<span><span class="va">param_non_index</span> <span class="op">&lt;-</span> <span class="fu">fitdistrplus</span><span class="fu">::</span><span class="fu">fitdist</span><span class="op">(</span><span class="va">non_index_cases</span>,<span class="st">"nbinom"</span><span class="op">)</span> </span>
+<span><span class="va">param_index</span> <span class="op">&lt;-</span> <span class="fu">fitdistrplus</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdist</a></span><span class="op">(</span><span class="va">index_cases</span>,<span class="st">"nbinom"</span><span class="op">)</span> </span>
+<span><span class="va">param_non_index</span> <span class="op">&lt;-</span> <span class="fu">fitdistrplus</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdist</a></span><span class="op">(</span><span class="va">non_index_cases</span>,<span class="st">"nbinom"</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="co"># Compare probability of a large outbreak when k varies according to index/non-index values, </span></span>
 <span><span class="co"># assuming R=2 and 3 initial spillover infections</span></span>
