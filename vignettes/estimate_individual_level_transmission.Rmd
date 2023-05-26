@@ -25,7 +25,7 @@ is often quantified as the population-level reproduction number ($R$). However,
 there may be individual-level heterogeneity in transmission that this metric does not capture. 
 
 In their landmark work, @lloyd-smithSuperspreadingEffectIndividual2005 showed
-that variation in individual-level disease transmission exceed that of a poisson
+that variation in individual-level disease transmission often exceed that of a poisson
 model and in some cases that of a geometric model. They fit a negative binomial
 distribution to show that the distribution of secondary cases displayed overdispersion,
 in other words, the variance exceeded the mean. In the negative binomial distribution
