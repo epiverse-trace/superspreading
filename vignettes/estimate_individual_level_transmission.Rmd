@@ -332,7 +332,7 @@ ggplot(data = dist_compare_data) +
 ```
 
 The fit of each model is very similar, as expected from the close AIC and BIC (these models have the same numbers of free parameters). 
-The Poisson-Weibull compound distribution can adequately capture the overdispersion in the EVD transmission data. A noticable difference
+The Poisson-Weibull compound distribution can adequately capture the overdispersion in the EVD transmission data. A noticeable difference
 between the models fitting to the number of cases that caused a single secondary cases. Here the negative binomial matches the empirical
 data, whereas the Poisson-Weibull slightly overestimates the number.
 
