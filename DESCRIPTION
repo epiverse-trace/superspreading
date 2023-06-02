@@ -46,4 +46,6 @@ Suggests:
 Remotes:
     epiverse-trace/epiparameter
 Config/testthat/edition: 3
+Config/Needs/website:
+    epiverse-trace/epiversetheme
 VignetteBuilder: knitr
