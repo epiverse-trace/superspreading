@@ -25,9 +25,6 @@
     <loc>/index.html</loc>
   </url>
   <url>
-    <loc>/reference/cases_to_transmission.html</loc>
-  </url>
-  <url>
     <loc>/reference/dpoislnorm.html</loc>
   </url>
   <url>
@@ -50,5 +47,8 @@
   </url>
   <url>
     <loc>/reference/proportion_cluster_size.html</loc>
+  </url>
+  <url>
+    <loc>/reference/proportion_transmission.html</loc>
   </url>
 </urlset>
