@@ -173,7 +173,7 @@ non_index_cases <- c(
 )
 ```
 
-We fit the negative binomial model for both the index and non-index case tranmission events.
+We fit the negative binomial model for both the index and non-index case transmission events.
 
 ```{r, fit-nbinom}
 # Estimate R and k for index and non-index cases
@@ -337,4 +337,4 @@ between the models fitting to the number of cases that caused a single secondary
 data, whereas the Poisson-Weibull slightly overestimates the number.
 
 Overall, {superspreading} and {fitdistrplus} (or another fitting package of your choice) can be used to estimate and 
-understand individual-level transmission dynamics when tranmission chain data is available.
+understand individual-level transmission dynamics when transmission chain data is available.
