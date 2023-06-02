@@ -6,7 +6,7 @@
 #'
 #' It is commonly estimated what proportion of cases cause 80% of transmission
 #' (i.e. secondary cases).
-#' This can be calculated using `cases_to_transmission()` at varying values of
+#' This can be calculated using `proportion_transmission()` at varying values of
 #' \eqn{R} and for different values of percentage transmission.
 #'
 #' @details Multiple values of R and k can be supplied and a data frame of
@@ -40,7 +40,7 @@
 #' percent_transmission <- 0.8 # 80% of transmission
 #' R <- 2
 #' k <- 0.5
-#' cases_to_transmission(
+#' proportion_transmission(
 #'   R = R,
 #'   k = k,
 #'   percent_transmission = percent_transmission
@@ -48,7 +48,7 @@
 #'
 #' # example with multiple values of k
 #' k <- c(0.1, 0.2, 0.3, 0.4, 0.5, 1)
-#' cases_to_transmission(
+#' proportion_transmission(
 #'   R = R,
 #'   k = k,
 #'   percent_transmission = percent_transmission
@@ -56,12 +56,12 @@
 #'
 #' # example with vectors of R and k
 #' R <- c(1, 2, 3)
-#' cases_to_transmission(
+#' proportion_transmission(
 #'   R = R,
 #'   k = k,
 #'   percent_transmission = percent_transmission
 #' )
-cases_to_transmission <- function(R, k, percent_transmission, sim = FALSE) { # nolint
+proportion_transmission <- function(R, k, percent_transmission, sim = FALSE) { # nolint
 
   # check input
   checkmate::assert_numeric(R)
@@ -75,13 +75,13 @@ cases_to_transmission <- function(R, k, percent_transmission, sim = FALSE) { # n
   for (i in seq_len(nrow(df))) {
 
     if (sim) {
-      prop <- .cases_to_transmission_numerical(
+      prop <- .proportion_transmission_numerical(
         R = df[i, "R"],
         k = df[i, "k"],
         percent_transmission = percent_transmission
       )
     } else {
-      prop <- .cases_to_transmission_analytical(
+      prop <- .proportion_transmission_analytical(
         R = df[i, "R"],
         k = df[i, "k"],
         percent_transmission = percent_transmission
@@ -100,7 +100,7 @@ cases_to_transmission <- function(R, k, percent_transmission, sim = FALSE) { # n
 #' @return A numeric
 #' @keywords internal
 #' @noRd
-.cases_to_transmission_analytical <- function(R, k, percent_transmission) { # nolint
+.proportion_transmission_analytical <- function(R, k, percent_transmission) { # nolint
 
   xm1 <- stats::qnbinom(1 - percent_transmission, k + 1, mu = R * (k + 1) / k)
   remq <- 1 - percent_transmission -
@@ -118,7 +118,7 @@ cases_to_transmission <- function(R, k, percent_transmission, sim = FALSE) { # n
 #' @return A numeric
 #' @keywords internal
 #' @noRd
-.cases_to_transmission_numerical <- function(R, k, percent_transmission) { # nolint
+.proportion_transmission_numerical <- function(R, k, percent_transmission) { # nolint
 
   nsim <- 1e5
   simulate_secondary <- stats::rnbinom(

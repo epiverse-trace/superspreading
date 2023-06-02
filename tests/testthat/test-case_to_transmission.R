@@ -1,5 +1,5 @@
-test_that("cases_to_transmission works as expected for single R and k", {
-  res <- cases_to_transmission(R = 2, k = 0.5, percent_transmission = 0.8)
+test_that("proportion_transmission works as expected for single R and k", {
+  res <- proportion_transmission(R = 2, k = 0.5, percent_transmission = 0.8)
 
   expect_s3_class(res, "data.frame")
   expect_identical(dim(res), c(1L, 3L))
@@ -8,7 +8,7 @@ test_that("cases_to_transmission works as expected for single R and k", {
     c("numeric", "numeric", "character")
   )
 
-  res <- cases_to_transmission(
+  res <- proportion_transmission(
     R = 2,
     k = 0.5,
     percent_transmission = 0.8,
@@ -23,8 +23,8 @@ test_that("cases_to_transmission works as expected for single R and k", {
   )
 })
 
-test_that("cases_to_transmission works as expected for multiple R", {
-  res <- cases_to_transmission(
+test_that("proportion_transmission works as expected for multiple R", {
+  res <- proportion_transmission(
     R = c(1, 2, 3),
     k = 0.5,
     percent_transmission = 0.8
@@ -37,7 +37,7 @@ test_that("cases_to_transmission works as expected for multiple R", {
     c("numeric", "numeric", "character")
   )
 
-  res <- cases_to_transmission(
+  res <- proportion_transmission(
     R = c(1, 2, 3),
     k = 0.5,
     percent_transmission = 0.8,
@@ -52,8 +52,8 @@ test_that("cases_to_transmission works as expected for multiple R", {
   )
 })
 
-test_that("cases_to_transmission works as expected for multiple R & k", {
-  res <- cases_to_transmission(
+test_that("proportion_transmission works as expected for multiple R & k", {
+  res <- proportion_transmission(
     R = c(1, 2, 3),
     k = c(0.1, 0.2, 0.3),
     percent_transmission = 0.8
@@ -66,7 +66,7 @@ test_that("cases_to_transmission works as expected for multiple R & k", {
     c("numeric", "numeric", "character")
   )
 
-  res <- cases_to_transmission(
+  res <- proportion_transmission(
     R = c(1, 2, 3),
     k = c(0.1, 0.2, 0.3),
     percent_transmission = 0.8,
@@ -81,30 +81,30 @@ test_that("cases_to_transmission works as expected for multiple R & k", {
   )
 })
 
-test_that("cases_to_transmission fails as expected", {
+test_that("proportion_transmission fails as expected", {
   expect_error(
-    cases_to_transmission(R = "1", k = 0.1, percent_transmission = 0.8),
+    proportion_transmission(R = "1", k = 0.1, percent_transmission = 0.8),
     regexp = "Assertion on 'R' failed"
   )
 
   expect_error(
-    cases_to_transmission(R = 1, k = "0.1", percent_transmission = 0.8),
+    proportion_transmission(R = 1, k = "0.1", percent_transmission = 0.8),
     regexp = "Assertion on 'k' failed"
   )
 
   expect_error(
-    cases_to_transmission(R = 1, k = 0.1, percent_transmission = "0.8"),
+    proportion_transmission(R = 1, k = 0.1, percent_transmission = "0.8"),
     regexp = "Assertion on 'percent_transmission' failed"
   )
 
   expect_error(
-    cases_to_transmission(R = 1, k = 0.1, percent_transmission = 0.8, sim = 1),
+    proportion_transmission(R = 1, k = 0.1, percent_transmission = 0.8, sim = 1),
     regexp = "Assertion on 'sim' failed"
   )
 })
 
-test_that(".cases_to_transmission_numerical works as expected", {
-  res <- .cases_to_transmission_numerical(
+test_that(".proportion_transmission_numerical works as expected", {
+  res <- .proportion_transmission_numerical(
     R = 2,
     k = 0.5,
     percent_transmission = 0.8
@@ -113,8 +113,8 @@ test_that(".cases_to_transmission_numerical works as expected", {
   expect_length(res, 1)
 })
 
-test_that(".cases_to_transmission_analytical works as expected", {
-  res <- .cases_to_transmission_analytical(
+test_that(".proportion_transmission_analytical works as expected", {
+  res <- .proportion_transmission_analytical(
     R = 2,
     k = 0.5,
     percent_transmission = 0.8
