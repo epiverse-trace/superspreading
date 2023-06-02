@@ -1,0 +1,86 @@
+---
+title: "Epidemic Risk"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Epidemic Risk}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+During the early stages of an infectious disease outbreak information on transmission
+clusters can provide insight into the occurrence of superspreading events and from this
+the probability an outbreak will cause an epidemic. This has implications for policy
+decisions whether control interventions are required to bring disease transmission 
+under control (e.g. $R$ < 1) and increase the probability that an outbreak goes extinct.
+
+This vignette explores ...
+
+```{r setup}
+library(superspreading)
+library(ggplot2)
+```
+
+## Plot from Kucharski et al (2020)
+
+```{r}
+epidemic_params <- expand.grid(
+  R = 2.35, R_lw = 1.5, R_up = 3.2, k = seq(0, 1, 0.1), a = seq(0, 10, 1)
+)
+# results are transposed to pivot to long rather than wide data
+prob_epidemic <- t(apply(epidemic_params, 1, function(x) {
+  median <- probability_epidemic(R = x[["R"]], k = x[["k"]], a = x[["a"]])
+  lower <- probability_epidemic(R = x[["R_lw"]], k = x[["k"]], a = x[["a"]])
+  upper <- probability_epidemic(R = x[["R_up"]], k = x[["k"]], a = x[["a"]])
+  c(prob_epidemic = median, prob_epidemic_lw = lower, prob_epidemic_up = upper)
+})) 
+epidemic_params <- cbind(epidemic_params, prob_epidemic)
+
+# subset data for a single initial infection
+homogeneity <- subset(epidemic_params, a == 1)
+
+# plot probability of epidemic across dispersion
+ggplot2::ggplot(data = homogeneity) +
+  ggplot2::geom_ribbon(mapping = ggplot2::aes(x = k, ymin = prob_epidemic_lw, ymax = prob_epidemic_up), fill = "grey70") +
+  ggplot2::geom_line(mapping = ggplot2::aes(x = k, y = prob_epidemic)) +
+  ggplot2::scale_y_continuous(
+    name = "Probability of large outbreak", 
+    limits = c(0, 1)
+  ) +
+  ggplot2::scale_x_continuous(name = "Extent of homogeneity in transmission") +
+  ggplot2::theme_bw()
+```
+
+```{r}
+introductions <- subset(epidemic_params, k == 0.5)
+ggplot2::ggplot(data = introductions) +
+  ggplot2::geom_pointrange(
+    mapping = ggplot2::aes(
+      x = a, 
+      y = prob_epidemic, 
+      ymin = prob_epidemic_lw, 
+      ymax = prob_epidemic_up
+    )
+  ) +
+  ggplot2::scale_y_continuous(
+    name = "Probability of large outbreak", 
+    limits = c(0, 1)
+  ) +
+  ggplot2::scale_x_continuous(name = "Number of introductions", n.breaks = 6) +
+  ggplot2::theme_bw()
+```
+
+## Plot from CMMID dashboard
+
+## Plot from Lloyd-Smith et al (2005)
+
+## Link to policy report
+
+
+
