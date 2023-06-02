@@ -98,7 +98,12 @@ test_that("proportion_transmission fails as expected", {
   )
 
   expect_error(
-    proportion_transmission(R = 1, k = 0.1, percent_transmission = 0.8, sim = 1),
+    proportion_transmission(
+      R = 1,
+      k = 0.1,
+      percent_transmission = 0.8,
+      sim = 1
+    ),
     regexp = "Assertion on 'sim' failed"
   )
 })
