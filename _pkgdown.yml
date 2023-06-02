@@ -1,4 +1,34 @@
-url: ~
+url: https://epiverse-trace.github.io/superspreading
 template:
-  bootstrap: 5
+  package: epiversetheme
+  bslib:
+    font_weight_base : 300
 
+reference:
+  - title: Offspring distributions
+
+  - subtitle: Poisson-lognormal
+    desc: PDF and CDF functions for the Poisson-lognormal compound distribution
+    contents:
+    - ends_with("poislnorm")
+
+  - subtitle: Poisson-Weibull
+    desc: PDF and CDF functions for the Poisson-Weibull compound distribution
+    contents:
+    - ends_with("poisweibull")
+
+  - title: Probability of epidemic or extinction
+    desc: Probability of a disease causing an epidemic or going extinct
+    contents:
+    - starts_with("probability")
+
+  - title: Proportion of transmission
+    contents:
+    - proportion_transmission
+    - proportion_cluster_size
+
+articles:
+- title: Parameter estimation
+  navbar: Parameter estimation
+  contents:
+  - estimate_individual_level_transmission
