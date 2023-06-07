@@ -43,8 +43,9 @@ Suggests:
     bookdown,
     rmarkdown,
     ggplot2,
-    testthat (>= 3.0.0),
-    spelling
+    spelling,
+    ggtext,
+    testthat (>= 3.0.0)
 Remotes:
     epiverse-trace/epiparameter
 Config/testthat/edition: 3
