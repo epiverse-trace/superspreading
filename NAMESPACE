@@ -2,6 +2,7 @@
 
 export(dpoislnorm)
 export(dpoisweibull)
+export(estimate_cluster_size)
 export(ppoislnorm)
 export(ppoisweibull)
 export(probability_epidemic)
