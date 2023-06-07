@@ -1,6 +1,12 @@
 ---
 title: "Epidemic Risk"
-output: rmarkdown::html_vignette
+output: 
+  bookdown::html_vignette2:
+    code_folding: show
+pkgdown:
+   as_is: true
+bibliography: references.json
+link-citations: true
 vignette: >
   %\VignetteIndexEntry{Epidemic Risk}
   %\VignetteEngine{knitr::rmarkdown}
@@ -20,16 +26,27 @@ the probability an outbreak will cause an epidemic. This has implications for po
 decisions whether control interventions are required to bring disease transmission 
 under control (e.g. $R$ < 1) and increase the probability that an outbreak goes extinct.
 
-This vignette explores ...
+A recent example of where individual-level transmission and superspreading was analysed
+to understand disease transmission was by the [Scientific Advisory Group for Emergencies 
+(SAGE)](https://www.gov.uk/government/organisations/scientific-advisory-group-for-emergencies) 
+for the [UK's response COVID-19](https://www.gov.uk/government/publications/analysis-of-sars-cov-2-transmission-clusters-and-superspreading-events-3-june-2020). 
+
+This vignette explores the applications of the functions included the {superspreading} package and their visualiation in understanding and informing decision makers for a variety of outbreak scenarios.
 
 ```{r setup}
 library(superspreading)
 library(ggplot2)
 ```
 
-## Plot from Kucharski et al (2020)
+Early in the COVID-19 epidemic @kucharskiEarlyDynamicsTransmission2020 investigated
+whether data on SARS-CoV-2 transmission displayed signatures of overdispersion (i.e.
+evidence of superspreading events). This was in light of evidence that other corona virus
+outbreaks (Severe acute respiratory syndrome (SARS) and Middle East respiratory syndrome (MERS))
+had experienced superspreading events. The detection of variability in individual-transmission
+is important in understanding or predicting the likelihood of transmission establishing
+when imported into a new location (e.g. country). 
 
-```{r}
+```{r, prep-dispersion-plot}
 epidemic_params <- expand.grid(
   R = 2.35, R_lw = 1.5, R_up = 3.2, k = seq(0, 1, 0.1), a = seq(0, 10, 1)
 )
@@ -44,11 +61,24 @@ epidemic_params <- cbind(epidemic_params, prob_epidemic)
 
 # subset data for a single initial infection
 homogeneity <- subset(epidemic_params, a == 1)
+```
 
+```{r, plot-dispersion, class.source = 'fold-hide', fig.cap="The probability that an initial infection (introduction) will cause a sustained outbreak (transmission chain). The dispersion of the individual-level transmission is plotted on the x-axis and probability of outbreak -- calculated using `probability_epidemic()` -- is on the y-axis. This plot is reproduced from Kucharski et al. (2020) figure 3A.", fig.width = 8, fig.height = 5}
 # plot probability of epidemic across dispersion
 ggplot2::ggplot(data = homogeneity) +
-  ggplot2::geom_ribbon(mapping = ggplot2::aes(x = k, ymin = prob_epidemic_lw, ymax = prob_epidemic_up), fill = "grey70") +
+  ggplot2::geom_ribbon(
+    mapping = ggplot2::aes(
+      x = k, 
+      ymin = prob_epidemic_lw, 
+      ymax = prob_epidemic_up
+    ), 
+    fill = "grey70"
+  ) +
   ggplot2::geom_line(mapping = ggplot2::aes(x = k, y = prob_epidemic)) +
+  ggplot2::geom_vline(mapping = ggplot2::aes(xintercept = 0.2), linetype = "dashed") +
+  ggplot2::annotate(geom = "text", x = 0.15, y = 0.75, label= "SARS") + 
+  ggplot2::geom_vline(mapping = ggplot2::aes(xintercept = 0.4), linetype = "dashed") +
+  ggplot2::annotate(geom = "text", x = 0.45, y = 0.75, label = "MERS") +
   ggplot2::scale_y_continuous(
     name = "Probability of large outbreak", 
     limits = c(0, 1)
@@ -57,8 +87,21 @@ ggplot2::ggplot(data = homogeneity) +
   ggplot2::theme_bw()
 ```
 
-```{r}
+The degree of variability in transmission increases as $k$ decreases. So the probability
+of a large outbreak is smaller for smaller values of $k$, meaning that if SARS-CoV-2
+is more similar to SARS than MERS it will be less likely to establish and cause an 
+outbreak if introduced into a newly susceptible population.
+
+However, this probability of establishment and continued transmission will also
+depend on the number of initial introductions to that populations. The more
+introductions, the higher the chance one will lead to an epidemic.
+
+```{r, prep-introductions-plot}
 introductions <- subset(epidemic_params, k == 0.5)
+```
+
+```{r, plot-introductions, class.source = 'fold-hide', fig.cap="The probability that an a number of introduction events will cause a sustained outbreak (transmission chain). The number of disease introductions is plotted on the x-axis and probability of outbreak -- calculated using `probability_epidemic()` -- is on the y-axis. This plot is reproduced from Kucharski et al. (2020) figure 3B.", fig.width = 8, fig.height = 5}
+# plot probability of epidemic across introductions
 ggplot2::ggplot(data = introductions) +
   ggplot2::geom_pointrange(
     mapping = ggplot2::aes(
@@ -76,11 +119,100 @@ ggplot2::ggplot(data = introductions) +
   ggplot2::theme_bw()
 ```
 
-## Plot from CMMID dashboard
+Different levels of heterogeneity in transmission will produce different probabilities of epidemics.
 
-## Plot from Lloyd-Smith et al (2005)
+```{r, plot-introductions-multi-k, class.source = 'fold-hide', fig.cap="The probability that an a number of introduction events will cause a sustained outbreak (transmission chain). The number of disease introductions is plotted on the x-axis and probability of outbreak -- calculated using `probability_epidemic()` -- is on the y-axis. Different values of dispersion are plotted to show the effect of increased transmission variability on an epidemic establishing", fig.width = 8, fig.height = 5}
+# plot probability of epidemic across introductions for multiple k
+ggplot2::ggplot(data = epidemic_params) +
+  ggplot2::geom_point(
+    mapping = ggplot2::aes(
+      x = a, 
+      y = prob_epidemic,
+      colour = k
+    )
+  ) +
+  ggplot2::scale_y_continuous(
+    name = "Probability of large outbreak", 
+    limits = c(0, 1)
+  ) +
+  ggplot2::labs(colour = "Dispersion (*k*)") +
+  ggplot2::scale_x_continuous(name = "Number of introductions", n.breaks = 6) +
+  ggplot2::scale_colour_continuous(type = "viridis") +
+  ggplot2::theme_bw() +
+  ggplot2::theme(legend.title = ggtext::element_markdown())
+```
 
-## Link to policy report
+In the above plot we drop the uncertainty around each point and assume a known value
+of R in order to more clearly show the pattern.
 
+Applications that make it easy to explore this functionality and compare between existing
+parameter estimates of offspring distribution are also useful when
+knowledge of superspreading in the early stages of an outbreak. An example of this is the
+[Shiny app developed by the Centre for Mathematical Modelling of Infectious diseases](https://cmmid.github.io/visualisations/new-outbreak-probability) at the London
+School of Hygiene and Tropical Medicine, for comparing SARS-like and MERS-like scenarios, 
+as well as random mixing.
+
+Conversely to the probability of an epidemics, the probability that an outbreak will 
+go extinct (i.e. transmission will subside), can also be plotted for different values of 
+$R$.
+
+```{r, prep-exinction-plot}
+extinction_params <- expand.grid(
+  R = seq(0, 5, 0.1), 
+  k = c(0.01, 0.1, 0.5, 1, 4, Inf),
+  a = 1
+)
+# results are transposed to pivot to long rather than wide data
+prob_extinct <- apply(extinction_params, 1, function(x) {
+  median <- probability_extinct(R = x[["R"]], k = x[["k"]], a = x[["a"]])
+  median
+})
+extinction_params <- cbind(extinction_params, prob_extinct)
+```
+
+```{r, plot-extinction, class.source = 'fold-hide', fig.cap="The probability that an infectious disease will go extinct for a given value of $R$ and $k$. This is calculated using `probability_extinct()` function.", fig.width = 8, fig.height = 5}
+# plot probability of extinction across R for multiple k
+ggplot2::ggplot(data = extinction_params) +
+  ggplot2::geom_point(mapping = ggplot2::aes(x = R, y = prob_extinct, colour = factor(k))) +
+    ggplot2::scale_y_continuous(
+    name = "Probability of extinction", 
+    limits = c(0, 1)
+  ) +
+  ggplot2::labs(colour = "Dispersion (*k*)") +
+  ggplot2::scale_x_continuous(name = "Reproductive number (*R*)", n.breaks = 6) +
+  ggplot2::scale_color_viridis_d() +
+  ggplot2::theme_bw() +
+  ggplot2::theme(
+    axis.title.x = ggtext::element_markdown(),
+    legend.title = ggtext::element_markdown()
+  )
+```
+
+## Superspreading in decision making
+
+One of the first tasks in an outbreak is to establish whether estimates of individual-level
+transmission variability have been reported, either for this outbreak or a previous outbreak
+of the same pathogen. Alternatively, if it is an outbreak of a novel pathogen, parameters
+for similar pathogens can be searched for. 
+
+This is accomplished by another Epiverse-TRACE R package: [{epiparameter}](https://epiverse-trace.github.io/epiparameter/index.html). This package
+contains a library of epidemiological parameters included offspring distribution parameter estimates and uncertainty with the corresponding source (e.g. published article). This aids the collation and establish a current understanding as was done for [COVID-19](https://www.gov.uk/government/publications/analysis-of-sars-cov-2-transmission-clusters-and-superspreading-events-3-june-2020).
+
+From these parameter estimates metrics to give an intuitive understanding of transmission patterns can be tabulated.
+For example the proportion of transmission events in a given cluster size can be calculated using the {superspreading} function `proportion_cluster_size()`.
+
+```{r}
+# For R = 0.8
+proportion_cluster_size(R = 0.8, k = seq(0.1, 1, 0.1), cluster_size = c(5, 10, 25))
+
+# For R = 3
+proportion_cluster_size(R = 0.8, k = seq(0.1, 1, 0.1), cluster_size = c(5, 10, 25))
+```
+
+These results indicate whether preventing gatherings of a certain size can reduce the epidemic
+by preventing potential superspreading events.
+
+When data on the settings of transmission is known, priority can be given to restricting 
+particular types of gatherings to most effectively bring down the reproduction number.
 
 
