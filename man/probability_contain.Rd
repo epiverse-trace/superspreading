@@ -26,8 +26,8 @@ offspring distribution from fitted negative binomial)}
 
 \item{c}{Control strength, 0 is no control measures, 1 is complete control.}
 
-\item{control_type}{Either \code{"population"} or \code{"individual"} for population-level
-or individual-level control measures.}
+\item{control_type}{Either \code{"population"} or \code{"individual"} for
+population-level or individual-level control measures.}
 
 \item{stochastic}{Whether to use a stochastic branching process model or the
 probability of extinction.}
@@ -41,7 +41,8 @@ which the epidemic is considered contained.}
 A number for the probability of containment
 }
 \description{
-Containment is defined as not reaching 100 cases
+Containment is defined as the size of the transmission chain
+not reaching the \code{case_threshold} (default = 100).
 }
 \examples{
 probability_contain(R = 1.5, k = 0.5, c = 1)

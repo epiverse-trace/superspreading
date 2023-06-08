@@ -1,8 +1,7 @@
 #' Probability that an outbreak will be contained
 #'
-#' @description
-#' Containment is defined as not reaching 100 cases
-#'
+#' @description Containment is defined as the size of the transmission chain
+#' not reaching the `case_threshold` (default = 100).
 #'
 #' @inheritParams probability_epidemic
 #' @param c Control strength, 0 is no control measures, 1 is complete control.
