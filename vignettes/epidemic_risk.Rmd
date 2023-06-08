@@ -170,7 +170,7 @@ prob_extinct <- apply(extinction_params, 1, function(x) {
 extinction_params <- cbind(extinction_params, prob_extinct)
 ```
 
-```{r, plot-extinction, class.source = 'fold-hide', fig.cap="The probability that an infectious disease will go extinct for a given value of $R$ and $k$. This is calculated using `probability_extinct()` function.", fig.width = 8, fig.height = 5}
+```{r, plot-extinction, class.source = 'fold-hide', fig.cap="The probability that an infectious disease will go extinct for a given value of $R$ and $k$. This is calculated using `probability_extinct()` function. This plot is reproduced from @lloyd-smithSuperspreadingEffectIndividual2005 figure 2B.", fig.width = 8, fig.height = 5}
 # plot probability of extinction across R for multiple k
 ggplot2::ggplot(data = extinction_params) +
   ggplot2::geom_point(mapping = ggplot2::aes(x = R, y = prob_extinct, colour = factor(k))) +
@@ -215,4 +215,47 @@ by preventing potential superspreading events.
 When data on the settings of transmission is known, priority can be given to restricting 
 particular types of gatherings to most effectively bring down the reproduction number.
 
+## Controls on transmission
 
+In their work on identifying the prevalence of overdispersion in individual-level transmission, @lloyd-smithSuperspreadingEffectIndividual2005 also showed the effect of control measures on the probability of containment. They defined containment as the size of a transmission chain not reaching 100 cases. They assumed control measures could be either population-level, or individual-level. We `probability_contain()` to calculate the probability that disease spread will go extinct before reaching a threshold size.
+
+```{r, prep-containment-plot}
+contain_params <- expand.grid(
+  R = 3, k = c(0.1, 0.5, 1, Inf), a = 1, c = seq(0, 1, 0.05)
+)
+prob_contain <- apply(contain_params, 1, function(x) {
+  probability_contain(
+    R = x[["R"]], 
+    k = x[["k"]], 
+    a = x[["a"]], 
+    c = x[["c"]], 
+    control_type = "population", 
+    stochastic = TRUE, 
+    case_threshold = 100
+  )
+})
+contain_params <- cbind(contain_params, prob_contain)
+```
+
+```{r, plot-containment, class.source = 'fold-hide', fig.cap="The probability that an outbreak will be contained (i.e. not exceed 100 chains) for a variety of population-level control measures. The probability of containment is calculated using `probability_contain()`. This plot is reproduced from Lloyd-Smith et al. (2005) figure 3C.", fig.width = 8, fig.height = 5}
+# plot probability of epidemic across introductions for multiple k
+ggplot2::ggplot(data = contain_params) +
+  ggplot2::geom_point(
+    mapping = ggplot2::aes(
+      x = c, 
+      y = prob_contain,
+      colour = factor(k)
+    )
+  ) + 
+  ggplot2::scale_y_continuous(
+    name = "Probability of containment", 
+    limits = c(0, 1)
+  ) +
+  ggplot2::scale_x_continuous(name = "Control measures (*c*)", n.breaks = 6) +
+  ggplot2::labs(colour = "Dispersion (*k*)") +
+  ggplot2::scale_color_viridis_d() +
+  ggplot2::theme_bw() +
+  ggplot2::theme(axis.title.x = ggtext::element_markdown(),
+                 legend.title = ggtext::element_markdown())
+
+```
