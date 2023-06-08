@@ -48,7 +48,7 @@ Suggests:
     ggtext,
     testthat (>= 3.0.0)
 Remotes:
-    epiverse-trace/epiparameter
+    epiverse-trace/epiparameter,
     epiverse-trace/bpmodels
 Config/testthat/edition: 3
 Config/Needs/website:
