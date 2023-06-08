@@ -4,7 +4,7 @@ test_that("proportion_cluster_size works as expected for single R and k", {
   expect_s3_class(res, "data.frame")
   expect_identical(dim(res), c(1L, 3L))
   expect_identical(
-    unname(sapply(res, class)),
+    unname(vapply(res, class, FUN.VALUE = character(1))),
     c("numeric", "numeric", "character")
   )
 })
@@ -19,7 +19,7 @@ test_that("proportion_cluster_size works as expected for multiple R", {
   expect_s3_class(res, "data.frame")
   expect_identical(dim(res), c(3L, 3L))
   expect_identical(
-    unname(sapply(res, class)),
+    unname(vapply(res, class, FUN.VALUE = character(1))),
     c("numeric", "numeric", "character")
   )
 })
@@ -34,7 +34,7 @@ test_that("proportion_cluster_size works as expected for multiple R & k", {
   expect_s3_class(res, "data.frame")
   expect_identical(dim(res), c(9L, 3L))
   expect_identical(
-    unname(sapply(res, class)),
+    unname(vapply(res, class, FUN.VALUE = character(1))),
     c("numeric", "numeric", "character")
   )
 })
@@ -49,7 +49,7 @@ test_that("proportion_cluster_size works as expected for multiple R & k & cs", {
   expect_s3_class(res, "data.frame")
   expect_identical(dim(res), c(9L, 5L))
   expect_identical(
-    unname(sapply(res, class)),
+    unname(vapply(res, class, FUN.VALUE = character(1))),
     c("numeric", "numeric", "character", "character", "character")
   )
 })
