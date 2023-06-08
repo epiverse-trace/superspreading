@@ -36,6 +36,7 @@ This vignette explores the applications of the functions included the {superspre
 ```{r setup}
 library(superspreading)
 library(ggplot2)
+library(ggtext)
 ```
 
 Early in the COVID-19 epidemic @kucharskiEarlyDynamicsTransmission2020 investigated
@@ -65,32 +66,32 @@ homogeneity <- subset(epidemic_params, a == 1)
 
 ```{r, plot-dispersion, class.source = 'fold-hide', fig.cap="The probability that an initial infection (introduction) will cause a sustained outbreak (transmission chain). The dispersion of the individual-level transmission is plotted on the x-axis and probability of outbreak -- calculated using `probability_epidemic()` -- is on the y-axis. This plot is reproduced from Kucharski et al. (2020) figure 3A.", fig.width = 8, fig.height = 5}
 # plot probability of epidemic across dispersion
-ggplot2::ggplot(data = homogeneity) +
-  ggplot2::geom_ribbon(
-    mapping = ggplot2::aes(
+ggplot(data = homogeneity) +
+  geom_ribbon(
+    mapping = aes(
       x = k,
       ymin = prob_epidemic_lw,
       ymax = prob_epidemic_up
     ),
     fill = "grey70"
   ) +
-  ggplot2::geom_line(mapping = ggplot2::aes(x = k, y = prob_epidemic)) +
-  ggplot2::geom_vline(
-    mapping = ggplot2::aes(xintercept = 0.2),
+  geom_line(mapping = aes(x = k, y = prob_epidemic)) +
+  geom_vline(
+    mapping = aes(xintercept = 0.2),
     linetype = "dashed"
   ) +
-  ggplot2::annotate(geom = "text", x = 0.15, y = 0.75, label = "SARS") +
-  ggplot2::geom_vline(
-    mapping = ggplot2::aes(xintercept = 0.4),
+  annotate(geom = "text", x = 0.15, y = 0.75, label = "SARS") +
+  geom_vline(
+    mapping = aes(xintercept = 0.4),
     linetype = "dashed"
   ) +
-  ggplot2::annotate(geom = "text", x = 0.45, y = 0.75, label = "MERS") +
-  ggplot2::scale_y_continuous(
+  annotate(geom = "text", x = 0.45, y = 0.75, label = "MERS") +
+  scale_y_continuous(
     name = "Probability of large outbreak",
     limits = c(0, 1)
   ) +
-  ggplot2::scale_x_continuous(name = "Extent of homogeneity in transmission") +
-  ggplot2::theme_bw()
+  scale_x_continuous(name = "Extent of homogeneity in transmission") +
+  theme_bw()
 ```
 
 The degree of variability in transmission increases as $k$ decreases. So the probability
@@ -108,44 +109,44 @@ introductions <- subset(epidemic_params, k == 0.5)
 
 ```{r, plot-introductions, class.source = 'fold-hide', fig.cap="The probability that an a number of introduction events will cause a sustained outbreak (transmission chain). The number of disease introductions is plotted on the x-axis and probability of outbreak -- calculated using `probability_epidemic()` -- is on the y-axis. This plot is reproduced from Kucharski et al. (2020) figure 3B.", fig.width = 8, fig.height = 5}
 # plot probability of epidemic across introductions
-ggplot2::ggplot(data = introductions) +
-  ggplot2::geom_pointrange(
-    mapping = ggplot2::aes(
+ggplot(data = introductions) +
+  geom_pointrange(
+    mapping = aes(
       x = a,
       y = prob_epidemic,
       ymin = prob_epidemic_lw,
       ymax = prob_epidemic_up
     )
   ) +
-  ggplot2::scale_y_continuous(
+  scale_y_continuous(
     name = "Probability of large outbreak",
     limits = c(0, 1)
   ) +
-  ggplot2::scale_x_continuous(name = "Number of introductions", n.breaks = 6) +
-  ggplot2::theme_bw()
+  scale_x_continuous(name = "Number of introductions", n.breaks = 6) +
+  theme_bw()
 ```
 
 Different levels of heterogeneity in transmission will produce different probabilities of epidemics.
 
 ```{r, plot-introductions-multi-k, class.source = 'fold-hide', fig.cap="The probability that an a number of introduction events will cause a sustained outbreak (transmission chain). The number of disease introductions is plotted on the x-axis and probability of outbreak -- calculated using `probability_epidemic()` -- is on the y-axis. Different values of dispersion are plotted to show the effect of increased transmission variability on an epidemic establishing", fig.width = 8, fig.height = 5}
 # plot probability of epidemic across introductions for multiple k
-ggplot2::ggplot(data = epidemic_params) +
-  ggplot2::geom_point(
-    mapping = ggplot2::aes(
+ggplot(data = epidemic_params) +
+  geom_point(
+    mapping = aes(
       x = a,
       y = prob_epidemic,
       colour = k
     )
   ) +
-  ggplot2::scale_y_continuous(
+  scale_y_continuous(
     name = "Probability of large outbreak",
     limits = c(0, 1)
   ) +
-  ggplot2::labs(colour = "Dispersion (*k*)") +
-  ggplot2::scale_x_continuous(name = "Number of introductions", n.breaks = 6) +
-  ggplot2::scale_colour_continuous(type = "viridis") +
-  ggplot2::theme_bw() +
-  ggplot2::theme(legend.title = ggtext::element_markdown())
+  labs(colour = "Dispersion (*k*)") +
+  scale_x_continuous(name = "Number of introductions", n.breaks = 6) +
+  scale_colour_continuous(type = "viridis") +
+  theme_bw() +
+  theme(legend.title = element_markdown())
 ```
 
 In the above plot we drop the uncertainty around each point and assume a known value
@@ -178,28 +179,28 @@ extinction_params <- cbind(extinction_params, prob_extinct)
 
 ```{r, plot-extinction, class.source = 'fold-hide', fig.cap="The probability that an infectious disease will go extinct for a given value of $R$ and $k$. This is calculated using `probability_extinct()` function. This plot is reproduced from @lloyd-smithSuperspreadingEffectIndividual2005 figure 2B.", fig.width = 8, fig.height = 5}
 # plot probability of extinction across R for multiple k
-ggplot2::ggplot(data = extinction_params) +
-  ggplot2::geom_point(
-    mapping = ggplot2::aes(
+ggplot(data = extinction_params) +
+  geom_point(
+    mapping = aes(
       x = R,
       y = prob_extinct,
       colour = factor(k)
     )
   ) +
-  ggplot2::scale_y_continuous(
+  scale_y_continuous(
     name = "Probability of extinction",
     limits = c(0, 1)
   ) +
-  ggplot2::labs(colour = "Dispersion (*k*)") +
-  ggplot2::scale_x_continuous(
+  labs(colour = "Dispersion (*k*)") +
+  scale_x_continuous(
     name = "Reproductive number (*R*)",
     n.breaks = 6
   ) +
-  ggplot2::scale_color_viridis_d() +
-  ggplot2::theme_bw() +
-  ggplot2::theme(
-    axis.title.x = ggtext::element_markdown(),
-    legend.title = ggtext::element_markdown()
+  scale_color_viridis_d() +
+  theme_bw() +
+  theme(
+    axis.title.x = element_markdown(),
+    legend.title = element_markdown()
   )
 ```
 
@@ -262,24 +263,24 @@ contain_params <- cbind(contain_params, prob_contain)
 
 ```{r, plot-containment, class.source = 'fold-hide', fig.cap="The probability that an outbreak will be contained (i.e. not exceed 100 chains) for a variety of population-level control measures. The probability of containment is calculated using `probability_contain()`. This plot is reproduced from Lloyd-Smith et al. (2005) figure 3C.", fig.width = 8, fig.height = 5}
 # plot probability of epidemic across introductions for multiple k
-ggplot2::ggplot(data = contain_params) +
-  ggplot2::geom_point(
-    mapping = ggplot2::aes(
+ggplot(data = contain_params) +
+  geom_point(
+    mapping = aes(
       x = c,
       y = prob_contain,
       colour = factor(k)
     )
   ) +
-  ggplot2::scale_y_continuous(
+  scale_y_continuous(
     name = "Probability of containment",
     limits = c(0, 1)
   ) +
-  ggplot2::scale_x_continuous(name = "Control measures (*c*)", n.breaks = 6) +
-  ggplot2::labs(colour = "Dispersion (*k*)") +
-  ggplot2::scale_color_viridis_d() +
-  ggplot2::theme_bw() +
-  ggplot2::theme(
-    axis.title.x = ggtext::element_markdown(),
-    legend.title = ggtext::element_markdown()
+  scale_x_continuous(name = "Control measures (*c*)", n.breaks = 6) +
+  labs(colour = "Dispersion (*k*)") +
+  scale_color_viridis_d() +
+  theme_bw() +
+  theme(
+    axis.title.x = element_markdown(),
+    legend.title = element_markdown()
   )
 ```
