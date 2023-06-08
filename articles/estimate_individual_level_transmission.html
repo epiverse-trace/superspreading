@@ -247,7 +247,7 @@ Figure 1: Number of secondary cases from the empirical data (bar plot) and the d
 <span>  <span class="va">secondary_case_transmission</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">n_non_index</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">secondary_case_transmission</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-</details><p>We fit the negative binomial model for both the index and non-index case tranmission events.</p>
+</details><p>We fit the negative binomial model for both the index and non-index case transmission events.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Estimate R and k for index and non-index cases</span></span>
 <span><span class="va">param_index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdist</a></span><span class="op">(</span></span>
@@ -439,11 +439,11 @@ Figure 2: Number of secondary cases from the empirical data (bar plot) and the d
 </p>
 </div>
 <p>The fit of each model is very similar, as expected from the close AIC and BIC (these models have the same numbers of free parameters).
-The Poisson-Weibull compound distribution can adequately capture the overdispersion in the EVD transmission data. A noticable difference
+The Poisson-Weibull compound distribution can adequately capture the overdispersion in the EVD transmission data. A noticeable difference
 between the models fitting to the number of cases that caused a single secondary cases. Here the negative binomial matches the empirical
 data, whereas the Poisson-Weibull slightly overestimates the number.</p>
 <p>Overall, {superspreading} and {fitdistrplus} (or another fitting package of your choice) can be used to estimate and
-understand individual-level transmission dynamics when tranmission chain data is available.</p>
+understand individual-level transmission dynamics when transmission chain data is available.</p>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-althausEbolaSuperspreading2015" class="csl-entry">
 Althaus, Christian L. 2015. <span>“Ebola Superspreading.”</span> <em>The Lancet Infectious Diseases</em> 15 (5): 507–8. <a href="https://doi.org/10.1016/S1473-3099(15)70135-0" class="external-link">https://doi.org/10.1016/S1473-3099(15)70135-0</a>.
