@@ -34,12 +34,13 @@ probability_contain <- function(R, k, a = 1, c, # nolint
   if (control_type == "population") {
     R <- (1 - c) * R # nolint
   } else {
-    stop("individual-level controls not yet implemented")
+    stop("individual-level controls not yet implemented", call. = FALSE)
   }
 
   if (a != 1) {
     stop(
-      "Multiple introductions is not yet implemented for probability_contain"
+      "Multiple introductions is not yet implemented for probability_contain",
+      call. = FALSE
     )
   }
 
