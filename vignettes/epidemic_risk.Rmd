@@ -21,6 +21,12 @@ knitr::opts_chunk$set(
 )
 ```
 
+::: {.alert .alert-info}
+**New to the {superspreading} package?**
+
+See the [Get started](https://epiverse-trace.github.io/superspreading/articles/superspreading.html) vignette for an introduction to the concepts discussed below and some of the functions included in the R package.
+:::
+
 During the early stages of an infectious disease outbreak information on transmission
 clusters can provide insight into the occurrence of superspreading events and from this
 the probability an outbreak will cause an epidemic. This has implications for policy
