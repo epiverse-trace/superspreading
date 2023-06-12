@@ -38,7 +38,7 @@ to understand disease transmission was by the [Scientific Advisory Group for Eme
 (SAGE)](https://www.gov.uk/government/organisations/scientific-advisory-group-for-emergencies) 
 for the [UK's COVID-19 response](https://www.gov.uk/government/publications/analysis-of-sars-cov-2-transmission-clusters-and-superspreading-events-3-june-2020). 
 
-This vignette explores the applications of the functions included in the {superspreading} package and their visualization in understanding and informing decision-makers for a variety of outbreak scenarios.
+This vignette explores the applications of the functions included in the {superspreading} package and their visualisation in understanding and informing decision-makers for a variety of outbreak scenarios.
 
 ```{r setup}
 library(superspreading)
@@ -201,7 +201,7 @@ ggplot(data = extinction_params) +
     name = "Reproductive number (*R*)",
     n.breaks = 6
   ) +
-  scale_color_viridis_d() +
+  scale_colour_viridis_d() +
   theme_bw() +
   theme(
     axis.title.x = element_markdown(),
@@ -282,7 +282,7 @@ ggplot(data = contain_params) +
   ) +
   scale_x_continuous(name = "Control measures (*c*)", n.breaks = 6) +
   labs(colour = "Dispersion (*k*)") +
-  scale_color_viridis_d() +
+  scale_colour_viridis_d() +
   theme_bw() +
   theme(
     axis.title.x = element_markdown(),
