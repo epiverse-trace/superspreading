@@ -232,7 +232,7 @@ proportion_cluster_size(
 
 # For R = 3
 proportion_cluster_size(
-  R = 0.8,
+  R = 3,
   k = seq(0.1, 1, 0.1),
   cluster_size = c(5, 10, 25)
 )
