@@ -100,8 +100,8 @@ ggplot(data = homogeneity) +
   theme_bw()
 ```
 
-The degree of variability in transmission increases as $k$ decreases. So the probability
-of a large outbreak is smaller for smaller values of $k$, meaning that if COVID-19
+The degree of variability in transmission increases as $k$ decreases (@lloyd-smithSuperspreadingEffectIndividual2005). 
+So the probability of a large outbreak is smaller for smaller values of $k$, meaning that if COVID-19
 is more similar to SARS than MERS it will be less likely to establish and cause an 
 outbreak if introduced into a newly susceptible population.
 
