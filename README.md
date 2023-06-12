@@ -124,6 +124,14 @@ More details on how to use `{superspreading}` can be found in the
 vignettes](https://epiverse-trace.github.io/superspreading/), under
 “Articles”.
 
+`{superspreading}` does not provide plotting functions, instead we
+provide example code chunks in the package’s vignettes that can be used
+as a templates upon which data visualisations can be modified. We
+recommend users copy and edit the examples for their own purposes. (This
+is permitted under the package’s MIT license). By default code chunks
+for plotting are folded, in order to unfold them and see the code simply
+click the code button at the top left of the plot.
+
 ## Help
 
 To report a bug please open an
@@ -149,7 +157,9 @@ citation("superspreading")
 #> To cite package 'superspreading' in publications use:
 #> 
 #>   Lambert J, Kucharski A (2023). _superspreading: Estimate individual
-#>   level variation in transmission_. R package version 0.0.0.9000.
+#>   level variation in transmission_.
+#>   https://github.com/epiverse-trace/superspreading,
+#>   https://epiverse-trace.github.io/superspreading/.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -157,7 +167,8 @@ citation("superspreading")
 #>     title = {superspreading: Estimate individual level variation in transmission},
 #>     author = {Joshua W. Lambert and Adam Kucharski},
 #>     year = {2023},
-#>     note = {R package version 0.0.0.9000},
+#>     note = {https://github.com/epiverse-trace/superspreading,
+#> https://epiverse-trace.github.io/superspreading/},
 #>   }
 ```
 
