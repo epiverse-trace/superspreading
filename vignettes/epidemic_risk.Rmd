@@ -28,17 +28,17 @@ See the [Get started](https://epiverse-trace.github.io/superspreading/articles/s
 :::
 
 During the early stages of an infectious disease outbreak information on transmission
-clusters can provide insight into the occurrence of superspreading events and from this
+clusters and heterogeneity in individual-level transmission can provide insight into the occurrence of superspreading events and from this
 the probability an outbreak will cause an epidemic. This has implications for policy
-decisions whether control interventions are required to bring disease transmission 
+decisions on how to bring disease transmission 
 under control (e.g. $R$ < 1) and increase the probability that an outbreak goes extinct.
 
-A recent example of where individual-level transmission and superspreading was analysed
+A recent example of where individual-level transmission and superspreading were analysed
 to understand disease transmission was by the [Scientific Advisory Group for Emergencies 
 (SAGE)](https://www.gov.uk/government/organisations/scientific-advisory-group-for-emergencies) 
 for the [UK's COVID-19 response](https://www.gov.uk/government/publications/analysis-of-sars-cov-2-transmission-clusters-and-superspreading-events-3-june-2020). 
 
-This vignette explores the applications of the functions included the {superspreading} package and their visualiation in understanding and informing decision makers for a variety of outbreak scenarios.
+This vignette explores the applications of the functions included in the {superspreading} package and their visualization in understanding and informing decision-makers for a variety of outbreak scenarios.
 
 ```{r setup}
 library(superspreading)
@@ -46,9 +46,8 @@ library(ggplot2)
 library(ggtext)
 ```
 
-Early in the COVID-19 epidemic @kucharskiEarlyDynamicsTransmission2020 investigated
-whether data on SARS-CoV-2 transmission displayed signatures of overdispersion (i.e.
-evidence of superspreading events). This was in light of evidence that other corona virus
+Early in the COVID-19 epidemic, a number of studies including @kucharskiEarlyDynamicsTransmission2020 investigated
+whether data on SARS-CoV-2 incidence had evidence of superspreading events. These events are often estimated as some measure of overdispersion. This was in light of evidence that other corona virus
 outbreaks (Severe acute respiratory syndrome (SARS) and Middle East respiratory syndrome (MERS))
 had superspreading events. The detection of variability in individual-transmission
 is important in understanding or predicting the likelihood of transmission establishing
@@ -247,7 +246,7 @@ particular types of gatherings to most effectively bring down the reproduction n
 
 ## Controls on transmission
 
-In their work on identifying the prevalence of overdispersion in individual-level transmission, @lloyd-smithSuperspreadingEffectIndividual2005 also showed the effect of control measures on the probability of containment. They defined containment as the size of a transmission chain not reaching 100 cases. They assumed control measures could be either population-level, or individual-level. {superspreading} provides `probability_contain()` to calculate the probability that disease spread will go extinct before reaching a threshold size.
+In their work on identifying the prevalence of overdispersion in individual-level transmission, @lloyd-smithSuperspreadingEffectIndividual2005 also showed the effect of control measures on the probability of containment. They defined containment as the size of a transmission chain not reaching 100 cases. They assumed the implementation of control measures at the individual or population level. {superspreading} provides `probability_contain()` to calculate the probability that an outbreak will go extinct before reaching a threshold size.
 
 ```{r, prep-containment-plot}
 contain_params <- expand.grid(
