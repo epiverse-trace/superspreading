@@ -17,8 +17,8 @@ reference:
     contents:
     - ends_with("poisweibull")
 
-  - title: Probability of epidemic or extinction
-    desc: Probability of a disease causing an epidemic or going extinct
+  - title: Probability of epidemic, extinction or containment
+    desc: Probability of a disease causing an epidemic, going extinct or being contained
     contents:
     - starts_with("probability")
 
@@ -32,3 +32,7 @@ articles:
   navbar: Parameter estimation
   contents:
   - estimate_individual_level_transmission
+- title: Superspreading for decision-making
+  navbar: Superspreading for decision-making
+  contents:
+  - epidemic_risk
