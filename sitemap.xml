@@ -10,6 +10,9 @@
     <loc>https://epiverse-trace.github.io/superspreading/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://epiverse-trace.github.io/superspreading/articles/epidemic_risk.html</loc>
+  </url>
+  <url>
     <loc>https://epiverse-trace.github.io/superspreading/articles/estimate_individual_level_transmission.html</loc>
   </url>
   <url>
@@ -38,6 +41,9 @@
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/superspreading/reference/ppoisweibull.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/superspreading/reference/probability_contain.html</loc>
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/superspreading/reference/probability_epidemic.html</loc>
