@@ -30,12 +30,12 @@ probability_contain <- function(R, k, a = 1, c, # nolint
                                 ...,
                                 case_threshold = 100) {
   # check inputs
-  checkmate::assertNumber(R)
-  checkmate::assertNumber(k)
-  checkmate::assertCount(a)
-  checkmate::assertNumber(c, lower = 0, upper = 1)
-  checkmate::assertLogical(stochastic)
-  checkmate::assertNumber(case_threshold)
+  checkmate::assert_number(R)
+  checkmate::assert_number(k)
+  checkmate::assert_count(a)
+  checkmate::assert_number(c, lower = 0, upper = 1)
+  checkmate::assert_logical(stochastic)
+  checkmate::assert_number(case_threshold)
 
   control_type <- match.arg(control_type)
   if (control_type == "population") {
