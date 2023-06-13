@@ -124,6 +124,8 @@ More details on how to use `{superspreading}` can be found in the
 vignettes](https://epiverse-trace.github.io/superspreading/), under
 “Articles”.
 
+### Visualisation and plotting functionality
+
 `{superspreading}` does not provide plotting functions, instead we
 provide example code chunks in the package’s vignettes that can be used
 as a templates upon which data visualisations can be modified. We
