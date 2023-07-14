@@ -8,7 +8,7 @@ probability_contain(
   R,
   k,
   num_init_infect = 1,
-  c,
+  control,
   control_type = c("population", "individual"),
   stochastic = TRUE,
   ...,
@@ -24,7 +24,7 @@ offspring distribution from fitted negative binomial)}
 
 \item{num_init_infect}{A \code{count} specifying the number of initial infections}
 
-\item{c}{Control strength, 0 is no control measures, 1 is complete control.}
+\item{control}{Control strength, 0 is no control measures, 1 is complete control.}
 
 \item{control_type}{Either \code{"population"} or \code{"individual"} for
 population-level or individual-level control measures.}
@@ -45,7 +45,7 @@ Containment is defined as the size of the transmission chain
 not reaching the \code{case_threshold} (default = 100).
 }
 \examples{
-probability_contain(R = 1.5, k = 0.5, c = 1)
+probability_contain(R = 1.5, k = 0.5, control = 1)
 }
 \references{
 Lloyd-Smith, J. O., Schreiber, S. J., Kopp, P. E., & Getz, W. M. (2005)
