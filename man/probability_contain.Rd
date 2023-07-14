@@ -24,7 +24,8 @@ offspring distribution from fitted negative binomial)}
 
 \item{num_init_infect}{A \code{count} specifying the number of initial infections}
 
-\item{control}{Control strength, 0 is no control measures, 1 is complete control.}
+\item{control}{Control strength, 0 is no control measures, 1 is complete
+control.}
 
 \item{control_type}{Either \code{"population"} or \code{"individual"} for
 population-level or individual-level control measures.}
