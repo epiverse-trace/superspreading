@@ -24,7 +24,7 @@
 #'
 #' @examples
 #' probability_contain(R = 1.5, k = 0.5, c = 1)
-probability_contain <- function(R, k, a = 1, c,
+probability_contain <- function(R, k, num_init_infect = 1, c, # nolint
                                 control_type = c("population", "individual"),
                                 stochastic = TRUE,
                                 ...,
@@ -32,7 +32,7 @@ probability_contain <- function(R, k, a = 1, c,
   # check inputs
   checkmate::assert_number(R, lower = 0, finite = TRUE)
   checkmate::assert_number(k, lower = 0)
-  checkmate::assert_count(a)
+  checkmate::assert_count(num_init_infect)
   checkmate::assert_number(c, lower = 0, upper = 1)
   checkmate::assert_logical(stochastic, any.missing = FALSE, len = 1)
   checkmate::assert_number(case_threshold, lower = 1)
@@ -44,7 +44,7 @@ probability_contain <- function(R, k, a = 1, c,
     stop("individual-level controls not yet implemented", call. = FALSE)
   }
 
-  if (a != 1) {
+  if (num_init_infect != 1) {
     stop(
       "Multiple introductions is not yet implemented for probability_contain",
       call. = FALSE
@@ -62,7 +62,9 @@ probability_contain <- function(R, k, a = 1, c,
     )
     prob_contain <- sum(!is.infinite(chain_size)) / length(chain_size)
   } else {
-    prob_contain <- probability_extinct(R = R, k = k, a = a)
+    prob_contain <- probability_extinct(
+      R = R, k = k, num_init_infect = num_init_infect
+    )
   }
   return(prob_contain)
 }

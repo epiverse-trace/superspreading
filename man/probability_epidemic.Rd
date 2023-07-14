@@ -5,7 +5,7 @@
 \title{Calculate the probability a disease will cause an outbreak based on R, k
 and initial cases}
 \usage{
-probability_epidemic(R, k, a)
+probability_epidemic(R, k, num_init_infect)
 }
 \arguments{
 \item{R}{A \code{number} specifying the R parameter (i.e. average secondary cases
@@ -14,7 +14,7 @@ per infectious individual)}
 \item{k}{A \code{number} specifying the  k parameter (i.e. overdispersion in
 offspring distribution from fitted negative binomial)}
 
-\item{a}{A \code{count} specifying the number of initial infections}
+\item{num_init_infect}{A \code{count} specifying the number of initial infections}
 }
 \value{
 A value with the probability of a large epidemic
@@ -25,7 +25,7 @@ epidemic (i.e. probability will fail to go extinct) based on R, k and
 initial cases
 }
 \examples{
-probability_epidemic(R = 1.5, k = 0.1, a = 10)
+probability_epidemic(R = 1.5, k = 0.1, num_init_infect = 10)
 }
 \references{
 Kucharski, A. J., Russell, T. W., Diamond, C., Liu, Y., Edmunds, J.,
