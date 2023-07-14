@@ -73,7 +73,6 @@ proportion_transmission <- function(R, k, percent_transmission, sim = FALSE) { #
   colnames(df) <- c("R", "k", paste0("prop_", percent_transmission * 100))
 
   for (i in seq_len(nrow(df))) {
-
     if (sim) {
       prop <- .proportion_transmission_numerical(
         R = df[i, "R"],
@@ -134,7 +133,7 @@ proportion_transmission <- function(R, k, percent_transmission, sim = FALSE) { #
   cumsum_secondary <- cumsum(sort(simulate_secondary, decreasing = TRUE))
 
   # proportion causing case
-  out <-  sum(cumsum_secondary <= percent_cases) / nsim
+  out <- sum(cumsum_secondary <= percent_cases) / nsim
 
   return(out)
 }
