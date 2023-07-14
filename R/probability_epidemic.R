@@ -26,8 +26,8 @@
 #' probability_epidemic(R = 1.5, k = 0.1, a = 10)
 probability_epidemic <- function(R, k, a) { # nolint
   # check inputs
-  checkmate::assert_number(R)
-  checkmate::assert_number(k)
+  checkmate::assert_number(R, lower = 0, finite = TRUE)
+  checkmate::assert_number(k, lower = 0)
   checkmate::assert_count(a)
 
   # change Inf k to 1e10 to prevent issue with grid search
