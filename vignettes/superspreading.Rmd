@@ -75,9 +75,9 @@ this probability. $k$ is the dispersion parameter of a negative binomial distrib
 and controls the variability of individual-level transmission.
 
 ```{r, prob-epidemic-k}
-probability_epidemic(R = 1.5, k = 1, a = 1)
-probability_epidemic(R = 1.5, k = 0.5, a = 1)
-probability_epidemic(R = 1.5, k = 0.1, a = 1)
+probability_epidemic(R = 1.5, k = 1, num_init_infect = 1)
+probability_epidemic(R = 1.5, k = 0.5, num_init_infect = 1)
+probability_epidemic(R = 1.5, k = 0.1, num_init_infect = 1)
 ```
 
 In the above code, $k$ values above one represent low heterogeneity (in the case 
@@ -90,10 +90,10 @@ When the value of $R$ increases, this causes the probability of an
 epidemic to increase, if $k$ remains the same.
 
 ```{r, prob-epidemic-R}
-probability_epidemic(R = 0.5, k = 1, a = 1)
-probability_epidemic(R = 1.0, k = 1, a = 1)
-probability_epidemic(R = 1.5, k = 1, a = 1)
-probability_epidemic(R = 5, k = 1, a = 1)
+probability_epidemic(R = 0.5, k = 1, num_init_infect = 1)
+probability_epidemic(R = 1.0, k = 1, num_init_infect = 1)
+probability_epidemic(R = 1.5, k = 1, num_init_infect = 1)
+probability_epidemic(R = 5, k = 1, num_init_infect = 1)
 ```
 
 Any value of $R$ less than or equal to one will have zero probability of causing
@@ -104,9 +104,9 @@ number of initial infections seeding the outbreak. We define
 `a` to be this number of initial infections.
 
 ```{r, prob-epidemic-a}
-probability_epidemic(R = 1.5, k = 1, a = 1)
-probability_epidemic(R = 1.5, k = 1, a = 10)
-probability_epidemic(R = 1.5, k = 1, a = 100)
+probability_epidemic(R = 1.5, k = 1, num_init_infect = 1)
+probability_epidemic(R = 1.5, k = 1, num_init_infect = 10)
+probability_epidemic(R = 1.5, k = 1, num_init_infect = 100)
 ```
 
 ## Empirical superspreading
@@ -145,14 +145,14 @@ family(sars)
 probability_epidemic(
   R = sars_params[["mean"]],
   k = sars_params[["dispersion"]],
-  a = 1
+  num_init_infect = 1
 )
 family(evd)
 # k is set to infinite as the distribution for EVD is poisson
-probability_epidemic(R = evd_params[["mean"]], k = Inf, a = 1)
+probability_epidemic(R = evd_params[["mean"]], k = Inf, num_init_infect = 1)
 ```
 
-In the above example we assume the initial pool of infectors is one (`a = 1`) 
+In the above example we assume the initial pool of infectors is one (`num_init_infect = 1`) 
 but this can easily be adjusted in the case there is evidence for a larger initial
 seeding of infections, whether from animal-to-human spillover or imported cases from outside the area of interest.
 

@@ -7,7 +7,7 @@
 probability_contain(
   R,
   k,
-  a = 1,
+  num_init_infect = 1,
   c,
   control_type = c("population", "individual"),
   stochastic = TRUE,
@@ -22,7 +22,7 @@ per infectious individual)}
 \item{k}{A \code{number} specifying the  k parameter (i.e. overdispersion in
 offspring distribution from fitted negative binomial)}
 
-\item{a}{A \code{count} specifying the number of initial infections}
+\item{num_init_infect}{A \code{count} specifying the number of initial infections}
 
 \item{c}{Control strength, 0 is no control measures, 1 is complete control.}
 

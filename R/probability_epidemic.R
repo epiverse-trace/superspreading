@@ -9,7 +9,7 @@
 #' per infectious individual)
 #' @param k A `number` specifying the  k parameter (i.e. overdispersion in
 #' offspring distribution from fitted negative binomial)
-#' @param a A `count` specifying the number of initial infections
+#' @param num_init_infect A `count` specifying the number of initial infections
 #'
 #' @return A value with the probability of a large epidemic
 #' @export
@@ -23,12 +23,12 @@
 #' 20(5), 553-558. \doi{10.1016/S1473-3099(20)30144-4}
 #'
 #' @examples
-#' probability_epidemic(R = 1.5, k = 0.1, a = 10)
-probability_epidemic <- function(R, k, a) {
+#' probability_epidemic(R = 1.5, k = 0.1, num_init_infect = 10)
+probability_epidemic <- function(R, k, num_init_infect) { # nolint
   # check inputs
   checkmate::assert_number(R, lower = 0, finite = TRUE)
   checkmate::assert_number(k, lower = 0)
-  checkmate::assert_count(a)
+  checkmate::assert_count(num_init_infect)
 
   # change Inf k to 1e10 to prevent issue with grid search
   if (is.infinite(k)) k <- 1e10
@@ -47,8 +47,8 @@ probability_epidemic <- function(R, k, a) {
     prob_est <- ss[which.min(calculate_prob)]
   }
 
-  # calculate P(epidemic) given 'a' introductions
-  prob_epidemic <- 1 - prob_est^a
+  # calculate P(epidemic) given 'num_init_infect' introductions
+  prob_epidemic <- 1 - prob_est^num_init_infect
 
   return(prob_epidemic)
 }
@@ -73,8 +73,8 @@ probability_epidemic <- function(R, k, a) {
 #' Nature, 438(7066), 355-359. \doi{10.1038/nature04153}
 #'
 #' @examples
-#' probability_extinct(R = 1.5, k = 0.1, a = 10)
-probability_extinct <- function(R, k, a) {
+#' probability_extinct(R = 1.5, k = 0.1, num_init_infect = 10)
+probability_extinct <- function(R, k, num_init_infect) { # nolint
   # input checking done in probability_epidemic
-  1 - probability_epidemic(R = R, k = k, a = a)
+  1 - probability_epidemic(R = R, k = k, num_init_infect = num_init_infect)
 }

@@ -59,7 +59,11 @@ and number of initial infections (`a`).
 
 ```{r, prep-dispersion-plot}
 epidemic_params <- expand.grid(
-  R = 2.35, R_lw = 1.5, R_up = 3.2, k = seq(0, 1, 0.1), a = seq(0, 10, 1)
+  R = 2.35,
+  R_lw = 1.5,
+  R_up = 3.2,
+  k = seq(0, 1, 0.1),
+  num_init_infect = seq(0, 10, 1)
 )
 ```
 
@@ -69,9 +73,21 @@ The results are combined with the the parameters.
 ```{r, calc-prob-endemic}
 # results are transposed to pivot to long rather than wide data
 prob_epidemic <- t(apply(epidemic_params, 1, function(x) {
-  median <- probability_epidemic(R = x[["R"]], k = x[["k"]], a = x[["a"]])
-  lower <- probability_epidemic(R = x[["R_lw"]], k = x[["k"]], a = x[["a"]])
-  upper <- probability_epidemic(R = x[["R_up"]], k = x[["k"]], a = x[["a"]])
+  median <- probability_epidemic(
+    R = x[["R"]],
+    k = x[["k"]],
+    num_init_infect = x[["num_init_infect"]]
+  )
+  lower <- probability_epidemic(
+    R = x[["R_lw"]],
+    k = x[["k"]],
+    num_init_infect = x[["num_init_infect"]]
+  )
+  upper <- probability_epidemic(
+    R = x[["R_up"]],
+    k = x[["k"]],
+    num_init_infect = x[["num_init_infect"]]
+  )
   c(prob_epidemic = median, prob_epidemic_lw = lower, prob_epidemic_up = upper)
 }))
 epidemic_params <- cbind(epidemic_params, prob_epidemic)
@@ -82,7 +98,7 @@ to only include those with a single initial infection seeding transmission (`a =
 
 ```{r, subset-prob-epidemic}
 # subset data for a single initial infection
-homogeneity <- subset(epidemic_params, a == 1)
+homogeneity <- subset(epidemic_params, num_init_infect == 1)
 ```
 
 ```{r, plot-dispersion, class.source = 'fold-hide', fig.cap="The probability that an initial infection (introduction) will cause a sustained outbreak (transmission chain). The dispersion of the individual-level transmission is plotted on the x-axis and probability of outbreak -- calculated using `probability_epidemic()` -- is on the y-axis. This plot is reproduced from @kucharskiEarlyDynamicsTransmission2020 figure 3A.", fig.width = 8, fig.height = 5}
@@ -133,7 +149,7 @@ introductions <- subset(epidemic_params, k == 0.5)
 ggplot(data = introductions) +
   geom_pointrange(
     mapping = aes(
-      x = a,
+      x = num_init_infect,
       y = prob_epidemic,
       ymin = prob_epidemic_lw,
       ymax = prob_epidemic_up
@@ -154,7 +170,7 @@ Different levels of heterogeneity in transmission will produce different probabi
 ggplot(data = epidemic_params) +
   geom_point(
     mapping = aes(
-      x = a,
+      x = num_init_infect,
       y = prob_epidemic,
       colour = k
     )
@@ -187,11 +203,15 @@ $R$.
 extinction_params <- expand.grid(
   R = seq(0, 5, 0.1),
   k = c(0.01, 0.1, 0.5, 1, 4, Inf),
-  a = 1
+  num_init_infect = 1
 )
 # results are transposed to pivot to long rather than wide data
 prob_extinct <- apply(extinction_params, 1, function(x) {
-  median <- probability_extinct(R = x[["R"]], k = x[["k"]], a = x[["a"]])
+  median <- probability_extinct(
+    R = x[["R"]],
+    k = x[["k"]],
+    num_init_infect = x[["num_init_infect"]]
+  )
   median
 })
 extinction_params <- cbind(extinction_params, prob_extinct)
@@ -279,13 +299,13 @@ In their work on identifying the prevalence of overdispersion in individual-leve
 
 ```{r, prep-containment-plot}
 contain_params <- expand.grid(
-  R = 3, k = c(0.1, 0.5, 1, Inf), a = 1, c = seq(0, 1, 0.05)
+  R = 3, k = c(0.1, 0.5, 1, Inf), num_init_infect = 1, c = seq(0, 1, 0.05)
 )
 prob_contain <- apply(contain_params, 1, function(x) {
   probability_contain(
     R = x[["R"]],
     k = x[["k"]],
-    a = x[["a"]],
+    num_init_infect = x[["num_init_infect"]],
     c = x[["c"]],
     control_type = "population",
     stochastic = TRUE,

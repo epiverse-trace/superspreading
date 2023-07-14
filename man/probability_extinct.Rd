@@ -5,7 +5,7 @@
 \title{Calculates the probability a branching process will go extinct based on
 R, k and initial cases}
 \usage{
-probability_extinct(R, k, a)
+probability_extinct(R, k, num_init_infect)
 }
 \arguments{
 \item{R}{A \code{number} specifying the R parameter (i.e. average secondary cases
@@ -14,7 +14,7 @@ per infectious individual)}
 \item{k}{A \code{number} specifying the  k parameter (i.e. overdispersion in
 offspring distribution from fitted negative binomial)}
 
-\item{a}{A \code{count} specifying the number of initial infections}
+\item{num_init_infect}{A \code{count} specifying the number of initial infections}
 }
 \value{
 A value with the probability of going extinct
@@ -25,7 +25,7 @@ an epidemic and will go extinct. This is the complement of the probability
 of a disease causing an epidemic (\code{\link[=probability_epidemic]{probability_epidemic()}}).
 }
 \examples{
-probability_extinct(R = 1.5, k = 0.1, a = 10)
+probability_extinct(R = 1.5, k = 0.1, num_init_infect = 10)
 }
 \references{
 Lloyd-Smith, J. O., Schreiber, S. J., Kopp, P. E., & Getz, W. M. (2005).
