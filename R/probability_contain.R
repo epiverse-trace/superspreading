@@ -4,7 +4,8 @@
 #' not reaching the `case_threshold` (default = 100).
 #'
 #' @inheritParams probability_epidemic
-#' @param control Control strength, 0 is no control measures, 1 is complete control.
+#' @param control Control strength, 0 is no control measures, 1 is complete
+#' control.
 #' @param control_type Either `"population"` or `"individual"` for
 #' population-level or individual-level control measures.
 #' @param stochastic Whether to use a stochastic branching process model or the
@@ -52,14 +53,23 @@ probability_contain <- function(R, k, num_init_infect = 1, control, # nolint
   }
 
   if (stochastic) {
-    chain_size <- bpmodels::chain_sim(
+    # arguments for chain_sim()
+    args <- list(
       n = 1e5,
       offspring = "nbinom",
       size = k,
       mu = R,
-      infinite = case_threshold,
-      ...
+      infinite = case_threshold
     )
+
+    # replace default args if in dots (remove args not for chain_sim)
+    args[names(args) %in% ...names()] <- list(...)[...names() %in% names(args)]
+
+    chain_size <- do.call(
+      bpmodels::chain_sim,
+      args
+    )
+
     prob_contain <- sum(!is.infinite(chain_size)) / length(chain_size)
   } else {
     prob_contain <- probability_extinct(
