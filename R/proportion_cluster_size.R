@@ -39,9 +39,9 @@
 proportion_cluster_size <- function(R, k, cluster_size) { # nolint
 
   # check input
-  checkmate::assert_numeric(R)
-  checkmate::assert_numeric(k)
-  checkmate::assert_numeric(cluster_size)
+  checkmate::assert_numeric(R, lower = 0, finite = TRUE)
+  checkmate::assert_numeric(k, lower = 0)
+  checkmate::assert_integerish(cluster_size, lower = 1)
 
   df <- expand.grid(R, k)
   df <- cbind(df, as.data.frame(matrix(nrow = 1, ncol = length(cluster_size))))
