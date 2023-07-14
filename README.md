@@ -61,28 +61,28 @@ library(fitdistrplus)
 
 index_case_transmission <- c(2, 17, 5, 1, 8, 2, 14)
 secondary_case_transmission <- c(
-  1, 2, 1, 4, 4, 1, 3, 3, 1, 1, 4, 9, 9, 1, 2, 1, 1, 1, 4, 3, 3, 4, 2, 5, 
+  1, 2, 1, 4, 4, 1, 3, 3, 1, 1, 4, 9, 9, 1, 2, 1, 1, 1, 4, 3, 3, 4, 2, 5,
   1, 2, 2, 1, 9, 1, 3, 1, 2, 1, 1, 2
-) 
+)
 
 # Format data into index and non-index cases
 # total non-index cases
-n_non_index <- sum(c(index_case_transmission, secondary_case_transmission)) 
+n_non_index <- sum(c(index_case_transmission, secondary_case_transmission))
 # transmission from all non-index cases
 non_index_cases <- c(
-  secondary_case_transmission, 
+  secondary_case_transmission,
   rep(0, n_non_index - length(secondary_case_transmission))
 )
 
 # Estimate R and k for index and non-index cases
-param_index <- fitdist(data = index_case_transmission, distr = "nbinom") 
+param_index <- fitdist(data = index_case_transmission, distr = "nbinom")
 param_index
 #> Fitting of the distribution ' nbinom ' by maximum likelihood 
 #> Parameters:
 #>      estimate Std. Error
 #> size 1.596646   1.025029
 #> mu   7.000771   2.320850
-param_non_index <- fitdist(data = non_index_cases, distr = "nbinom") 
+param_non_index <- fitdist(data = non_index_cases, distr = "nbinom")
 param_non_index
 #> Fitting of the distribution ' nbinom ' by maximum likelihood 
 #> Parameters:
@@ -94,7 +94,7 @@ param_non_index
 ### Calculate the probability of large epidemic
 
 ``` r
-# Compare probability of a large outbreak when k varies according to 
+# Compare probability of a large outbreak when k varies according to
 # index/non-index values, assuming R = 2 and 3 initial spillover infections
 
 R <- 2
@@ -102,16 +102,16 @@ initial_infections <- 3
 
 # Probability of epidemic using k estimate from index cases
 probability_epidemic(
-  R = R, 
-  k = param_index$estimate[["size"]], 
+  R = R,
+  k = param_index$estimate[["size"]],
   a = initial_infections
 )
 #> [1] 0.9280087
 
 # Probability of epidemic using k estimate from non-index cases
 probability_epidemic(
-  R = R, 
-  k = param_non_index$estimate[["size"]], 
+  R = R,
+  k = param_non_index$estimate[["size"]],
   a = initial_infections
 )
 #> [1] 0.4665883
