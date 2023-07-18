@@ -139,7 +139,7 @@ initial_infections <- 3
 probability_epidemic(
   R = param_index$estimate[["R"]],
   k = param_index$estimate[["k"]],
-  a = initial_infections
+  num_init_infect = initial_infections
 )
 #> [1] 0.9995781
 
@@ -147,7 +147,7 @@ probability_epidemic(
 probability_epidemic(
   R = param_non_index$estimate[["R"]],
   k = param_non_index$estimate[["k"]],
-  a = initial_infections
+  num_init_infect = initial_infections
 )
 #> [1] 0
 ```
