@@ -34,7 +34,6 @@ infectors infect few or zero individuals (@lloyd-smithSuperspreadingEffectIndivi
 ```{r setup}
 library(superspreading)
 library(epiparameter)
-library(distributional)
 ```
 
 ## Probability of epidemic
@@ -112,9 +111,9 @@ evd <- epidist_db(
 The parameters of each distribution can be extracted:
 
 ```{r, params}
-sars_params <- parameters(sars)
+sars_params <- get_parameters(sars)
 sars_params
-evd_params <- parameters(evd)
+evd_params <- get_parameters(evd)
 evd_params
 ```
 
