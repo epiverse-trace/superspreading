@@ -44,11 +44,11 @@ library(fitdistrplus)
 library(ggplot2)
 ```
 
+## Transmission data
+
 For this example we use transmission chain data from @fayeChainsTransmissionControl2015 from the Ebola virus disease outbreak in West Africa, between the period from February to August 2014. Specifically, this data reconstructs the pathway of Ebola transmission in Conakry, Guinea.
 
 This data has been used by @althausEbolaSuperspreading2015 to show that the Ebola outbreak in Conakry displayed signatures of overdispersion (i.e. superspreading events), and by @kucharskiEffectivenessRingVaccination2016 to determine the effectiveness of ring- and mass-vaccination campaigns for ongoing Ebola outbreaks.
-
-## Transmission data
 
 ```{r, prep-data}
 # total number of cases (i.e. individuals in transmission chain)
@@ -80,7 +80,7 @@ geom_fit <- fitdist(data = all_cases, distr = "geom")
 nbinom_fit <- fitdist(data = all_cases, distr = "nbinom")
 ```
 
-```{r, fit-table}
+```{r, fit-table, class.source = 'fold-hide'}
 knitr::kable(
   data.frame(
     distribution = c(pois_fit$distname, geom_fit$distname, nbinom_fit$distname),
@@ -91,6 +91,12 @@ knitr::kable(
 ```
 
 The best performing model, for both AIC and BIC comparison, is the negative binomial.
+
+AIC and BIC are model fitting metrics (information criterion) to determine the model 
+that best fits the data while penalising model complexity to prevent overfitting and allows
+comparison of models with a different number of parameters. In this case the Poisson
+and Geometric models have a single parameter, whereas the Negative binomial has two
+parameters.
 
 ```{r, nbinom-estim}
 nbinom_fit$estimate
@@ -141,12 +147,12 @@ ggplot(data = nbinom_data) +
   ) +
   geom_point(
     mapping = aes(x = x, y = density),
-    colour = "coral",
+    colour = "#f58231",
     size = 2
   ) +
   geom_line(
     mapping = aes(x = x, y = density),
-    colour = "coral"
+    colour = "#f58231"
   ) +
   scale_x_continuous(name = "Number of secondary cases") +
   scale_y_continuous(name = "Frequency") +
@@ -325,7 +331,7 @@ ggplot(data = dist_compare_data) +
   scale_y_continuous(name = "Frequency") +
   scale_colour_manual(
     name = "Distribution",
-    values = c("coral", "deeppink")
+    values = c("#f58231", "#ffe119")
   ) +
   theme_bw() +
   theme(legend.position = "top")
