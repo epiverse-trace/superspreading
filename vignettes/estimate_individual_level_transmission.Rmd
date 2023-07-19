@@ -231,7 +231,7 @@ and Poisson-Weibull (`dpoisweibull()` and `ppoisweibull()`).
 
 These functions can be used with {fitdistrplus}, as shown for the other distributions above.
 
-```{r}
+```{r, fit-extra-dists}
 # fit an expanded set of offspring distribution models:
 # - Poisson
 # - Geometric
@@ -253,7 +253,9 @@ poisweibull_fit <- fitdist(
   distr = "poisweibull",
   start = list(shape = 1, scale = 1)
 )
+```
 
+```{r, fit-extra-table, class.source = 'fold-hide'}
 knitr::kable(
   data.frame(
     distribution = c(
