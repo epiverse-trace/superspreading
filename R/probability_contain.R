@@ -29,8 +29,18 @@ probability_contain <- function(R, k, num_init_infect = 1, control, # nolint
                                 control_type = c("population", "individual"),
                                 stochastic = TRUE,
                                 ...,
-                                case_threshold = 100) {
+                                case_threshold = 100,
+                                epidist) {
+  input_params <- missing(R) && missing(k)
+  if (!xor(input_params, missing(epidist))) {
+    stop("One of R and k or <epidist> must be supplied.", call. = FALSE)
+  }
   # check inputs
+  if (input_params) {
+    epiparameter::is_epidist(epidist)
+    R <- get_epidist_param(epidist = epidist, parameter = "R")
+    k <- get_epidist_param(epidist = epidist, parameter = "k")
+  }
   checkmate::assert_number(R, lower = 0, finite = TRUE)
   checkmate::assert_number(k, lower = 0)
   checkmate::assert_count(num_init_infect)
