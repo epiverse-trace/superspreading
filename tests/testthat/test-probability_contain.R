@@ -54,3 +54,26 @@ test_that("probability_contain fails as expected", {
     regexp = "individual-level controls not yet implemented"
   )
 })
+
+test_that("probability_contain works with <epidist>", {
+  edist <- suppressWarnings(
+    epiparameter::epidist_db(
+      disease = "SARS",
+      epi_dist = "offspring_distribution",
+      author = "Lloyd-Smith_etal"
+    )
+  )
+  expect_equal(
+    probability_contain(
+      num_init_infect = 1, control = 0.1, stochastic = FALSE, epidist = edist
+    ),
+    0.904
+  )
+})
+
+test_that("probability_contain fails without R and k or <epidist>", {
+  expect_error(
+    probability_contain(num_init_infect = 1, control = 0.5),
+    regexp = "One of R and k or <epidist> must be supplied."
+  )
+})
