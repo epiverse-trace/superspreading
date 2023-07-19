@@ -127,3 +127,28 @@ test_that(".prop_transmission_analytical works as expected", {
   expect_type(res, "double")
   expect_length(res, 1)
 })
+
+test_that("proportion_transmission works with <epidist>", {
+  edist <- suppressWarnings(
+    epiparameter::epidist_db(
+      disease = "SARS",
+      epi_dist = "offspring_distribution",
+      author = "Lloyd-Smith_etal"
+    )
+  )
+  res <- proportion_transmission(percent_transmission = 0.8, epidist = edist)
+
+  expect_s3_class(res, "data.frame")
+  expect_identical(dim(res), c(1L, 3L))
+  expect_identical(
+    unname(vapply(res, class, character(1))),
+    c("numeric", "numeric", "character")
+  )
+})
+
+test_that("proportion_transmission fails without R and k or <epidist>", {
+  expect_error(
+    proportion_transmission(percent_transmission = 0.8),
+    regexp = "One of R and k or <epidist> must be supplied."
+  )
+})

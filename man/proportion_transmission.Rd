@@ -5,7 +5,7 @@
 \title{Estimate what proportion of cases that cause a certain proportion of
 transmission}
 \usage{
-proportion_transmission(R, k, percent_transmission, sim = FALSE)
+proportion_transmission(R, k, percent_transmission, sim = FALSE, ..., epidist)
 }
 \arguments{
 \item{R}{A \code{number} specifying the R parameter (i.e. average secondary cases
@@ -19,6 +19,11 @@ for which a proportion of cases has produced}
 
 \item{sim}{A \code{logical} whether the calculation should be done numerically
 (i.e. simulate secondary contacts) or analytically}
+
+\item{...}{\code{\link{dots}} not used, extra arguments supplied will cause a warning.}
+
+\item{epidist}{An \verb{<epidist>} object. An S3 class for working with
+epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}}
 }
 \value{
 A data frame with the value for the proportion of cases for a given
