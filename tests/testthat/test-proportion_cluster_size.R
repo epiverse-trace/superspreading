@@ -70,3 +70,28 @@ test_that("proportion_cluster_size fails as expected", {
     regexp = "Assertion on 'cluster_size' failed"
   )
 })
+
+test_that("proportion_cluster_size works with <epidist>", {
+  edist <- suppressWarnings(
+    epiparameter::epidist_db(
+      disease = "SARS",
+      epi_dist = "offspring_distribution",
+      author = "Lloyd-Smith_etal"
+    )
+  )
+  res <- proportion_cluster_size(cluster_size = 20, epidist = edist)
+
+  expect_s3_class(res, "data.frame")
+  expect_identical(dim(res), c(1L, 3L))
+  expect_identical(
+    unname(vapply(res, class, FUN.VALUE = character(1))),
+    c("numeric", "numeric", "character")
+  )
+})
+
+test_that("proportion_cluster_size fails without R and k or <epidist>", {
+  expect_error(
+    proportion_cluster_size(cluster_size = 10),
+    regexp = "One of R and k or <epidist> must be supplied."
+  )
+})
