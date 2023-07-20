@@ -28,7 +28,7 @@ disease accounting for transmission heterogeneity, this heterogeneity is not
 accounted for by the population-level reproduction number ($R$).
 
 ::: {.alert .alert-info}
-**Definition:**
+## Definition
 
 Superspreading describes individual heterogeneity in disease transmission, such that some individuals transmit to many infectees while other
 infectors infect few or zero individuals (@lloyd-smithSuperspreadingEffectIndividual2005).
@@ -38,6 +38,17 @@ infectors infect few or zero individuals (@lloyd-smithSuperspreadingEffectIndivi
 library(superspreading)
 library(epiparameter)
 ```
+
+::: {.alert .alert-secondary}
+The {epiparameter} R package is loaded to provide a library of epidemiological parameters. These
+parameters can be used by the {superspreading} functions. See the [Empirical superspreading] section of this
+vignette for its usage.
+
+As an example, offspring distributions are stored in the {epiparameter} library which contain estimated parameters,
+such as the reproduction number ($R$), and in the case of a negative binomial model, the dispersion parameter ($k$).
+
+The offspring distribution is the distribution of the number of infectees (secondary case or offspring) that each infector (primary case) produces. 
+:::
 
 ## Probability of epidemic
 
