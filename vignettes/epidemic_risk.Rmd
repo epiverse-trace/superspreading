@@ -237,6 +237,15 @@ contains a library of epidemiological parameters included offspring distribution
 Equipped with these parameter estimates, metrics that provide an intuitive understanding of transmission patterns can be tabulated.
 For example the proportion of transmission events in a given cluster size can be calculated using the {superspreading} function `proportion_cluster_size()`.
 
+This calculates the proportion of new cases that originated within a transmission event of a
+given size. In other words, what proportion of all transmission events were part of secondary
+case clusters (i.e. from the same primary case) of at least, for example, five cases. This 
+calculation is useful to inform backwards contact tracing efforts. 
+
+In this example we look at clusters of at least five, ten and twenty-five secondary cases, at
+different numbers of initial infections and for two reproduction numbers to see how this affects
+cluster sizes.
+
 ```{r}
 # For R = 0.8
 proportion_cluster_size(
@@ -253,7 +262,12 @@ proportion_cluster_size(
 )
 ```
 
-These results indicate whether preventing gatherings of a certain size can reduce the epidemic
+These results show that as the level of heterogeneity in individual-level
+transmission increases, a larger percentage of cases come from larger cluster sizes,
+and that large clusters can be produced when $R$ is higher even with low levels of 
+transmission variation.
+
+It indicates whether preventing gatherings of a certain size can reduce the epidemic
 by preventing potential superspreading events.
 
 When data on the settings of transmission is known, priority can be given to restricting 
