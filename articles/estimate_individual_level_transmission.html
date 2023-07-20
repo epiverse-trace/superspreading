@@ -115,11 +115,11 @@ multiple model fitting and comparison.</p>
 <span><span class="co">#&gt; Loading required package: MASS</span></span>
 <span><span class="co">#&gt; Loading required package: survival</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
-</details><p>For this example we use transmission chain data from <span class="citation">Faye et al. (<a href="#ref-fayeChainsTransmissionControl2015" role="doc-biblioref">2015</a>)</span> from the Ebola virus disease outbreak in West Africa, between the period from February to August 2014. Specifically, this data reconstructs the pathway of Ebola transmission in Conakry, Guinea.</p>
-<p>This data has been used by <span class="citation">Althaus (<a href="#ref-althausEbolaSuperspreading2015" role="doc-biblioref">2015</a>)</span> to show that the Ebola outbreak in Conakry displayed signatures of overdispersion (i.e. superspreading events), and by <span class="citation">Kucharski et al. (<a href="#ref-kucharskiEffectivenessRingVaccination2016" role="doc-biblioref">2016</a>)</span> to determine the effectiveness of ring- and mass-vaccination campaigns for ongoing Ebola outbreaks.</p>
-<div class="section level2">
+</details><div class="section level2">
 <h2 id="transmission-data">Transmission data<a class="anchor" aria-label="anchor" href="#transmission-data"></a>
 </h2>
+<p>For this example we use transmission chain data from <span class="citation">Faye et al. (<a href="#ref-fayeChainsTransmissionControl2015" role="doc-biblioref">2015</a>)</span> from the Ebola virus disease outbreak in West Africa, between the period from February to August 2014. Specifically, this data reconstructs the pathway of Ebola transmission in Conakry, Guinea.</p>
+<p>This data has been used by <span class="citation">Althaus (<a href="#ref-althausEbolaSuperspreading2015" role="doc-biblioref">2015</a>)</span> to show that the Ebola outbreak in Conakry displayed signatures of overdispersion (i.e. superspreading events), and by <span class="citation">Kucharski et al. (<a href="#ref-kucharskiEffectivenessRingVaccination2016" role="doc-biblioref">2016</a>)</span> to determine the effectiveness of ring- and mass-vaccination campaigns for ongoing Ebola outbreaks.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># total number of cases (i.e. individuals in transmission chain)</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">152</span></span>
@@ -146,7 +146,7 @@ multiple model fitting and comparison.</p>
 <span><span class="va">pois_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdist</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">all_cases</span>, distr <span class="op">=</span> <span class="st">"pois"</span><span class="op">)</span></span>
 <span><span class="va">geom_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdist</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">all_cases</span>, distr <span class="op">=</span> <span class="st">"geom"</span><span class="op">)</span></span>
 <span><span class="va">nbinom_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdist</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">all_cases</span>, distr <span class="op">=</span> <span class="st">"nbinom"</span><span class="op">)</span></span></code></pre></div>
-</details><details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+</details><details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>    distribution <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">pois_fit</span><span class="op">$</span><span class="va">distname</span>, <span class="va">geom_fit</span><span class="op">$</span><span class="va">distname</span>, <span class="va">nbinom_fit</span><span class="op">$</span><span class="va">distname</span><span class="op">)</span>,</span>
@@ -179,6 +179,11 @@ multiple model fitting and comparison.</p>
 </tbody>
 </table>
 <p>The best performing model, for both AIC and BIC comparison, is the negative binomial.</p>
+<p>AIC and BIC are model fitting metrics (information criterion) to determine the model
+that best fits the data while penalising model complexity to prevent overfitting and allows
+comparison of models with a different number of parameters. In this case the Poisson
+and Geometric models have a single parameter, whereas the Negative binomial has two
+parameters.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nbinom_fit</span><span class="op">$</span><span class="va">estimate</span></span>
 <span><span class="co">#&gt;      size        mu </span></span>
@@ -224,12 +229,12 @@ from which superspreading events can be possible.</p>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span></span>
 <span>    mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">density</span><span class="op">)</span>,</span>
-<span>    colour <span class="op">=</span> <span class="st">"coral"</span>,</span>
+<span>    colour <span class="op">=</span> <span class="st">"#f58231"</span>,</span>
 <span>    size <span class="op">=</span> <span class="fl">2</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span></span>
 <span>    mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">density</span><span class="op">)</span>,</span>
-<span>    colour <span class="op">=</span> <span class="st">"coral"</span></span>
+<span>    colour <span class="op">=</span> <span class="st">"#f58231"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Number of secondary cases"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Frequency"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -332,9 +337,9 @@ and Poisson-Weibull (<code><a href="../reference/dpoisweibull.html">dpoisweibull
 <span>  data <span class="op">=</span> <span class="va">all_cases</span>,</span>
 <span>  distr <span class="op">=</span> <span class="st">"poisweibull"</span>,</span>
 <span>  start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</details><details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>    distribution <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>      <span class="va">pois_fit</span><span class="op">$</span><span class="va">distname</span>,</span>
@@ -398,7 +403,7 @@ and Poisson-Weibull models. Although the second best model, the Poisson-Weibull,
 negative binomial (<span class="math inline">\(\Delta\)</span>AIC &lt; 2 &amp; <span class="math inline">\(\Delta\)</span>BIC &lt; 2).</p>
 <p>Here we plot the density of each distribution given the maximum likelihood estimates to inspect differences
 between the two distributions.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create data frame with proportion of cases, density of each distribution</span></span>
 <span><span class="va">dist_compare_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span>, <span class="fl">1</span><span class="op">)</span>,</span>
@@ -417,7 +422,7 @@ between the two distributions.</p>
 <span>  <span class="op">)</span>,</span>
 <span>  dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Negative Binomial"</span>, <span class="fl">21</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Poisson-Weibull"</span>, <span class="fl">21</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-</details><details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+</details><details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make plot</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dist_compare_data</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span></span>
@@ -438,7 +443,7 @@ between the two distributions.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Frequency"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_colour_manual</a></span><span class="op">(</span></span>
 <span>    name <span class="op">=</span> <span class="st">"Distribution"</span>,</span>
-<span>    values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"coral"</span>, <span class="st">"deeppink"</span><span class="op">)</span></span>
+<span>    values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#f58231"</span>, <span class="st">"#ffe119"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span></span></code></pre></div>
