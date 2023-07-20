@@ -53,10 +53,20 @@ had superspreading events. The detection of variability in individual-transmissi
 is important in understanding or predicting the likelihood of transmission establishing
 when imported into a new location (e.g. country). 
 
+First we set up the parameters to use for calculating the probability of an
+epidemic. In this case we are varying the heterogeneity of transmission (`k`)
+and number of initial infections (`a`).
+
 ```{r, prep-dispersion-plot}
 epidemic_params <- expand.grid(
   R = 2.35, R_lw = 1.5, R_up = 3.2, k = seq(0, 1, 0.1), a = seq(0, 10, 1)
 )
+```
+
+Then we calculate the probability of an epidemic for each parameter combination.
+The results are combined with the the parameters.
+
+```{r, calc-prob-endemic}
 # results are transposed to pivot to long rather than wide data
 prob_epidemic <- t(apply(epidemic_params, 1, function(x) {
   median <- probability_epidemic(R = x[["R"]], k = x[["k"]], a = x[["a"]])
@@ -65,7 +75,12 @@ prob_epidemic <- t(apply(epidemic_params, 1, function(x) {
   c(prob_epidemic = median, prob_epidemic_lw = lower, prob_epidemic_up = upper)
 }))
 epidemic_params <- cbind(epidemic_params, prob_epidemic)
+```
 
+To visualise the influence of transmission variation (`k`) we subset the results
+to only include those with a single initial infection seeding transmission (`a = 1`).
+
+```{r, subset-prob-epidemic}
 # subset data for a single initial infection
 homogeneity <- subset(epidemic_params, a == 1)
 ```
