@@ -40,7 +40,7 @@ library(epiparameter)
 ```
 
 ::: {.alert .alert-secondary}
-The {epiparameter} R package is loaded to provide a library of epidemiological parameters. These
+The [{epiparameter}](https://github.com/epiverse-trace/epiparameter) R package is loaded to provide a library of epidemiological parameters. These
 parameters can be used by the {superspreading} functions. See the [Empirical superspreading] section of this
 vignette for its usage.
 
@@ -57,12 +57,20 @@ transmission in the population) is determined by the nature of that diseases'
 transmission heterogeneity. This variability may be an intrinsic property of 
 the disease, or a product of human behaviour and social mixing patterns.
 
-For a given value of $R$ (or $R_0$), that is the number of secondary cases caused by a 
-primary case, if the variability is high, the probability that the outbreak 
+For a given value of $R$, if the variability is high, the probability that the outbreak 
 will cause epidemic is lower as the superspreading events are rare. Whereas for
 lower variability the probability is higher as more individuals are closer to the 
-mean ($R$). The `probability_epidemic()` function in {superspreading} can calculate
-this probability. `k` is the dispersion parameter of a negative binomial distribution
+mean ($R$).
+
+::: {.alert .alert-secondary}
+Here we use $R$ to represent the reproduction number (number of secondary cases caused by a 
+primary case) without specifying it as the basic reproduction number ($R_0$)
+or the effective reproduction number ($R_t$). This is because either 
+can be applied to the functions provided by {superspreading}.
+:::
+
+The `probability_epidemic()` function in {superspreading} can calculate
+this probability. $k$ is the dispersion parameter of a negative binomial distribution
 and controls the variability of individual-level transmission.
 
 ```{r, prob-epidemic-k}
@@ -71,14 +79,14 @@ probability_epidemic(R = 1.5, k = 0.5, a = 1)
 probability_epidemic(R = 1.5, k = 0.1, a = 1)
 ```
 
-In the above code, `k` values above one represent low heterogeneity (in the case 
-$k \rightarrow \infty$ it is a poisson distribution), and as `k` decreases,
-heterogeneity increases. When `k` equals 1, the distribution is geometric. Values
-of `k` less than one indicate overdispersion of disease transmission, a signature
+In the above code, $k$ values above one represent low heterogeneity (in the case 
+$k \rightarrow \infty$ it is a poisson distribution), and as $k$ decreases,
+heterogeneity increases. When $k$ equals 1, the distribution is geometric. Values
+of $k$ less than one indicate overdispersion of disease transmission, a signature
 of superspreading.
 
 When the value of $R$ increases, this causes the probability of an 
-epidemic to increase, if `k` remains the same.
+epidemic to increase, if $k$ remains the same.
 
 ```{r, prob-epidemic-R}
 probability_epidemic(R = 0.5, k = 1, a = 1)
@@ -108,7 +116,7 @@ been estimated. An offspring distribution is simply the distribution of the
 number of secondary infections caused by a primary infection. It is the distribution
 of $R$, with the mean of the distribution given as $R$.
 
-Here we can use {epiparameter} to load in offspring distributions for multiple 
+Here we can use [{epiparameter}](https://github.com/epiverse-trace/epiparameter) to load in offspring distributions for multiple 
 diseases and evaluate how likely they are to cause epidemics.
 
 ```{r, epiparam}
@@ -152,6 +160,6 @@ We can see that the probability of an epidemic given the estimates of
 This is due to the offspring distribution of Ebola being poisson distributed 
 with a smaller mean (mean $R$ = `r evd_params[["mean"]]`), 
 compared to SARS, which is negative binomially distributed with a relatively
-small dispersion (k = `r sars_params[["dispersion"]]`).
+small dispersion ($k$ = `r sars_params[["dispersion"]]`).
 
 ## References
