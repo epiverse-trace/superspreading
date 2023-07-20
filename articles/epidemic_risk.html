@@ -120,22 +120,30 @@ outbreaks (Severe acute respiratory syndrome (SARS) and Middle East respiratory 
 had superspreading events. The detection of variability in individual-transmission
 is important in understanding or predicting the likelihood of transmission establishing
 when imported into a new location (e.g. country).</p>
+<p>First we set up the parameters to use for calculating the probability of an
+epidemic. In this case we are varying the heterogeneity of transmission (<code>k</code>)
+and number of initial infections (<code>a</code>).</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epidemic_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fl">2.35</span>, R_lw <span class="op">=</span> <span class="fl">1.5</span>, R_up <span class="op">=</span> <span class="fl">3.2</span>, k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.1</span><span class="op">)</span>, a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co"># results are transposed to pivot to long rather than wide data</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</details><p>Then we calculate the probability of an epidemic for each parameter combination.
+The results are combined with the the parameters.</p>
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># results are transposed to pivot to long rather than wide data</span></span>
 <span><span class="va">prob_epidemic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">epidemic_params</span>, <span class="fl">1</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">median</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span>R <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"R"</span><span class="op">]</span><span class="op">]</span>, k <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"k"</span><span class="op">]</span><span class="op">]</span>, a <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span>  <span class="va">lower</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span>R <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"R_lw"</span><span class="op">]</span><span class="op">]</span>, k <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"k"</span><span class="op">]</span><span class="op">]</span>, a <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span>  <span class="va">upper</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span>R <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"R_up"</span><span class="op">]</span><span class="op">]</span>, k <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"k"</span><span class="op">]</span><span class="op">]</span>, a <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>prob_epidemic <span class="op">=</span> <span class="va">median</span>, prob_epidemic_lw <span class="op">=</span> <span class="va">lower</span>, prob_epidemic_up <span class="op">=</span> <span class="va">upper</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">epidemic_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">epidemic_params</span>, <span class="va">prob_epidemic</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># subset data for a single initial infection</span></span>
+<span><span class="va">epidemic_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">epidemic_params</span>, <span class="va">prob_epidemic</span><span class="op">)</span></span></code></pre></div>
+</details><p>To visualise the influence of transmission variation (<code>k</code>) we subset the results
+to only include those with a single initial infection seeding transmission (<code>a = 1</code>).</p>
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># subset data for a single initial infection</span></span>
 <span><span class="va">homogeneity</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">epidemic_params</span>, <span class="va">a</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-</details><details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+</details><details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot probability of epidemic across dispersion</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">homogeneity</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html" class="external-link">geom_ribbon</a></span><span class="op">(</span></span>
@@ -176,9 +184,9 @@ outbreak if introduced into a newly susceptible population.</p>
 <p>However, this probability of establishment and continued transmission will also
 depend on the number of initial introductions to that populations. The more
 introductions, the higher the chance one will lead to an epidemic.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">introductions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">epidemic_params</span>, <span class="va">k</span> <span class="op">==</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
-</details><details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+</details><details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot probability of epidemic across introductions</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">introductions</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html" class="external-link">geom_pointrange</a></span><span class="op">(</span></span>
@@ -202,7 +210,7 @@ Figure 2: The probability that an a number of introduction events will cause a s
 </p>
 </div>
 <p>Different levels of heterogeneity in transmission will produce different probabilities of epidemics.</p>
-<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot probability of epidemic across introductions for multiple k</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">epidemic_params</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span></span>
@@ -237,7 +245,7 @@ as well as random mixing.</p>
 <p>Conversely to the probability of an epidemics, the probability that an outbreak will
 go extinct (i.e. transmission will subside), can also be plotted for different values of
 <span class="math inline">\(R\)</span>.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">extinction_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span>, <span class="fl">0.1</span><span class="op">)</span>,</span>
 <span>  k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="cn">Inf</span><span class="op">)</span>,</span>
@@ -249,7 +257,7 @@ go extinct (i.e. transmission will subside), can also be plotted for different 
 <span>  <span class="va">median</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="va">extinction_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">extinction_params</span>, <span class="va">prob_extinct</span><span class="op">)</span></span></code></pre></div>
-</details><details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+</details><details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot probability of extinction across R for multiple k</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">extinction_params</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span></span>
@@ -291,7 +299,14 @@ for similar pathogens can be searched for.</p>
 contains a library of epidemiological parameters included offspring distribution parameter estimates and uncertainty obtained from published literature. This aids the collation and establishes a baseline understanding of transmission. Similar to the collation of transmission clusters for <a href="https://www.gov.uk/government/publications/analysis-of-sars-cov-2-transmission-clusters-and-superspreading-events-3-june-2020" class="external-link">COVID-19</a>.</p>
 <p>Equipped with these parameter estimates, metrics that provide an intuitive understanding of transmission patterns can be tabulated.
 For example the proportion of transmission events in a given cluster size can be calculated using the {superspreading} function <code><a href="../reference/proportion_cluster_size.html">proportion_cluster_size()</a></code>.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<p>This calculates the proportion of new cases that originated within a transmission event of a
+given size. In other words, what proportion of all transmission events were part of secondary
+case clusters (i.e. from the same primary case) of at least, for example, five cases. This
+calculation is useful to inform backwards contact tracing efforts.</p>
+<p>In this example we look at clusters of at least five, ten and twenty-five secondary cases, at
+different numbers of initial infections and for two reproduction numbers to see how this affects
+cluster sizes.</p>
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># For R = 0.8</span></span>
 <span><span class="fu"><a href="../reference/proportion_cluster_size.html">proportion_cluster_size</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fl">0.8</span>,</span>
@@ -299,16 +314,16 @@ For example the proportion of transmission events in a given cluster size can be
 <span>  cluster_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">25</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;      R   k prop_5 prop_10 prop_25</span></span>
-<span><span class="co">#&gt; 1  0.8 0.1  66.2%   37.7%      7%</span></span>
-<span><span class="co">#&gt; 2  0.8 0.2  49.2%   18.2%    0.6%</span></span>
-<span><span class="co">#&gt; 3  0.8 0.3  37.3%      9%    0.2%</span></span>
-<span><span class="co">#&gt; 4  0.8 0.4  30.5%    5.2%      0%</span></span>
-<span><span class="co">#&gt; 5  0.8 0.5  24.7%    2.9%      0%</span></span>
-<span><span class="co">#&gt; 6  0.8 0.6  20.7%    1.7%      0%</span></span>
-<span><span class="co">#&gt; 7  0.8 0.7  18.5%    1.3%      0%</span></span>
-<span><span class="co">#&gt; 8  0.8 0.8    16%    0.7%      0%</span></span>
-<span><span class="co">#&gt; 9  0.8 0.9  14.5%    0.6%      0%</span></span>
-<span><span class="co">#&gt; 10 0.8 1.0  12.5%    0.4%      0%</span></span>
+<span><span class="co">#&gt; 1  0.8 0.1  66.6%   38.8%    7.2%</span></span>
+<span><span class="co">#&gt; 2  0.8 0.2  49.1%   18.5%    0.8%</span></span>
+<span><span class="co">#&gt; 3  0.8 0.3  38.3%    9.4%    0.1%</span></span>
+<span><span class="co">#&gt; 4  0.8 0.4  30.5%    5.4%      0%</span></span>
+<span><span class="co">#&gt; 5  0.8 0.5  24.7%      3%      0%</span></span>
+<span><span class="co">#&gt; 6  0.8 0.6  20.8%      2%      0%</span></span>
+<span><span class="co">#&gt; 7  0.8 0.7  17.9%    1.1%      0%</span></span>
+<span><span class="co">#&gt; 8  0.8 0.8  16.2%    0.9%      0%</span></span>
+<span><span class="co">#&gt; 9  0.8 0.9  14.6%    0.6%      0%</span></span>
+<span><span class="co">#&gt; 10 0.8 1.0  12.7%    0.4%      0%</span></span>
 <span></span>
 <span><span class="co"># For R = 3</span></span>
 <span><span class="fu"><a href="../reference/proportion_cluster_size.html">proportion_cluster_size</a></span><span class="op">(</span></span>
@@ -317,17 +332,21 @@ For example the proportion of transmission events in a given cluster size can be
 <span>  cluster_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">25</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    R   k prop_5 prop_10 prop_25</span></span>
-<span><span class="co">#&gt; 1  3 0.1  90.2%   78.3%     50%</span></span>
-<span><span class="co">#&gt; 2  3 0.2  83.8%   64.7%   27.7%</span></span>
-<span><span class="co">#&gt; 3  3 0.3  79.6%   54.8%   15.6%</span></span>
-<span><span class="co">#&gt; 4  3 0.4  76.1%   47.6%    9.5%</span></span>
-<span><span class="co">#&gt; 5  3 0.5  72.8%   41.5%    5.5%</span></span>
-<span><span class="co">#&gt; 6  3 0.6  70.2%   36.6%    3.7%</span></span>
-<span><span class="co">#&gt; 7  3 0.7  68.2%   32.4%    2.1%</span></span>
-<span><span class="co">#&gt; 8  3 0.8  66.3%   29.4%    1.5%</span></span>
-<span><span class="co">#&gt; 9  3 0.9  65.2%     27%    1.1%</span></span>
-<span><span class="co">#&gt; 10 3 1.0  63.5%   24.3%    0.6%</span></span></code></pre></div>
-</details><p>These results indicate whether preventing gatherings of a certain size can reduce the epidemic
+<span><span class="co">#&gt; 1  3 0.1  90.2%   78.3%   50.1%</span></span>
+<span><span class="co">#&gt; 2  3 0.2  84.2%   65.1%   28.2%</span></span>
+<span><span class="co">#&gt; 3  3 0.3  79.5%   54.8%   15.9%</span></span>
+<span><span class="co">#&gt; 4  3 0.4  75.8%   46.9%    8.9%</span></span>
+<span><span class="co">#&gt; 5  3 0.5  72.6%   41.8%    5.4%</span></span>
+<span><span class="co">#&gt; 6  3 0.6  70.4%   37.3%    3.6%</span></span>
+<span><span class="co">#&gt; 7  3 0.7  68.3%   32.8%    2.3%</span></span>
+<span><span class="co">#&gt; 8  3 0.8  66.7%   29.7%    1.6%</span></span>
+<span><span class="co">#&gt; 9  3 0.9  64.6%     27%    0.8%</span></span>
+<span><span class="co">#&gt; 10 3 1.0  63.3%   24.5%    0.8%</span></span></code></pre></div>
+</details><p>These results show that as the level of heterogeneity in individual-level
+transmission increases, a larger percentage of cases come from larger cluster sizes,
+and that large clusters can be produced when <span class="math inline">\(R\)</span> is higher even with low levels of
+transmission variation.</p>
+<p>It indicates whether preventing gatherings of a certain size can reduce the epidemic
 by preventing potential superspreading events.</p>
 <p>When data on the settings of transmission is known, priority can be given to restricting
 particular types of gatherings to most effectively bring down the reproduction number.</p>
@@ -336,7 +355,7 @@ particular types of gatherings to most effectively bring down the reproduction n
 <h2 id="controls-on-transmission">Controls on transmission<a class="anchor" aria-label="anchor" href="#controls-on-transmission"></a>
 </h2>
 <p>In their work on identifying the prevalence of overdispersion in individual-level transmission, <span class="citation">Lloyd-Smith et al. (<a href="#ref-lloyd-smithSuperspreadingEffectIndividual2005" role="doc-biblioref">2005</a>)</span> also showed the effect of control measures on the probability of containment. They defined containment as the size of a transmission chain not reaching 100 cases. They assumed the implementation of control measures at the individual or population level. {superspreading} provides <code><a href="../reference/probability_contain.html">probability_contain()</a></code> to calculate the probability that an outbreak will go extinct before reaching a threshold size.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">contain_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="cn">Inf</span><span class="op">)</span>, a <span class="op">=</span> <span class="fl">1</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -352,7 +371,7 @@ particular types of gatherings to most effectively bring down the reproduction n
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="va">contain_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">contain_params</span>, <span class="va">prob_contain</span><span class="op">)</span></span></code></pre></div>
-</details><details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+</details><details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot probability of epidemic across introductions for multiple k</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">contain_params</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span></span>
