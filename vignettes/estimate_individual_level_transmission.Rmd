@@ -346,3 +346,5 @@ data, whereas the Poisson-Weibull slightly overestimates the number.
 
 Overall, {superspreading} and {fitdistrplus} (or another fitting package of your choice) can be used to estimate and 
 understand individual-level transmission dynamics when transmission chain data is available.
+
+## References

@@ -31,7 +31,7 @@ accounted for by the population-level reproduction number ($R$).
 ## Definition
 
 Superspreading describes individual heterogeneity in disease transmission, such that some individuals transmit to many infectees while other
-infectors infect few or zero individuals (@lloyd-smithSuperspreadingEffectIndividual2005).
+infectors infect few or zero individuals [@lloyd-smithSuperspreadingEffectIndividual2005].
 :::
 
 ```{r setup}
