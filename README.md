@@ -15,8 +15,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 
 `{superspreading}` is an R package that provides a set of functions to
-estimate and understand individual-level variation in transmission from
-secondary cases.
+estimate and understand individual-level variation the in transmission
+of infectious diseases from data on secondary cases.
 
 `{superspreading}` is developed at the [Centre for the Mathematical
 Modelling of Infectious
@@ -52,6 +52,17 @@ transmission from index and secondary cases for Ebola in 2014.
 ***Source***: Faye et al.
 ([2015](#ref-fayeChainsTransmissionControl2015)) & Althaus
 ([2015](#ref-althausEbolaSuperspreading2015)).
+
+[`{fitdistrplus}`](https://CRAN.R-project.org/package=fitdistrplus) is a
+well-developed and stable R package that provides a variety of methods
+for fitting distribution models to data ([Delignette-Muller and Dutang
+2015](#ref-delignette-mullerFitdistrplusPackageFitting2015)). Therefore,
+it is used throughout the documentation of `{superspreading}` and is a
+recommended package for those wanting to fit distribution models, for
+example those supplied in `{superspreading}` (Poisson-lognormal and
+Poisson-Weibull). We recommend reading the `{fitdistrplus}`
+documentation (specifically `?fitdist`) to explore the full range of
+functionality.
 
 ``` r
 # we use {fitdistrplus} to fit the models
@@ -158,15 +169,15 @@ By contributing to this project, you agree to abide by its terms.
 citation("superspreading")
 #> To cite package 'superspreading' in publications use:
 #> 
-#>   Lambert J, Kucharski A (2023). _superspreading: Estimate individual
-#>   level variation in transmission_.
+#>   Lambert J, Kucharski A (2023). _superspreading: Estimate
+#>   Individual-Level Variation in Transmission_.
 #>   https://github.com/epiverse-trace/superspreading,
 #>   https://epiverse-trace.github.io/superspreading/.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {superspreading: Estimate individual level variation in transmission},
+#>     title = {superspreading: Estimate Individual-Level Variation in Transmission},
 #>     author = {Joshua W. Lambert and Adam Kucharski},
 #>     year = {2023},
 #>     note = {https://github.com/epiverse-trace/superspreading,
@@ -197,6 +208,15 @@ This project has some overlap with other R packages:
 Althaus, Christian L. 2015. “Ebola Superspreading.” *The Lancet
 Infectious Diseases* 15 (5): 507–8.
 <https://doi.org/10.1016/S1473-3099(15)70135-0>.
+
+</div>
+
+<div id="ref-delignette-mullerFitdistrplusPackageFitting2015"
+class="csl-entry">
+
+Delignette-Muller, Marie Laure, and Christophe Dutang. 2015.
+“Fitdistrplus: An R Package for Fitting Distributions.” *Journal of
+Statistical Software* 64 (4). <https://doi.org/10.18637/jss.v064.i04>.
 
 </div>
 
