@@ -83,10 +83,16 @@ non_index_cases <- c(
 
 # Estimate R and k for index and non-index cases
 param_index <- fitdist(data = index_case_transmission, distr = "nbinom")
-param_index
+# rename size and mu to k and R
+names(param_index$estimate) <- c("k", "R")
+param_index$estimate
 param_non_index <- fitdist(data = non_index_cases, distr = "nbinom")
-param_non_index
+# rename size and mu to k and R
+names(param_non_index$estimate) <- c("k", "R")
+param_non_index$estimate
 ```
+
+The reproduction number ($R$) is higher for index cases than for non-index cases, but the heterogeneity in transmission is higher for non-index cases (i.e. $k$ is lower).
 
 ### Calculate the probability of large epidemic
 
@@ -100,14 +106,14 @@ initial_infections <- 3
 # Probability of epidemic using k estimate from index cases
 probability_epidemic(
   R = R,
-  k = param_index$estimate[["size"]],
+  k = param_index$estimate[["k"]],
   a = initial_infections
 )
 
 # Probability of epidemic using k estimate from non-index cases
 probability_epidemic(
   R = R,
-  k = param_non_index$estimate[["size"]],
+  k = param_non_index$estimate[["k"]],
   a = initial_infections
 )
 ```
