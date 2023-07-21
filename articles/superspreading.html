@@ -101,27 +101,43 @@ superspreading or superspreading events (SSE). Individual-level transmission is
 important for understanding the growth or decline in cases of an infectious
 disease accounting for transmission heterogeneity, this heterogeneity is not
 accounted for by the population-level reproduction number (<span class="math inline">\(R\)</span>).</p>
-<div class="alert alert-info">
-<p><strong>Definition:</strong></p>
+<div class="section level2 alert alert-info">
+<h2 id="definition">Definition<a class="anchor" aria-label="anchor" href="#definition"></a>
+</h2>
 <p>Superspreading describes individual heterogeneity in disease transmission, such that some individuals transmit to many infectees while other
 infectors infect few or zero individuals (<span class="citation">Lloyd-Smith et al. (<a href="#ref-lloyd-smithSuperspreadingEffectIndividual2005" role="doc-biblioref">2005</a>)</span>).</p>
 </div>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/superspreading" class="external-link">superspreading</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/epiparameter" class="external-link">epiparameter</a></span><span class="op">)</span></span></code></pre></div>
-</details><div class="section level2">
+</details><div class="alert alert-secondary">
+<p>The <a href="https://github.com/epiverse-trace/epiparameter" class="external-link">{epiparameter}</a> R package is loaded to provide a library of epidemiological parameters. These
+parameters can be used by the {superspreading} functions. See the <a href="#empirical-superspreading">Empirical superspreading</a> section of this
+vignette for its usage.</p>
+<p>As an example, offspring distributions are stored in the {epiparameter} library which contain estimated parameters,
+such as the reproduction number (<span class="math inline">\(R\)</span>), and in the case of a negative binomial model, the dispersion parameter (<span class="math inline">\(k\)</span>).</p>
+<p>The offspring distribution is the distribution of the number of infectees (secondary case or offspring) that each infector (primary case) produces.</p>
+</div>
+<div class="section level2">
 <h2 id="probability-of-epidemic">Probability of epidemic<a class="anchor" aria-label="anchor" href="#probability-of-epidemic"></a>
 </h2>
 <p>The probability that a novel disease will cause a epidemic (i.e. sustained
 transmission in the population) is determined by the nature of that diseases’
 transmission heterogeneity. This variability may be an intrinsic property of
 the disease, or a product of human behaviour and social mixing patterns.</p>
-<p>For a given value of <span class="math inline">\(R\)</span> (or <span class="math inline">\(R_0\)</span>), that is the number of secondary cases caused by a
-primary case, if the variability is high, the probability that the outbreak
+<p>For a given value of <span class="math inline">\(R\)</span>, if the variability is high, the probability that the outbreak
 will cause epidemic is lower as the superspreading events are rare. Whereas for
 lower variability the probability is higher as more individuals are closer to the
-mean (<span class="math inline">\(R\)</span>). The <code><a href="../reference/probability_epidemic.html">probability_epidemic()</a></code> function in {superspreading} can calculate
-this probability. <code>k</code> is the dispersion parameter of a negative binomial distribution
+mean (<span class="math inline">\(R\)</span>).</p>
+<div class="alert alert-secondary">
+<p>Here we use <span class="math inline">\(R\)</span> to represent the reproduction number (number of secondary cases caused by a
+typical case). Depending on the situation, this may be equivalent to the basic reproduction
+number (<span class="math inline">\(R_0\)</span>, representing transmission in a fully susceptible population) or the effective
+reproduction number at a given point in time (<span class="math inline">\(R_t\)</span>, representing the extent of transmission
+at time <span class="math inline">\(t\)</span>). Either can be input into the functions provided by {superspreading}</p>
+</div>
+<p>The <code><a href="../reference/probability_epidemic.html">probability_epidemic()</a></code> function in {superspreading} can calculate
+this probability. <span class="math inline">\(k\)</span> is the dispersion parameter of a negative binomial distribution
 and controls the variability of individual-level transmission.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span>R <span class="op">=</span> <span class="fl">1.5</span>, k <span class="op">=</span> <span class="fl">1</span>, a <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
@@ -130,13 +146,13 @@ and controls the variability of individual-level transmission.</p>
 <span><span class="co">#&gt; [1] 0.232</span></span>
 <span><span class="fu"><a href="../reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span>R <span class="op">=</span> <span class="fl">1.5</span>, k <span class="op">=</span> <span class="fl">0.1</span>, a <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.068</span></span></code></pre></div>
-</details><p>In the above code, <code>k</code> values above one represent low heterogeneity (in the case <code>k</code>
-→ <span class="math inline">\(\infty\)</span> it is a poisson distribution), and as <code>k</code> decreases,
-heterogeneity increases. When <code>k</code> equals 1, the distribution is geometric. Values
-of <code>k</code> less than one indicate overdispersion of disease transmission, a signature
+</details><p>In the above code, <span class="math inline">\(k\)</span> values above one represent low heterogeneity (in the case
+<span class="math inline">\(k \rightarrow \infty\)</span> it is a poisson distribution), and as <span class="math inline">\(k\)</span> decreases,
+heterogeneity increases. When <span class="math inline">\(k\)</span> equals 1, the distribution is geometric. Values
+of <span class="math inline">\(k\)</span> less than one indicate overdispersion of disease transmission, a signature
 of superspreading.</p>
 <p>When the value of <span class="math inline">\(R\)</span> increases, this causes the probability of an
-epidemic to increase, if <code>k</code> remains the same.</p>
+epidemic to increase, if <span class="math inline">\(k\)</span> remains the same.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span>R <span class="op">=</span> <span class="fl">0.5</span>, k <span class="op">=</span> <span class="fl">1</span>, a <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0</span></span>
@@ -168,7 +184,7 @@ an epidemic for diseases for which parameters of an offspring distribution have
 been estimated. An offspring distribution is simply the distribution of the
 number of secondary infections caused by a primary infection. It is the distribution
 of <span class="math inline">\(R\)</span>, with the mean of the distribution given as <span class="math inline">\(R\)</span>.</p>
-<p>Here we can use {epiparameter} to load in offspring distributions for multiple
+<p>Here we can use <a href="https://github.com/epiverse-trace/epiparameter" class="external-link">{epiparameter}</a> to load in offspring distributions for multiple
 diseases and evaluate how likely they are to cause epidemics.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist_db.html" class="external-link">epidist_db</a></span><span class="op">(</span></span>
@@ -215,7 +231,7 @@ seeding of infections, whether from animal-to-human spillover or imported cases 
 This is due to the offspring distribution of Ebola being poisson distributed
 with a smaller mean (mean <span class="math inline">\(R\)</span> = 1.5),
 compared to SARS, which is negative binomially distributed with a relatively
-small dispersion (k = 0.16).</p>
+small dispersion (<span class="math inline">\(k\)</span> = 0.16).</p>
 </div>
 <div class="section level2 unnumbered">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
