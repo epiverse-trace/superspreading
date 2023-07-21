@@ -22,7 +22,22 @@ Authors@R:
             family = "Funk",
             role = "ctb",
             email = "sebastian.funk@lshtm.ac.uk",
-            comment = c(ORCID = "0000-0002-2842-3406"))
+            comment = c(ORCID = "0000-0002-2842-3406")
+        ),
+        person(
+            given = "Pratik",
+            family = "Gupte",
+            role = c("rev"),
+            email = "pratik.gupte@lshtm.ac.uk",
+            comment = c(ORCID = "https://orcid.org/0000-0001-5294-7819")
+        ),
+        person(
+            given = "Hugo",
+            family = "Gruson",
+            role = c("rev"),
+            email = "hugo.gruson@data.org",
+            comment = c(ORCID = "https://orcid.org/0000-0002-4094-1476")
+        )
     )
 Description: Implements functions to estimate individual level variation in 
     transmission.
