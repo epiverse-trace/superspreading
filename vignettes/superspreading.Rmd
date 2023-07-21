@@ -64,9 +64,10 @@ mean ($R$).
 
 ::: {.alert .alert-secondary}
 Here we use $R$ to represent the reproduction number (number of secondary cases caused by a 
-primary case) without specifying it as the basic reproduction number ($R_0$)
-or the effective reproduction number ($R_t$). This is because either 
-can be applied to the functions provided by {superspreading}.
+typical case). Depending on the situation, this may be equivalent to the basic reproduction
+number ($R_0$, representing transmission in a fully susceptible population) or the effective 
+reproduction number at a given point in time ($R_t$, representing the extent of transmission 
+at time $t$). Either can be input into the functions provided by {superspreading}
 :::
 
 The `probability_epidemic()` function in {superspreading} can calculate
