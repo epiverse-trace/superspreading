@@ -24,7 +24,7 @@
 #'
 #' @examples
 #' probability_epidemic(R = 1.5, k = 0.1, a = 10)
-probability_epidemic <- function(R, k, a) { # nolint
+probability_epidemic <- function(R, k, a) {
   # check inputs
   checkmate::assert_number(R, lower = 0, finite = TRUE)
   checkmate::assert_number(k, lower = 0)
@@ -74,7 +74,7 @@ probability_epidemic <- function(R, k, a) { # nolint
 #'
 #' @examples
 #' probability_extinct(R = 1.5, k = 0.1, a = 10)
-probability_extinct <- function(R, k, a) { # nolint
+probability_extinct <- function(R, k, a) {
   # input checking done in probability_epidemic
   1 - probability_epidemic(R = R, k = k, a = a)
 }

@@ -24,7 +24,7 @@
 #'
 #' @examples
 #' probability_contain(R = 1.5, k = 0.5, c = 1)
-probability_contain <- function(R, k, a = 1, c, # nolint
+probability_contain <- function(R, k, a = 1, c,
                                 control_type = c("population", "individual"),
                                 stochastic = TRUE,
                                 ...,
@@ -39,7 +39,7 @@ probability_contain <- function(R, k, a = 1, c, # nolint
 
   control_type <- match.arg(control_type)
   if (control_type == "population") {
-    R <- (1 - c) * R # nolint
+    R <- (1 - c) * R
   } else {
     stop("individual-level controls not yet implemented", call. = FALSE)
   }

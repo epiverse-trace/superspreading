@@ -108,8 +108,8 @@ test_that("proportion_transmission fails as expected", {
   )
 })
 
-test_that(".proportion_transmission_numerical works as expected", {
-  res <- .proportion_transmission_numerical(
+test_that(".prop_transmission_numerical works as expected", {
+  res <- .prop_transmission_numerical(
     R = 2,
     k = 0.5,
     percent_transmission = 0.8
@@ -118,8 +118,8 @@ test_that(".proportion_transmission_numerical works as expected", {
   expect_length(res, 1)
 })
 
-test_that(".proportion_transmission_analytical works as expected", {
-  res <- .proportion_transmission_analytical(
+test_that(".prop_transmission_analytical works as expected", {
+  res <- .prop_transmission_analytical(
     R = 2,
     k = 0.5,
     percent_transmission = 0.8

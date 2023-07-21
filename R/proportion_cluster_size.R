@@ -36,7 +36,7 @@
 #' # example with a vector of cluster sizes
 #' cluster_size <- c(5, 10, 25)
 #' proportion_cluster_size(R = R, k = k, cluster_size = cluster_size)
-proportion_cluster_size <- function(R, k, cluster_size) { # nolint
+proportion_cluster_size <- function(R, k, cluster_size) {
 
   # check input
   checkmate::assert_numeric(R, lower = 0, finite = TRUE)
