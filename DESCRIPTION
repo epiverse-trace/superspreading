@@ -1,5 +1,5 @@
 Package: superspreading
-Title: Estimate Individual Level Variation in Transmission
+Title: Estimate Individual-Level Variation in Transmission
 Version: 0.0.0.9000
 Authors@R: 
     c(
@@ -39,7 +39,7 @@ Authors@R:
             comment = c(ORCID = "https://orcid.org/0000-0002-4094-1476")
         )
     )
-Description: Implements functions to estimate individual level variation in 
+Description: Implements functions to estimate individual-level variation in 
     transmission.
 License: MIT + file LICENSE
 URL: https://github.com/epiverse-trace/superspreading, https://epiverse-trace.github.io/superspreading/
