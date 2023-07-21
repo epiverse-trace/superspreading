@@ -491,5 +491,46 @@
 				]
 			]
 		}
+	},
+	{
+		"id": "delignette-mullerFitdistrplusPackageFitting2015",
+		"type": "article-journal",
+		"container-title": "Journal of Statistical Software",
+		"DOI": "10.18637/jss.v064.i04",
+		"ISSN": "1548-7660",
+		"issue": "4",
+		"journalAbbreviation": "J. Stat. Soft.",
+		"language": "en",
+		"source": "DOI.org (Crossref)",
+		"title": "fitdistrplus: An R Package for Fitting Distributions",
+		"title-short": "<b>fitdistrplus</b>",
+		"URL": "http://www.jstatsoft.org/v64/i04/",
+		"volume": "64",
+		"author": [
+			{
+				"family": "Delignette-Muller",
+				"given": "Marie Laure"
+			},
+			{
+				"family": "Dutang",
+				"given": "Christophe"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2023",
+					7,
+					21
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2015"
+				]
+			]
+		}
 	}
 ]
