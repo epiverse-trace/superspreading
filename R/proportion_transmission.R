@@ -61,7 +61,7 @@
 #'   k = k,
 #'   percent_transmission = percent_transmission
 #' )
-proportion_transmission <- function(R, k, percent_transmission, sim = FALSE) { # nolint
+proportion_transmission <- function(R, k, percent_transmission, sim = FALSE) {
 
   # check input
   checkmate::assert_numeric(R, lower = 0, finite = TRUE)
@@ -74,13 +74,13 @@ proportion_transmission <- function(R, k, percent_transmission, sim = FALSE) { #
 
   for (i in seq_len(nrow(df))) {
     if (sim) {
-      prop <- .proportion_transmission_numerical(
+      prop <- .prop_transmission_numerical(
         R = df[i, "R"],
         k = df[i, "k"],
         percent_transmission = percent_transmission
       )
     } else {
-      prop <- .proportion_transmission_analytical(
+      prop <- .prop_transmission_analytical(
         R = df[i, "R"],
         k = df[i, "k"],
         percent_transmission = percent_transmission
@@ -99,7 +99,7 @@ proportion_transmission <- function(R, k, percent_transmission, sim = FALSE) { #
 #' @return A numeric
 #' @keywords internal
 #' @noRd
-.proportion_transmission_analytical <- function(R, k, percent_transmission) { # nolint
+.prop_transmission_analytical <- function(R, k, percent_transmission) {
 
   xm1 <- stats::qnbinom(1 - percent_transmission, k + 1, mu = R * (k + 1) / k)
   remq <- 1 - percent_transmission -
@@ -117,7 +117,7 @@ proportion_transmission <- function(R, k, percent_transmission, sim = FALSE) { #
 #' @return A numeric
 #' @keywords internal
 #' @noRd
-.proportion_transmission_numerical <- function(R, k, percent_transmission) { # nolint
+.prop_transmission_numerical <- function(R, k, percent_transmission) {
 
   nsim <- 1e5
   simulate_secondary <- stats::rnbinom(
