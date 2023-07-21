@@ -73,7 +73,7 @@ probability_contain <- function(R, k, num_init_infect = 1, control,
     )
 
     # replace default args if in dots (remove args not for chain_sim)
-    args <- modifyList(args, list(...)[...names() %in% names(args)])
+    args <- utils::modifyList(args, list(...)[...names() %in% names(args)])
 
     chain_size <- do.call(
       bpmodels::chain_sim,
