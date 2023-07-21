@@ -18,6 +18,13 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 estimate and understand individual-level variation the in transmission
 of infectious diseases from data on secondary cases.
 
+`{superspreading}` implements methods outlined in Lloyd-Smith et al.
+([2005](#ref-lloyd-smithSuperspreadingEffectIndividual2005)), Adam J.
+Kucharski et al. ([2020](#ref-kucharskiEarlyDynamicsTransmission2020)),
+and Kremer et al.
+([2021](#ref-kremerQuantifyingSuperspreadingCOVID192021)), as well as
+additional functions.
+
 `{superspreading}` is developed at the [Centre for the Mathematical
 Modelling of Infectious
 Diseases](https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases)
@@ -45,7 +52,7 @@ library(superspreading)
 ### Calculate the heterogeneity of transmission
 
 Case study using data from early Ebola outbreak in Guinea in 2014,
-stratified by index and non-index cases, as in Kucharski et al.
+stratified by index and non-index cases, as in Adam J. Kucharski et al.
 ([2016](#ref-kucharskiEffectivenessRingVaccination2016)). Data on
 transmission from index and secondary cases for Ebola in 2014.
 
@@ -64,13 +71,22 @@ Poisson-Weibull). We recommend reading the `{fitdistrplus}`
 documentation (specifically `?fitdist`) to explore the full range of
 functionality.
 
+In this example we fit the negative binomial distribution to estimate
+the reproduction number ($R$, which is the mean of the distribution) and
+the dispersion ($k$, which a measure of the variance of the
+distribution). The parameters are estimated via maximum likelihood (the
+default method for `fitdist()`).
+
 ``` r
 # we use {fitdistrplus} to fit the models
 library(fitdistrplus)
 #> Loading required package: MASS
 #> Loading required package: survival
 
+# transmission events from index cases
 index_case_transmission <- c(2, 17, 5, 1, 8, 2, 14)
+
+# transmission events from secondary cases
 secondary_case_transmission <- c(
   1, 2, 1, 4, 4, 1, 3, 3, 1, 1, 4, 9, 9, 1, 2, 1, 1, 1, 4, 3, 3, 4, 2, 5,
   1, 2, 2, 1, 9, 1, 3, 1, 2, 1, 1, 2
@@ -87,20 +103,22 @@ non_index_cases <- c(
 
 # Estimate R and k for index and non-index cases
 param_index <- fitdist(data = index_case_transmission, distr = "nbinom")
-param_index
-#> Fitting of the distribution ' nbinom ' by maximum likelihood 
-#> Parameters:
-#>      estimate Std. Error
-#> size 1.596646   1.025029
-#> mu   7.000771   2.320850
+# rename size and mu to k and R
+names(param_index$estimate) <- c("k", "R")
+param_index$estimate
+#>        k        R 
+#> 1.596646 7.000771
 param_non_index <- fitdist(data = non_index_cases, distr = "nbinom")
-param_non_index
-#> Fitting of the distribution ' nbinom ' by maximum likelihood 
-#> Parameters:
-#>       estimate Std. Error
-#> size 0.1937490 0.05005421
-#> mu   0.6619608 0.14197451
+# rename size and mu to k and R
+names(param_non_index$estimate) <- c("k", "R")
+param_non_index$estimate
+#>         k         R 
+#> 0.1937490 0.6619608
 ```
+
+The reproduction number ($R$) is higher for index cases than for
+non-index cases, but the heterogeneity in transmission is higher for
+non-index cases (i.e. $k$ is lower).
 
 ### Calculate the probability of large epidemic
 
@@ -114,7 +132,7 @@ initial_infections <- 3
 # Probability of epidemic using k estimate from index cases
 probability_epidemic(
   R = R,
-  k = param_index$estimate[["size"]],
+  k = param_index$estimate[["k"]],
   a = initial_infections
 )
 #> [1] 0.9280087
@@ -122,7 +140,7 @@ probability_epidemic(
 # Probability of epidemic using k estimate from non-index cases
 probability_epidemic(
   R = R,
-  k = param_non_index$estimate[["size"]],
+  k = param_non_index$estimate[["k"]],
   a = initial_infections
 )
 #> [1] 0.4665883
@@ -230,6 +248,17 @@ Transmission and Control of Ebola Virus Disease in Conakry, Guinea, in
 
 </div>
 
+<div id="ref-kremerQuantifyingSuperspreadingCOVID192021"
+class="csl-entry">
+
+Kremer, Cécile, Andrea Torneri, Sien Boesmans, Hanne Meuwissen, Selina
+Verdonschot, Koen Vanden Driessche, Christian L. Althaus, Christel Faes,
+and Niel Hens. 2021. “Quantifying Superspreading for COVID-19 Using
+Poisson Mixture Distributions.” *Scientific Reports* 11 (1): 14107.
+<https://doi.org/10.1038/s41598-021-93578-x>.
+
+</div>
+
 <div id="ref-kucharskiEffectivenessRingVaccination2016"
 class="csl-entry">
 
@@ -238,6 +267,26 @@ Sebastian Funk, and W. John Edmunds. 2016. “Effectiveness of Ring
 Vaccination as Control Strategy for Ebola Virus Disease.” *Emerging
 Infectious Diseases* 22 (1): 105–8.
 <https://doi.org/10.3201/eid2201.151410>.
+
+</div>
+
+<div id="ref-kucharskiEarlyDynamicsTransmission2020" class="csl-entry">
+
+Kucharski, Adam J, Timothy W Russell, Charlie Diamond, Yang Liu, John
+Edmunds, Sebastian Funk, Rosalind M Eggo, et al. 2020. “Early Dynamics
+of Transmission and Control of COVID-19: A Mathematical Modelling
+Study.” *The Lancet Infectious Diseases* 20 (5): 553–58.
+<https://doi.org/10.1016/S1473-3099(20)30144-4>.
+
+</div>
+
+<div id="ref-lloyd-smithSuperspreadingEffectIndividual2005"
+class="csl-entry">
+
+Lloyd-Smith, J. O., S. J. Schreiber, P. E. Kopp, and W. M. Getz. 2005.
+“Superspreading and the Effect of Individual Variation on Disease
+Emergence.” *Nature* 438 (7066): 355–59.
+<https://doi.org/10.1038/nature04153>.
 
 </div>
 
