@@ -25,7 +25,7 @@
 #'
 #' @examples
 #' probability_contain(R = 1.5, k = 0.5, control = 1)
-probability_contain <- function(R, k, num_init_infect = 1, control, # nolint
+probability_contain <- function(R, k, num_init_infect = 1, control,
                                 control_type = c("population", "individual"),
                                 stochastic = TRUE,
                                 ...,
@@ -73,7 +73,7 @@ probability_contain <- function(R, k, num_init_infect = 1, control, # nolint
     )
 
     # replace default args if in dots (remove args not for chain_sim)
-    args[names(args) %in% ...names()] <- list(...)[...names() %in% names(args)]
+    args <- modifyList(args, list(...)[...names() %in% names(args)])
 
     chain_size <- do.call(
       bpmodels::chain_sim,

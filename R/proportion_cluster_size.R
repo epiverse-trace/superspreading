@@ -36,7 +36,7 @@
 #' # example with a vector of cluster sizes
 #' cluster_size <- c(5, 10, 25)
 #' proportion_cluster_size(R = R, k = k, cluster_size = cluster_size)
-proportion_cluster_size <- function(R, k, cluster_size, ..., epidist) { # nolint
+proportion_cluster_size <- function(R, k, cluster_size, ..., epidist) {
   input_params <- missing(R) && missing(k)
   if (!xor(input_params, missing(epidist))) {
     stop("One of R and k or <epidist> must be supplied.", call. = FALSE)

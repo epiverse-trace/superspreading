@@ -27,7 +27,7 @@
 #'
 #' @examples
 #' probability_epidemic(R = 1.5, k = 0.1, num_init_infect = 10)
-probability_epidemic <- function(R, k, num_init_infect, ..., epidist) { # nolint
+probability_epidemic <- function(R, k, num_init_infect, ..., epidist) {
   input_params <- missing(R) && missing(k)
   if (!xor(input_params, missing(epidist))) {
     stop("One of R and k or <epidist> must be supplied.", call. = FALSE)
@@ -89,7 +89,7 @@ probability_epidemic <- function(R, k, num_init_infect, ..., epidist) { # nolint
 #'
 #' @examples
 #' probability_extinct(R = 1.5, k = 0.1, num_init_infect = 10)
-probability_extinct <- function(R, k, num_init_infect, ..., epidist) { # nolint
+probability_extinct <- function(R, k, num_init_infect, ..., epidist) {
   # input checking done in probability_epidemic
   1 - probability_epidemic(
     R = R, k = k, num_init_infect = num_init_infect, ..., epidist = epidist

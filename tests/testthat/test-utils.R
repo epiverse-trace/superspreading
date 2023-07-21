@@ -4,7 +4,7 @@ edist <- suppressWarnings(
     disease = "SARS",
     epi_dist = "offspring_distribution",
     author = "Lloyd-Smith_etal"
-  ),
+  )
 )
 
 test_that("get_param works as expected", {
