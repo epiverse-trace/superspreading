@@ -25,8 +25,8 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 `{superspreading}` is an R package that provides a set of functions to estimate 
-and understand individual-level variation in transmission from
-secondary cases. 
+and understand individual-level variation the in transmission of infectious diseases
+from data on secondary cases. 
 
 `{superspreading}` is developed at the [Centre for the Mathematical Modelling of Infectious Diseases](https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases) at the [London School of Hygiene and Tropical Medicine](https://www.lshtm.ac.uk/) as part of [Epiverse-TRACE](https://data.org/initiatives/epiverse/).
 
@@ -52,6 +52,8 @@ library(superspreading)
 Case study using data from early Ebola outbreak in Guinea in 2014, stratified by index and non-index cases, as in @kucharskiEffectivenessRingVaccination2016. Data on transmission from index and secondary cases for Ebola in 2014.
 
 ***Source***: @fayeChainsTransmissionControl2015 & @althausEbolaSuperspreading2015.
+
+[`{fitdistrplus}`](https://CRAN.R-project.org/package=fitdistrplus) is a well-developed and stable R package that provides a variety of methods for fitting distribution models to data [@delignette-mullerFitdistrplusPackageFitting2015]. Therefore, it is used throughout the documentation of `{superspreading}` and is a recommended package for those wanting to fit distribution models, for example those supplied in `{superspreading}` (Poisson-lognormal and Poisson-Weibull). We recommend reading the `{fitdistrplus}` documentation (specifically `?fitdist`) to explore the full range of functionality.
 
 ```{r, estim-superspreading}
 # we use {fitdistrplus} to fit the models
