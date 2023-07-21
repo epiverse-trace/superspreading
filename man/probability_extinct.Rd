@@ -30,7 +30,7 @@ probability_extinct(R = 1.5, k = 0.1, a = 10)
 \references{
 Lloyd-Smith, J. O., Schreiber, S. J., Kopp, P. E., & Getz, W. M. (2005).
 Superspreading and the effect of individual variation on disease emergence.
-Nature, 438(7066), 355-359. \url{https://doi.org/10.1038/nature04153}
+Nature, 438(7066), 355-359. \doi{10.1038/nature04153}
 }
 \seealso{
 \code{\link[=probability_epidemic]{probability_epidemic()}}

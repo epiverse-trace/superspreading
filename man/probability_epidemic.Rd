@@ -31,7 +31,7 @@ probability_epidemic(R = 1.5, k = 0.1, a = 10)
 Kucharski, A. J., Russell, T. W., Diamond, C., Liu, Y., Edmunds, J.,
 Funk, S. & Eggo, R. M. (2020). Early dynamics of transmission and control
 of COVID-19: a mathematical modelling study. The Lancet Infectious Diseases,
-20(5), 553-558. \url{https://doi.org/10.1016/S1473-3099(20)30144-4}
+20(5), 553-558. \doi{10.1016/S1473-3099(20)30144-4}
 }
 \seealso{
 \code{\link[=probability_extinct]{probability_extinct()}}
