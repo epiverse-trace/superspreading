@@ -94,29 +94,38 @@ param_non_index$estimate
 
 The reproduction number ($R$) is higher for index cases than for non-index cases, but the heterogeneity in transmission is higher for non-index cases (i.e. $k$ is lower).
 
-### Calculate the probability of large epidemic
+### Calculate the probability of a large epidemic
+
+Given the reproduction number ($R$) and the dispersion ($k$), the probability that
+a infectious disease will cause an epidemic, in other words the probability it
+does not go extinct, can be calculated using `probability_epidemic()`. Here we
+use `probability_epidemic()` for the parameters estimated in the above section
+for Ebola, assuming there are three initial infections seeding the potential outbreak.
 
 ```{r, prob-epidemic}
 # Compare probability of a large outbreak when k varies according to
-# index/non-index values, assuming R = 2 and 3 initial spillover infections
+# index/non-index values, assuming 3 initial spillover infections
 
-R <- 2
 initial_infections <- 3
 
-# Probability of epidemic using k estimate from index cases
+# Probability of an epidemic using k estimated from index cases
 probability_epidemic(
-  R = R,
+  R = param_index$estimate[["R"]],
   k = param_index$estimate[["k"]],
   a = initial_infections
 )
 
-# Probability of epidemic using k estimate from non-index cases
+# Probability of an epidemic using k estimated from non-index cases
 probability_epidemic(
-  R = R,
+  R = param_non_index$estimate[["R"]],
   k = param_non_index$estimate[["k"]],
   a = initial_infections
 )
 ```
+
+The probability of causing a sustained outbreak is high for the index cases, but
+is zero for non-index cases (i.e. disease transmission will inevitably cease assuming transmission
+dynamics do not change).
 
 ## Package vignettes
 
