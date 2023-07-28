@@ -125,16 +125,32 @@ epidemic. In this case we are varying the heterogeneity of transmission (<code>k
 and number of initial infections (<code>a</code>).</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epidemic_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">2.35</span>, R_lw <span class="op">=</span> <span class="fl">1.5</span>, R_up <span class="op">=</span> <span class="fl">3.2</span>, k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.1</span><span class="op">)</span>, a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span>  R <span class="op">=</span> <span class="fl">2.35</span>,</span>
+<span>  R_lw <span class="op">=</span> <span class="fl">1.5</span>,</span>
+<span>  R_up <span class="op">=</span> <span class="fl">3.2</span>,</span>
+<span>  k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.1</span><span class="op">)</span>,</span>
+<span>  num_init_infect <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </details><p>Then we calculate the probability of an epidemic for each parameter combination.
 The results are combined with the the parameters.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># results are transposed to pivot to long rather than wide data</span></span>
 <span><span class="va">prob_epidemic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">epidemic_params</span>, <span class="fl">1</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">median</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span>R <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"R"</span><span class="op">]</span><span class="op">]</span>, k <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"k"</span><span class="op">]</span><span class="op">]</span>, a <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span>  <span class="va">lower</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span>R <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"R_lw"</span><span class="op">]</span><span class="op">]</span>, k <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"k"</span><span class="op">]</span><span class="op">]</span>, a <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span>  <span class="va">upper</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span>R <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"R_up"</span><span class="op">]</span><span class="op">]</span>, k <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"k"</span><span class="op">]</span><span class="op">]</span>, a <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="va">median</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span></span>
+<span>    R <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"R"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    k <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"k"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    num_init_infect <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"num_init_infect"</span><span class="op">]</span><span class="op">]</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="va">lower</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span></span>
+<span>    R <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"R_lw"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    k <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"k"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    num_init_infect <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"num_init_infect"</span><span class="op">]</span><span class="op">]</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="va">upper</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span></span>
+<span>    R <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"R_up"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    k <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"k"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    num_init_infect <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"num_init_infect"</span><span class="op">]</span><span class="op">]</span></span>
+<span>  <span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>prob_epidemic <span class="op">=</span> <span class="va">median</span>, prob_epidemic_lw <span class="op">=</span> <span class="va">lower</span>, prob_epidemic_up <span class="op">=</span> <span class="va">upper</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">epidemic_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">epidemic_params</span>, <span class="va">prob_epidemic</span><span class="op">)</span></span></code></pre></div>
@@ -142,7 +158,7 @@ The results are combined with the the parameters.</p>
 to only include those with a single initial infection seeding transmission (<code>a = 1</code>).</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># subset data for a single initial infection</span></span>
-<span><span class="va">homogeneity</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">epidemic_params</span>, <span class="va">a</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">homogeneity</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">epidemic_params</span>, <span class="va">num_init_infect</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 </details><details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot probability of epidemic across dispersion</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">homogeneity</span><span class="op">)</span> <span class="op">+</span></span>
@@ -191,7 +207,7 @@ introductions, the higher the chance one will lead to an epidemic.</p>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">introductions</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html" class="external-link">geom_pointrange</a></span><span class="op">(</span></span>
 <span>    mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
-<span>      x <span class="op">=</span> <span class="va">a</span>,</span>
+<span>      x <span class="op">=</span> <span class="va">num_init_infect</span>,</span>
 <span>      y <span class="op">=</span> <span class="va">prob_epidemic</span>,</span>
 <span>      ymin <span class="op">=</span> <span class="va">prob_epidemic_lw</span>,</span>
 <span>      ymax <span class="op">=</span> <span class="va">prob_epidemic_up</span></span>
@@ -215,7 +231,7 @@ Figure 2: The probability that an a number of introduction events will cause a s
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">epidemic_params</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span></span>
 <span>    mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
-<span>      x <span class="op">=</span> <span class="va">a</span>,</span>
+<span>      x <span class="op">=</span> <span class="va">num_init_infect</span>,</span>
 <span>      y <span class="op">=</span> <span class="va">prob_epidemic</span>,</span>
 <span>      colour <span class="op">=</span> <span class="va">k</span></span>
 <span>    <span class="op">)</span></span>
@@ -249,11 +265,15 @@ go extinct (i.e. transmission will subside), can also be plotted for different 
 <code class="sourceCode R"><span><span class="va">extinction_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span>, <span class="fl">0.1</span><span class="op">)</span>,</span>
 <span>  k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="cn">Inf</span><span class="op">)</span>,</span>
-<span>  a <span class="op">=</span> <span class="fl">1</span></span>
+<span>  num_init_infect <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co"># results are transposed to pivot to long rather than wide data</span></span>
 <span><span class="va">prob_extinct</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">extinction_params</span>, <span class="fl">1</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">median</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/probability_extinct.html">probability_extinct</a></span><span class="op">(</span>R <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"R"</span><span class="op">]</span><span class="op">]</span>, k <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"k"</span><span class="op">]</span><span class="op">]</span>, a <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="va">median</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/probability_extinct.html">probability_extinct</a></span><span class="op">(</span></span>
+<span>    R <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"R"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    k <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"k"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    num_init_infect <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"num_init_infect"</span><span class="op">]</span><span class="op">]</span></span>
+<span>  <span class="op">)</span></span>
 <span>  <span class="va">median</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="va">extinction_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">extinction_params</span>, <span class="va">prob_extinct</span><span class="op">)</span></span></code></pre></div>
@@ -314,16 +334,16 @@ cluster sizes.</p>
 <span>  cluster_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">25</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;      R   k prop_5 prop_10 prop_25</span></span>
-<span><span class="co">#&gt; 1  0.8 0.1    67%   38.1%    6.8%</span></span>
-<span><span class="co">#&gt; 2  0.8 0.2  49.5%   18.5%    0.8%</span></span>
-<span><span class="co">#&gt; 3  0.8 0.3  38.2%      9%    0.1%</span></span>
-<span><span class="co">#&gt; 4  0.8 0.4  31.1%    5.3%    0.1%</span></span>
-<span><span class="co">#&gt; 5  0.8 0.5  24.5%      3%      0%</span></span>
-<span><span class="co">#&gt; 6  0.8 0.6    21%    1.8%      0%</span></span>
-<span><span class="co">#&gt; 7  0.8 0.7  18.3%    1.2%      0%</span></span>
-<span><span class="co">#&gt; 8  0.8 0.8  15.4%    0.8%      0%</span></span>
-<span><span class="co">#&gt; 9  0.8 0.9  13.7%    0.4%      0%</span></span>
-<span><span class="co">#&gt; 10 0.8 1.0  12.6%    0.4%      0%</span></span>
+<span><span class="co">#&gt; 1  0.8 0.1  66.4%   38.1%      6%</span></span>
+<span><span class="co">#&gt; 2  0.8 0.2  48.7%   17.1%    0.6%</span></span>
+<span><span class="co">#&gt; 3  0.8 0.3  37.3%      9%      0%</span></span>
+<span><span class="co">#&gt; 4  0.8 0.4  30.9%    5.6%      0%</span></span>
+<span><span class="co">#&gt; 5  0.8 0.5  25.5%    3.1%      0%</span></span>
+<span><span class="co">#&gt; 6  0.8 0.6  20.6%    1.7%      0%</span></span>
+<span><span class="co">#&gt; 7  0.8 0.7  18.3%    1.3%      0%</span></span>
+<span><span class="co">#&gt; 8  0.8 0.8  16.2%    0.8%      0%</span></span>
+<span><span class="co">#&gt; 9  0.8 0.9  14.1%    0.8%      0%</span></span>
+<span><span class="co">#&gt; 10 0.8 1.0    12%    0.4%      0%</span></span>
 <span></span>
 <span><span class="co"># For R = 3</span></span>
 <span><span class="fu"><a href="../reference/proportion_cluster_size.html">proportion_cluster_size</a></span><span class="op">(</span></span>
@@ -332,16 +352,16 @@ cluster sizes.</p>
 <span>  cluster_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">25</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    R   k prop_5 prop_10 prop_25</span></span>
-<span><span class="co">#&gt; 1  3 0.1  90.3%   78.2%   49.2%</span></span>
-<span><span class="co">#&gt; 2  3 0.2    84%   64.5%   26.9%</span></span>
-<span><span class="co">#&gt; 3  3 0.3  79.4%     55%   16.1%</span></span>
-<span><span class="co">#&gt; 4  3 0.4  75.9%   47.4%    9.1%</span></span>
-<span><span class="co">#&gt; 5  3 0.5  72.7%   41.3%    5.8%</span></span>
-<span><span class="co">#&gt; 6  3 0.6    70%   36.2%    3.6%</span></span>
-<span><span class="co">#&gt; 7  3 0.7  68.2%   32.8%    2.2%</span></span>
-<span><span class="co">#&gt; 8  3 0.8  66.6%   30.4%    1.7%</span></span>
-<span><span class="co">#&gt; 9  3 0.9  64.6%   26.5%    0.9%</span></span>
-<span><span class="co">#&gt; 10 3 1.0  63.4%   24.3%    0.7%</span></span></code></pre></div>
+<span><span class="co">#&gt; 1  3 0.1  90.3%   78.2%   49.9%</span></span>
+<span><span class="co">#&gt; 2  3 0.2  84.2%   64.6%   28.1%</span></span>
+<span><span class="co">#&gt; 3  3 0.3  79.3%   54.8%   15.3%</span></span>
+<span><span class="co">#&gt; 4  3 0.4  75.6%   47.2%    9.3%</span></span>
+<span><span class="co">#&gt; 5  3 0.5  72.7%   41.6%      6%</span></span>
+<span><span class="co">#&gt; 6  3 0.6    70%   36.6%    3.8%</span></span>
+<span><span class="co">#&gt; 7  3 0.7  68.1%   32.6%    2.3%</span></span>
+<span><span class="co">#&gt; 8  3 0.8  66.4%   29.5%    1.6%</span></span>
+<span><span class="co">#&gt; 9  3 0.9  64.7%   26.9%    1.2%</span></span>
+<span><span class="co">#&gt; 10 3 1.0  63.1%     24%    0.7%</span></span></code></pre></div>
 </details><p>These results show that as the level of heterogeneity in individual-level
 transmission increases, a larger percentage of cases come from larger cluster sizes,
 and that large clusters can be produced when <span class="math inline">\(R\)</span> is higher even with low levels of
@@ -357,14 +377,14 @@ particular types of gatherings to most effectively bring down the reproduction n
 <p>In their work on identifying the prevalence of overdispersion in individual-level transmission, <span class="citation">Lloyd-Smith et al. (<a href="#ref-lloyd-smithSuperspreadingEffectIndividual2005" role="doc-biblioref">2005</a>)</span> also showed the effect of control measures on the probability of containment. They defined containment as the size of a transmission chain not reaching 100 cases. They assumed the implementation of control measures at the individual or population level. {superspreading} provides <code><a href="../reference/probability_contain.html">probability_contain()</a></code> to calculate the probability that an outbreak will go extinct before reaching a threshold size.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">contain_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="cn">Inf</span><span class="op">)</span>, a <span class="op">=</span> <span class="fl">1</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.05</span><span class="op">)</span></span>
+<span>  R <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="cn">Inf</span><span class="op">)</span>, num_init_infect <span class="op">=</span> <span class="fl">1</span>, control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">prob_contain</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">contain_params</span>, <span class="fl">1</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/probability_contain.html">probability_contain</a></span><span class="op">(</span></span>
 <span>    R <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"R"</span><span class="op">]</span><span class="op">]</span>,</span>
 <span>    k <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"k"</span><span class="op">]</span><span class="op">]</span>,</span>
-<span>    a <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span>,</span>
-<span>    c <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"c"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    num_init_infect <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"num_init_infect"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    control <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"control"</span><span class="op">]</span><span class="op">]</span>,</span>
 <span>    control_type <span class="op">=</span> <span class="st">"population"</span>,</span>
 <span>    stochastic <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>    case_threshold <span class="op">=</span> <span class="fl">100</span></span>
@@ -376,7 +396,7 @@ particular types of gatherings to most effectively bring down the reproduction n
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">contain_params</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span></span>
 <span>    mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
-<span>      x <span class="op">=</span> <span class="va">c</span>,</span>
+<span>      x <span class="op">=</span> <span class="va">control</span>,</span>
 <span>      y <span class="op">=</span> <span class="va">prob_contain</span>,</span>
 <span>      colour <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">k</span><span class="op">)</span></span>
 <span>    <span class="op">)</span></span>

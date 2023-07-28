@@ -73,12 +73,13 @@ not reaching the <code>case_threshold</code> (default = 100).</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">probability_contain</span><span class="op">(</span></span>
 <span>  <span class="va">R</span>,</span>
 <span>  <span class="va">k</span>,</span>
-<span>  a <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  <span class="va">c</span>,</span>
+<span>  num_init_infect <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  <span class="va">control</span>,</span>
 <span>  control_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"population"</span>, <span class="st">"individual"</span><span class="op">)</span>,</span>
 <span>  stochastic <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  case_threshold <span class="op">=</span> <span class="fl">100</span></span>
+<span>  case_threshold <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  <span class="va">epidist</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -94,12 +95,13 @@ per infectious individual)</p></dd>
 offspring distribution from fitted negative binomial)</p></dd>
 
 
-<dt>a</dt>
+<dt>num_init_infect</dt>
 <dd><p>A <code>count</code> specifying the number of initial infections</p></dd>
 
 
-<dt>c</dt>
-<dd><p>Control strength, 0 is no control measures, 1 is complete control.</p></dd>
+<dt>control</dt>
+<dd><p>Control strength, 0 is no control measures, 1 is complete
+control.</p></dd>
 
 
 <dt>control_type</dt>
@@ -120,6 +122,11 @@ probability of extinction.</p></dd>
 <dd><p>A number for the threshold of the number of cases below
 which the epidemic is considered contained.</p></dd>
 
+
+<dt>epidist</dt>
+<dd><p>An <code>&lt;epidist&gt;</code> object. An S3 class for working with
+epidemiological parameters/distributions, see <code><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epiparameter::epidist()</a></code></p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -136,7 +143,7 @@ Nature, 438(7066), 355-359. <a href="https://doi.org/10.1038/nature04153" class=
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">probability_contain</span><span class="op">(</span>R <span class="op">=</span> <span class="fl">1.5</span>, k <span class="op">=</span> <span class="fl">0.5</span>, c <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">probability_contain</span><span class="op">(</span>R <span class="op">=</span> <span class="fl">1.5</span>, k <span class="op">=</span> <span class="fl">0.5</span>, control <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 </code></pre></div>
     </div>

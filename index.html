@@ -170,7 +170,7 @@
 <span><span class="fu"><a href="reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="va">param_index</span><span class="op">$</span><span class="va">estimate</span><span class="op">[[</span><span class="st">"R"</span><span class="op">]</span><span class="op">]</span>,</span>
 <span>  k <span class="op">=</span> <span class="va">param_index</span><span class="op">$</span><span class="va">estimate</span><span class="op">[[</span><span class="st">"k"</span><span class="op">]</span><span class="op">]</span>,</span>
-<span>  a <span class="op">=</span> <span class="va">initial_infections</span></span>
+<span>  num_init_infect <span class="op">=</span> <span class="va">initial_infections</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.9995781</span></span>
 <span></span>
@@ -178,7 +178,7 @@
 <span><span class="fu"><a href="reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="va">param_non_index</span><span class="op">$</span><span class="va">estimate</span><span class="op">[[</span><span class="st">"R"</span><span class="op">]</span><span class="op">]</span>,</span>
 <span>  k <span class="op">=</span> <span class="va">param_non_index</span><span class="op">$</span><span class="va">estimate</span><span class="op">[[</span><span class="st">"k"</span><span class="op">]</span><span class="op">]</span>,</span>
-<span>  a <span class="op">=</span> <span class="va">initial_infections</span></span>
+<span>  num_init_infect <span class="op">=</span> <span class="va">initial_infections</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 <p>The probability of causing a sustained outbreak is high for the index cases, but is zero for non-index cases (i.e. disease transmission will inevitably cease assuming transmission dynamics do not change).</p>

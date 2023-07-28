@@ -85,7 +85,7 @@ to at least one secondary case.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">proportion_cluster_size</span><span class="op">(</span><span class="va">R</span>, <span class="va">k</span>, <span class="va">cluster_size</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">proportion_cluster_size</span><span class="op">(</span><span class="va">R</span>, <span class="va">k</span>, <span class="va">cluster_size</span>, <span class="va">...</span>, <span class="va">epidist</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -102,6 +102,15 @@ offspring distribution from fitted negative binomial)</p></dd>
 
 <dt>cluster_size</dt>
 <dd><p>A <code>number</code> for the cluster size threshold</p></dd>
+
+
+<dt>...</dt>
+<dd><p><code><a href="https://rdrr.io/r/base/dots.html" class="external-link">dots</a></code> not used, extra arguments supplied will cause a warning.</p></dd>
+
+
+<dt>epidist</dt>
+<dd><p>An <code>&lt;epidist&gt;</code> object. An S3 class for working with
+epidemiological parameters/distributions, see <code><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epiparameter::epidist()</a></code></p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -129,27 +138,27 @@ transmission events</p>
 <span class="r-in"><span><span class="va">cluster_size</span> <span class="op">&lt;-</span> <span class="fl">10</span></span></span>
 <span class="r-in"><span><span class="fu">proportion_cluster_size</span><span class="op">(</span>R <span class="op">=</span> <span class="va">R</span>, k <span class="op">=</span> <span class="va">k</span>, cluster_size <span class="op">=</span> <span class="va">cluster_size</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   R   k prop_10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2 0.1   68.4%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2 0.1   68.8%</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># example with a vector of k</span></span></span>
 <span class="r-in"><span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>, <span class="fl">0.5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">proportion_cluster_size</span><span class="op">(</span>R <span class="op">=</span> <span class="va">R</span>, k <span class="op">=</span> <span class="va">k</span>, cluster_size <span class="op">=</span> <span class="va">cluster_size</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   R   k prop_10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2 0.1   69.2%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2 0.2   50.3%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2 0.3   38.5%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 2 0.4   31.2%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2 0.1   69.3%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2 0.2   50.4%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2 0.3   39.3%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 2 0.4   31.1%</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5 2 0.5   24.8%</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># example with a vector of cluster sizes</span></span></span>
 <span class="r-in"><span><span class="va">cluster_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">25</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">proportion_cluster_size</span><span class="op">(</span>R <span class="op">=</span> <span class="va">R</span>, k <span class="op">=</span> <span class="va">k</span>, cluster_size <span class="op">=</span> <span class="va">cluster_size</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   R   k prop_5 prop_10 prop_25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2 0.1  85.8%   69.1%   35.5%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2 0.2  76.3%   50.6%     14%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2 0.3  69.7%   39.1%    5.8%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 2 0.4  63.4%   30.2%    2.5%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 2 0.5  59.5%   24.6%    1.2%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2 0.1  85.4%   68.7%   34.4%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2 0.2    76%   51.1%   13.8%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2 0.3  69.3%   39.1%    5.9%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 2 0.4  64.2%   31.2%    2.6%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 2 0.5  59.7%   24.8%    1.2%</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
