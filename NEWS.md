@@ -1,3 +1,5 @@
+# superspreading (development version)
+
 # superspreading 0.1.0
 
 Initial release of _superspreading_, an R package to estimate individual-level variation in disease transmission and provide summary metrics for superspreading events.
