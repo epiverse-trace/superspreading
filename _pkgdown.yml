@@ -4,6 +4,9 @@ template:
   bslib:
     font_weight_base : 300
 
+development:
+  mode: auto
+
 reference:
   - title: Offspring distributions
 
