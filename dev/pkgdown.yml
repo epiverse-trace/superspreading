@@ -5,7 +5,7 @@ articles:
   epidemic_risk: epidemic_risk.html
   estimate_individual_level_transmission: estimate_individual_level_transmission.html
   superspreading: superspreading.html
-last_built: 2023-08-18T09:19Z
+last_built: 2023-12-06T14:30Z
 urls:
   reference: https://epiverse-trace.github.io/superspreading/reference
   article: https://epiverse-trace.github.io/superspreading/articles
