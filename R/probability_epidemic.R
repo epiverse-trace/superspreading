@@ -36,7 +36,7 @@ probability_epidemic <- function(R, k, num_init_infect, ..., offspring_dist) {
   # check inputs
   chkDots(...)
   if (input_params) {
-    epiparameter::is_epidist(offspring_dist)
+    checkmate::assert_class(offspring_dist, classes = "epidist")
     R <- get_epidist_param(epidist = offspring_dist, parameter = "R")
     k <- get_epidist_param(epidist = offspring_dist, parameter = "k")
   }
