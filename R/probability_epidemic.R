@@ -68,7 +68,7 @@ probability_epidemic <- function(R, k, num_init_infect, ..., epidist) {
   return(prob_epidemic)
 }
 
-#' Calculates the probability a branching process will go extinct based on
+#' Calculate the probability a branching process will go extinct based on
 #' R, k and initial cases
 #'
 #' @description Calculates the probability a branching process will not causes

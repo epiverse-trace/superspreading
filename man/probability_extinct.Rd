@@ -2,7 +2,7 @@
 % Please edit documentation in R/probability_epidemic.R
 \name{probability_extinct}
 \alias{probability_extinct}
-\title{Calculates the probability a branching process will go extinct based on
+\title{Calculate the probability a branching process will go extinct based on
 R, k and initial cases}
 \usage{
 probability_extinct(R, k, num_init_infect, ..., epidist)
