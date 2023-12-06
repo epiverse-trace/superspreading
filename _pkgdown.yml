@@ -30,6 +30,10 @@ reference:
     - proportion_transmission
     - proportion_cluster_size
 
+  - title: Helper functions
+    contents:
+    - ends_with("ic_tbl")
+
 articles:
 - title: Parameter estimation
   navbar: Parameter estimation
