@@ -132,7 +132,7 @@ test_that("proportion_transmission works with <epidist>", {
   edist <- suppressWarnings(
     epiparameter::epidist_db(
       disease = "SARS",
-      epi_dist = "offspring_distribution",
+      epi_dist = "offspring distribution",
       author = "Lloyd-Smith",
       single_epidist = TRUE
     )
