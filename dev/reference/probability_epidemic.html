@@ -80,7 +80,7 @@ initial cases.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">probability_epidemic</span><span class="op">(</span><span class="va">R</span>, <span class="va">k</span>, <span class="va">num_init_infect</span>, <span class="va">...</span>, <span class="va">epidist</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">probability_epidemic</span><span class="op">(</span><span class="va">R</span>, <span class="va">k</span>, <span class="va">num_init_infect</span>, <span class="va">...</span>, <span class="va">offspring_dist</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -103,7 +103,7 @@ offspring distribution from fitted negative binomial).</p></dd>
 <dd><p><a href="https://rdrr.io/r/base/dots.html" class="external-link">dots</a> not used, extra arguments supplied will cause a warning.</p></dd>
 
 
-<dt>epidist</dt>
+<dt>offspring_dist</dt>
 <dd><p>An <code>&lt;epidist&gt;</code> object. An S3 class for working with
 epidemiological parameters/distributions, see <code><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epiparameter::epidist()</a></code>.</p></dd>
 
