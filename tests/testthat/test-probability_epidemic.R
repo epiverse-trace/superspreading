@@ -82,7 +82,10 @@ test_that("probability_epidemic works with <epidist>", {
       single_epidist = TRUE
     )
   )
-  expect_equal(probability_epidemic(num_init_infect = 1, epidist = edist), 0.12)
+  expect_equal(
+    probability_epidemic(num_init_infect = 1, offspring_dist = edist),
+    0.12
+  )
 })
 
 test_that("probability_epidemic fails without R and k or <epidist>", {

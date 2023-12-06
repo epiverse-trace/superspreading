@@ -80,7 +80,7 @@ test_that("proportion_cluster_size works with <epidist>", {
       single_epidist = TRUE
     )
   )
-  res <- proportion_cluster_size(cluster_size = 20, epidist = edist)
+  res <- proportion_cluster_size(cluster_size = 20, offspring_dist = edist)
 
   expect_s3_class(res, "data.frame")
   expect_identical(dim(res), c(1L, 3L))
