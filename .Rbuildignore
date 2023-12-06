@@ -8,3 +8,5 @@
 ^\.lintr$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^doc$
+^Meta$
