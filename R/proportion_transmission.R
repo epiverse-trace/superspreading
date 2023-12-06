@@ -22,8 +22,8 @@
 #' @param sim A `logical` whether the calculation should be done numerically
 #' (i.e. simulate secondary contacts) or analytically.
 #'
-#' @return A `<data.frame>` with the value for the proportion of cases for a given
-#' value of R and k.
+#' @return A `<data.frame>` with the value for the proportion of cases for a
+#' given value of R and k.
 #' @export
 #'
 #' @references
