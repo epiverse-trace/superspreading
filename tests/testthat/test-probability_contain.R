@@ -56,7 +56,7 @@ test_that("probability_contain fails as expected", {
 })
 
 test_that("probability_contain works with <epidist>", {
-  edist <- suppressWarnings(
+  edist <- suppressMessages(
     epiparameter::epidist_db(
       disease = "SARS",
       epi_dist = "offspring distribution",

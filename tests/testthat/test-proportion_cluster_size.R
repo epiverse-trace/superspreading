@@ -72,7 +72,7 @@ test_that("proportion_cluster_size fails as expected", {
 })
 
 test_that("proportion_cluster_size works with <epidist>", {
-  edist <- suppressWarnings(
+  edist <- suppressMessages(
     epiparameter::epidist_db(
       disease = "SARS",
       epi_dist = "offspring distribution",
