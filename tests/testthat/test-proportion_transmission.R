@@ -133,7 +133,8 @@ test_that("proportion_transmission works with <epidist>", {
     epiparameter::epidist_db(
       disease = "SARS",
       epi_dist = "offspring_distribution",
-      author = "Lloyd-Smith_etal"
+      author = "Lloyd-Smith",
+      single_epidist = TRUE
     )
   )
   res <- proportion_transmission(percent_transmission = 0.8, epidist = edist)

@@ -78,7 +78,8 @@ test_that("probability_epidemic works with <epidist>", {
     epiparameter::epidist_db(
       disease = "SARS",
       epi_dist = "offspring_distribution",
-      author = "Lloyd-Smith_etal"
+      author = "Lloyd-Smith",
+      single_epidist = TRUE
     )
   )
   expect_equal(probability_epidemic(num_init_infect = 1, epidist = edist), 0.12)
