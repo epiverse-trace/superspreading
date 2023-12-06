@@ -137,7 +137,10 @@ test_that("proportion_transmission works with <epidist>", {
       single_epidist = TRUE
     )
   )
-  res <- proportion_transmission(percent_transmission = 0.8, epidist = edist)
+  res <- proportion_transmission(
+    percent_transmission = 0.8,
+    offspring_dist = edist
+  )
 
   expect_s3_class(res, "data.frame")
   expect_identical(dim(res), c(1L, 3L))

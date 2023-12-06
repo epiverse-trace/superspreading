@@ -66,7 +66,10 @@ test_that("probability_contain works with <epidist>", {
   )
   expect_equal(
     probability_contain(
-      num_init_infect = 1, control = 0.1, stochastic = FALSE, epidist = edist
+      num_init_infect = 1,
+      control = 0.1,
+      stochastic = FALSE,
+      offspring_dist = edist
     ),
     0.904
   )
