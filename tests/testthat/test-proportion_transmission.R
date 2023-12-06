@@ -129,7 +129,7 @@ test_that(".prop_transmission_analytical works as expected", {
 })
 
 test_that("proportion_transmission works with <epidist>", {
-  edist <- suppressWarnings(
+  edist <- suppressMessages(
     epiparameter::epidist_db(
       disease = "SARS",
       epi_dist = "offspring distribution",

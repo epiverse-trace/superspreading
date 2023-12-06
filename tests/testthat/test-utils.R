@@ -1,5 +1,5 @@
 library(epiparameter)
-edist <- suppressWarnings(
+edist <- suppressMessages(
   epidist_db(
     disease = "SARS",
     epi_dist = "offspring distribution",
@@ -22,7 +22,7 @@ test_that("get_param fails as expected", {
 })
 
 test_that("get_param fails as expected with incorrect parameters", {
-  edist <- suppressWarnings(
+  edist <- suppressMessages(
     epidist_db(
       disease = "COVID-19",
       epi_dist = "incubation period",

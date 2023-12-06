@@ -74,7 +74,7 @@ test_that("probability_epidemic works for R > 1", {
 })
 
 test_that("probability_epidemic works with <epidist>", {
-  edist <- suppressWarnings(
+  edist <- suppressMessages(
     epiparameter::epidist_db(
       disease = "SARS",
       epi_dist = "offspring distribution",
