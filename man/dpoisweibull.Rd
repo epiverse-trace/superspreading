@@ -7,11 +7,11 @@
 dpoisweibull(x, shape, scale)
 }
 \arguments{
-\item{x}{A \code{number} for the quantile of the distribution}
+\item{x}{A \code{number} for the quantile of the distribution.}
 
-\item{shape}{A \code{number} for the shape parameter of the distribution}
+\item{shape}{A \code{number} for the shape parameter of the distribution.}
 
-\item{scale}{A \code{number} for the scale parameter of the distribution}
+\item{scale}{A \code{number} for the scale parameter of the distribution.}
 }
 \value{
 A \code{numeric} vector of the density of the poisson-Weibull

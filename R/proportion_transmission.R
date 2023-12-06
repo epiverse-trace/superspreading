@@ -9,7 +9,7 @@
 #' This can be calculated using `proportion_transmission()` at varying values of
 #' \eqn{R} and for different values of percentage transmission.
 #'
-#' @details Multiple values of R and k can be supplied and a data frame of
+#' @details Multiple values of R and k can be supplied and a `<data.frame>` of
 #' every combination of these will be returned.
 #'
 #' The numerical calculation uses random number generation to simulate secondary
@@ -18,12 +18,12 @@
 #'
 #' @inheritParams probability_epidemic
 #' @param percent_transmission A `number` of the percentage transmission
-#' for which a proportion of cases has produced
+#' for which a proportion of cases has produced.
 #' @param sim A `logical` whether the calculation should be done numerically
-#' (i.e. simulate secondary contacts) or analytically
+#' (i.e. simulate secondary contacts) or analytically.
 #'
-#' @return A data frame with the value for the proportion of cases for a given
-#' value of R and k
+#' @return A `<data.frame>` with the value for the proportion of cases for a given
+#' value of R and k.
 #' @export
 #'
 #' @references

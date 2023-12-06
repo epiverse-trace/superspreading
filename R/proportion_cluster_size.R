@@ -1,6 +1,6 @@
 #' Proportion of new cases that originated with a transmission event of a
 #' given size (useful to inform backwards contact tracing efforts, i.e. how
-#' many cases are associated with large clusters).
+#' many cases are associated with large clusters)
 #'
 #' @description Calculates the proportion of new cases that originated with a
 #' transmission event of a given size (useful to inform backwards contact
@@ -14,13 +14,14 @@
 #' cases of a certain size. In other words it is the number of cases above a
 #' threshold divided by the total number of cases, not the number of
 #' transmission events above a certain threshold divided by the number of
-#' transmission events
+#' transmission events.
 #'
 #' @inheritParams probability_epidemic
-#' @param cluster_size A `number` for the cluster size threshold
+#' @param cluster_size A `number` for the cluster size threshold.
 #'
-#' @return A data frame with the value for the proportion of new cases that are
-#' part of a transmission event above a threshold for a given value of R and k
+#' @return A `<data.frame>` with the value for the proportion of new cases
+#' that are part of a transmission event above a threshold for a given value
+#' of R and k.
 #' @export
 #'
 #' @examples

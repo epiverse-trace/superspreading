@@ -9,20 +9,20 @@ probability_extinct(R, k, num_init_infect, ..., epidist)
 }
 \arguments{
 \item{R}{A \code{number} specifying the R parameter (i.e. average secondary cases
-per infectious individual)}
+per infectious individual).}
 
 \item{k}{A \code{number} specifying the  k parameter (i.e. overdispersion in
-offspring distribution from fitted negative binomial)}
+offspring distribution from fitted negative binomial).}
 
-\item{num_init_infect}{A \code{count} specifying the number of initial infections}
+\item{num_init_infect}{A \code{count} specifying the number of initial infections.}
 
-\item{...}{\code{\link{dots}} not used, extra arguments supplied will cause a warning.}
+\item{...}{\link{dots} not used, extra arguments supplied will cause a warning.}
 
 \item{epidist}{An \verb{<epidist>} object. An S3 class for working with
-epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}}
+epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}.}
 }
 \value{
-A value with the probability of going extinct
+A value with the probability of going extinct.
 }
 \description{
 Calculates the probability a branching process will not causes

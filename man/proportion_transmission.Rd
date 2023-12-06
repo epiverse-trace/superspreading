@@ -9,25 +9,25 @@ proportion_transmission(R, k, percent_transmission, sim = FALSE, ..., epidist)
 }
 \arguments{
 \item{R}{A \code{number} specifying the R parameter (i.e. average secondary cases
-per infectious individual)}
+per infectious individual).}
 
 \item{k}{A \code{number} specifying the  k parameter (i.e. overdispersion in
-offspring distribution from fitted negative binomial)}
+offspring distribution from fitted negative binomial).}
 
 \item{percent_transmission}{A \code{number} of the percentage transmission
-for which a proportion of cases has produced}
+for which a proportion of cases has produced.}
 
 \item{sim}{A \code{logical} whether the calculation should be done numerically
-(i.e. simulate secondary contacts) or analytically}
+(i.e. simulate secondary contacts) or analytically.}
 
-\item{...}{\code{\link{dots}} not used, extra arguments supplied will cause a warning.}
+\item{...}{\link{dots} not used, extra arguments supplied will cause a warning.}
 
 \item{epidist}{An \verb{<epidist>} object. An S3 class for working with
-epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}}
+epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}.}
 }
 \value{
-A data frame with the value for the proportion of cases for a given
-value of R and k
+A \verb{<data.frame>} with the value for the proportion of cases for a given
+value of R and k.
 }
 \description{
 Calculates the proportion of cases that cause a certain
@@ -39,7 +39,7 @@ This can be calculated using \code{proportion_transmission()} at varying values 
 \eqn{R} and for different values of percentage transmission.
 }
 \details{
-Multiple values of R and k can be supplied and a data frame of
+Multiple values of R and k can be supplied and a \verb{<data.frame>} of
 every combination of these will be returned.
 
 The numerical calculation uses random number generation to simulate secondary
