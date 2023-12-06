@@ -13,7 +13,7 @@ probability_contain(
   stochastic = TRUE,
   ...,
   case_threshold = 100,
-  epidist
+  offspring_dist
 )
 }
 \arguments{
@@ -39,7 +39,7 @@ probability of extinction.}
 \item{case_threshold}{A number for the threshold of the number of cases below
 which the epidemic is considered contained.}
 
-\item{epidist}{An \verb{<epidist>} object. An S3 class for working with
+\item{offspring_dist}{An \verb{<epidist>} object. An S3 class for working with
 epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}.}
 }
 \value{

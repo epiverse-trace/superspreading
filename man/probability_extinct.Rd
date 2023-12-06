@@ -5,7 +5,7 @@
 \title{Calculate the probability a branching process will go extinct based on
 R, k and initial cases}
 \usage{
-probability_extinct(R, k, num_init_infect, ..., epidist)
+probability_extinct(R, k, num_init_infect, ..., offspring_dist)
 }
 \arguments{
 \item{R}{A \code{number} specifying the R parameter (i.e. average secondary cases
@@ -18,7 +18,7 @@ offspring distribution from fitted negative binomial).}
 
 \item{...}{\link{dots} not used, extra arguments supplied will cause a warning.}
 
-\item{epidist}{An \verb{<epidist>} object. An S3 class for working with
+\item{offspring_dist}{An \verb{<epidist>} object. An S3 class for working with
 epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}.}
 }
 \value{
