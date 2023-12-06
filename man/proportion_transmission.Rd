@@ -26,8 +26,8 @@ for which a proportion of cases has produced.}
 epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}.}
 }
 \value{
-A \verb{<data.frame>} with the value for the proportion of cases for a given
-value of R and k.
+A \verb{<data.frame>} with the value for the proportion of cases for a
+given value of R and k.
 }
 \description{
 Calculates the proportion of cases that cause a certain
