@@ -60,7 +60,8 @@ test_that("probability_contain works with <epidist>", {
     epiparameter::epidist_db(
       disease = "SARS",
       epi_dist = "offspring_distribution",
-      author = "Lloyd-Smith_etal"
+      author = "Lloyd-Smith",
+      single_epidist = TRUE
     )
   )
   expect_equal(

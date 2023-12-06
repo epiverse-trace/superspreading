@@ -3,7 +3,8 @@ edist <- suppressWarnings(
   epidist_db(
     disease = "SARS",
     epi_dist = "offspring_distribution",
-    author = "Lloyd-Smith_etal"
+    author = "Lloyd-Smith",
+    single_epidist = TRUE
   )
 )
 
@@ -25,7 +26,8 @@ test_that("get_param fails as expected with incorrect parameters", {
     epidist_db(
       disease = "COVID-19",
       epi_dist = "incubation_period",
-      author = "Linton_etal"
+      author = "Linton",
+      single_epidist = TRUE
     )
   )
   expect_error(

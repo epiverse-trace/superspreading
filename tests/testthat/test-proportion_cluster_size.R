@@ -76,7 +76,8 @@ test_that("proportion_cluster_size works with <epidist>", {
     epiparameter::epidist_db(
       disease = "SARS",
       epi_dist = "offspring_distribution",
-      author = "Lloyd-Smith_etal"
+      author = "Lloyd-Smith",
+      single_epidist = TRUE
     )
   )
   res <- proportion_cluster_size(cluster_size = 20, epidist = edist)
