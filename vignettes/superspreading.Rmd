@@ -123,12 +123,12 @@ diseases and evaluate how likely they are to cause epidemics.
 ```{r, epiparam}
 sars <- epidist_db(
   disease = "SARS",
-  epi_dist = "offspring distribution", 
+  epi_dist = "offspring distribution",
   single_epidist = TRUE
 )
 evd <- epidist_db(
   disease = "Ebola Virus Disease",
-  epi_dist = "offspring distribution", 
+  epi_dist = "offspring distribution",
   single_epidist = TRUE
 )
 ```
@@ -151,8 +151,8 @@ probability_epidemic(
 )
 family(evd)
 probability_epidemic(
-  R = evd_params[["mean"]], 
-  k = evd_params[["dispersion"]], 
+  R = evd_params[["mean"]],
+  k = evd_params[["dispersion"]],
   num_init_infect = 1
 )
 ```
