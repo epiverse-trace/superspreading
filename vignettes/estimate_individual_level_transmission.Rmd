@@ -81,13 +81,10 @@ nbinom_fit <- fitdist(data = all_cases, distr = "nbinom")
 ```
 
 ```{r, fit-table, class.source = 'fold-hide'}
-knitr::kable(
-  data.frame(
-    distribution = c(pois_fit$distname, geom_fit$distname, nbinom_fit$distname),
-    AIC = c(pois_fit$aic, geom_fit$aic, nbinom_fit$aic),
-    BIC = c(pois_fit$bic, geom_fit$bic, nbinom_fit$bic)
-  )
-)
+model_tbl <- ic_tbl(pois_fit, geom_fit, nbinom_fit)
+col.names <- gsub(pattern = "^Delta", replacement = "$\\\\Delta$", x = colnames(model_tbl))
+col.names <- gsub(pattern = "^w", replacement = "$w$", x = col.names)
+knitr::kable(model_tbl, col.names = col.names, row.names = FALSE, digits = 1)
 ```
 
 The best performing model, for both AIC and BIC comparison, is the negative binomial.
@@ -256,31 +253,12 @@ poisweibull_fit <- fitdist(
 ```
 
 ```{r, fit-extra-table, class.source = 'fold-hide'}
-knitr::kable(
-  data.frame(
-    distribution = c(
-      pois_fit$distname,
-      geom_fit$distname,
-      nbinom_fit$distname,
-      poislnorm_fit$distname,
-      poisweibull_fit$distname
-    ),
-    AIC = c(
-      pois_fit$aic,
-      geom_fit$aic,
-      nbinom_fit$aic,
-      poislnorm_fit$aic,
-      poisweibull_fit$aic
-    ),
-    BIC = c(
-      pois_fit$bic,
-      geom_fit$bic,
-      nbinom_fit$bic,
-      poislnorm_fit$bic,
-      poisweibull_fit$bic
-    )
-  )
+model_tbl <- ic_tbl(
+  pois_fit, geom_fit, nbinom_fit, poislnorm_fit, poisweibull_fit
 )
+col.names <- gsub(pattern = "^Delta", replacement = "$\\\\Delta$", x = colnames(model_tbl))
+col.names <- gsub(pattern = "^w", replacement = "$w$", x = col.names)
+knitr::kable(model_tbl, col.names = col.names, row.names = FALSE, digits = 1)
 ```
 
 The negative binomial is still the best performing fitting model, even with the addition of the Poisson-lognormal
