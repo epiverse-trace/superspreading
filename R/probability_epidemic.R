@@ -3,18 +3,18 @@
 #'
 #' @description Calculates the probability a branching process will cause an
 #' epidemic (i.e. probability will fail to go extinct) based on R, k and
-#' initial cases
+#' initial cases.
 #'
 #' @param R A `number` specifying the R parameter (i.e. average secondary cases
-#' per infectious individual)
+#' per infectious individual).
 #' @param k A `number` specifying the  k parameter (i.e. overdispersion in
-#' offspring distribution from fitted negative binomial)
-#' @param num_init_infect A `count` specifying the number of initial infections
-#' @param ... [`dots`] not used, extra arguments supplied will cause a warning.
+#' offspring distribution from fitted negative binomial).
+#' @param num_init_infect A `count` specifying the number of initial infections.
+#' @param ... [dots] not used, extra arguments supplied will cause a warning.
 #' @param epidist An `<epidist>` object. An S3 class for working with
-#' epidemiological parameters/distributions, see [`epiparameter::epidist()`]
+#' epidemiological parameters/distributions, see [epiparameter::epidist()].
 #'
-#' @return A value with the probability of a large epidemic
+#' @return A value with the probability of a large epidemic.
 #' @export
 #' @seealso [probability_extinct()]
 #'
@@ -73,11 +73,11 @@ probability_epidemic <- function(R, k, num_init_infect, ..., epidist) {
 #'
 #' @description Calculates the probability a branching process will not causes
 #' an epidemic and will go extinct. This is the complement of the probability
-#' of a disease causing an epidemic ([`probability_epidemic()`]).
+#' of a disease causing an epidemic ([probability_epidemic()]).
 #'
 #' @inheritParams probability_epidemic
 #'
-#' @return A value with the probability of going extinct
+#' @return A value with the probability of going extinct.
 #' @export
 #' @seealso [probability_epidemic()]
 #'

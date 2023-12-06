@@ -8,11 +8,11 @@ distribution}
 ppoisweibull(q, shape, scale)
 }
 \arguments{
-\item{q}{A \code{number} for the quantile of the distribution}
+\item{q}{A \code{number} for the quantile of the distribution.}
 
-\item{shape}{A \code{number} for the shape parameter of the distribution}
+\item{shape}{A \code{number} for the shape parameter of the distribution.}
 
-\item{scale}{A \code{number} for the scale parameter of the distribution}
+\item{scale}{A \code{number} for the scale parameter of the distribution.}
 }
 \value{
 A \code{numeric} vector of the distribution function.

@@ -18,12 +18,12 @@ probability_contain(
 }
 \arguments{
 \item{R}{A \code{number} specifying the R parameter (i.e. average secondary cases
-per infectious individual)}
+per infectious individual).}
 
 \item{k}{A \code{number} specifying the  k parameter (i.e. overdispersion in
-offspring distribution from fitted negative binomial)}
+offspring distribution from fitted negative binomial).}
 
-\item{num_init_infect}{A \code{count} specifying the number of initial infections}
+\item{num_init_infect}{A \code{count} specifying the number of initial infections.}
 
 \item{control}{Control strength, 0 is no control measures, 1 is complete
 control.}
@@ -40,10 +40,10 @@ probability of extinction.}
 which the epidemic is considered contained.}
 
 \item{epidist}{An \verb{<epidist>} object. An S3 class for working with
-epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}}
+epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}.}
 }
 \value{
-A number for the probability of containment
+A \code{number} for the probability of containment.
 }
 \description{
 Containment is defined as the size of the transmission chain

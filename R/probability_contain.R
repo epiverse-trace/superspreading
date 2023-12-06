@@ -14,7 +14,7 @@
 #' @param case_threshold A number for the threshold of the number of cases below
 #' which the epidemic is considered contained.
 #'
-#' @return A number for the probability of containment
+#' @return A `number` for the probability of containment.
 #' @export
 #'
 #' @references

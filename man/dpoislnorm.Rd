@@ -7,12 +7,12 @@
 dpoislnorm(x, meanlog, sdlog)
 }
 \arguments{
-\item{x}{A \code{number} for the quantile of the distribution}
+\item{x}{A \code{number} for the quantile of the distribution.}
 
-\item{meanlog}{A \code{number} for the mean of the distribution on the log scale}
+\item{meanlog}{A \code{number} for the mean of the distribution on the log scale.}
 
 \item{sdlog}{A \code{number} for the standard deviation of the distribution on
-the log scale}
+the log scale.}
 }
 \value{
 A \code{numeric} vector of the density of the poisson-lognormal

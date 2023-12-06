@@ -4,27 +4,28 @@
 \alias{proportion_cluster_size}
 \title{Proportion of new cases that originated with a transmission event of a
 given size (useful to inform backwards contact tracing efforts, i.e. how
-many cases are associated with large clusters).}
+many cases are associated with large clusters)}
 \usage{
 proportion_cluster_size(R, k, cluster_size, ..., epidist)
 }
 \arguments{
 \item{R}{A \code{number} specifying the R parameter (i.e. average secondary cases
-per infectious individual)}
+per infectious individual).}
 
 \item{k}{A \code{number} specifying the  k parameter (i.e. overdispersion in
-offspring distribution from fitted negative binomial)}
+offspring distribution from fitted negative binomial).}
 
-\item{cluster_size}{A \code{number} for the cluster size threshold}
+\item{cluster_size}{A \code{number} for the cluster size threshold.}
 
-\item{...}{\code{\link{dots}} not used, extra arguments supplied will cause a warning.}
+\item{...}{\link{dots} not used, extra arguments supplied will cause a warning.}
 
 \item{epidist}{An \verb{<epidist>} object. An S3 class for working with
-epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}}
+epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}.}
 }
 \value{
-A data frame with the value for the proportion of new cases that are
-part of a transmission event above a threshold for a given value of R and k
+A \verb{<data.frame>} with the value for the proportion of new cases
+that are part of a transmission event above a threshold for a given value
+of R and k.
 }
 \description{
 Calculates the proportion of new cases that originated with a
@@ -40,7 +41,7 @@ the proportion of transmission events that cause a cluster of secondary
 cases of a certain size. In other words it is the number of cases above a
 threshold divided by the total number of cases, not the number of
 transmission events above a certain threshold divided by the number of
-transmission events
+transmission events.
 }
 \examples{
 R <- 2

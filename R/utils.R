@@ -3,7 +3,7 @@
 #' @inheritParams probability_epidemic
 #' @param parameter A character string, either `"R"` or `"k"`.
 #'
-#' @return An unnamed numeric
+#' @return An unnamed numeric.
 #' @keywords internal
 #' @noRd
 get_epidist_param <- function(epidist,
