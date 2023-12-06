@@ -123,11 +123,13 @@ diseases and evaluate how likely they are to cause epidemics.
 ```{r, epiparam}
 sars <- epidist_db(
   disease = "SARS",
-  epi_dist = "offspring_distribution"
+  epi_dist = "offspring_distribution", 
+  single_epidist = TRUE
 )
 evd <- epidist_db(
   disease = "Ebola Virus Disease",
-  epi_dist = "offspring_distribution"
+  epi_dist = "offspring_distribution", 
+  single_epidist = TRUE
 )
 ```
 
@@ -148,8 +150,11 @@ probability_epidemic(
   num_init_infect = 1
 )
 family(evd)
-# k is set to infinite as the distribution for EVD is poisson
-probability_epidemic(R = evd_params[["mean"]], k = Inf, num_init_infect = 1)
+probability_epidemic(
+  R = evd_params[["mean"]], 
+  k = evd_params[["dispersion"]], 
+  num_init_infect = 1
+)
 ```
 
 In the above example we assume the initial pool of infectors is one (`num_init_infect = 1`) 
@@ -157,10 +162,9 @@ but this can easily be adjusted in the case there is evidence for a larger initi
 seeding of infections, whether from animal-to-human spillover or imported cases from outside the area of interest.
 
 We can see that the probability of an epidemic given the estimates of 
-@lloyd-smithSuperspreadingEffectIndividual2005 is greater for SARS than Ebola. 
-This is due to the offspring distribution of Ebola being poisson distributed 
-with a smaller mean (mean $R$ = `r evd_params[["mean"]]`), 
-compared to SARS, which is negative binomially distributed with a relatively
+@lloyd-smithSuperspreadingEffectIndividual2005 is greater for Ebola than SARS.
+This is due to the offspring distribution of Ebola having a larger dispersion 
+(dispersion $k$ = `r evd_params[["dispersion"]]`), compared to SARS, which has a relatively
 small dispersion ($k$ = `r sars_params[["dispersion"]]`).
 
 ## References
