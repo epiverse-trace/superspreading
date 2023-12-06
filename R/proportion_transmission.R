@@ -65,18 +65,18 @@ proportion_transmission <- function(R, k,
                                     percent_transmission,
                                     sim = FALSE,
                                     ...,
-                                    epidist) {
+                                    offspring_dist) {
   input_params <- missing(R) && missing(k)
-  if (!xor(input_params, missing(epidist))) {
+  if (!xor(input_params, missing(offspring_dist))) {
     stop("One of R and k or <epidist> must be supplied.", call. = FALSE)
   }
 
   # check inputs
   chkDots(...)
   if (input_params) {
-    epiparameter::is_epidist(epidist)
-    R <- get_epidist_param(epidist = epidist, parameter = "R")
-    k <- get_epidist_param(epidist = epidist, parameter = "k")
+    epiparameter::is_epidist(offspring_dist)
+    R <- get_epidist_param(epidist = offspring_dist, parameter = "R")
+    k <- get_epidist_param(epidist = offspring_dist, parameter = "k")
   }
   checkmate::assert_numeric(R, lower = 0, finite = TRUE)
   checkmate::assert_numeric(k, lower = 0)

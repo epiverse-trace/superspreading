@@ -11,7 +11,7 @@
 #' offspring distribution from fitted negative binomial).
 #' @param num_init_infect A `count` specifying the number of initial infections.
 #' @param ... [dots] not used, extra arguments supplied will cause a warning.
-#' @param epidist An `<epidist>` object. An S3 class for working with
+#' @param offspring_dist An `<epidist>` object. An S3 class for working with
 #' epidemiological parameters/distributions, see [epiparameter::epidist()].
 #'
 #' @return A value with the probability of a large epidemic.
@@ -27,18 +27,18 @@
 #'
 #' @examples
 #' probability_epidemic(R = 1.5, k = 0.1, num_init_infect = 10)
-probability_epidemic <- function(R, k, num_init_infect, ..., epidist) {
+probability_epidemic <- function(R, k, num_init_infect, ..., offspring_dist) {
   input_params <- missing(R) && missing(k)
-  if (!xor(input_params, missing(epidist))) {
+  if (!xor(input_params, missing(offspring_dist))) {
     stop("One of R and k or <epidist> must be supplied.", call. = FALSE)
   }
 
   # check inputs
   chkDots(...)
   if (input_params) {
-    epiparameter::is_epidist(epidist)
-    R <- get_epidist_param(epidist = epidist, parameter = "R")
-    k <- get_epidist_param(epidist = epidist, parameter = "k")
+    epiparameter::is_epidist(offspring_dist)
+    R <- get_epidist_param(epidist = offspring_dist, parameter = "R")
+    k <- get_epidist_param(epidist = offspring_dist, parameter = "k")
   }
 
   checkmate::assert_number(R, lower = 0, finite = TRUE)
@@ -89,9 +89,13 @@ probability_epidemic <- function(R, k, num_init_infect, ..., epidist) {
 #'
 #' @examples
 #' probability_extinct(R = 1.5, k = 0.1, num_init_infect = 10)
-probability_extinct <- function(R, k, num_init_infect, ..., epidist) {
+probability_extinct <- function(R, k, num_init_infect, ..., offspring_dist) {
   # input checking done in probability_epidemic
   1 - probability_epidemic(
-    R = R, k = k, num_init_infect = num_init_infect, ..., epidist = epidist
+    R = R,
+    k = k,
+    num_init_infect = num_init_infect,
+    ...,
+    offspring_dist = offspring_dist
   )
 }

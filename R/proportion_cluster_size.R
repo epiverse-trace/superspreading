@@ -37,18 +37,18 @@
 #' # example with a vector of cluster sizes
 #' cluster_size <- c(5, 10, 25)
 #' proportion_cluster_size(R = R, k = k, cluster_size = cluster_size)
-proportion_cluster_size <- function(R, k, cluster_size, ..., epidist) {
+proportion_cluster_size <- function(R, k, cluster_size, ..., offspring_dist) {
   input_params <- missing(R) && missing(k)
-  if (!xor(input_params, missing(epidist))) {
+  if (!xor(input_params, missing(offspring_dist))) {
     stop("One of R and k or <epidist> must be supplied.", call. = FALSE)
   }
 
   # check inputs
   chkDots(...)
   if (input_params) {
-    epiparameter::is_epidist(epidist)
-    R <- get_epidist_param(epidist = epidist, parameter = "R")
-    k <- get_epidist_param(epidist = epidist, parameter = "k")
+    epiparameter::is_epidist(offspring_dist)
+    R <- get_epidist_param(epidist = offspring_dist, parameter = "R")
+    k <- get_epidist_param(epidist = offspring_dist, parameter = "k")
   }
   checkmate::assert_numeric(R, lower = 0, finite = TRUE)
   checkmate::assert_numeric(k, lower = 0)
