@@ -96,43 +96,43 @@ This can be calculated using <code>proportion_transmission()</code> at varying v
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>R</dt>
 <dd><p>A <code>number</code> specifying the R parameter (i.e. average secondary cases
-per infectious individual)</p></dd>
+per infectious individual).</p></dd>
 
 
 <dt>k</dt>
 <dd><p>A <code>number</code> specifying the  k parameter (i.e. overdispersion in
-offspring distribution from fitted negative binomial)</p></dd>
+offspring distribution from fitted negative binomial).</p></dd>
 
 
 <dt>percent_transmission</dt>
 <dd><p>A <code>number</code> of the percentage transmission
-for which a proportion of cases has produced</p></dd>
+for which a proportion of cases has produced.</p></dd>
 
 
 <dt>sim</dt>
 <dd><p>A <code>logical</code> whether the calculation should be done numerically
-(i.e. simulate secondary contacts) or analytically</p></dd>
+(i.e. simulate secondary contacts) or analytically.</p></dd>
 
 
 <dt>...</dt>
-<dd><p><code><a href="https://rdrr.io/r/base/dots.html" class="external-link">dots</a></code> not used, extra arguments supplied will cause a warning.</p></dd>
+<dd><p><a href="https://rdrr.io/r/base/dots.html" class="external-link">dots</a> not used, extra arguments supplied will cause a warning.</p></dd>
 
 
 <dt>epidist</dt>
 <dd><p>An <code>&lt;epidist&gt;</code> object. An S3 class for working with
-epidemiological parameters/distributions, see <code><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epiparameter::epidist()</a></code></p></dd>
+epidemiological parameters/distributions, see <code><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epiparameter::epidist()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A data frame with the value for the proportion of cases for a given
-value of R and k</p>
+<p>A <code>&lt;data.frame&gt;</code> with the value for the proportion of cases for a
+given value of R and k.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Multiple values of R and k can be supplied and a data frame of
+    <p>Multiple values of R and k can be supplied and a <code>&lt;data.frame&gt;</code> of
 every combination of these will be returned.</p>
 <p>The numerical calculation uses random number generation to simulate secondary
 contacts so the answers may minimally vary between calls. The number of
