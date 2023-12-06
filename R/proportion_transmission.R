@@ -83,7 +83,7 @@ proportion_transmission <- function(R, k,
   checkmate::assert_number(percent_transmission, lower = 0, upper = 1)
   checkmate::assert_logical(sim, any.missing = FALSE, len = 1)
 
-  df <- expand.grid("R" = R, "k" = k, NA_real_)
+  df <- expand.grid(R = R, k = k, NA_real_)
   colnames(df) <- c("R", "k", paste0("prop_", percent_transmission * 100))
 
   for (i in seq_len(nrow(df))) {
