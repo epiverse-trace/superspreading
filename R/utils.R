@@ -84,19 +84,6 @@ ic_tbl <- function(..., sort_by = c("AIC", "BIC")) {
 
   model_tbl <- model_tbl[order(model_tbl[[sort_by]]), ]
 
-  class(model_tbl) <- c("ic_tbl", "data.frame")
-
   # return tbl
   model_tbl
-}
-
-#' Print method for `<ic_tbl>`
-#'
-#' @inheritParams base::print
-#'
-#' @return Invisibly returns `x`, called for printing side-effects.
-#' @export
-print.ic_tbl <- function(x, ...) {
-  chkDots(...)
-  NextMethod()
 }

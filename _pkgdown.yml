@@ -32,7 +32,7 @@ reference:
 
   - title: Helper functions
     contents:
-    - ends_with("ic_tbl")
+    - ic_tbl
 
 articles:
 - title: Parameter estimation
