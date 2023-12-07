@@ -82,7 +82,9 @@ nbinom_fit <- fitdist(data = all_cases, distr = "nbinom")
 
 ```{r, fit-table, class.source = 'fold-hide'}
 model_tbl <- ic_tbl(pois_fit, geom_fit, nbinom_fit)
-col.names <- gsub(pattern = "^Delta", replacement = "$\\\\Delta$", x = colnames(model_tbl))
+col.names <- gsub(
+  pattern = "^Delta", replacement = "$\\\\Delta$", x = colnames(model_tbl)
+)
 col.names <- gsub(pattern = "^w", replacement = "$w$", x = col.names)
 knitr::kable(model_tbl, col.names = col.names, row.names = FALSE, digits = 1)
 ```
@@ -256,7 +258,9 @@ poisweibull_fit <- fitdist(
 model_tbl <- ic_tbl(
   pois_fit, geom_fit, nbinom_fit, poislnorm_fit, poisweibull_fit
 )
-col.names <- gsub(pattern = "^Delta", replacement = "$\\\\Delta$", x = colnames(model_tbl))
+col.names <- gsub(
+  pattern = "^Delta", replacement = "$\\\\Delta$", x = colnames(model_tbl)
+)
 col.names <- gsub(pattern = "^w", replacement = "$w$", x = col.names)
 knitr::kable(model_tbl, col.names = col.names, row.names = FALSE, digits = 1)
 ```
