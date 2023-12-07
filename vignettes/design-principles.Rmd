@@ -1,0 +1,59 @@
+---
+title: "Design Principles for {superspreading}"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Design Principles for {superspreading}}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette outlines the design decisions that have been taken during the development of the {superspreading} R package, and provides some of the reasoning, and possible pros and cons of each decision.
+
+This document is primarily intended to be read by those interested in understanding the code within the package and for potential package contributors.
+
+## Scope
+
+The {superspreading} package aims to provide a range of summary metrics to characterise individual-level variation in disease transmission. These include calculating the probability an outbreak becomes an epidemic (`probability_epidemic()`), or conversely goes extinct (`probability_extinct()`), the probability an outbreak can be contained (`probability_contain()`), the proportion of cases in cluster of a given size (`proportion_cluster_size()`), and the proportion of cases that cause a proportion of tranmsision (`proportion_transmission()`).
+
+The other aspect of the package is to provide likelihoods for distribution models to estimate heterogeneity in individual-level disease transmission that are not available in R (i.e. base R). At present we include two models: Poisson-lognormal (`dpoislnorm()` & `ppoislnorm()`) and Poisson-Weibull (`dpoisweibull()` & `ppoisweibull()`) distributions.
+
+The package does not implement any branching process models and uses the `{bpmodels}` package for this. The package provides functions to calculate variation in individual-level transmission but does not provide functions for inference, and currently relies on {fitdistrplus} for fitting models.
+
+## Output
+
+Functions with the name `probability_*()` return a single `numeric`. Functions with the name `proportion_*()` return a `<data.frame>` with as many rows as combinations of input values (see `expand.grid()`). The consistency of simple well-known data structure makes it easy for users to apply these functions in different scenarios (e.g. iteratively).
+
+The distribution likelihoods return a vector of `numeric`s of equal length to the input vector. This is the same behaviour as the base R distribution functions.
+
+## Design decisions
+
+- `proportion_*()` functions return a `<data.frame>` with the proportion column(s) containing `character` strings, formatted with a percentage sign (`%`). It was reasoned that {superspreading} is most likely used either as a standalone package, or at the terminus of a epidemiological analysis pipeline, and thus the outputs of {superspreading} functions would not be passed into other functions. If this were the case then the proportions would be better as `numeric`.
+
+- The distribution likelihoods are vectorised (i.e. wrapped in `Vectorize()`). This enables them to be used identically to base R distribution functions.
+
+- Native interoperability with `<epidist>` objects, from the {epiparameter} package is enabled for `probability_*()` and `proportion_*()` via the `offspring_dist` argument. This allows user to pass in a single object and the parameters required by the {superspreading} function will be extracted, if these are not available within the `<epidist>` object the function returns an informative error. The `offspring_dist` argument is after `...` to ensure users specify the argument in full and not accidentally provide data to this argument.
+
+- Internal functions have a dot (`.`) prefix, exported functions do not.
+
+## Dependencies
+
+The aim is to restrict the number of dependencies to a minimal required set for ease of maintenance. The current hard dependencies are:
+
+* {stats}
+* [{checkmate}](https://CRAN.R-project.org/package=checkmate)
+* [{bpmodels}](https://github.com/epiverse-trace/bpmodels)
+
+{stats} is distributed with the R language so is viewed as a lightweight dependency, that should already be installed on a user's machine if they have R. {checkmate} is an input checking package widely used across Epiverse-TRACE packages.  {bpmodels} is used to simulate a single-type branching process model to calculate the probability of containment (`probability_contain()`), as mentioned above, branching process simulations are beyond the scope of {superspreading}.
+
+Suggested dependencies (not including package documentation ({knitr}, {bookdown}, {rmarkdown}), testing ({spelling} and {testthat}), and plotting ({ggplot2})) are: [{epiparameter}](https://github.com/epiverse-trace/epiparameter), used to easily access epidemiological parameters from the package's library, and [{fitdistrplus}](https://CRAN.R-project.org/package=fitdistrplus), used for model fitting methods.
+
+## Contribute
+
+There are no special requirements to contributing to {superspreading}, please follow the [package contributing guide](https://github.com/epiverse-trace/.github/blob/main/CONTRIBUTING.md).
