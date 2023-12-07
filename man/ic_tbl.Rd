@@ -2,13 +2,16 @@
 % Please edit documentation in R/utils.R
 \name{ic_tbl}
 \alias{ic_tbl}
-\title{Helper function to create model comparison table}
+\title{Helper function to create a model comparison table}
 \usage{
 ic_tbl(..., sort_by = c("AIC", "BIC"))
 }
 \arguments{
 \item{...}{\link{dots} One or more model fit results from
-\code{\link[fitdistrplus:fitdist]{fitdistrplus::fitdist()}}}
+\code{\link[fitdistrplus:fitdist]{fitdistrplus::fitdist()}}.}
+
+\item{sort_by}{A \code{character} string specifying which information criterion
+to order the table by, either \code{"AIC"} (default) or \code{"BIC"}.}
 }
 \value{
 A \verb{<data.frame>}.
