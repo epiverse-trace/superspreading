@@ -43,3 +43,7 @@ articles:
   navbar: Superspreading for decision-making
   contents:
   - epidemic_risk
+- title: Developer Documentation
+  navbar: Developer Documentation
+  contents:
+  - design-principles
