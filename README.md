@@ -182,7 +182,7 @@ To report a bug please open an
 
 Contributions to `{superspreading}` are welcomed. Please follow the
 [package contributing
-guide](https://github.com/epiverse-trace/superspreading/blob/main/.github/CONTRIBUTING.md).
+guide](https://github.com/epiverse-trace/.github/blob/main/CONTRIBUTING.md).
 
 ## Code of Conduct
 
@@ -198,9 +198,9 @@ citation("superspreading")
 #> To cite package 'superspreading' in publications use:
 #> 
 #>   Lambert J, Kucharski A (2023). _superspreading: Estimate
-#>   Individual-Level Variation in Transmission_.
-#>   https://github.com/epiverse-trace/superspreading,
-#>   https://epiverse-trace.github.io/superspreading/.
+#>   Individual-Level Variation in Transmission_. R package version
+#>   0.1.0.9000, https://epiverse-trace.github.io/superspreading/,
+#>   <https://github.com/epiverse-trace/superspreading>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -208,8 +208,9 @@ citation("superspreading")
 #>     title = {superspreading: Estimate Individual-Level Variation in Transmission},
 #>     author = {Joshua W. Lambert and Adam Kucharski},
 #>     year = {2023},
-#>     note = {https://github.com/epiverse-trace/superspreading,
+#>     note = {R package version 0.1.0.9000, 
 #> https://epiverse-trace.github.io/superspreading/},
+#>     url = {https://github.com/epiverse-trace/superspreading},
 #>   }
 ```
 
