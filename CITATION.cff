@@ -102,12 +102,15 @@ references:
   - family-names: Delignette-Muller
     given-names: Marie-Laure
     email: marielaure.delignettemuller@vetagro-sup.fr
+    orcid: https://orcid.org/0000-0001-5453-3994
   - family-names: Dutang
     given-names: Christophe
     email: christophe.dutang@ensimag.fr
+    orcid: https://orcid.org/0000-0001-6732-1501
   - family-names: Siberchicot
     given-names: Aurelie
     email: aurelie.siberchicot@univ-lyon1.fr
+    orcid: https://orcid.org/0000-0002-7638-8318
   year: '2023'
 - type: software
   title: knitr
