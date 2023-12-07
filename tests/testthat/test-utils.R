@@ -35,3 +35,37 @@ test_that("get_param fails as expected with incorrect parameters", {
     regexp = "(arg)*(should be one of)*(R)*(k)"
   )
 })
+
+test_that("ic_tbl works as expected", {
+  cases <- rnbinom(n = 100, mu = 5, size = 0.7)
+  pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
+  geom_fit <- fitdistrplus::fitdist(data = cases, distr = "geom")
+  nbinom_fit <- fitdistrplus::fitdist(data = cases, distr = "nbinom")
+  tbl <- ic_tbl(pois_fit, geom_fit, nbinom_fit)
+  expect_s3_class(tbl, class = "data.frame")
+  expect_identical(dim(tbl), c(3L, 7L))
+})
+
+test_that("ic_tbl works as expected with sort_by = BIC", {
+  cases <- rnbinom(n = 100, mu = 5, size = 0.7)
+  pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
+  geom_fit <- fitdistrplus::fitdist(data = cases, distr = "geom")
+  nbinom_fit <- fitdistrplus::fitdist(data = cases, distr = "nbinom")
+  tbl <- ic_tbl(pois_fit, geom_fit, nbinom_fit, sort_by = "BIC")
+  expect_s3_class(tbl, class = "data.frame")
+  expect_identical(dim(tbl), c(3L, 7L))
+})
+
+test_that("ic_tbl fails as expected", {
+  cases <- rnbinom(n = 100, mu = 5, size = 0.7)
+  pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
+  geom_fit <- fitdistrplus::fitdist(data = cases, distr = "geom")
+  nbinom_fit <- fitdistrplus::fitdist(data = cases, distr = "nbinom")
+  expect_error(
+    ic_tbl(pois_fit, geom_fit, nbinom_fit, sort_by = "WIC"),
+    regexp = "(arg)*(should be one of)*(AIC)*(BIC)"
+  )
+
+  pois_fit <- unclass(pois_fit)
+  expect_error(ic_tbl(pois_fit), regexp = "Input objects must be <fitdist>")
+})
