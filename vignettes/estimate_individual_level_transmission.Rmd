@@ -35,8 +35,7 @@ This vignette demonstrates how to use the {superspreading} and {fitdistrplus} R
 packages to estimate the parameters of individual-level transmission and select
 the best fitting model.
 
-Additionally, {ggplot2} is used for plotting and {quickfit} is used to assist with
-multiple model fitting and comparison.
+Additionally, {ggplot2} is used for plotting.
 
 ```{r setup}
 library(superspreading)
@@ -74,7 +73,6 @@ all_cases <- c(
 # - Geometric
 # - Negative Binomial
 
-# TODO: use {quickfit} for model comparison
 pois_fit <- fitdist(data = all_cases, distr = "pois")
 geom_fit <- fitdist(data = all_cases, distr = "geom")
 nbinom_fit <- fitdist(data = all_cases, distr = "nbinom")
@@ -238,7 +236,6 @@ These functions can be used with {fitdistrplus}, as shown for the other distribu
 # - Poisson-lognormal compound
 # - Poisson-Weibull compound
 
-# TODO: use {quickfit} for model comparison
 pois_fit <- fitdist(data = all_cases, distr = "pois")
 geom_fit <- fitdist(data = all_cases, distr = "geom")
 nbinom_fit <- fitdist(data = all_cases, distr = "nbinom")
