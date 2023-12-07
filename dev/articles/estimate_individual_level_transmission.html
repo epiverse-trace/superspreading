@@ -112,8 +112,7 @@ this is quantified by the dispersion (<span class="math inline">\(k\)</span>) pa
 <p>This vignette demonstrates how to use the {superspreading} and {fitdistrplus} R
 packages to estimate the parameters of individual-level transmission and select
 the best fitting model.</p>
-<p>Additionally, {ggplot2} is used for plotting and {quickfit} is used to assist with
-multiple model fitting and comparison.</p>
+<p>Additionally, {ggplot2} is used for plotting.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/superspreading" class="external-link">superspreading</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lbbe.univ-lyon1.fr/fr/fitdistrplus" class="external-link">fitdistrplus</a></span><span class="op">)</span></span>
@@ -147,7 +146,6 @@ multiple model fitting and comparison.</p>
 <span><span class="co"># - Geometric</span></span>
 <span><span class="co"># - Negative Binomial</span></span>
 <span></span>
-<span><span class="co"># TODO: use {quickfit} for model comparison</span></span>
 <span><span class="va">pois_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdist</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">all_cases</span>, distr <span class="op">=</span> <span class="st">"pois"</span><span class="op">)</span></span>
 <span><span class="va">geom_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdist</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">all_cases</span>, distr <span class="op">=</span> <span class="st">"geom"</span><span class="op">)</span></span>
 <span><span class="va">nbinom_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdist</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">all_cases</span>, distr <span class="op">=</span> <span class="st">"nbinom"</span><span class="op">)</span></span></code></pre></div>
@@ -348,7 +346,6 @@ and Poisson-Weibull (<code><a href="../reference/dpoisweibull.html">dpoisweibull
 <span><span class="co"># - Poisson-lognormal compound</span></span>
 <span><span class="co"># - Poisson-Weibull compound</span></span>
 <span></span>
-<span><span class="co"># TODO: use {quickfit} for model comparison</span></span>
 <span><span class="va">pois_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdist</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">all_cases</span>, distr <span class="op">=</span> <span class="st">"pois"</span><span class="op">)</span></span>
 <span><span class="va">geom_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdist</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">all_cases</span>, distr <span class="op">=</span> <span class="st">"geom"</span><span class="op">)</span></span>
 <span><span class="va">nbinom_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdist</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">all_cases</span>, distr <span class="op">=</span> <span class="st">"nbinom"</span><span class="op">)</span></span>
