@@ -5,7 +5,15 @@
 \title{Calculate the probability a branching process will go extinct based on
 R, k and initial cases}
 \usage{
-probability_extinct(R, k, num_init_infect, ..., offspring_dist)
+probability_extinct(
+  R,
+  k,
+  num_init_infect,
+  ind_control,
+  pop_control,
+  ...,
+  offspring_dist
+)
 }
 \arguments{
 \item{R}{A \code{number} specifying the R parameter (i.e. average secondary cases
@@ -15,6 +23,12 @@ per infectious individual).}
 offspring distribution from fitted negative binomial).}
 
 \item{num_init_infect}{A \code{count} specifying the number of initial infections.}
+
+\item{ind_control}{A \code{numeric} specifying the strength of individual-level
+control measures. Between \code{0} (default) and \code{1} (maximum).}
+
+\item{pop_control}{A \code{numeric} specifying the strength of population-level
+control measures. Between \code{0} (default) and \code{1} (maximum).}
 
 \item{...}{\link{dots} not used, extra arguments supplied will cause a warning.}
 

@@ -5,7 +5,15 @@
 \title{Calculate the probability a disease will cause an outbreak based on R, k
 and initial cases}
 \usage{
-probability_epidemic(R, k, num_init_infect, ..., offspring_dist)
+probability_epidemic(
+  R,
+  k,
+  num_init_infect,
+  ind_control = 0,
+  pop_control = 0,
+  ...,
+  offspring_dist
+)
 }
 \arguments{
 \item{R}{A \code{number} specifying the R parameter (i.e. average secondary cases
@@ -15,6 +23,12 @@ per infectious individual).}
 offspring distribution from fitted negative binomial).}
 
 \item{num_init_infect}{A \code{count} specifying the number of initial infections.}
+
+\item{ind_control}{A \code{numeric} specifying the strength of individual-level
+control measures. Between \code{0} (default) and \code{1} (maximum).}
+
+\item{pop_control}{A \code{numeric} specifying the strength of population-level
+control measures. Between \code{0} (default) and \code{1} (maximum).}
 
 \item{...}{\link{dots} not used, extra arguments supplied will cause a warning.}
 
@@ -33,6 +47,10 @@ initial cases.
 probability_epidemic(R = 1.5, k = 0.1, num_init_infect = 10)
 }
 \references{
+Lloyd-Smith, J. O., Schreiber, S. J., Kopp, P. E., & Getz, W. M. (2005)
+Superspreading and the effect of individual variation on disease emergence.
+Nature, 438(7066), 355-359. \doi{10.1038/nature04153}
+
 Kucharski, A. J., Russell, T. W., Diamond, C., Liu, Y., Edmunds, J.,
 Funk, S. & Eggo, R. M. (2020). Early dynamics of transmission and control
 of COVID-19: a mathematical modelling study. The Lancet Infectious Diseases,
