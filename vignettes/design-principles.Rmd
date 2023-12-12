@@ -24,11 +24,11 @@ The {superspreading} package aims to provide a range of summary metrics to chara
 
 The other aspect of the package is to provide likelihoods for distribution models to estimate heterogeneity in individual-level disease transmission that are not available in R (i.e. base R). At present we include two models: Poisson-lognormal (`dpoislnorm()` & `ppoislnorm()`) and Poisson-Weibull (`dpoisweibull()` & `ppoisweibull()`) distributions.
 
-The package does not implement any branching process models and uses the `{bpmodels}` package for this. The package provides functions to calculate variation in individual-level transmission but does not provide functions for inference, and currently relies on {fitdistrplus} for fitting models.
+The package does not implement any branching process simulations and uses the `{bpmodels}` package for this. It focuses mostly on analytical functions that are derived from branching process models. The package provides functions to calculate variation in individual-level transmission but does not provide functions for inference, and currently relies on {fitdistrplus} for fitting models.
 
 ## Output
 
-Functions with the name `probability_*()` return a single `numeric`. Functions with the name `proportion_*()` return a `<data.frame>` with as many rows as combinations of input values (see `expand.grid()`). The consistency of simple well-known data structure makes it easy for users to apply these functions in different scenarios (e.g. iteratively).
+Functions with the name `probability_*()` return a single `numeric`. Functions with the name `proportion_*()` return a `<data.frame>` with as many rows as combinations of input values (see `expand.grid()`). The consistency of simple well-known data structure makes it easy for users to apply these functions in different scenarios.
 
 The distribution likelihoods return a vector of `numeric`s of equal length to the input vector. This is the same behaviour as the base R distribution functions.
 
