@@ -1,0 +1,106 @@
+---
+title: "Outbreaks in heterogeneous networks"
+output: 
+  bookdown::html_vignette2:
+    code_folding: show
+pkgdown:
+   as_is: true
+bibliography: references.json
+link-citations: true
+vignette: >
+  %\VignetteIndexEntry{Outbreaks in heterogeneous networks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(superspreading)
+library(ggplot2)
+library(scales)
+```
+
+Determining if an outbreak will grow and spread through a population is quantified by the reproduction number ($R$). When transmission of an infectious disease is heterogeneous, that is to say, the contact network has variability in it's connectedness of different individuals (or degree of each vertex/node). Such scenarios are common in sexually transmitted infections (STIs), with highly connect individuals both more likely to acquire and pass on infection.
+
+@mayTransmissionDynamicsHuman1988 showed that rather than assuming homogeneous contacts (i.e. no network effects)
+
+$$
+R_0 = \beta \gamma M
+$$
+the transmissibility of an infectious disease in such a heterogeneous network can be calculated with the following:
+
+$$
+R_0 = \frac{\beta}{\gamma} \frac{M^2 + V}{M}
+$$
+
+This formulation can be used if a disease is sexually transmitted and suspected to cause a substantial outbreak ($R > 1$). This was the case for Zika virus in 2016. @yakobLowRiskSexuallytransmitted2016 used the above simple heterogeneous network model to determine the risk of an outbreak if sexual transmission was a viable and common mode of transmission for Zika virus.
+
+The {superspreading} package provides this simple model with the function `calc_network_R()`. Here we reproduce the analysis of @yakobLowRiskSexuallytransmitted2016 to show the low likelihood of Zika causing an outbreak from sexual transmission.
+
+```{r, calc-R-zika}
+infect_duration <- exp(seq(log(0.01), log(10), length.out = 100))
+prob_transmission <- exp(seq(log(0.01), log(1), length.out = 100))
+params <- expand.grid(
+  infect_duration = infect_duration,
+  prob_transmission = prob_transmission
+)
+R <- t(apply(
+  params,
+  MARGIN = 1,
+  function(x) {
+    calc_network_R(
+      mean_num_contact = 14.1,
+      sd_num_contact = 69.6,
+      infect_duration = x[["infect_duration"]],
+      prob_transmission = x[["prob_transmission"]],
+      age_range = c(16, 74)
+    )
+  }
+))
+res <- cbind(params, R)
+res <- reshape(
+  data = res,
+  varying = c("R", "R_var"),
+  v.names = "R",
+  direction = "long",
+  times = c("R", "R_var"),
+  timevar = "group"
+)
+```
+
+```{r, plot-zika-r, class.source = 'fold-hide', fig.width = 8, fig.height = 5}
+ggplot(data = res) +
+  geom_tile(
+    mapping = aes(
+      x = infect_duration,
+      y = prob_transmission,
+      fill = R
+    )
+  ) +
+  scale_x_continuous(
+    name = "Mean duration of infectiousness",
+    trans = "log", breaks = breaks_log()
+  ) +
+  scale_y_continuous(
+    name = "Zika virus transmission probability per sexual partners",
+    trans = "log", breaks = breaks_log()
+  ) +
+  facet_wrap(
+    vars(group),
+    labeller = as_labeller(c(R = "R", R_var = "Adjusted R"))
+  ) +
+  scale_fill_viridis_c(
+    trans = "log",
+    breaks = breaks_log(n = 8)(min(res$R):max(res$R)),
+    labels = label_comma()
+  ) +
+  theme_bw()
+```
+  
+## References
