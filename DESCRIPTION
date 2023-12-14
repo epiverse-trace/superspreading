@@ -60,6 +60,7 @@ Suggests:
     ggplot2,
     spelling,
     ggtext,
+    scales,
     testthat (>= 3.0.0)
 Remotes:
     epiverse-trace/epiparameter,
