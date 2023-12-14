@@ -7,7 +7,7 @@
 probability_contain(
   R,
   k,
-  num_init_infect = 1,
+  num_init_infect,
   ind_control = 0,
   pop_control = 0,
   stochastic = FALSE,
@@ -51,7 +51,23 @@ Containment is defined as the size of the transmission chain
 not reaching the \code{case_threshold} (default = 100).
 }
 \examples{
-probability_contain(R = 1.5, k = 0.5, control = 1)
+# population-level control measures
+probability_contain(R = 1.5, k = 0.5, num_init_infect = 1, pop_control = 0.1)
+
+# individual-level control measures
+probability_contain(R = 1.5, k = 0.5, num_init_infect = 1, ind_control = 0.1)
+
+# both levels of control measures
+probability_contain(
+  R = 1.5,
+  k = 0.5,
+  num_init_infect = 1,
+  ind_control = 0.1,
+  pop_control = 0.1
+)
+
+# multi initial infections with population-level control measures
+probability_contain(R = 1.5, k = 0.5, num_init_infect = 5, pop_control = 0.1)
 }
 \references{
 Lloyd-Smith, J. O., Schreiber, S. J., Kopp, P. E., & Getz, W. M. (2005)

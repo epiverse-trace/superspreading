@@ -22,10 +22,26 @@
 #' Nature, 438(7066), 355-359. \doi{10.1038/nature04153}
 #'
 #' @examples
-#' probability_contain(R = 1.5, k = 0.5, control = 1)
+#' # population-level control measures
+#' probability_contain(R = 1.5, k = 0.5, num_init_infect = 1, pop_control = 0.1)
+#'
+#' # individual-level control measures
+#' probability_contain(R = 1.5, k = 0.5, num_init_infect = 1, ind_control = 0.1)
+#'
+#' # both levels of control measures
+#' probability_contain(
+#'   R = 1.5,
+#'   k = 0.5,
+#'   num_init_infect = 1,
+#'   ind_control = 0.1,
+#'   pop_control = 0.1
+#' )
+#'
+#' # multi initial infections with population-level control measures
+#' probability_contain(R = 1.5, k = 0.5, num_init_infect = 5, pop_control = 0.1)
 probability_contain <- function(R,
                                 k,
-                                num_init_infect = 1,
+                                num_init_infect,
                                 ind_control = 0,
                                 pop_control = 0,
                                 stochastic = FALSE,
