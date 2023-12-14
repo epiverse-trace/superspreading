@@ -111,8 +111,8 @@ probability_epidemic <- function(R,
 probability_extinct <- function(R,
                                 k,
                                 num_init_infect,
-                                ind_control,
-                                pop_control,
+                                ind_control = 0,
+                                pop_control = 0,
                                 ...,
                                 offspring_dist) {
   # input checking done in probability_epidemic
