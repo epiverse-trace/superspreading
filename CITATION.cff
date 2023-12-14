@@ -246,6 +246,23 @@ references:
     orcid: https://orcid.org/0000-0001-9560-6336
   year: '2023'
 - type: software
+  title: scales
+  abstract: 'scales: Scale Functions for Visualization'
+  notes: Suggests
+  url: https://scales.r-lib.org
+  repository: https://CRAN.R-project.org/package=scales
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Pedersen
+    given-names: Thomas Lin
+    email: thomas.pedersen@posit.co
+    orcid: https://orcid.org/0000-0002-5147-4711
+  - family-names: Seidel
+    given-names: Dana
+  year: '2023'
+- type: software
   title: testthat
   abstract: 'testthat: Unit Testing for R'
   notes: Suggests
