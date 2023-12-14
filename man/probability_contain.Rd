@@ -8,8 +8,8 @@ probability_contain(
   R,
   k,
   num_init_infect = 1,
-  control,
-  control_type = c("population", "individual"),
+  ind_control = 0,
+  pop_control = 0,
   stochastic = TRUE,
   ...,
   case_threshold = 100,
@@ -25,11 +25,11 @@ offspring distribution from fitted negative binomial).}
 
 \item{num_init_infect}{A \code{count} specifying the number of initial infections.}
 
-\item{control}{Control strength, 0 is no control measures, 1 is complete
-control.}
+\item{ind_control}{A \code{numeric} specifying the strength of individual-level
+control measures. Between \code{0} (default) and \code{1} (maximum).}
 
-\item{control_type}{Either \code{"population"} or \code{"individual"} for
-population-level or individual-level control measures.}
+\item{pop_control}{A \code{numeric} specifying the strength of population-level
+control measures. Between \code{0} (default) and \code{1} (maximum).}
 
 \item{stochastic}{Whether to use a stochastic branching process model or the
 probability of extinction.}
