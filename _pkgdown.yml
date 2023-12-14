@@ -30,6 +30,10 @@ reference:
     - proportion_transmission
     - proportion_cluster_size
 
+  - title: Reproduction number in heterogeneous network
+    contents:
+    - calc_network_R
+
   - title: Helper functions
     contents:
     - ic_tbl
