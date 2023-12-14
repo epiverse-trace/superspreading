@@ -20,9 +20,9 @@ This document is primarily intended to be read by those interested in understand
 
 ## Scope
 
-The {superspreading} package aims to provide a range of summary metrics to characterise individual-level variation in disease transmission. These include calculating the probability an outbreak becomes an epidemic (`probability_epidemic()`), or conversely goes extinct (`probability_extinct()`), the probability an outbreak can be contained (`probability_contain()`), the proportion of cases in cluster of a given size (`proportion_cluster_size()`), and the proportion of cases that cause a proportion of tranmsision (`proportion_transmission()`).
+The {superspreading} package aims to provide a range of summary metrics to characterise individual-level variation in disease transmission. These include calculating the probability an outbreak becomes an epidemic (`probability_epidemic()`), or conversely goes extinct (`probability_extinct()`), the probability an outbreak can be contained (`probability_contain()`), the proportion of cases in cluster of a given size (`proportion_cluster_size()`), and the proportion of cases that cause a proportion of transmission (`proportion_transmission()`).
 
-The other aspect of the package is to provide likelihoods for distribution models to estimate heterogeneity in individual-level disease transmission that are not available in R (i.e. base R). At present we include two models: Poisson-lognormal (`dpoislnorm()` & `ppoislnorm()`) and Poisson-Weibull (`dpoisweibull()` & `ppoisweibull()`) distributions.
+The other aspect of the package is to provide probability density functions and cumulative distribution functions to compute the likelihood for distribution models to estimate heterogeneity in individual-level disease transmission that are not available in R (i.e. base R). At present we include two models: Poisson-lognormal (`dpoislnorm()` & `ppoislnorm()`) and Poisson-Weibull (`dpoisweibull()` & `ppoisweibull()`) distributions.
 
 The package does not implement any branching process simulations and uses the `{bpmodels}` package for this. It focuses mostly on analytical functions that are derived from branching process models. The package provides functions to calculate variation in individual-level transmission but does not provide functions for inference, and currently relies on {fitdistrplus} for fitting models.
 
@@ -30,13 +30,13 @@ The package does not implement any branching process simulations and uses the `{
 
 Functions with the name `probability_*()` return a single `numeric`. Functions with the name `proportion_*()` return a `<data.frame>` with as many rows as combinations of input values (see `expand.grid()`). The consistency of simple well-known data structure makes it easy for users to apply these functions in different scenarios.
 
-The distribution likelihoods return a vector of `numeric`s of equal length to the input vector. This is the same behaviour as the base R distribution functions.
+The distribution functions return a vector of `numeric`s of equal length to the input vector. This is the same behaviour as the base R distribution functions.
 
 ## Design decisions
 
 - `proportion_*()` functions return a `<data.frame>` with the proportion column(s) containing `character` strings, formatted with a percentage sign (`%`). It was reasoned that {superspreading} is most likely used either as a standalone package, or at the terminus of a epidemiological analysis pipeline, and thus the outputs of {superspreading} functions would not be passed into other functions. If this were the case then the proportions would be better as `numeric`.
 
-- The distribution likelihoods are vectorised (i.e. wrapped in `Vectorize()`). This enables them to be used identically to base R distribution functions.
+- The distribution functions are vectorised (i.e. wrapped in `Vectorize()`). This enables them to be used identically to base R distribution functions.
 
 - Native interoperability with `<epidist>` objects, from the {epiparameter} package is enabled for `probability_*()` and `proportion_*()` via the `offspring_dist` argument. This allows user to pass in a single object and the parameters required by the {superspreading} function will be extracted, if these are not available within the `<epidist>` object the function returns an informative error. The `offspring_dist` argument is after `...` to ensure users specify the argument in full and not accidentally provide data to this argument.
 
