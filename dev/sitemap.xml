@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://epiverse-trace.github.io/superspreading/dev/CONTRIBUTING.html</loc>
-  </url>
-  <url>
     <loc>https://epiverse-trace.github.io/superspreading/dev/LICENSE-text.html</loc>
   </url>
   <url>
@@ -62,5 +59,8 @@
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/superspreading/dev/reference/proportion_transmission.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/superspreading/dev/reference/superspreading-package.html</loc>
   </url>
 </urlset>
