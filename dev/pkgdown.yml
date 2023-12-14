@@ -2,10 +2,11 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
+  design-principles: design-principles.html
   epidemic_risk: epidemic_risk.html
   estimate_individual_level_transmission: estimate_individual_level_transmission.html
   superspreading: superspreading.html
-last_built: 2023-12-14T11:55Z
+last_built: 2023-12-14T12:40Z
 urls:
   reference: https://epiverse-trace.github.io/superspreading/reference
   article: https://epiverse-trace.github.io/superspreading/articles
