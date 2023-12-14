@@ -80,10 +80,10 @@ not reaching the <code>case_threshold</code> (default = 100).</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">probability_contain</span><span class="op">(</span></span>
 <span>  <span class="va">R</span>,</span>
 <span>  <span class="va">k</span>,</span>
-<span>  num_init_infect <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  <span class="va">control</span>,</span>
-<span>  control_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"population"</span>, <span class="st">"individual"</span><span class="op">)</span>,</span>
-<span>  stochastic <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">num_init_infect</span>,</span>
+<span>  ind_control <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  pop_control <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  stochastic <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  case_threshold <span class="op">=</span> <span class="fl">100</span>,</span>
 <span>  <span class="va">offspring_dist</span></span>
@@ -106,19 +106,20 @@ offspring distribution from fitted negative binomial).</p></dd>
 <dd><p>A <code>count</code> specifying the number of initial infections.</p></dd>
 
 
-<dt>control</dt>
-<dd><p>Control strength, 0 is no control measures, 1 is complete
-control.</p></dd>
+<dt>ind_control</dt>
+<dd><p>A <code>numeric</code> specifying the strength of individual-level
+control measures. Between <code>0</code> (default) and <code>1</code> (maximum).</p></dd>
 
 
-<dt>control_type</dt>
-<dd><p>Either <code>"population"</code> or <code>"individual"</code> for
-population-level or individual-level control measures.</p></dd>
+<dt>pop_control</dt>
+<dd><p>A <code>numeric</code> specifying the strength of population-level
+control measures. Between <code>0</code> (default) and <code>1</code> (maximum).</p></dd>
 
 
 <dt>stochastic</dt>
 <dd><p>Whether to use a stochastic branching process model or the
-probability of extinction.</p></dd>
+analytical probability of extinction. Default (<code>FALSE</code>) is to use the
+analytical calculation.</p></dd>
 
 
 <dt>...</dt>
@@ -147,11 +148,34 @@ epidemiological parameters/distributions, see <code><a href="https://epiverse-tr
 Superspreading and the effect of individual variation on disease emergence.
 Nature, 438(7066), 355-359. <a href="https://doi.org/10.1038/nature04153" class="external-link">doi:10.1038/nature04153</a></p>
     </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="probability_extinct.html">probability_extinct()</a></code></p></div>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">probability_contain</span><span class="op">(</span>R <span class="op">=</span> <span class="fl">1.5</span>, k <span class="op">=</span> <span class="fl">0.5</span>, control <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># population-level control measures</span></span></span>
+<span class="r-in"><span><span class="fu">probability_contain</span><span class="op">(</span>R <span class="op">=</span> <span class="fl">1.5</span>, k <span class="op">=</span> <span class="fl">0.5</span>, num_init_infect <span class="op">=</span> <span class="fl">1</span>, pop_control <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.821</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># individual-level control measures</span></span></span>
+<span class="r-in"><span><span class="fu">probability_contain</span><span class="op">(</span>R <span class="op">=</span> <span class="fl">1.5</span>, k <span class="op">=</span> <span class="fl">0.5</span>, num_init_infect <span class="op">=</span> <span class="fl">1</span>, ind_control <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.839</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># both levels of control measures</span></span></span>
+<span class="r-in"><span><span class="fu">probability_contain</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  R <span class="op">=</span> <span class="fl">1.5</span>,</span></span>
+<span class="r-in"><span>  k <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
+<span class="r-in"><span>  num_init_infect <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>  ind_control <span class="op">=</span> <span class="fl">0.1</span>,</span></span>
+<span class="r-in"><span>  pop_control <span class="op">=</span> <span class="fl">0.1</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.892</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># multi initial infections with population-level control measures</span></span></span>
+<span class="r-in"><span><span class="fu">probability_contain</span><span class="op">(</span>R <span class="op">=</span> <span class="fl">1.5</span>, k <span class="op">=</span> <span class="fl">0.5</span>, num_init_infect <span class="op">=</span> <span class="fl">5</span>, pop_control <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.373006</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

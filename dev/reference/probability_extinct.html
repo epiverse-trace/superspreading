@@ -83,7 +83,15 @@ of a disease causing an epidemic (<code><a href="probability_epidemic.html">prob
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">probability_extinct</span><span class="op">(</span><span class="va">R</span>, <span class="va">k</span>, <span class="va">num_init_infect</span>, <span class="va">...</span>, <span class="va">offspring_dist</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">probability_extinct</span><span class="op">(</span></span>
+<span>  <span class="va">R</span>,</span>
+<span>  <span class="va">k</span>,</span>
+<span>  <span class="va">num_init_infect</span>,</span>
+<span>  ind_control <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  pop_control <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  <span class="va">offspring_dist</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -100,6 +108,16 @@ offspring distribution from fitted negative binomial).</p></dd>
 
 <dt>num_init_infect</dt>
 <dd><p>A <code>count</code> specifying the number of initial infections.</p></dd>
+
+
+<dt>ind_control</dt>
+<dd><p>A <code>numeric</code> specifying the strength of individual-level
+control measures. Between <code>0</code> (default) and <code>1</code> (maximum).</p></dd>
+
+
+<dt>pop_control</dt>
+<dd><p>A <code>numeric</code> specifying the strength of population-level
+control measures. Between <code>0</code> (default) and <code>1</code> (maximum).</p></dd>
 
 
 <dt>...</dt>
