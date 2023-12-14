@@ -9,8 +9,8 @@ probability_extinct(
   R,
   k,
   num_init_infect,
-  ind_control,
-  pop_control,
+  ind_control = 0,
+  pop_control = 0,
   ...,
   offspring_dist
 )
