@@ -58,3 +58,6 @@ Lloyd-Smith, J. O., Schreiber, S. J., Kopp, P. E., & Getz, W. M. (2005)
 Superspreading and the effect of individual variation on disease emergence.
 Nature, 438(7066), 355-359. \doi{10.1038/nature04153}
 }
+\seealso{
+\code{\link[=probability_extinct]{probability_extinct()}}
+}
