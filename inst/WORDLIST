@@ -4,6 +4,8 @@ Althaus
 Barré
 Boëlle
 Boesmans
+bookdown
+bpmodels
 bw
 Camacho
 Cécile
@@ -38,6 +40,7 @@ infector
 infectors
 infty
 init
+knitr
 Koen
 Kopp
 Kremer
@@ -64,11 +67,13 @@ pointrange
 poisson
 prob
 rightarrow
+rmarkdown
 SARS
 Schreiber
 Selina
 Sien
 Soropogui
+testthat
 Torneri
 Verdonschot
 viridis

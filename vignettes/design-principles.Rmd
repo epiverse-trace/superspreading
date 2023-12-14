@@ -34,7 +34,7 @@ The distribution functions return a vector of `numeric`s of equal length to the 
 
 ## Design decisions
 
-- `proportion_*()` functions return a `<data.frame>` with the proportion column(s) containing `character` strings, formatted with a percentage sign (`%`). It was reasoned that {superspreading} is most likely used either as a standalone package, or at the terminus of a epidemiological analysis pipeline, and thus the outputs of {superspreading} functions would not be passed into other functions. If this were the case then the proportions would be better as `numeric`.
+- `proportion_*()` functions return a `<data.frame>` with the proportion column(s) containing `character` strings, formatted with a percentage sign (`%`). It was reasoned that {superspreading} is most likely used either as a stand-alone package, or at the terminus of a epidemiological analysis pipeline, and thus the outputs of {superspreading} functions would not be passed into other functions. If this were the case then the proportions would be better as `numeric`.
 
 - The distribution functions are vectorised (i.e. wrapped in `Vectorize()`). This enables them to be used identically to base R distribution functions.
 
