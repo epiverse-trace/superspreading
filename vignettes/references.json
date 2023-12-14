@@ -1,6 +1,6 @@
 [
 	{
-		"id": "lloyd-smithSuperspreadingEffectIndividual2005",
+		"id": "j.o.lloyd-smithSuperspreadingEffectIndividual2005",
 		"type": "article-journal",
 		"container-title": "Nature",
 		"DOI": "10.1038/nature04153",
@@ -15,8 +15,7 @@
 		"volume": "438",
 		"author": [
 			{
-				"family": "Lloyd-Smith",
-				"given": "J. O."
+				"literal": "J. O. Lloyd-Smith"
 			},
 			{
 				"family": "Schreiber",
@@ -529,6 +528,259 @@
 			"date-parts": [
 				[
 					"2015"
+				]
+			]
+		}
+	},
+	{
+		"id": "mayTransmissionDynamicsHuman1988",
+		"type": "article-journal",
+		"abstract": "The paper first reviews data on HIV infections and AIDS disease among homosexual men, heterosexuals, intravenous (iv) drug abusers and children born to infected mothers, in both developed and developing countries. We survey such information as is currently available about the distribution of incubation times that elapse between HIV infection and the appearance of AIDS, about the fraction of those infected with HIV who eventually go on to develop AIDS, about time-dependent patterns of infectiousness and about distributions of rates of acquiring new sexual or needle-sharing partners. With this information, models for the transmission dynamics of HIV are developed, beginning with deliberately oversimplified models and progressing - on the basis of the understanding thus gained - to more complex ones. Where possible, estimates of the model’s parameters are derived from the epidemiological data, and predictions are compared with observed trends. We also combine these epidemiological models with demographic considerations to assess the effects that heterosexually-transmitted HIV/ AIDS may eventually have on rates of population growth, on age profiles and on associated economic and social indicators, in African and other countries. The degree to which sexual or other habits must change to bring the ‘basic reproductive rate ’, R\n              0\n              , of HIV infections below unity is discussed. We conclude by outlining some research needs, both in the refinement and development of models and in the collection of epidemiological data.",
+		"container-title": "Philosophical Transactions of the Royal Society of London. B, Biological Sciences",
+		"DOI": "10.1098/rstb.1988.0108",
+		"ISSN": "0080-4622, 2054-0280",
+		"issue": "1207",
+		"journalAbbreviation": "Phil. Trans. R. Soc. Lond. B",
+		"language": "en",
+		"page": "565-607",
+		"source": "DOI.org (Crossref)",
+		"title": "The transmission dynamics of human immunodeficiency virus (HIV)",
+		"URL": "https://royalsocietypublishing.org/doi/10.1098/rstb.1988.0108",
+		"volume": "321",
+		"author": [
+			{
+				"family": "May",
+				"given": "Robert"
+			},
+			{
+				"family": "Anderson",
+				"given": "Roy"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2023",
+					12,
+					14
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"1988",
+					10,
+					31
+				]
+			]
+		}
+	},
+	{
+		"id": "mercerChangesSexualAttitudes2013",
+		"type": "article-journal",
+		"container-title": "The Lancet",
+		"DOI": "10.1016/S0140-6736(13)62035-8",
+		"ISSN": "01406736",
+		"issue": "9907",
+		"journalAbbreviation": "The Lancet",
+		"language": "en",
+		"page": "1781-1794",
+		"source": "DOI.org (Crossref)",
+		"title": "Changes in sexual attitudes and lifestyles in Britain through the life course and over time: findings from the National Surveys of Sexual Attitudes and Lifestyles (Natsal)",
+		"title-short": "Changes in sexual attitudes and lifestyles in Britain through the life course and over time",
+		"URL": "https://linkinghub.elsevier.com/retrieve/pii/S0140673613620358",
+		"volume": "382",
+		"author": [
+			{
+				"family": "Mercer",
+				"given": "Catherine H"
+			},
+			{
+				"family": "Tanton",
+				"given": "Clare"
+			},
+			{
+				"family": "Prah",
+				"given": "Philip"
+			},
+			{
+				"family": "Erens",
+				"given": "Bob"
+			},
+			{
+				"family": "Sonnenberg",
+				"given": "Pam"
+			},
+			{
+				"family": "Clifton",
+				"given": "Soazig"
+			},
+			{
+				"family": "Macdowall",
+				"given": "Wendy"
+			},
+			{
+				"family": "Lewis",
+				"given": "Ruth"
+			},
+			{
+				"family": "Field",
+				"given": "Nigel"
+			},
+			{
+				"family": "Datta",
+				"given": "Jessica"
+			},
+			{
+				"family": "Copas",
+				"given": "Andrew J"
+			},
+			{
+				"family": "Phelps",
+				"given": "Andrew"
+			},
+			{
+				"family": "Wellings",
+				"given": "Kaye"
+			},
+			{
+				"family": "Johnson",
+				"given": "Anne M"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2023",
+					12,
+					14
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2013",
+					11
+				]
+			]
+		}
+	},
+	{
+		"id": "yakobLowRiskSexuallytransmitted2016",
+		"type": "article-journal",
+		"container-title": "The Lancet Infectious Diseases",
+		"DOI": "10.1016/S1473-3099(16)30324-3",
+		"ISSN": "14733099",
+		"issue": "10",
+		"journalAbbreviation": "The Lancet Infectious Diseases",
+		"language": "en",
+		"page": "1100-1102",
+		"source": "DOI.org (Crossref)",
+		"title": "Low risk of a sexually-transmitted Zika virus outbreak",
+		"URL": "https://linkinghub.elsevier.com/retrieve/pii/S1473309916303243",
+		"volume": "16",
+		"author": [
+			{
+				"family": "Yakob",
+				"given": "Laith"
+			},
+			{
+				"family": "Kucharski",
+				"given": "Adam"
+			},
+			{
+				"family": "Hue",
+				"given": "Stephane"
+			},
+			{
+				"family": "Edmunds",
+				"given": "W John"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2023",
+					12,
+					14
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2016",
+					10
+				]
+			]
+		}
+	},
+	{
+		"id": "endoHeavytailedSexualContact2022",
+		"type": "article-journal",
+		"abstract": "The outbreak of monkeypox across non-endemic regions confirmed in May 2022 shows epidemiological features distinct from previously imported outbreaks, most notably its observed growth and predominance amongst men who have sex with men (MSM). We use a transmission model fitted to empirical sexual partnership data to show that the heavy-tailed sexual partnership distribution, in which a handful of individuals have disproportionately many partners, can explain the sustained growth of monkeypox among MSM despite the absence of such patterns previously. We suggest that the basic reproduction number (\n              R\n              0\n              ) for monkeypox over the MSM sexual network may be substantially above 1, which poses challenges to outbreak containment. Ensuring support and tailored messaging to facilitate prevention and early detection among MSM with high numbers of partners is warranted.\n            \n          , \n            Sexually associated outbreaks\n            \n              Monkeypox cases have occurred sporadically around the world for several decades. However, May of 2022 saw hundreds to thousands of reports outside of endemic regions. Despite its not being a classical sexually transmitted disease, the outbreak outside of Africa is concentrated in the community of men who have sex with men (MSM). Endo\n              et al\n              . found substantial transmission among the MSM community and estimate high values for a basic reproduction number (\n              R\n              0\n              ) greater than 1.0 within the context of an MSM sexual network. Fortunately, the smallpox vaccine is effective against monkeypox. —CA\n            \n          , \n            Worldwide detection of monkeypox infections indicates that transmission is promoted by the structure of contact networks of men who have sex with men.",
+		"container-title": "Science",
+		"DOI": "10.1126/science.add4507",
+		"ISSN": "0036-8075, 1095-9203",
+		"issue": "6615",
+		"journalAbbreviation": "Science",
+		"language": "en",
+		"page": "90-94",
+		"source": "DOI.org (Crossref)",
+		"title": "Heavy-tailed sexual contact networks and monkeypox epidemiology in the global outbreak, 2022",
+		"URL": "https://www.science.org/doi/10.1126/science.add4507",
+		"volume": "378",
+		"author": [
+			{
+				"family": "Endo",
+				"given": "Akira"
+			},
+			{
+				"family": "Murayama",
+				"given": "Hiroaki"
+			},
+			{
+				"family": "Abbott",
+				"given": "Sam"
+			},
+			{
+				"family": "Ratnayake",
+				"given": "Ruwan"
+			},
+			{
+				"family": "Pearson",
+				"given": "Carl A. B."
+			},
+			{
+				"family": "Edmunds",
+				"given": "W. John"
+			},
+			{
+				"family": "Fearon",
+				"given": "Elizabeth"
+			},
+			{
+				"family": "Funk",
+				"given": "Sebastian"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2023",
+					12,
+					14
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2022",
+					10,
+					7
 				]
 			]
 		}
