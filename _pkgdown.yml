@@ -43,6 +43,7 @@ articles:
   navbar: Parameter estimation
   contents:
   - estimate_individual_level_transmission
+  - heterogeneous_network_outbreaks
 - title: Superspreading for decision-making
   navbar: Superspreading for decision-making
   contents:
