@@ -5,7 +5,8 @@
 #'
 #' @inheritParams probability_epidemic
 #' @param stochastic Whether to use a stochastic branching process model or the
-#' probability of extinction.
+#' analytical probability of extinction. Default (`FALSE`) is to use the
+#' analytical calculation.
 #' @param ... arguments to be passed to [bpmodels::chain_sim()].
 #' @param case_threshold A number for the threshold of the number of cases below
 #' which the epidemic is considered contained.
@@ -26,7 +27,7 @@ probability_contain <- function(R,
                                 num_init_infect = 1,
                                 ind_control = 0,
                                 pop_control = 0,
-                                stochastic = TRUE,
+                                stochastic = FALSE,
                                 ...,
                                 case_threshold = 100,
                                 offspring_dist) {

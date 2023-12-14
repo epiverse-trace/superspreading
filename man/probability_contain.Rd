@@ -10,7 +10,7 @@ probability_contain(
   num_init_infect = 1,
   ind_control = 0,
   pop_control = 0,
-  stochastic = TRUE,
+  stochastic = FALSE,
   ...,
   case_threshold = 100,
   offspring_dist
@@ -32,7 +32,8 @@ control measures. Between \code{0} (default) and \code{1} (maximum).}
 control measures. Between \code{0} (default) and \code{1} (maximum).}
 
 \item{stochastic}{Whether to use a stochastic branching process model or the
-probability of extinction.}
+analytical probability of extinction. Default (\code{FALSE}) is to use the
+analytical calculation.}
 
 \item{...}{arguments to be passed to \code{\link[bpmodels:chain_sim]{bpmodels::chain_sim()}}.}
 
