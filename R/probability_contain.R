@@ -13,6 +13,7 @@
 #'
 #' @return A `number` for the probability of containment.
 #' @export
+#' @seealso [probability_extinct()]
 #'
 #' @references
 #'
