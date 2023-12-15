@@ -6,8 +6,6 @@
 \alias{superspreading-package}
 \title{superspreading: Estimate Individual-Level Variation in Transmission}
 \description{
-\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
-
 Implements functions to estimate individual-level variation in transmission.
 }
 \seealso{
