@@ -21,6 +21,7 @@
 #' for which a proportion of cases has produced.
 #' @param sim A `logical` whether the calculation should be done numerically
 #' (i.e. simulate secondary contacts) or analytically.
+#' @inheritParams proportion_cluster_size
 #'
 #' @return A `<data.frame>` with the value for the proportion of cases for a
 #' given value of R and k.
@@ -65,7 +66,8 @@ proportion_transmission <- function(R, k,
                                     percent_transmission,
                                     sim = FALSE,
                                     ...,
-                                    offspring_dist) {
+                                    offspring_dist,
+                                    format_prop = TRUE) {
   input_params <- missing(R) && missing(k)
   if (!xor(input_params, missing(offspring_dist))) {
     stop("One of R and k or <epidist> must be supplied.", call. = FALSE)
@@ -82,6 +84,7 @@ proportion_transmission <- function(R, k,
   checkmate::assert_numeric(k, lower = 0)
   checkmate::assert_number(percent_transmission, lower = 0, upper = 1)
   checkmate::assert_logical(sim, any.missing = FALSE, len = 1)
+  checkmate::assert_logical(format_prop, any.missing = FALSE, len = 1)
 
   df <- expand.grid(R = R, k = k, NA_real_)
   colnames(df) <- c("R", "k", paste0("prop_", percent_transmission * 100))
@@ -101,8 +104,11 @@ proportion_transmission <- function(R, k,
       )
     }
 
+    if (format_prop) {
+      prop <- paste0(round(prop * 100, digits = 1), "%")
+    }
     # df is ways i x 3 so insert value into col 3
-    df[i, 3] <- paste0(round(prop * 100, digits = 1), "%")
+    df[i, 3] <- prop
   }
   return(df)
 }
