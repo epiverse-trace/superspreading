@@ -1,5 +1,35 @@
 # superspreading (development version)
 
+Second minor release of _superspreading_. This release enhances functions added in v0.1.0 and adds two new exported functions, and one new vignette.
+
+## New features
+
+* A new function (`calc_network_R()`) to estimate the reproduction number for heterogeneous networks and a vignette outlining use cases for the function from existing epidemiological literature is added (#71).
+* `proportion_*()` functions can now return proportion columns of the output `<data.frame>` as `numeric` when the new argument `format_prop` is set to `FALSE` (#72).
+* `probability_epidemic()` and `probability_extinct()` now have individual-level and population-level control in a joint framework (#70).
+* A new design principles vignette to document package development is added (#68).
+* Added a helper function (`ic_tbl()`) to improve model comparison tables (#65).
+
+## Breaking changes
+
+* `ind_control` and `pop_control` arguments replace `control` and `control_type` arguments in `probability_contain()`; and the argument default for `num_init_infect` is removed (#70).
+* Changed `epidist` argument to `offspring_dist` to follow Epiverse style (affects several functions) (#64).
+
+## Minor changes
+
+* New package hex logo (#73).
+* Updated continuous integration and package infrastructure (#67).
+* Improved function documentation (#63).
+
+## Bug fixes
+
+* None to {superspreading} functions.
+* Update {epiparameter} use (#62).
+
+## Deprecated and defunct
+
+* None
+
 # superspreading 0.1.0
 
 Initial release of _superspreading_, an R package to estimate individual-level variation in disease transmission and provide summary metrics for superspreading events.
