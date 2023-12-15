@@ -81,6 +81,22 @@ test_that("proportion_transmission works as expected for multiple R & k", {
   )
 })
 
+test_that("proportion_transmission works as expected for format_prop = FALSE", {
+  res <- proportion_transmission(
+    R = c(1, 2, 3),
+    k = c(0.1, 0.2, 0.3),
+    percent_transmission = 0.8,
+    format_prop = FALSE
+  )
+
+  expect_s3_class(res, "data.frame")
+  expect_identical(dim(res), c(9L, 3L))
+  expect_identical(
+    unname(vapply(res, class, character(1))),
+    rep("numeric", 3)
+  )
+})
+
 test_that("proportion_transmission fails as expected", {
   expect_error(
     proportion_transmission(R = "1", k = 0.1, percent_transmission = 0.8),
