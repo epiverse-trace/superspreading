@@ -18,6 +18,9 @@
 #'
 #' @inheritParams probability_epidemic
 #' @param cluster_size A `number` for the cluster size threshold.
+#' @param format_prop A `logical` determining whether the proportion column
+#' of the `<data.frame>` returned by the function is formatted as a string with
+#' a percentage sign (`%`), (`TRUE`, default), or as a `numeric` (`FALSE`).
 #'
 #' @return A `<data.frame>` with the value for the proportion of new cases
 #' that are part of a transmission event above a threshold for a given value
@@ -37,7 +40,8 @@
 #' # example with a vector of cluster sizes
 #' cluster_size <- c(5, 10, 25)
 #' proportion_cluster_size(R = R, k = k, cluster_size = cluster_size)
-proportion_cluster_size <- function(R, k, cluster_size, ..., offspring_dist) {
+proportion_cluster_size <- function(R, k, cluster_size, ..., offspring_dist,
+                                    format_prop = TRUE) {
   input_params <- missing(R) && missing(k)
   if (!xor(input_params, missing(offspring_dist))) {
     stop("One of R and k or <epidist> must be supplied.", call. = FALSE)
@@ -53,6 +57,7 @@ proportion_cluster_size <- function(R, k, cluster_size, ..., offspring_dist) {
   checkmate::assert_numeric(R, lower = 0, finite = TRUE)
   checkmate::assert_numeric(k, lower = 0)
   checkmate::assert_integerish(cluster_size, lower = 1)
+  checkmate::assert_logical(format_prop, any.missing = FALSE, len = 1)
 
   df <- expand.grid(R, k)
   df <- cbind(df, as.data.frame(matrix(nrow = 1, ncol = length(cluster_size))))
@@ -68,7 +73,9 @@ proportion_cluster_size <- function(R, k, cluster_size, ..., offspring_dist) {
     propn_cluster <- vapply(cluster_size, function(x) {
       sum(simulate_secondary[simulate_secondary >= x]) / sum(simulate_secondary)
     }, FUN.VALUE = numeric(1))
-    propn_cluster <- paste0(round(propn_cluster * 100, digits = 1), "%")
+    if (format_prop) {
+      propn_cluster <- paste0(round(propn_cluster * 100, digits = 1), "%")
+    }
     col <- seq(3, 2 + length(propn_cluster), by = 1)
     df[i, col] <- propn_cluster
   }

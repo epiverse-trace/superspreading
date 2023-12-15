@@ -6,7 +6,14 @@
 given size (useful to inform backwards contact tracing efforts, i.e. how
 many cases are associated with large clusters)}
 \usage{
-proportion_cluster_size(R, k, cluster_size, ..., offspring_dist)
+proportion_cluster_size(
+  R,
+  k,
+  cluster_size,
+  ...,
+  offspring_dist,
+  format_prop = TRUE
+)
 }
 \arguments{
 \item{R}{A \code{number} specifying the R parameter (i.e. average secondary cases
@@ -21,6 +28,10 @@ offspring distribution from fitted negative binomial).}
 
 \item{offspring_dist}{An \verb{<epidist>} object. An S3 class for working with
 epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}.}
+
+\item{format_prop}{A \code{logical} determining whether the proportion column
+of the \verb{<data.frame>} returned by the function is formatted as a string with
+a percentage sign (\verb{\%}), (\code{TRUE}, default), or as a \code{numeric} (\code{FALSE}).}
 }
 \value{
 A \verb{<data.frame>} with the value for the proportion of new cases

@@ -11,7 +11,8 @@ proportion_transmission(
   percent_transmission,
   sim = FALSE,
   ...,
-  offspring_dist
+  offspring_dist,
+  format_prop = TRUE
 )
 }
 \arguments{
@@ -31,6 +32,10 @@ for which a proportion of cases has produced.}
 
 \item{offspring_dist}{An \verb{<epidist>} object. An S3 class for working with
 epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}.}
+
+\item{format_prop}{A \code{logical} determining whether the proportion column
+of the \verb{<data.frame>} returned by the function is formatted as a string with
+a percentage sign (\verb{\%}), (\code{TRUE}, default), or as a \code{numeric} (\code{FALSE}).}
 }
 \value{
 A \verb{<data.frame>} with the value for the proportion of cases for a
