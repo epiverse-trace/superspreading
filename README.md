@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# *superspreading*: Estimate individual-level variation in transmission <img src="man/figures/logo.png" align="right" width="120"/>
+# *superspreading*: Estimate individual-level variation in transmission <img src="man/figures/logo.svg" align="right" width="120"/>
 
 <!-- badges: start -->
 
