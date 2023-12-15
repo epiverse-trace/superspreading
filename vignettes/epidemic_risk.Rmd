@@ -306,10 +306,7 @@ prob_contain <- apply(contain_params, 1, function(x) {
     R = x[["R"]],
     k = x[["k"]],
     num_init_infect = x[["num_init_infect"]],
-    control = x[["control"]],
-    control_type = "population",
-    stochastic = TRUE,
-    case_threshold = 100
+    pop_control = x[["control"]]
   )
 })
 contain_params <- cbind(contain_params, prob_contain)
