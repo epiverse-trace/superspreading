@@ -36,6 +36,7 @@ Getz
 ggplot
 Hanne
 Heleze
+hline
 infectees
 infector
 infectors
@@ -55,6 +56,8 @@ Magassouba
 md
 MERS
 Meuwissen
+mpox
+Natsal
 N’Faly
 Niel
 num
@@ -67,8 +70,10 @@ pkgdown
 pointrange
 poisson
 prob
+res
 rightarrow
 rmarkdown
+SAR
 SARS
 Schreiber
 Selina
@@ -76,11 +81,15 @@ Sien
 Soropogui
 testthat
 Torneri
+var
+vars
 Verdonschot
 viridis
 vline
 Wellcome
 wellcomeopenres
 xintercept
+yintercept
 ymax
 ymin
+zika
