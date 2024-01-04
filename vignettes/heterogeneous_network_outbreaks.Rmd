@@ -94,7 +94,7 @@ ggplot(data = res) +
       y = prob_transmission,
       z = R
     ),
-    breaks = c(1),  # Set the contour line at R = 1
+    breaks = 1,  # Set the contour line at R = 1
     color = "black"
   ) +
   scale_x_continuous(
