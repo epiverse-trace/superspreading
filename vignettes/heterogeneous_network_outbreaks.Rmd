@@ -26,24 +26,25 @@ library(ggplot2)
 library(scales)
 ```
 
-Determining if an outbreak will grow and spread through a population is quantified by the reproduction number ($R$). When transmission of an infectious disease is heterogeneous, that is to say, the contact network has variability in it's connectedness of different individuals (or degree of each vertex/node) it can alter the transmission. Such scenarios are common in sexually transmitted infections (STIs), with highly connected individuals both more likely to acquire and pass on infection.
+Determining if an outbreak will grow and spread through a susceptible population is quantified by the basic reproduction number ($R_0$). When there is individual-level variability in the connectedness of different individuals in a network (i.e. higher variance in the degree of each node) it can lead to heterogenity in transmission dynamics. Such scenarios are common in persistent sexually transmitted infections (STIs), where partners can change during the infectious period, which means highly connected individuals can be both more likely to acquire and pass on the infection.
 
-@mayTransmissionDynamicsHuman1988 showed that rather than assuming homogeneous contacts (i.e. no network effects)
+Under the basic assumption of homogeneous contact patterns (i.e. no network effects), we have the following expression for the basic reproduction number:
 
 $$
-R_0 = \beta \gamma M
+R_0 = \beta M / \gamma
 $$
-where $\beta$ is the probability of transmission per contact, $\gamma$ is the duration of infectiousness and $M$ is the mean number of contacts (or partners) per year; the transmissibility of an infectious disease in such a heterogeneous network can be calculated with the following:
+where $\beta$ is the probability of transmission per contact, $1/\gamma$ is the duration of infectiousness and $M$ is the mean number of contacts (or partners) per year. 
+
+In contrast, @mayTransmissionDynamicsHuman1988 showed that the transmissibility of an infectious disease in a heterogeneous network can be defined as follows:
 
 $$
 R_0 = \frac{\beta}{\gamma} \frac{M^2 + V}{M}
 $$
-
-where $V$ is the variance of the number of contacts per year. This formulation can be used if a disease is sexually transmitted and suspected to cause a substantial outbreak ($R > 1$). 
+where $V$ is the variance of the number of contacts per unit time. This formulation can be appropriate if heterogeneity is predictable over time (i.e. highly connected individuals typically remain highly connected), the duration of infectiousness is similar or longer to the frequency of partner change among highly connected individuals, and the disease has the potential to cause a substantial outbreak (i.e. larger value of $\beta$ and/or $1/\gammaa$). 
 
 The {superspreading} package provides the `calc_network_R()` function to calculate the reproduction number using the unadjusted formula (first equation) and the adjusted formula (second equation).
 
-The possibility of a sexually transmitted outbreak Zika virus arose around 2015. @yakobLowRiskSexuallytransmitted2016 used the above simple heterogeneous network model to determine the risk of an outbreak if sexual transmission was a viable and common mode of transmission for Zika virus.
+For example, the possibility of a sexually transmitted outbreak Zika virus was a particular concern when the infection spread globally in 2015-16. @yakobLowRiskSexuallytransmitted2016 used the above heterogeneous network model to determine the risk that sexual transmission could be a common mode of transmission for Zika virus, leading to sustained human-to-human transmission in the absence of vectors.
 
 Here we replicate the analysis of @yakobLowRiskSexuallytransmitted2016 to show the low likelihood of Zika causing an outbreak from sexual transmission. Following @yakobLowRiskSexuallytransmitted2016, we use data from the National Survey of Sexual Attitude and Lifestyles (Natsal) on the mean and variance in the number of sexual partners and age range [@mercerChangesSexualAttitudes2013].
 
@@ -87,6 +88,15 @@ ggplot(data = res) +
       fill = R
     )
   ) +
+  geom_contour(
+    mapping = aes(
+      x = infect_duration,
+      y = prob_transmission,
+      z = R
+    ),
+    breaks = c(1),  # Set the contour line at R = 1
+    color = "black"
+  ) +
   scale_x_continuous(
     name = "Mean duration of infectiousness",
     trans = "log", breaks = breaks_log()
@@ -107,7 +117,9 @@ ggplot(data = res) +
   theme_bw()
 ```
 
-Another study that showed the network effects on transmission of an STI was @endoHeavytailedSexualContact2022, who showed that Mpox (or monkeypox) had spread throughout a network on men who have sex with men (MSM). Using the Natsal UK data [@mercerChangesSexualAttitudes2013] on same- and opposite-sex sexual partnerships for the age range of 18 to 44, they show that the disease transmission for MSM is greater than for a non-MSM transmission network. Here we reproduce a figure from @endoHeavytailedSexualContact2022, using `calc_network_R()` to show the comparison that highly connected individuals -- who are more likely to acquire and pass on infection -- alter the estimated $R$ compared to the simpler assumption of $R = SAR \times contacts$.
+Another study that showed the network effects on transmission of an STI was @endoHeavytailedSexualContact2022, who estimated that Mpox (or monkeypox) could spread throughout a network on men who have sex with men (MSM), but would have lower transmissibility in the wider population. Using the Natsal UK data [@mercerChangesSexualAttitudes2013] on same- and opposite-sex sexual partnerships for the age range of 18 to 44, they show that the disease transmission for MSM is greater than for a non-MSM transmission network. Because Mpox has a relatively short infectious period, this study assumed that contacts remained fixed during the period of infection, and hence used a next generation matrix approach more akin to the group-specific transmission defined in the [finalsize package](https://epiverse-trace.github.io/finalsize/).
+
+For comparison, we reproduce a figure from @endoHeavytailedSexualContact2022, using `calc_network_R()` instead to show how highly connected individuals -- who are more likely to acquire and pass on infection -- alter the estimated $R_0$ compared to the simpler assumption of $R_0 = SAR \times contacts$, under the assumptions described above.
 
 ```{r, calc-r-mpox}
 beta <- seq(0.001, 1, length.out = 1000)
@@ -132,7 +144,7 @@ res <- reshape(
 )
 ```
 
-```{r, plot-mpox, class.source = 'fold-hide', fig.cap="The reproduction number using the unadjusted and adjusted calculation -- calculated using `calc_network_R()` -- with secondary attack rate on the x-axis and reproduction number ($R$) on the y-axis. This plot is similar to Figure 2A from @endoHeavytailedSexualContact2022.", fig.width = 8, fig.height = 5}
+```{r, plot-mpox, class.source = 'fold-hide', fig.cap="The reproduction number using the unadjusted and adjusted calculation -- calculated using `calc_network_R()` -- with secondary attack rate on the x-axis and reproduction number ($R_0$) on the y-axis. This plot is similar to Figure 2A from @endoHeavytailedSexualContact2022.", fig.width = 8, fig.height = 5}
 ggplot(data = res) +
   geom_line(mapping = aes(x = beta, y = R, colour = group)) +
   geom_hline(mapping = aes(yintercept = 1)) +
@@ -155,7 +167,7 @@ ggplot(data = res) +
 
 
 ::: {.alert .alert-warning}
-_Methodological caveat_: There is a link with the theory for the main negative binomial models for superspreading here (which have a Gamma distributed mean), because the above Anderson and May formulation requires the 'true' mean and variance of the underlying static contact distribution, rather than the observed mean and variance. To give the superspreading version: in a simple branching process with fixed R with variance 0, the Poisson distributed number of transmissions per year measured exhibits more variation than the 'true' R. For the above STI model, taking the lifetime average deals with this problem some extent, because if we look at the sum of contacts over a large number of years, then calculate the mean per year, the observed distribution will converge as the number of years gets very large.
+_Methodological caveat_: There is a link with the theory for the main negative binomial models from the [superspreading package](https://epiverse-trace.github.io/superspreading/) here (which have a Gamma distributed mean), because the above Anderson and May formulation requires the 'true' mean and variance of the underlying static contact distribution, rather than the observed mean and variance. To give the superspreading version: in a simple branching process with fixed $R_0$ (i.e. zero variance in the individual-level reproduction number, perhaps because everyone has an identical number of contacts), the Poisson distributed number of transmissions per year measured exhibits more variation than the 'true' $R_0$ (which has zero variance). For the above STI model, taking the lifetime average deals with this problem some extent, because if we look at the sum of contacts over a large number of years, then calculate the mean per year, the observed distribution will converge as the number of years gets very large.
 :::
 
 ## References
