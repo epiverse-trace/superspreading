@@ -26,7 +26,7 @@ library(ggplot2)
 library(scales)
 ```
 
-Determining if an outbreak will grow and spread through a susceptible population is quantified by the basic reproduction number ($R_0$). When there is individual-level variability in the connectedness of different individuals in a network (i.e. higher variance in the degree of each node) it can lead to heterogenity in transmission dynamics. Such scenarios are common in persistent sexually transmitted infections (STIs), where partners can change during the infectious period, which means highly connected individuals can be both more likely to acquire and pass on the infection.
+Determining if an outbreak will grow and spread through a susceptible population is quantified by the basic reproduction number ($R_0$). When there is individual-level variability in the connectedness of different individuals in a network (i.e. higher variance in the degree of each node) it can lead to heterogeneity in transmission dynamics. Such scenarios are common in persistent sexually transmitted infections (STIs), where partners can change during the infectious period, which means highly connected individuals can be both more likely to acquire and pass on the infection.
 
 Under the basic assumption of homogeneous contact patterns (i.e. no network effects), we have the following expression for the basic reproduction number:
 
@@ -40,7 +40,7 @@ In contrast, @mayTransmissionDynamicsHuman1988 showed that the transmissibility 
 $$
 R_0 = \frac{\beta}{\gamma} \frac{M^2 + V}{M}
 $$
-where $V$ is the variance of the number of contacts per unit time. This formulation can be appropriate if heterogeneity is predictable over time (i.e. highly connected individuals typically remain highly connected), the duration of infectiousness is similar or longer to the frequency of partner change among highly connected individuals, and the disease has the potential to cause a substantial outbreak (i.e. larger value of $\beta$ and/or $1/\gammaa$). 
+where $V$ is the variance of the number of contacts per unit time. This formulation can be appropriate if heterogeneity is predictable over time (i.e. highly connected individuals typically remain highly connected), the duration of infectiousness is similar or longer to the frequency of partner change among highly connected individuals, and the disease has the potential to cause a substantial outbreak (i.e. larger value of $\beta$ and/or $1/\gamma$). 
 
 The {superspreading} package provides the `calc_network_R()` function to calculate the reproduction number using the unadjusted formula (first equation) and the adjusted formula (second equation).
 
@@ -95,7 +95,7 @@ ggplot(data = res) +
       z = R
     ),
     breaks = 1,  # Set the contour line at R = 1
-    color = "black"
+    colour = "black"
   ) +
   scale_x_continuous(
     name = "Mean duration of infectiousness",
