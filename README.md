@@ -18,10 +18,10 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 estimate and understand individual-level variation the in transmission
 of infectious diseases from data on secondary cases.
 
-`{superspreading}` implements methods outlined in Lloyd-Smith et al.
-([2005](#ref-lloyd-smithSuperspreadingEffectIndividual2005)), Adam J.
-Kucharski et al. ([2020](#ref-kucharskiEarlyDynamicsTransmission2020)),
-and Kremer et al.
+`{superspreading}` implements methods outlined in
+([**lloyd-smithSuperspreadingEffectIndividual2005?**](#ref-lloyd-smithSuperspreadingEffectIndividual2005)),
+Adam J. Kucharski et al.
+([2020](#ref-kucharskiEarlyDynamicsTransmission2020)), and Kremer et al.
 ([2021](#ref-kremerQuantifyingSuperspreadingCOVID192021)), as well as
 additional functions.
 
@@ -197,7 +197,7 @@ By contributing to this project, you agree to abide by its terms.
 citation("superspreading")
 #> To cite package 'superspreading' in publications use:
 #> 
-#>   Lambert J, Kucharski A (2023). _superspreading: Estimate
+#>   Lambert J, Kucharski A (2024). _superspreading: Estimate
 #>   Individual-Level Variation in Transmission_. R package version
 #>   0.1.0.9000, https://epiverse-trace.github.io/superspreading/,
 #>   <https://github.com/epiverse-trace/superspreading>.
@@ -207,7 +207,7 @@ citation("superspreading")
 #>   @Manual{,
 #>     title = {superspreading: Estimate Individual-Level Variation in Transmission},
 #>     author = {Joshua W. Lambert and Adam Kucharski},
-#>     year = {2023},
+#>     year = {2024},
 #>     note = {R package version 0.1.0.9000, 
 #> https://epiverse-trace.github.io/superspreading/},
 #>     url = {https://github.com/epiverse-trace/superspreading},
@@ -288,16 +288,6 @@ Edmunds, Sebastian Funk, Rosalind M Eggo, et al. 2020. “Early Dynamics
 of Transmission and Control of COVID-19: A Mathematical Modelling
 Study.” *The Lancet Infectious Diseases* 20 (5): 553–58.
 <https://doi.org/10.1016/S1473-3099(20)30144-4>.
-
-</div>
-
-<div id="ref-lloyd-smithSuperspreadingEffectIndividual2005"
-class="csl-entry">
-
-Lloyd-Smith, J. O., S. J. Schreiber, P. E. Kopp, and W. M. Getz. 2005.
-“Superspreading and the Effect of Individual Variation on Disease
-Emergence.” *Nature* 438 (7066): 355–59.
-<https://doi.org/10.1038/nature04153>.
 
 </div>
 
