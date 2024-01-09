@@ -51,9 +51,9 @@ calc_network_R <- function(mean_num_contact,
 
   # calculate R0 with and without correction
   R <- beta * contacts_per_year[["mean"]] * infect_duration
-  R_var <- beta *
+  R_var <- beta * infect_duration *
     (contacts_per_year[["mean"]] + contacts_per_year[["var"]] /
-      contacts_per_year[["mean"]]) * infect_duration
+      contacts_per_year[["mean"]])
 
   # return R0 with and without variance correction
   c(R = R, R_var = R_var)
