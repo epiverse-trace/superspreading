@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 
 `{superspreading}` is an R package that provides a set of functions to estimate 
 and understand individual-level variation the in transmission of infectious diseases
-from data on secondary cases. 
+from data on secondary cases.  
 
 `{superspreading}` implements methods outlined in @lloyd-smithSuperspreadingEffectIndividual2005, @kucharskiEarlyDynamicsTransmission2020, and @kremerQuantifyingSuperspreadingCOVID192021, as well as additional functions.
 
