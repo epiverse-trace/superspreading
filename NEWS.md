@@ -1,6 +1,6 @@
 # superspreading (development version)
 
-Second minor release of _superspreading_. This release enhances functions added in v0.1.0 and adds two new exported functions, and one new vignette.
+Second minor release of _superspreading_. This release enhances functions added in v0.1.0 and adds two new exported functions, and two new vignettes.
 
 ## New features
 
