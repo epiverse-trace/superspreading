@@ -1,6 +1,6 @@
 [
 	{
-		"id": "j.o.lloyd-smithSuperspreadingEffectIndividual2005",
+		"id": "lloyd-smithSuperspreadingEffectIndividual2005",
 		"type": "article-journal",
 		"container-title": "Nature",
 		"DOI": "10.1038/nature04153",
@@ -15,7 +15,8 @@
 		"volume": "438",
 		"author": [
 			{
-				"literal": "J. O. Lloyd-Smith"
+				"family": "Lloyd-Smith",
+				"given": "J. O."
 			},
 			{
 				"family": "Schreiber",
