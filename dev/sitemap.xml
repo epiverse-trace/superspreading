@@ -16,6 +16,9 @@
     <loc>https://epiverse-trace.github.io/superspreading/dev/articles/estimate_individual_level_transmission.html</loc>
   </url>
   <url>
+    <loc>https://epiverse-trace.github.io/superspreading/dev/articles/heterogeneous_network_outbreaks.html</loc>
+  </url>
+  <url>
     <loc>https://epiverse-trace.github.io/superspreading/dev/articles/index.html</loc>
   </url>
   <url>
@@ -29,6 +32,9 @@
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/superspreading/dev/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/superspreading/dev/reference/calc_network_R.html</loc>
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/superspreading/dev/reference/dpoislnorm.html</loc>
