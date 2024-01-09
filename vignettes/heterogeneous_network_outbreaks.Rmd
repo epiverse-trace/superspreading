@@ -31,9 +31,9 @@ Determining if an outbreak will grow and spread through a susceptible population
 Under the basic assumption of homogeneous contact patterns (i.e. no network effects), we have the following expression for the basic reproduction number:
 
 $$
-R_0 = \beta M / \gamma
+R_0 = \frac{\beta M}{\gamma}
 $$
-where $\beta$ is the probability of transmission per contact, $1/\gamma$ is the duration of infectiousness and $M$ is the mean number of contacts (or partners) per year. 
+where $\beta$ is the probability of transmission per contact, $1/\gamma$ is the duration of infectiousness ($\gamma$ is the rate of loss of infectiousness) and $M$ is the mean number of contacts (or partners) per unit time (e.g., per year). 
 
 In contrast, @mayTransmissionDynamicsHuman1988 showed that the transmissibility of an infectious disease in a heterogeneous network can be defined as follows:
 
@@ -79,7 +79,7 @@ res <- reshape(
 )
 ```
 
-```{r, plot-zika-r, class.source = 'fold-hide', fig.cap="The reproduction number using the unadjusted and adjusted calculation -- calculated using `calc_network_R()` -- with mean duration of infection on the x-axis and transmission probability per sexual partner on the y-axis. Both axes are plotted on a natural log scale. This plot is similar to Figure 1 from @yakobLowRiskSexuallytransmitted2016, but is plotted as a heatmap and without annotation.", fig.width = 8, fig.height = 5}
+```{r, plot-zika-r, class.source = 'fold-hide', fig.cap="The reproduction number using the unadjusted and adjusted calculation -- calculated using `calc_network_R()` -- with mean duration of infection on the x-axis and transmission probability per sexual partner on the y-axis. The line shows the points that $R_0$ is equal to one. Both axes are plotted on a natural log scale. This plot is similar to Figure 1 from @yakobLowRiskSexuallytransmitted2016, but is plotted as a heatmap and without annotation.", fig.width = 8, fig.height = 5}
 ggplot(data = res) +
   geom_tile(
     mapping = aes(
@@ -119,7 +119,7 @@ ggplot(data = res) +
 
 Another study that showed the network effects on transmission of an STI was @endoHeavytailedSexualContact2022, who estimated that Mpox (or monkeypox) could spread throughout a network on men who have sex with men (MSM), but would have lower transmissibility in the wider population. Using the Natsal UK data [@mercerChangesSexualAttitudes2013] on same- and opposite-sex sexual partnerships for the age range of 18 to 44, they show that the disease transmission for MSM is greater than for a non-MSM transmission network. Because Mpox has a relatively short infectious period, this study assumed that contacts remained fixed during the period of infection, and hence used a next generation matrix approach more akin to the group-specific transmission defined in the [finalsize package](https://epiverse-trace.github.io/finalsize/).
 
-For comparison, we reproduce a figure from @endoHeavytailedSexualContact2022, using `calc_network_R()` instead to show how highly connected individuals -- who are more likely to acquire and pass on infection -- alter the estimated $R_0$ compared to the simpler assumption of $R_0 = SAR \times contacts$, under the assumptions described above.
+For comparison, we produce a figure similar to @endoHeavytailedSexualContact2022, using `calc_network_R()` instead to show how highly connected individuals -- who are more likely to acquire and pass on infection -- alter the estimated $R_0$ compared to the simpler assumption of $R_0 = SAR \times contacts$, under the assumptions described above.
 
 ```{r, calc-r-mpox}
 beta <- seq(0.001, 1, length.out = 1000)
