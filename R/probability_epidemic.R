@@ -64,22 +64,23 @@ probability_epidemic <- function(R,
   # change Inf k to 1e10 to prevent issue with grid search
   if (is.infinite(k)) k <- 1e10
 
-  # calculate probability of outbreak based solving g(s)=s in
-  # generating function for branching process
-  if (R <= 1) prob_est <- 1 # If R<=1, P(extinction)=1
+  if (R <= 1) {
+    # If R<=1, P(extinction)=1
+    return(0)
+  }
 
   # If R < 1, P(extinction) < 1
-  if (R > 1) {
-    # set up grid search
-    ss <- seq(0.001, 0.999, 0.001)
-    # define loss function
-    calculate_prob <- abs(
-      ind_control + (1 - ind_control) *
-        (1 + (((1 - pop_control) * R) / k) * (1 - ss))^(-k) - ss
-    )
-    # calculate probability of extinction
-    prob_est <- ss[which.min(calculate_prob)]
-  }
+  # calculate probability of outbreak based solving g(s)=s in
+  # generating function for branching process
+  # set up grid search
+  ss <- seq(0.001, 0.999, 0.001)
+  # define loss function
+  calculate_prob <- abs(
+    ind_control + (1 - ind_control) *
+      (1 + (((1 - pop_control) * R) / k) * (1 - ss))^(-k) - ss
+  )
+  # calculate probability of extinction
+  prob_est <- ss[which.min(calculate_prob)]
 
   # calculate P(epidemic) given 'num_init_infect' introductions
   prob_epidemic <- 1 - prob_est^num_init_infect
