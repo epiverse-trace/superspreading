@@ -70,6 +70,38 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="superspreading-development-version">superspreading (development version)<a class="anchor" aria-label="anchor" href="#superspreading-development-version"></a></h2>
+<p>Second minor release of <em>superspreading</em>. This release enhances functions added in v0.1.0 and adds two new exported functions, and two new vignettes.</p>
+<div class="section level3">
+<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<ul><li>A new function (<code><a href="../reference/calc_network_R.html">calc_network_R()</a></code>) to estimate the reproduction number for heterogeneous networks and a vignette outlining use cases for the function from existing epidemiological literature is added (<a href="https://github.com/epiverse-trace/superspreading/issues/71" class="external-link">#71</a>).</li>
+<li>
+<code>proportion_*()</code> functions can now return proportion columns of the output <code>&lt;data.frame&gt;</code> as <code>numeric</code> when the new argument <code>format_prop</code> is set to <code>FALSE</code> (<a href="https://github.com/epiverse-trace/superspreading/issues/72" class="external-link">#72</a>).</li>
+<li>
+<code><a href="../reference/probability_epidemic.html">probability_epidemic()</a></code> and <code><a href="../reference/probability_extinct.html">probability_extinct()</a></code> now have individual-level and population-level control in a joint framework (<a href="https://github.com/epiverse-trace/superspreading/issues/70" class="external-link">#70</a>).</li>
+<li>A new design principles vignette to document package development is added (<a href="https://github.com/epiverse-trace/superspreading/issues/68" class="external-link">#68</a>).</li>
+<li>Added a helper function (<code><a href="../reference/ic_tbl.html">ic_tbl()</a></code>) to improve model comparison tables (<a href="https://github.com/epiverse-trace/superspreading/issues/65" class="external-link">#65</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<ul><li>
+<code>ind_control</code> and <code>pop_control</code> arguments replace <code>control</code> and <code>control_type</code> arguments in <code><a href="../reference/probability_contain.html">probability_contain()</a></code>; and the argument default for <code>num_init_infect</code> is removed (<a href="https://github.com/epiverse-trace/superspreading/issues/70" class="external-link">#70</a>).</li>
+<li>Changed <code>epidist</code> argument to <code>offspring_dist</code> to follow Epiverse style (affects several functions) (<a href="https://github.com/epiverse-trace/superspreading/issues/64" class="external-link">#64</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-changes-development-version">Minor changes<a class="anchor" aria-label="anchor" href="#minor-changes-development-version"></a></h3>
+<ul><li>New package hex logo (<a href="https://github.com/epiverse-trace/superspreading/issues/73" class="external-link">#73</a>).</li>
+<li>Updated continuous integration and package infrastructure (<a href="https://github.com/epiverse-trace/superspreading/issues/67" class="external-link">#67</a>).</li>
+<li>Improved function documentation (<a href="https://github.com/epiverse-trace/superspreading/issues/63" class="external-link">#63</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<ul><li>None to {superspreading} functions.</li>
+<li>Update {epiparameter} use (<a href="https://github.com/epiverse-trace/superspreading/issues/62" class="external-link">#62</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="deprecated-and-defunct-development-version">Deprecated and defunct<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-development-version"></a></h3>
+<ul><li>None</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="superspreading-010">superspreading 0.1.0<a class="anchor" aria-label="anchor" href="#superspreading-010"></a></h2>
