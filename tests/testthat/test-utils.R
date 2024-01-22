@@ -37,6 +37,7 @@ test_that("get_param fails as expected with incorrect parameters", {
 })
 
 test_that("ic_tbl works as expected", {
+  set.seed(1)
   cases <- rnbinom(n = 100, mu = 5, size = 0.7)
   pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
   geom_fit <- fitdistrplus::fitdist(data = cases, distr = "geom")
@@ -44,9 +45,11 @@ test_that("ic_tbl works as expected", {
   tbl <- ic_tbl(pois_fit, geom_fit, nbinom_fit)
   expect_s3_class(tbl, class = "data.frame")
   expect_identical(dim(tbl), c(3L, 7L))
+  expect_identical(tbl$distribution, c("nbinom", "geom", "pois"))
 })
 
 test_that("ic_tbl works as expected with sort_by = BIC", {
+  set.seed(1)
   cases <- rnbinom(n = 100, mu = 5, size = 0.7)
   pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
   geom_fit <- fitdistrplus::fitdist(data = cases, distr = "geom")
@@ -54,6 +57,19 @@ test_that("ic_tbl works as expected with sort_by = BIC", {
   tbl <- ic_tbl(pois_fit, geom_fit, nbinom_fit, sort_by = "BIC")
   expect_s3_class(tbl, class = "data.frame")
   expect_identical(dim(tbl), c(3L, 7L))
+  expect_identical(tbl$distribution, c("nbinom", "geom", "pois"))
+})
+
+test_that("ic_tbl works as expected with sort_by = none", {
+  set.seed(1)
+  cases <- rnbinom(n = 100, mu = 5, size = 0.7)
+  pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
+  geom_fit <- fitdistrplus::fitdist(data = cases, distr = "geom")
+  nbinom_fit <- fitdistrplus::fitdist(data = cases, distr = "nbinom")
+  tbl <- ic_tbl(pois_fit, geom_fit, nbinom_fit, sort_by = "none")
+  expect_s3_class(tbl, class = "data.frame")
+  expect_identical(dim(tbl), c(3L, 7L))
+  expect_identical(tbl$distribution, c("pois", "geom", "nbinom"))
 })
 
 test_that("ic_tbl fails as expected", {
