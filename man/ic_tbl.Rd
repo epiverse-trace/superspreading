@@ -4,14 +4,15 @@
 \alias{ic_tbl}
 \title{Helper function to create a model comparison table}
 \usage{
-ic_tbl(..., sort_by = c("AIC", "BIC"))
+ic_tbl(..., sort_by = c("AIC", "BIC", "none"))
 }
 \arguments{
 \item{...}{\link{dots} One or more model fit results from
 \code{\link[fitdistrplus:fitdist]{fitdistrplus::fitdist()}}.}
 
 \item{sort_by}{A \code{character} string specifying which information criterion
-to order the table by, either \code{"AIC"} (default) or \code{"BIC"}.}
+to order the table by, either \code{"AIC"} (default), \code{"BIC"}, or \code{"none"}
+(i.e. no ordering).}
 }
 \value{
 A \verb{<data.frame>}.

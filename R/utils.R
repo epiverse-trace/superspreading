@@ -49,11 +49,12 @@ get_epidist_param <- function(epidist,
 #' @param ... [dots] One or more model fit results from
 #' [fitdistrplus::fitdist()].
 #' @param sort_by A `character` string specifying which information criterion
-#' to order the table by, either `"AIC"` (default) or `"BIC"`.
+#' to order the table by, either `"AIC"` (default), `"BIC"`, or `"none"`
+#' (i.e. no ordering).
 #'
 #' @return A `<data.frame>`.
 #' @export
-ic_tbl <- function(..., sort_by = c("AIC", "BIC")) {
+ic_tbl <- function(..., sort_by = c("AIC", "BIC", "none")) {
 
   sort_by <- match.arg(sort_by)
   models <- list(...)
@@ -89,7 +90,11 @@ ic_tbl <- function(..., sort_by = c("AIC", "BIC")) {
     wBIC = bic_weight
   )
 
-  model_tbl <- model_tbl[order(model_tbl[[sort_by]]), ]
+  if (sort_by != "none") {
+    model_tbl <- model_tbl[order(model_tbl[[sort_by]]), ]
+    row.names(model_tbl) <- NULL
+  }
+
 
   # return tbl
   model_tbl
