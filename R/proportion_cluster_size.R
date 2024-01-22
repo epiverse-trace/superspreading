@@ -70,8 +70,8 @@ proportion_cluster_size <- function(R, k, cluster_size, ..., offspring_dist,
       size = df[i, "k"]
     )
     propn_cluster <- vapply(cluster_size, function(x) {
-      sum(simulate_secondary[simulate_secondary >= x]) / sum(simulate_secondary)
-    }, FUN.VALUE = numeric(1))
+      sum(simulate_secondary[simulate_secondary >= x])
+    }, FUN.VALUE = numeric(1)) / sum(simulate_secondary)
     if (format_prop) {
       propn_cluster <- paste0(round(propn_cluster * 100, digits = 1), "%")
     }
