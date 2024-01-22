@@ -9,7 +9,7 @@ proportion_transmission(
   R,
   k,
   percent_transmission,
-  sim = FALSE,
+  simulate = FALSE,
   ...,
   offspring_dist,
   format_prop = TRUE
@@ -25,7 +25,7 @@ offspring distribution from fitted negative binomial).}
 \item{percent_transmission}{A \code{number} of the percentage transmission
 for which a proportion of cases has produced.}
 
-\item{sim}{A \code{logical} whether the calculation should be done numerically
+\item{simulate}{A \code{logical} whether the calculation should be done numerically
 (i.e. simulate secondary contacts) or analytically.}
 
 \item{...}{\link{dots} not used, extra arguments supplied will cause a warning.}
