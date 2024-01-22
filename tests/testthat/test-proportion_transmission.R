@@ -12,7 +12,7 @@ test_that("proportion_transmission works as expected for single R and k", {
     R = 2,
     k = 0.5,
     percent_transmission = 0.8,
-    sim = TRUE
+    simulate = TRUE
   )
 
   expect_s3_class(res, "data.frame")
@@ -41,7 +41,7 @@ test_that("proportion_transmission works as expected for multiple R", {
     R = c(1, 2, 3),
     k = 0.5,
     percent_transmission = 0.8,
-    sim = TRUE
+    simulate = TRUE
   )
 
   expect_s3_class(res, "data.frame")
@@ -70,7 +70,7 @@ test_that("proportion_transmission works as expected for multiple R & k", {
     R = c(1, 2, 3),
     k = c(0.1, 0.2, 0.3),
     percent_transmission = 0.8,
-    sim = TRUE
+    simulate = TRUE
   )
 
   expect_s3_class(res, "data.frame")
@@ -118,9 +118,9 @@ test_that("proportion_transmission fails as expected", {
       R = 1,
       k = 0.1,
       percent_transmission = 0.8,
-      sim = 1
+      simulate = 1
     ),
-    regexp = "Assertion on 'sim' failed"
+    regexp = "Assertion on 'simulate' failed"
   )
 })
 

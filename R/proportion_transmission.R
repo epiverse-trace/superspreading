@@ -19,7 +19,7 @@
 #' @inheritParams probability_epidemic
 #' @param percent_transmission A `number` of the percentage transmission
 #' for which a proportion of cases has produced.
-#' @param sim A `logical` whether the calculation should be done numerically
+#' @param simulate A `logical` whether the calculation should be done numerically
 #' (i.e. simulate secondary contacts) or analytically.
 #' @inheritParams proportion_cluster_size
 #'
@@ -64,7 +64,7 @@
 #' )
 proportion_transmission <- function(R, k,
                                     percent_transmission,
-                                    sim = FALSE,
+                                    simulate = FALSE,
                                     ...,
                                     offspring_dist,
                                     format_prop = TRUE) {
@@ -83,14 +83,14 @@ proportion_transmission <- function(R, k,
   checkmate::assert_numeric(R, lower = 0, finite = TRUE)
   checkmate::assert_numeric(k, lower = 0)
   checkmate::assert_number(percent_transmission, lower = 0, upper = 1)
-  checkmate::assert_logical(sim, any.missing = FALSE, len = 1)
+  checkmate::assert_logical(simulate, any.missing = FALSE, len = 1)
   checkmate::assert_logical(format_prop, any.missing = FALSE, len = 1)
 
   df <- expand.grid(R = R, k = k, NA_real_)
   colnames(df) <- c("R", "k", paste0("prop_", percent_transmission * 100))
 
   for (i in seq_len(nrow(df))) {
-    if (sim) {
+    if (simulate) {
       prop <- .prop_transmission_numerical(
         R = df[i, "R"],
         k = df[i, "k"],
