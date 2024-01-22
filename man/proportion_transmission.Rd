@@ -2,7 +2,7 @@
 % Please edit documentation in R/proportion_transmission.R
 \name{proportion_transmission}
 \alias{proportion_transmission}
-\title{Estimate what proportion of cases that cause a certain proportion of
+\title{Estimate what proportion of cases cause a certain proportion of
 transmission}
 \usage{
 proportion_transmission(

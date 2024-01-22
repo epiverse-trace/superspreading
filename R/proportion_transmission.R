@@ -1,4 +1,4 @@
-#' Estimate what proportion of cases that cause a certain proportion of
+#' Estimate what proportion of cases cause a certain proportion of
 #' transmission
 #'
 #' @description Calculates the proportion of cases that cause a certain
