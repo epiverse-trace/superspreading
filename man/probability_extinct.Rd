@@ -22,7 +22,9 @@ per infectious individual).}
 \item{k}{A \code{number} specifying the  k parameter (i.e. overdispersion in
 offspring distribution from fitted negative binomial).}
 
-\item{num_init_infect}{A \code{count} specifying the number of initial infections.}
+\item{num_init_infect}{An \code{integer} (or at least
+\href{https://rlang.r-lib.org/reference/is_integerish.html}{"integerish"} if
+stored as double) specifying the number of initial infections.}
 
 \item{ind_control}{A \code{numeric} specifying the strength of individual-level
 control measures. Between \code{0} (default) and \code{1} (maximum).}
