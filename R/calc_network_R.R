@@ -15,7 +15,7 @@
 #' age limits of individuals in the network.
 #'
 #' @return A named `numeric` vector of length 2, the unadjusted (`R`)
-#' and corrected (`R_var`) estimates of \eqn{R}.
+#' and network adjusted (`R_net`) estimates of \eqn{R}.
 #' @export
 #'
 #' @examples
@@ -51,10 +51,10 @@ calc_network_R <- function(mean_num_contact,
 
   # calculate R0 with and without correction
   R <- beta * contacts_per_time[["mean"]] * infect_duration
-  R_var <- beta * infect_duration *
+  R_net <- beta * infect_duration *
     (contacts_per_time[["mean"]] + contacts_per_time[["var"]] /
       contacts_per_time[["mean"]])
 
   # return R0 with and without variance correction
-  c(R = R, R_var = R_var)
+  c(R = R, R_net = R_net)
 }
