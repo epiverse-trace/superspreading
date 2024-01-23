@@ -104,7 +104,9 @@ offspring distribution from fitted negative binomial).</p></dd>
 
 
 <dt>num_init_infect</dt>
-<dd><p>A <code>count</code> specifying the number of initial infections.</p></dd>
+<dd><p>An <code>integer</code> (or at least
+<a href="https://rlang.r-lib.org/reference/is_integerish.html" class="external-link">"integerish"</a> if
+stored as double) specifying the number of initial infections.</p></dd>
 
 
 <dt>ind_control</dt>
@@ -158,11 +160,11 @@ Nature, 438(7066), 355-359. <a href="https://doi.org/10.1038/nature04153" class=
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># population-level control measures</span></span></span>
 <span class="r-in"><span><span class="fu">probability_contain</span><span class="op">(</span>R <span class="op">=</span> <span class="fl">1.5</span>, k <span class="op">=</span> <span class="fl">0.5</span>, num_init_infect <span class="op">=</span> <span class="fl">1</span>, pop_control <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.821</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8213172</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># individual-level control measures</span></span></span>
 <span class="r-in"><span><span class="fu">probability_contain</span><span class="op">(</span>R <span class="op">=</span> <span class="fl">1.5</span>, k <span class="op">=</span> <span class="fl">0.5</span>, num_init_infect <span class="op">=</span> <span class="fl">1</span>, ind_control <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.839</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8391855</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># both levels of control measures</span></span></span>
 <span class="r-in"><span><span class="fu">probability_contain</span><span class="op">(</span></span></span>
@@ -172,11 +174,11 @@ Nature, 438(7066), 355-359. <a href="https://doi.org/10.1038/nature04153" class=
 <span class="r-in"><span>  ind_control <span class="op">=</span> <span class="fl">0.1</span>,</span></span>
 <span class="r-in"><span>  pop_control <span class="op">=</span> <span class="fl">0.1</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.892</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8915076</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># multi initial infections with population-level control measures</span></span></span>
 <span class="r-in"><span><span class="fu">probability_contain</span><span class="op">(</span>R <span class="op">=</span> <span class="fl">1.5</span>, k <span class="op">=</span> <span class="fl">0.5</span>, num_init_infect <span class="op">=</span> <span class="fl">5</span>, pop_control <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.373006</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3737271</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

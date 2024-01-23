@@ -108,7 +108,9 @@ offspring distribution from fitted negative binomial).</p></dd>
 
 
 <dt>num_init_infect</dt>
-<dd><p>A <code>count</code> specifying the number of initial infections.</p></dd>
+<dd><p>An <code>integer</code> (or at least
+<a href="https://rlang.r-lib.org/reference/is_integerish.html" class="external-link">"integerish"</a> if
+stored as double) specifying the number of initial infections.</p></dd>
 
 
 <dt>ind_control</dt>
@@ -122,7 +124,10 @@ control measures. Between <code>0</code> (default) and <code>1</code> (maximum).
 
 
 <dt>...</dt>
-<dd><p><a href="https://rdrr.io/r/base/dots.html" class="external-link">dots</a> not used, extra arguments supplied will cause a warning.</p></dd>
+<dd><p>&lt;<code><a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic-dots</a></code>&gt; Named elements to replace
+default optimisation settings. Currently only <code>"fit_method"</code> is accepted
+and can be either <code>"optim"</code> (default) or <code>"grid"</code> for numerical
+optimisation routine or grid search, respectively.</p></dd>
 
 
 <dt>offspring_dist</dt>
@@ -154,7 +159,7 @@ of COVID-19: a mathematical modelling study. The Lancet Infectious Diseases,
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">probability_epidemic</span><span class="op">(</span>R <span class="op">=</span> <span class="fl">1.5</span>, k <span class="op">=</span> <span class="fl">0.1</span>, num_init_infect <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5055082</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5036888</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
