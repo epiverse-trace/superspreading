@@ -30,7 +30,10 @@ control measures. Between \code{0} (default) and \code{1} (maximum).}
 \item{pop_control}{A \code{numeric} specifying the strength of population-level
 control measures. Between \code{0} (default) and \code{1} (maximum).}
 
-\item{...}{\link{dots} not used, extra arguments supplied will cause a warning.}
+\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> Named elements to replace
+default optimisation settings. Currently only \code{"fit_method"} is accepted
+and can be either \code{"optim"} (default) or \code{"grid"} for numerical
+optimisation routine or grid search, respectively.}
 
 \item{offspring_dist}{An \verb{<epidist>} object. An S3 class for working with
 epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}.}
