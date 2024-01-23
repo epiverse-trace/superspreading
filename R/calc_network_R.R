@@ -12,7 +12,7 @@
 #' @param prob_transmission A `numeric` probability of transmission per contact,
 #' also known as \eqn{\beta}.
 #' @param age_range A `numeric` vector with two elements, the lower and upper
-#' age limits of individuals in the network. Default is 16 - 74 (`c(16, 74)`).
+#' age limits of individuals in the network.
 #'
 #' @return A named `numeric` vector of length 2, the unadjusted (`R`)
 #' and corrected (`R_var`) estimates of \eqn{R}.
@@ -31,7 +31,7 @@ calc_network_R <- function(mean_num_contact,
                            sd_num_contact,
                            infect_duration,
                            prob_transmission,
-                           age_range = c(16, 74)) {
+                           age_range) {
   checkmate::assert_number(mean_num_contact, lower = 0, finite = TRUE)
   checkmate::assert_number(sd_num_contact, lower = 0, finite = TRUE)
   checkmate::assert_number(infect_duration, lower = 0, finite = TRUE)
