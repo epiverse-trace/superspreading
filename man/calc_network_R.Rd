@@ -10,7 +10,7 @@ calc_network_R(
   sd_num_contact,
   infect_duration,
   prob_transmission,
-  age_range = c(16, 74)
+  age_range
 )
 }
 \arguments{
@@ -26,7 +26,7 @@ contacts per unit time.}
 also known as \eqn{\beta}.}
 
 \item{age_range}{A \code{numeric} vector with two elements, the lower and upper
-age limits of individuals in the network. Default is 16 - 74 (\code{c(16, 74)}).}
+age limits of individuals in the network.}
 }
 \value{
 A named \code{numeric} vector of length 2, the unadjusted (\code{R})
