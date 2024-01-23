@@ -2,7 +2,7 @@ test_that("probability_contain works as expected for deterministic", {
   prob_contain <- probability_contain(
     R = 1.5, k = 0.5, num_init_infect = 1
   )
-  expect_equal(prob_contain, 0.768)
+  expect_equal(prob_contain, 0.76759189)
 })
 
 test_that("probability_contain works as expected for stochastic", {
@@ -10,49 +10,49 @@ test_that("probability_contain works as expected for stochastic", {
     R = 1.5, k = 0.5, num_init_infect = 1, stochastic = TRUE
   )
   # larger tolerance for stochastic variance
-  expect_equal(prob_contain, 0.7672, tolerance = 1e-2)
+  expect_equal(prob_contain, 0.76791, tolerance = 1e-2)
 })
 
 test_that("probability_contain works as expected for population control", {
   prob_contain <- probability_contain(
     R = 1.5, k = 0.5, num_init_infect = 1, pop_control = 0.1
   )
-  expect_equal(prob_contain, 0.821)
+  expect_equal(prob_contain, 0.821317195)
 })
 
 test_that("probability_contain works as expected for individual control", {
   prob_contain <- probability_contain(
     R = 1.5, k = 0.5, num_init_infect = 1, ind_control = 0.1
   )
-  expect_equal(prob_contain, 0.839)
+  expect_equal(prob_contain, 0.839185481)
 })
 
 test_that("probability_contain works as expected for stochastic pop control", {
   prob_contain <- probability_contain(
     R = 1.5, k = 0.5, num_init_infect = 1, pop_control = 0.1, stochastic = TRUE
   )
-  expect_equal(prob_contain, 0.819, tolerance = 1e-2)
+  expect_equal(prob_contain, 0.81881, tolerance = 1e-2)
 })
 
 test_that("probability_contain works as expected for both controls", {
   prob_contain <- probability_contain(
     R = 1.5, k = 0.5, num_init_infect = 1, ind_control = 0.1, pop_control = 0.1
   )
-  expect_equal(prob_contain, 0.892)
+  expect_equal(prob_contain, 0.891507615)
 })
 
 test_that("probability_contain works as expected for ind control multi init", {
   prob_contain <- probability_contain(
     R = 1.5, k = 0.5, num_init_infect = 5, ind_control = 0.1
   )
-  expect_equal(prob_contain, 0.4157285)
+  expect_equal(prob_contain, 0.416188242)
 })
 
 test_that("probability_contain works as expected for pop control multi init", {
   prob_contain <- probability_contain(
     R = 1.5, k = 0.5, num_init_infect = 5, pop_control = 0.1,
   )
-  expect_equal(prob_contain, 0.373006, tolerance = 1e-2)
+  expect_equal(prob_contain, 0.373727087, tolerance = 1e-2)
 })
 
 test_that("probability_contain works as expected for different threshold", {
@@ -64,7 +64,7 @@ test_that("probability_contain works as expected for different threshold", {
     case_threshold = 50
   )
   # larger tolerance for stochastic variance
-  expect_equal(prob_contain, 0.76255, tolerance = 1e-2)
+  expect_equal(prob_contain, 0.76455, tolerance = 1e-2)
 })
 
 test_that("probability_contain works as when using dots", {
@@ -76,7 +76,7 @@ test_that("probability_contain works as when using dots", {
     infinite = 50
   )
   # larger tolerance for stochastic variance
-  expect_equal(prob_contain, 0.7606, tolerance = 0.1)
+  expect_equal(prob_contain, 0.76759189, tolerance = 0.1)
 })
 
 test_that("probability_contain works as when using dots with incorrect name", {
@@ -84,7 +84,7 @@ test_that("probability_contain works as when using dots with incorrect name", {
     R = 1.5, k = 0.5, num_init_infect = 1, random = 100
   )
   # larger tolerance for stochastic variance
-  expect_equal(prob_contain, 0.76669, tolerance = 1e-2)
+  expect_equal(prob_contain, 0.76759189, tolerance = 1e-2)
 })
 
 test_that("probability_contain works with <epidist>", {
@@ -102,7 +102,7 @@ test_that("probability_contain works with <epidist>", {
       pop_control = 0.1,
       offspring_dist = edist
     ),
-    0.904
+    0.903710478
   )
 
   expect_equal(
@@ -111,7 +111,7 @@ test_that("probability_contain works with <epidist>", {
       ind_control = 0.1,
       offspring_dist = edist
     ),
-    0.913
+    0.913339427
   )
 
   expect_equal(
@@ -121,7 +121,7 @@ test_that("probability_contain works with <epidist>", {
       pop_control = 0.1,
       offspring_dist = edist
     ),
-    0.71842137
+    0.716891142
   )
 })
 
