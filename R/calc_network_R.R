@@ -38,11 +38,11 @@ calc_network_R <- function(mean_num_contact,
   checkmate::assert_number(prob_transmission, lower = 0, finite = TRUE)
   checkmate::assert_numeric(age_range, len = 2, lower = 0, finite = TRUE)
 
-  # define measured sexual contacts
-  # normalise by years sexually active
+  # define measured contacts (e.g. sexual contacts)
+  # normalise by time active in the network (e.g. sexually active)
   scale_by_active <- 1 / (max(age_range) - min(age_range))
-  # calculate new partners per year
-  contacts_per_year <- c(
+  # calculate new partners per time
+  contacts_per_time <- c(
     mean = mean_num_contact * scale_by_active,
     var = sd_num_contact^2 * scale_by_active^2
   )
@@ -50,10 +50,10 @@ calc_network_R <- function(mean_num_contact,
   beta <- prob_transmission
 
   # calculate R0 with and without correction
-  R <- beta * contacts_per_year[["mean"]] * infect_duration
+  R <- beta * contacts_per_time[["mean"]] * infect_duration
   R_var <- beta * infect_duration *
-    (contacts_per_year[["mean"]] + contacts_per_year[["var"]] /
-      contacts_per_year[["mean"]])
+    (contacts_per_time[["mean"]] + contacts_per_time[["var"]] /
+      contacts_per_time[["mean"]])
 
   # return R0 with and without variance correction
   c(R = R, R_var = R_var)
