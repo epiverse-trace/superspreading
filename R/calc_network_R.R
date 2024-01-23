@@ -2,8 +2,7 @@
 #' network
 #'
 #' @description The calculation of the reproduction number adjusting for
-#' heterogeneity in number of contacts. The output of the function returns the
-#' unadjusted (`R`) and corrected (`R_var`) estimates of \eqn{R}.
+#' heterogeneity in number of contacts.
 #'
 #' @param mean_num_contact A `numeric`, mean (average) number of new contacts
 #' per unit time.
@@ -15,7 +14,8 @@
 #' @param age_range A `numeric` vector with two elements, the lower and upper
 #' age limits of individuals in the network. Default is 16 - 74 (`c(16, 74)`).
 #'
-#' @return A named `numeric` vector of length 2.
+#' @return A named `numeric` vector of length 2, the unadjusted (`R`)
+#' and corrected (`R_var`) estimates of \eqn{R}.
 #' @export
 #'
 #' @examples
