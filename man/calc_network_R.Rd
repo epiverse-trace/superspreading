@@ -29,12 +29,12 @@ also known as \eqn{\beta}.}
 age limits of individuals in the network. Default is 16 - 74 (\code{c(16, 74)}).}
 }
 \value{
-A named \code{numeric} vector of length 2.
+A named \code{numeric} vector of length 2, the unadjusted (\code{R})
+and corrected (\code{R_var}) estimates of \eqn{R}.
 }
 \description{
 The calculation of the reproduction number adjusting for
-heterogeneity in number of contacts. The output of the function returns the
-unadjusted (\code{R}) and corrected (\code{R_var}) estimates of \eqn{R}.
+heterogeneity in number of contacts.
 }
 \examples{
 # example using NATSAL data
