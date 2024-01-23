@@ -20,8 +20,8 @@
 #' @inheritParams probability_epidemic
 #' @param percent_transmission A `number` of the percentage transmission
 #' for which a proportion of cases has produced.
-#' @param simulate A `logical` whether the calculation should be done numerically
-#' (i.e. simulate secondary contacts) or analytically.
+#' @param simulate A `logical` whether the calculation should be done
+#' numerically (i.e. simulate secondary contacts) or analytically.
 #'
 #' @return A `<data.frame>` with the value for the proportion of cases for a
 #' given value of R and k.
