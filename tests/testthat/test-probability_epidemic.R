@@ -16,14 +16,14 @@ test_that("probability_epidemic works for R < 1", {
 test_that("probability_epidemic works for R > 1", {
   expect_equal(
     probability_epidemic(R = 1.5, k = 0.5, num_init_infect = 1),
-    0.232
+    0.23240811
   )
 })
 
 test_that("probability_epidemic works for k == Inf", {
   expect_equal(
     probability_epidemic(R = 1.5, k = Inf, num_init_infect = 1),
-    0.583
+    0.58281114
   )
 })
 
@@ -41,7 +41,7 @@ test_that("probability_epidemic works with individual-level control", {
     probability_epidemic(
       R = 1.5, k = 0.5, num_init_infect = 1, ind_control = 0.2
     ),
-    0.091
+    0.0907059844
   )
 })
 
@@ -50,7 +50,7 @@ test_that("probability_epidemic works with population-level control", {
     probability_epidemic(
       R = 1.5, k = 0.5, num_init_infect = 1, pop_control = 0.2
     ),
-    0.113
+    0.11338249
   )
 })
 
@@ -63,7 +63,7 @@ test_that("probability_epidemic works with both control measures", {
       ind_control = 0.1,
       pop_control = 0.1
     ),
-    0.108
+    0.108492385
   )
 })
 
@@ -100,7 +100,7 @@ test_that("probability_extinct works for R < 1", {
 test_that("probability_epidemic works for R > 1", {
   expect_equal(
     probability_extinct(R = 1.5, k = 0.5, num_init_infect = 1),
-    0.768
+    0.76759189
   )
 })
 
@@ -115,7 +115,7 @@ test_that("probability_epidemic works with <epidist>", {
   )
   expect_equal(
     probability_epidemic(num_init_infect = 1, offspring_dist = edist),
-    0.12
+    0.119870497
   )
 })
 
@@ -123,5 +123,33 @@ test_that("probability_epidemic fails without R and k or <epidist>", {
   expect_error(
     probability_epidemic(num_init_infect = 1),
     regexp = "One of R and k or <epidist> must be supplied."
+  )
+})
+
+test_that("probability_epidemic works with grid", {
+  expect_equal(
+    probability_epidemic(
+      R = 1.5,
+      k = 1,
+      num_init_infect = 5,
+      ind_control = 0.1,
+      pop_control = 0.1,
+      fit_method = "grid"
+    ),
+    0.579292767
+  )
+})
+
+test_that("probability_epidemic works with spliced list", {
+  expect_equal(
+    probability_epidemic(
+      R = 1.5,
+      k = 1,
+      num_init_infect = 5,
+      ind_control = 0.1,
+      pop_control = 0.1,
+      !!!list(fit_method = "grid")
+    ),
+    0.579292767
   )
 })
