@@ -135,34 +135,37 @@ ic_tbl <- function(..., sort_by = c("AIC", "BIC", "none")) {
     upper = 0.999
   )
 
+  func_args <- names(formals(func))
   if (fit_method == "optim") {
     optim_args <- names(formals("optim"))
     args <- c(args, method = "Brent")
-    # replace default args if in dots
-    args <- utils::modifyList(args, dots)
-    chk_args <- unique(c(names(args), optim_args))
+    chk_args <- unique(c(names(args), func_args, optim_args))
   } else {
     args <- c(args, res = 0.001)
-    # replace default args if in dots
-    args <- utils::modifyList(args, dots)
-    chk_args <- names(args)
+    chk_args <- unique(c(names(args), func_args))
   }
+  # replace default args if in dots
+  args <- utils::modifyList(args, dots)
 
   # check arguments in dots match arg list
   stopifnot(
-    "Only method can be supplied as an extra argument" =
+    "Arguments supplied in `...` not valid" =
       all(dots_names %in% chk_args)
   )
 
   if (fit_method == "optim") {
-    prob_est <- stats::optim(
-      par = 0.5,
-      fn = func,
-      gr = NULL,
-      ...,
-      method = args$method,
-      lower = args$lower,
-      upper = args$upper
+    optim_dots <- args[!names(args) %in% c("lower", "upper", "method")]
+    prob_est <- do.call(
+      stats::optim,
+      args = c(
+        par = 0.5,
+        fn = func,
+        gr = NULL,
+        optim_dots,
+        method = args$method,
+        lower = args$lower,
+        upper = args$upper
+      )
     )
     prob_est <- prob_est$par
   } else {
@@ -178,4 +181,4 @@ ic_tbl <- function(..., sort_by = c("AIC", "BIC", "none")) {
   prob_est
 }
 
-`%||%` <- function(x, y) if(is.null(x)) y else x
+`%||%` <- function(x, y) if (is.null(x)) y else x
