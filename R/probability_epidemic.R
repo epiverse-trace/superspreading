@@ -14,7 +14,10 @@
 #' control measures. Between `0` (default) and `1` (maximum).
 #' @param pop_control A `numeric` specifying the strength of population-level
 #' control measures. Between `0` (default) and `1` (maximum).
-#' @param ... [dots] not used, extra arguments supplied will cause a warning.
+#' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named elements to replace
+#' default optimisation settings. Currently only `"fit_method"` is accepted
+#' and can be either `"optim"` (default) or `"grid"` for numerical
+#' optimisation routine or grid search, respectively.
 #' @param offspring_dist An `<epidist>` object. An S3 class for working with
 #' epidemiological parameters/distributions, see [epiparameter::epidist()].
 #'
@@ -42,50 +45,16 @@ probability_epidemic <- function(R,
                                  pop_control = 0,
                                  ...,
                                  offspring_dist) {
-  input_params <- missing(R) && missing(k)
-  if (!xor(input_params, missing(offspring_dist))) {
-    stop("One of R and k or <epidist> must be supplied.", call. = FALSE)
-  }
-
-  # check inputs
-  chkDots(...)
-  if (input_params) {
-    checkmate::assert_class(offspring_dist, classes = "epidist")
-    R <- get_epidist_param(epidist = offspring_dist, parameter = "R")
-    k <- get_epidist_param(epidist = offspring_dist, parameter = "k")
-  }
-
-  checkmate::assert_number(R, lower = 0, finite = TRUE)
-  checkmate::assert_number(k, lower = 0)
-  checkmate::assert_count(num_init_infect)
-  checkmate::assert_number(ind_control, lower = 0, upper = 1)
-  checkmate::assert_number(pop_control, lower = 0, upper = 1)
-
-  # change Inf k to 1e10 to prevent issue with grid search
-  if (is.infinite(k)) k <- 1e10
-
-  if (R <= 1) {
-    # If R<=1, P(extinction)=1
-    return(0)
-  }
-
-  # If R < 1, P(extinction) < 1
-  # calculate probability of outbreak based solving g(s)=s in
-  # generating function for branching process
-  # set up grid search
-  ss <- seq(0.001, 0.999, 0.001)
-  # define loss function
-  calculate_prob <- abs(
-    ind_control + (1 - ind_control) *
-      (1 + (((1 - pop_control) * R) / k) * (1 - ss))^(-k) - ss
+  # input checking done in probability_extinct
+  1 - probability_extinct(
+    R = R,
+    k = k,
+    num_init_infect = num_init_infect,
+    ind_control = ind_control,
+    pop_control = pop_control,
+    ...,
+    offspring_dist = offspring_dist
   )
-  # calculate probability of extinction
-  prob_est <- ss[which.min(calculate_prob)]
-
-  # calculate P(epidemic) given 'num_init_infect' introductions
-  prob_epidemic <- 1 - prob_est^num_init_infect
-
-  return(prob_epidemic)
 }
 
 #' Calculate the probability a branching process will go extinct based on
@@ -116,14 +85,58 @@ probability_extinct <- function(R,
                                 pop_control = 0,
                                 ...,
                                 offspring_dist) {
-  # input checking done in probability_epidemic
-  1 - probability_epidemic(
+  input_params <- missing(R) && missing(k)
+  if (!xor(input_params, missing(offspring_dist))) {
+    stop("One of R and k or <epidist> must be supplied.", call. = FALSE)
+  }
+
+  # check inputs
+  if (input_params) {
+    checkmate::assert_class(offspring_dist, classes = "epidist")
+    R <- get_epidist_param(epidist = offspring_dist, parameter = "R")
+    k <- get_epidist_param(epidist = offspring_dist, parameter = "k")
+  }
+
+  checkmate::assert_number(R, lower = 0, finite = TRUE)
+  checkmate::assert_number(k, lower = 0)
+  checkmate::assert_count(num_init_infect)
+  checkmate::assert_number(ind_control, lower = 0, upper = 1)
+  checkmate::assert_number(pop_control, lower = 0, upper = 1)
+
+  # capture dynamic dots
+  dots <- rlang::dots_list(..., .ignore_empty = "none", .homonyms = "error")
+
+  # change Inf k to 1e10 to prevent issue with grid search
+  if (is.infinite(k)) k <- 1e10
+
+  if (R <= 1) {
+    # If R<=1, P(extinction)=1
+    return(1)
+  }
+
+  # If R < 1, P(extinction) < 1
+  # calculate probability of outbreak based solving g(s)=s in
+  # generating function for branching process
+  # define loss function
+  calculate_prob <- function(ss, R, k, ind_control, pop_control) {
+    abs(ind_control + (1 - ind_control) *
+          (1 + (((1 - pop_control) * R) / k) * (1 - ss))^(-k) - ss
+    )
+  }
+
+  fit_method <- dots$fit_method %||% "optim"
+
+  prob_extinct <- .fit(
+    func = calculate_prob,
+    fit_method = fit_method,
     R = R,
     k = k,
-    num_init_infect = num_init_infect,
     ind_control = ind_control,
-    pop_control = pop_control,
-    ...,
-    offspring_dist = offspring_dist
+    pop_control = pop_control
   )
+
+  # calculate P(extinction) given 'num_init_infect' introductions
+  prob_extinct <- prob_extinct^num_init_infect
+
+  return(prob_extinct)
 }
