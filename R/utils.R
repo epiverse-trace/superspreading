@@ -99,3 +99,81 @@ ic_tbl <- function(..., sort_by = c("AIC", "BIC", "none")) {
   # return tbl
   model_tbl
 }
+
+#' Optimise a function using either numerical optimisation or grid search
+#'
+#' @details
+#' Arguments passed through [dots] depend on whether `fit_method` is set to
+#' `"optim"` or `"grid"`. For `"optim"`, arguments are passed to [optim()],
+#' for `"grid"`, the variable arguments are `lower`, `upper` (lower and
+#' upper bounds on the grid search for the parameter being optimised, defaults
+#' are `lower = 0.001` and `upper = 0.999`), and `"res"` (the resolution of
+#' grid, default is `res = 0.001`).
+#'
+#' @param func A `function`.
+#' @param fit_method A `character` string, either `"optim"` or `"grid"`.
+#' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named elements to replace
+#' default optimisation settings for either [optim()] or grid search. See
+#' details.
+#'
+#' @return A single `numeric`.
+#' @keywords internal
+.fit <- function(func,
+                 fit_method = c("optim", "grid"),
+                 ...) {
+  if (!is.function(func)) {
+    stop("func must be a function", call. = FALSE)
+  }
+  fit_method <- match.arg(fit_method)
+
+  # capture dynamic dots
+  dots <- rlang::dots_list(..., .ignore_empty = "none", .homonyms = "error")
+  dots_names <- names(dots)
+
+  args <- list(
+    lower = 0.001,
+    upper = 0.999
+  )
+
+  if (fit_method == "optim") {
+    optim_args <- names(formals("optim"))
+    args <- c(args, method = "Brent")
+    # replace default args if in dots
+    args <- utils::modifyList(args, dots)
+    chk_args <- unique(c(names(args), optim_args))
+  } else {
+    args <- c(args, res = 0.001)
+    # replace default args if in dots
+    args <- utils::modifyList(args, dots)
+    chk_args <- names(args)
+  }
+
+  # check arguments in dots match arg list
+  stopifnot(
+    "Only method can be supplied as an extra argument" =
+      all(dots_names %in% chk_args)
+  )
+
+  if (fit_method == "optim") {
+    prob_est <- stats::optim(
+      par = 0.5,
+      fn = func,
+      gr = NULL,
+      ...,
+      method = args$method,
+      lower = args$lower,
+      upper = args$upper
+    )
+    prob_est <- prob_est$par
+  } else {
+    # set up grid search
+    ss <- seq(args$lower, args$upper, args$res)
+    args <- c(ss = list(ss), args)
+    args <- args[!names(args) %in% c("lower", "upper", "res")]
+    prob_est <- do.call(func, args = args)
+    prob_est <- ss[which.min(prob_est)]
+  }
+
+  # return estimate
+  prob_est
+}
