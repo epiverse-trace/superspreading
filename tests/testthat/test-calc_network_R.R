@@ -6,7 +6,7 @@ test_that("calc_network_R works as expected", {
     prob_transmission = 1,
     age_range = c(15, 75)
   )
-  expect_equal(R, c(R = 0.25, R_var = 3.0277778))
+  expect_equal(R, c(R = 0.25, R_net = 3.0277778))
 })
 
 test_that("calc_network_R gives equal values when sd is zero", {
@@ -17,6 +17,6 @@ test_that("calc_network_R gives equal values when sd is zero", {
     prob_transmission = 1,
     age_range = c(15, 75)
   )
-  expect_equal(R, c(R = 0.25, R_var = 0.25))
+  expect_equal(R, c(R = 0.25, R_net = 0.25))
 })
 

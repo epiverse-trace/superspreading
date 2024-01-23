@@ -30,7 +30,7 @@ age limits of individuals in the network.}
 }
 \value{
 A named \code{numeric} vector of length 2, the unadjusted (\code{R})
-and corrected (\code{R_var}) estimates of \eqn{R}.
+and network adjusted (\code{R_net}) estimates of \eqn{R}.
 }
 \description{
 The calculation of the reproduction number adjusting for

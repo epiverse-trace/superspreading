@@ -71,10 +71,10 @@ R <- t(apply(
 res <- cbind(params, R)
 res <- reshape(
   data = res,
-  varying = c("R", "R_var"),
+  varying = c("R", "R_net"),
   v.names = "R",
   direction = "long",
-  times = c("R", "R_var"),
+  times = c("R", "R_net"),
   timevar = "group"
 )
 ```
@@ -107,7 +107,7 @@ ggplot(data = res) +
   ) +
   facet_wrap(
     vars(group),
-    labeller = as_labeller(c(R = "R", R_var = "Adjusted R"))
+    labeller = as_labeller(c(R = "R", R_net = "Adjusted R"))
   ) +
   scale_fill_viridis_c(
     trans = "log",
@@ -136,10 +136,10 @@ res <- do.call(rbind, res)
 res <- as.data.frame(cbind(beta, res))
 res <- reshape(
   data = res,
-  varying = c("R", "R_var"),
+  varying = c("R", "R_net"),
   v.names = "R",
   direction = "long",
-  times = c("R", "R_var"),
+  times = c("R", "R_net"),
   timevar = "group"
 )
 ```
