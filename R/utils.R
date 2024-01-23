@@ -177,3 +177,5 @@ ic_tbl <- function(..., sort_by = c("AIC", "BIC", "none")) {
   # return estimate
   prob_est
 }
+
+`%||%` <- function(x, y) if(is.null(x)) y else x
