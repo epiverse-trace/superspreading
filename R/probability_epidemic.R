@@ -9,7 +9,9 @@
 #' per infectious individual).
 #' @param k A `number` specifying the  k parameter (i.e. overdispersion in
 #' offspring distribution from fitted negative binomial).
-#' @param num_init_infect A `count` specifying the number of initial infections.
+#' @param num_init_infect An `integer` (or at least
+#' ["integerish"](https://rlang.r-lib.org/reference/is_integerish.html) if
+#' stored as double) specifying the number of initial infections.
 #' @param ind_control A `numeric` specifying the strength of individual-level
 #' control measures. Between `0` (default) and `1` (maximum).
 #' @param pop_control A `numeric` specifying the strength of population-level
