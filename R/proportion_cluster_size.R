@@ -17,6 +17,7 @@
 #'
 #' @inheritParams probability_epidemic
 #' @param cluster_size A `number` for the cluster size threshold.
+#' @param ... [dots] not used, extra arguments supplied will cause a warning.
 #' @param format_prop A `logical` determining whether the proportion column
 #' of the `<data.frame>` returned by the function is formatted as a string with
 #' a percentage sign (`%`), (`TRUE`, default), or as a `numeric` (`FALSE`).
