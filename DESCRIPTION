@@ -50,7 +50,8 @@ RoxygenNote: 7.2.3
 Imports:
     checkmate,
     stats,
-    bpmodels
+    bpmodels,
+    rlang
 Suggests: 
     epiparameter,
     fitdistrplus,
