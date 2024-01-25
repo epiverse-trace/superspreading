@@ -146,6 +146,6 @@ test_that("proportion_transmission works with <epidist>", {
 test_that("proportion_transmission fails without R and k or <epidist>", {
   expect_error(
     proportion_transmission(percent_transmission = 0.8),
-    regexp = "One of R and k or <epidist> must be supplied."
+    regexp = "Only one of R and k or <epidist> must be supplied."
   )
 })

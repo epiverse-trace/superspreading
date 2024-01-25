@@ -153,6 +153,6 @@ test_that("probability_contain fails as expected", {
 test_that("probability_contain fails without R and k or <epidist>", {
   expect_error(
     probability_contain(num_init_infect = 1, pop_control = 0.5),
-    regexp = "One of R and k or <epidist> must be supplied."
+    regexp = "Only one of R and k or <epidist> must be supplied."
   )
 })

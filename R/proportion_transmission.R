@@ -70,7 +70,7 @@ proportion_transmission <- function(R, k,
                                     format_prop = TRUE) {
   input_params <- missing(R) && missing(k)
   if (!xor(input_params, missing(offspring_dist))) {
-    stop("One of R and k or <epidist> must be supplied.", call. = FALSE)
+    stop("Only one of R and k or <epidist> must be supplied.", call. = FALSE)
   }
 
   # check inputs
