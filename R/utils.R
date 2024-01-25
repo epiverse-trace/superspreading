@@ -54,6 +54,14 @@ get_epidist_param <- function(epidist,
 #'
 #' @return A `<data.frame>`.
 #' @export
+#' @examples
+#' if (requireNamespace("fitdistrplus", quietly = TRUE)) {
+#'   cases <- rnbinom(n = 100, mu = 5, size = 0.7)
+#'   pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
+#'   geom_fit <- fitdistrplus::fitdist(data = cases, distr = "geom")
+#'   nbinom_fit <- fitdistrplus::fitdist(data = cases, distr = "nbinom")
+#'   ic_tbl(pois_fit, geom_fit, nbinom_fit)
+#' }
 ic_tbl <- function(..., sort_by = c("AIC", "BIC", "none")) {
 
   sort_by <- match.arg(sort_by)
