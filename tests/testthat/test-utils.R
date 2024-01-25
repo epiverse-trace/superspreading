@@ -27,7 +27,7 @@ test_that("get_param fails as expected", {
 test_that("get_param fails as expected with incorrect parameters", {
   skip_if_not_installed(pkg = "epiparameter")
   edist <- suppressMessages(
-    epidist_db(
+    epiparameter::epidist_db(
       disease = "COVID-19",
       epi_dist = "incubation period",
       author = "Linton",
