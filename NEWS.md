@@ -5,21 +5,25 @@ Second minor release of _superspreading_. This release enhances functions added 
 ## New features
 
 * A new function (`calc_network_R()`) to estimate the reproduction number for heterogeneous networks and a vignette outlining use cases for the function from existing epidemiological literature is added (#71).
-* `proportion_*()` functions can now return proportion columns of the output `<data.frame>` as `numeric` when the new argument `format_prop` is set to `FALSE` (#72).
 * `probability_epidemic()` and `probability_extinct()` now have individual-level and population-level control in a joint framework (#70).
+* `proportion_*()` functions can now return proportion columns of the output `<data.frame>` as `numeric` when the new argument `format_prop` is set to `FALSE` (#72).
 * A new design principles vignette to document package development is added (#68).
 * Added a helper function (`ic_tbl()`) to improve model comparison tables (#65).
+* `probability_*()` functions now accept [dynamic dots](https://rlang.r-lib.org/reference/dyn-dots.html) ([{rlang}](https://CRAN.R-project.org/package=rlang) is added as a dependency) (#82).
 
 ## Breaking changes
 
 * `ind_control` and `pop_control` arguments replace `control` and `control_type` arguments in `probability_contain()`; and the argument default for `num_init_infect` is removed (#70).
 * Changed `epidist` argument to `offspring_dist` to follow Epiverse style (affects several functions) (#64).
+* Argument in `proportion_transmission()` has been renamed from `sim` to `simulate` (#81).
 
 ## Minor changes
 
 * New package hex logo (#73).
 * Updated continuous integration and package infrastructure (#67).
 * Improved function documentation (#63).
+* Optimisation now uses `optim()` by default (#82).
+* Testing suite now uses snapshot testing for regression tests (#84).
 
 ## Bug fixes
 
