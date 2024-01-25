@@ -42,10 +42,7 @@ test_that("ic_tbl works as expected", {
   pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
   geom_fit <- fitdistrplus::fitdist(data = cases, distr = "geom")
   nbinom_fit <- fitdistrplus::fitdist(data = cases, distr = "nbinom")
-  tbl <- ic_tbl(pois_fit, geom_fit, nbinom_fit)
-  expect_s3_class(tbl, class = "data.frame")
-  expect_identical(dim(tbl), c(3L, 7L))
-  expect_identical(tbl$distribution, c("nbinom", "geom", "pois"))
+  expect_snapshot(ic_tbl(pois_fit, geom_fit, nbinom_fit))
 })
 
 test_that("ic_tbl works as expected with sort_by = BIC", {
@@ -54,10 +51,7 @@ test_that("ic_tbl works as expected with sort_by = BIC", {
   pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
   geom_fit <- fitdistrplus::fitdist(data = cases, distr = "geom")
   nbinom_fit <- fitdistrplus::fitdist(data = cases, distr = "nbinom")
-  tbl <- ic_tbl(pois_fit, geom_fit, nbinom_fit, sort_by = "BIC")
-  expect_s3_class(tbl, class = "data.frame")
-  expect_identical(dim(tbl), c(3L, 7L))
-  expect_identical(tbl$distribution, c("nbinom", "geom", "pois"))
+  expect_snapshot(ic_tbl(pois_fit, geom_fit, nbinom_fit, sort_by = "BIC"))
 })
 
 test_that("ic_tbl works as expected with sort_by = none", {
@@ -66,10 +60,7 @@ test_that("ic_tbl works as expected with sort_by = none", {
   pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
   geom_fit <- fitdistrplus::fitdist(data = cases, distr = "geom")
   nbinom_fit <- fitdistrplus::fitdist(data = cases, distr = "nbinom")
-  tbl <- ic_tbl(pois_fit, geom_fit, nbinom_fit, sort_by = "none")
-  expect_s3_class(tbl, class = "data.frame")
-  expect_identical(dim(tbl), c(3L, 7L))
-  expect_identical(tbl$distribution, c("pois", "geom", "nbinom"))
+  expect_snapshot(ic_tbl(pois_fit, geom_fit, nbinom_fit, sort_by = "none"))
 })
 
 test_that("ic_tbl fails as expected", {

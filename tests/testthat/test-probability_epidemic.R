@@ -14,17 +14,11 @@ test_that("probability_epidemic works for R < 1", {
 })
 
 test_that("probability_epidemic works for R > 1", {
-  expect_equal(
-    probability_epidemic(R = 1.5, k = 0.5, num_init_infect = 1),
-    0.23240811
-  )
+  expect_snapshot(probability_epidemic(R = 1.5, k = 0.5, num_init_infect = 1))
 })
 
 test_that("probability_epidemic works for k == Inf", {
-  expect_equal(
-    probability_epidemic(R = 1.5, k = Inf, num_init_infect = 1),
-    0.58281114
-  )
+  expect_snapshot(probability_epidemic(R = 1.5, k = Inf, num_init_infect = 1))
 })
 
 test_that("probability_epidemic works for different k & num_init_infect", {
@@ -37,33 +31,30 @@ test_that("probability_epidemic works for different k & num_init_infect", {
 })
 
 test_that("probability_epidemic works with individual-level control", {
-  expect_equal(
+  expect_snapshot(
     probability_epidemic(
       R = 1.5, k = 0.5, num_init_infect = 1, ind_control = 0.2
-    ),
-    0.0907059844
+    )
   )
 })
 
 test_that("probability_epidemic works with population-level control", {
-  expect_equal(
+  expect_snapshot(
     probability_epidemic(
       R = 1.5, k = 0.5, num_init_infect = 1, pop_control = 0.2
-    ),
-    0.11338249
+    )
   )
 })
 
 test_that("probability_epidemic works with both control measures", {
-  expect_equal(
+  expect_snapshot(
     probability_epidemic(
       R = 1.5,
       k = 0.5,
       num_init_infect = 1,
       ind_control = 0.1,
       pop_control = 0.1
-    ),
-    0.108492385
+    )
   )
 })
 
@@ -98,9 +89,8 @@ test_that("probability_extinct works for R < 1", {
 })
 
 test_that("probability_epidemic works for R > 1", {
-  expect_equal(
-    probability_extinct(R = 1.5, k = 0.5, num_init_infect = 1),
-    0.76759189
+  expect_snapshot(
+    probability_extinct(R = 1.5, k = 0.5, num_init_infect = 1)
   )
 })
 
@@ -113,9 +103,8 @@ test_that("probability_epidemic works with <epidist>", {
       single_epidist = TRUE
     )
   )
-  expect_equal(
-    probability_epidemic(num_init_infect = 1, offspring_dist = edist),
-    0.119870497
+  expect_snapshot(
+    probability_epidemic(num_init_infect = 1, offspring_dist = edist)
   )
 })
 
@@ -127,7 +116,7 @@ test_that("probability_epidemic fails without R and k or <epidist>", {
 })
 
 test_that("probability_epidemic works with grid", {
-  expect_equal(
+  expect_snapshot(
     probability_epidemic(
       R = 1.5,
       k = 1,
@@ -135,13 +124,12 @@ test_that("probability_epidemic works with grid", {
       ind_control = 0.1,
       pop_control = 0.1,
       fit_method = "grid"
-    ),
-    0.579292767
+    )
   )
 })
 
 test_that("probability_epidemic works with spliced list", {
-  expect_equal(
+  expect_snapshot(
     probability_epidemic(
       R = 1.5,
       k = 1,
@@ -149,7 +137,6 @@ test_that("probability_epidemic works with spliced list", {
       ind_control = 0.1,
       pop_control = 0.1,
       !!!list(fit_method = "grid")
-    ),
-    0.579292767
+    )
   )
 })
