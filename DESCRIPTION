@@ -35,7 +35,7 @@ Authors@R:
             given = "Hugo",
             family = "Gruson",
             role = c("rev"),
-            email = "hugo.gruson@data.org",
+            email = "hugo@data.org",
             comment = c(ORCID = "https://orcid.org/0000-0002-4094-1476")
         )
     )
