@@ -24,7 +24,7 @@ Second minor release of _superspreading_. This release enhances functions added 
 ## Bug fixes
 
 * None to {superspreading} functions.
-* Update {epiparameter} use (#62).
+* Update {epiparameter} use in vignette and tests (#62).
 
 ## Deprecated and defunct
 
