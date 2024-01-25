@@ -44,7 +44,7 @@ where $V$ is the variance of the number of contacts per unit time. This formulat
 
 The {superspreading} package provides the `calc_network_R()` function to calculate the reproduction number using the unadjusted formula (first equation) and the adjusted formula (second equation).
 
-For example, the possibility of a sexually transmitted outbreak Zika virus was a particular concern when the infection spread globally in 2015-16. @yakobLowRiskSexuallytransmitted2016 used the above heterogeneous network model to determine the risk that sexual transmission could be a common mode of transmission for Zika virus, leading to sustained human-to-human transmission in the absence of vectors.
+For example, the possibility of a sexually transmitted Zika virus outbreak was a particular concern when the infection spread globally in 2015-16. @yakobLowRiskSexuallytransmitted2016 used the above heterogeneous network model to determine the risk that sexual transmission could be a common mode of transmission for Zika virus, leading to sustained human-to-human transmission in the absence of vectors.
 
 Here we replicate the analysis of @yakobLowRiskSexuallytransmitted2016 to show the low likelihood of Zika causing an outbreak from sexual transmission. Following @yakobLowRiskSexuallytransmitted2016, we use data from the National Survey of Sexual Attitude and Lifestyles (Natsal) on the mean and variance in the number of sexual partners and age range [@mercerChangesSexualAttitudes2013].
 
