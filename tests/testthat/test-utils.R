@@ -1,4 +1,4 @@
-if (requireNamespace("epiparameterr", quietly = TRUE)) {
+if (requireNamespace("epiparameter", quietly = TRUE)) {
   edist <- suppressMessages(
     epiparameter::epidist_db(
       disease = "SARS",
