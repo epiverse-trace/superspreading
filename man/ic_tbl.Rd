@@ -24,3 +24,12 @@ is designed specifically for handling \code{\link[fitdistrplus:fitdist]{fitdistr
 not a generalised function. See \code{\link[bbmle:ICtab]{bbmle::ICtab()}} for a more general use
 function to create information criteria tables.
 }
+\examples{
+if (requireNamespace("fitdistrplus", quietly = TRUE)) {
+  cases <- rnbinom(n = 100, mu = 5, size = 0.7)
+  pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
+  geom_fit <- fitdistrplus::fitdist(data = cases, distr = "geom")
+  nbinom_fit <- fitdistrplus::fitdist(data = cases, distr = "nbinom")
+  ic_tbl(pois_fit, geom_fit, nbinom_fit)
+}
+}
