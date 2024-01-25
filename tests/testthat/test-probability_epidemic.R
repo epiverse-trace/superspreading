@@ -95,6 +95,7 @@ test_that("probability_epidemic works for R > 1", {
 })
 
 test_that("probability_epidemic works with <epidist>", {
+  skip_if_not_installed(pkg = "epiparameter")
   edist <- suppressMessages(
     epiparameter::epidist_db(
       disease = "SARS",

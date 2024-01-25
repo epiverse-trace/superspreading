@@ -1,19 +1,22 @@
-library(epiparameter)
-edist <- suppressMessages(
-  epidist_db(
-    disease = "SARS",
-    epi_dist = "offspring distribution",
-    author = "Lloyd-Smith",
-    single_epidist = TRUE
+if (requireNamespace("epiparameterr", quietly = TRUE)) {
+  edist <- suppressMessages(
+    epiparameter::epidist_db(
+      disease = "SARS",
+      epi_dist = "offspring distribution",
+      author = "Lloyd-Smith",
+      single_epidist = TRUE
+    )
   )
-)
+}
 
 test_that("get_param works as expected", {
+  skip_if_not_installed(pkg = "epiparameter")
   expect_type(get_epidist_param(epidist = edist, parameter = "R"), "double")
   expect_type(get_epidist_param(epidist = edist, parameter = "k"), "double")
 })
 
 test_that("get_param fails as expected", {
+  skip_if_not_installed(pkg = "epiparameter")
   expect_error(
     get_epidist_param(epidist = edist, parameter = "random"),
     regexp = "(arg)*(should be one of)*(R)*(k)"
@@ -22,6 +25,7 @@ test_that("get_param fails as expected", {
 })
 
 test_that("get_param fails as expected with incorrect parameters", {
+  skip_if_not_installed(pkg = "epiparameter")
   edist <- suppressMessages(
     epidist_db(
       disease = "COVID-19",
@@ -37,6 +41,7 @@ test_that("get_param fails as expected with incorrect parameters", {
 })
 
 test_that("ic_tbl works as expected", {
+  skip_if_not_installed(pkg = "fitdistrplus")
   set.seed(1)
   cases <- rnbinom(n = 100, mu = 5, size = 0.7)
   pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
@@ -46,6 +51,7 @@ test_that("ic_tbl works as expected", {
 })
 
 test_that("ic_tbl works as expected with sort_by = BIC", {
+  skip_if_not_installed(pkg = "fitdistrplus")
   set.seed(1)
   cases <- rnbinom(n = 100, mu = 5, size = 0.7)
   pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
@@ -55,6 +61,7 @@ test_that("ic_tbl works as expected with sort_by = BIC", {
 })
 
 test_that("ic_tbl works as expected with sort_by = none", {
+  skip_if_not_installed(pkg = "fitdistrplus")
   set.seed(1)
   cases <- rnbinom(n = 100, mu = 5, size = 0.7)
   pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
@@ -64,6 +71,7 @@ test_that("ic_tbl works as expected with sort_by = none", {
 })
 
 test_that("ic_tbl fails as expected", {
+  skip_if_not_installed(pkg = "fitdistrplus")
   cases <- rnbinom(n = 100, mu = 5, size = 0.7)
   pois_fit <- fitdistrplus::fitdist(data = cases, distr = "pois")
   geom_fit <- fitdistrplus::fitdist(data = cases, distr = "geom")

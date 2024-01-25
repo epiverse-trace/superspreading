@@ -85,6 +85,7 @@ test_that("proportion_cluster_size fails as expected", {
 })
 
 test_that("proportion_cluster_size works with <epidist>", {
+  skip_if_not_installed(pkg = "epiparameter")
   edist <- suppressMessages(
     epiparameter::epidist_db(
       disease = "SARS",
