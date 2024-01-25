@@ -55,18 +55,15 @@ test_that("proportion_cluster_size works as expected for multiple R & k & cs", {
 })
 
 test_that("proportion_cluster_size works as expected for format_prop = FALSE", {
-  res <- proportion_cluster_size(
-    R = c(1, 2, 3),
-    k = c(0.1, 0.2, 0.3),
-    cluster_size = c(5, 10, 25),
-    format_prop = FALSE
-  )
-
-  expect_s3_class(res, "data.frame")
-  expect_identical(dim(res), c(9L, 5L))
-  expect_identical(
-    unname(vapply(res, class, FUN.VALUE = character(1))),
-    rep("numeric", 5)
+  expect_snapshot_value(
+    proportion_cluster_size(
+      R = c(1, 2, 3),
+      k = c(0.1, 0.2, 0.3),
+      cluster_size = c(5, 10, 25),
+      format_prop = FALSE
+    ),
+    style = "json2",
+    tolerance = 0.01
   )
 })
 
