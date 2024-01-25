@@ -102,6 +102,7 @@ test_that("probability_contain works as when using dots with incorrect name", {
 })
 
 test_that("probability_contain works with <epidist>", {
+  skip_if_not_installed(pkg = "epiparameter")
   edist <- suppressMessages(
     epiparameter::epidist_db(
       disease = "SARS",
