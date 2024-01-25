@@ -20,7 +20,7 @@ This document is primarily intended to be read by those interested in understand
 
 ## Scope
 
-The {superspreading} package aims to provide a range of summary metrics to characterise individual-level variation in disease transmission. These include calculating the probability an outbreak becomes an epidemic (`probability_epidemic()`), or conversely goes extinct (`probability_extinct()`), the probability an outbreak can be contained (`probability_contain()`), the proportion of cases in cluster of a given size (`proportion_cluster_size()`), and the proportion of cases that cause a proportion of transmission (`proportion_transmission()`).
+The {superspreading} package aims to provide a range of summary metrics to characterise individual-level variation in disease transmission and its impact on the growth or decline of an epidemic. These include calculating the probability an outbreak becomes an epidemic (`probability_epidemic()`), or conversely goes extinct (`probability_extinct()`), the probability an outbreak can be contained (`probability_contain()`), the proportion of cases in cluster of a given size (`proportion_cluster_size()`), and the proportion of cases that cause a proportion of transmission (`proportion_transmission()`).
 
 The other aspect of the package is to provide probability density functions and cumulative distribution functions to compute the likelihood for distribution models to estimate heterogeneity in individual-level disease transmission that are not available in R (i.e. base R). At present we include two models: Poisson-lognormal (`dpoislnorm()` & `ppoislnorm()`) and Poisson-Weibull (`dpoisweibull()` & `ppoisweibull()`) distributions.
 
