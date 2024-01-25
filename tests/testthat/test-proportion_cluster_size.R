@@ -106,6 +106,6 @@ test_that("proportion_cluster_size works with <epidist>", {
 test_that("proportion_cluster_size fails without R and k or <epidist>", {
   expect_error(
     proportion_cluster_size(cluster_size = 10),
-    regexp = "One of R and k or <epidist> must be supplied."
+    regexp = "Only one of R and k or <epidist> must be supplied."
   )
 })

@@ -50,7 +50,7 @@ probability_contain <- function(R,
                                 offspring_dist) {
   input_params <- missing(R) && missing(k)
   if (!xor(input_params, missing(offspring_dist))) {
-    stop("One of R and k or <epidist> must be supplied.", call. = FALSE)
+    stop("Only one of R and k or <epidist> must be supplied.", call. = FALSE)
   }
   # check inputs
   if (input_params) {
