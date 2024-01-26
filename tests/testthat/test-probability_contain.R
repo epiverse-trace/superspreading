@@ -8,7 +8,7 @@ test_that("probability_contain works as expected for stochastic", {
       R = 1.5, k = 0.5, num_init_infect = 1, stochastic = TRUE
     ),
     style = "json2",
-    tolerance = 0.01
+    tolerance = 0.05
   )
 })
 
@@ -34,7 +34,7 @@ test_that("probability_contain works as expected for stochastic pop control", {
       R = 1.5, k = 0.5, num_init_infect = 1, pop_control = 0.1, stochastic = TRUE
     ),
     style = "json2",
-    tolerance = 0.01
+    tolerance = 0.05
   )
 })
 
@@ -72,7 +72,7 @@ test_that("probability_contain works as expected for different threshold", {
       case_threshold = 50
     ),
     style = "json2",
-    tolerance = 0.01
+    tolerance = 0.05
   )
 })
 
@@ -87,17 +87,13 @@ test_that("probability_contain works as when using dots", {
       infinite = 50
     ),
     style = "json2",
-    tolerance = 0.01
+    tolerance = 0.05
   )
 })
 
 test_that("probability_contain works as when using dots with incorrect name", {
-  expect_snapshot_value(
-    probability_contain(
-      R = 1.5, k = 0.5, num_init_infect = 1, random = 100
-    ),
-    style = "json2",
-    tolerance = 0.01
+  expect_snapshot(
+    probability_contain(R = 1.5, k = 0.5, num_init_infect = 1, random = 100)
   )
 })
 

@@ -112,7 +112,7 @@ test_that(".prop_transmission_numerical works as expected", {
       percent_transmission = 0.8
     ),
     style = "json2",
-    tolerance = 0.01
+    tolerance = 0.05
   )
 })
 

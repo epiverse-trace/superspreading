@@ -63,7 +63,7 @@ test_that("proportion_cluster_size works as expected for format_prop = FALSE", {
       format_prop = FALSE
     ),
     style = "json2",
-    tolerance = 0.1
+    tolerance = 0.05
   )
 })
 
