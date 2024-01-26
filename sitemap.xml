@@ -4,19 +4,22 @@
     <loc>https://epiverse-trace.github.io/superspreading/404.html</loc>
   </url>
   <url>
-    <loc>https://epiverse-trace.github.io/superspreading/CONTRIBUTING.html</loc>
-  </url>
-  <url>
     <loc>https://epiverse-trace.github.io/superspreading/LICENSE-text.html</loc>
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/superspreading/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://epiverse-trace.github.io/superspreading/articles/design-principles.html</loc>
+  </url>
+  <url>
     <loc>https://epiverse-trace.github.io/superspreading/articles/epidemic_risk.html</loc>
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/superspreading/articles/estimate_individual_level_transmission.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/superspreading/articles/heterogeneous_network_outbreaks.html</loc>
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/superspreading/articles/index.html</loc>
@@ -34,10 +37,19 @@
     <loc>https://epiverse-trace.github.io/superspreading/news/index.html</loc>
   </url>
   <url>
+    <loc>https://epiverse-trace.github.io/superspreading/reference/calc_network_R.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/superspreading/reference/dot-fit.html</loc>
+  </url>
+  <url>
     <loc>https://epiverse-trace.github.io/superspreading/reference/dpoislnorm.html</loc>
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/superspreading/reference/dpoisweibull.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/superspreading/reference/ic_tbl.html</loc>
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/superspreading/reference/index.html</loc>
@@ -62,5 +74,8 @@
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/superspreading/reference/proportion_transmission.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/superspreading/reference/superspreading-package.html</loc>
   </url>
 </urlset>
