@@ -75,11 +75,10 @@
 
 # probability_contain works as when using dots with incorrect name
 
-    {
-      "type": "double",
-      "attributes": {},
-      "value": [0.76759189]
-    }
+    Code
+      probability_contain(R = 1.5, k = 0.5, num_init_infect = 1, random = 100)
+    Output
+      [1] 0.7675919
 
 # probability_contain works with <epidist>
 
