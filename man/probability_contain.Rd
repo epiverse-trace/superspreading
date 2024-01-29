@@ -37,7 +37,8 @@ control measures. Between \code{0} (default) and \code{1} (maximum).}
 analytical probability of extinction. Default (\code{FALSE}) is to use the
 analytical calculation.}
 
-\item{...}{arguments to be passed to \code{\link[bpmodels:chain_sim]{bpmodels::chain_sim()}}.}
+\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> Named elements to replace
+default arguments in \code{\link[bpmodels:chain_sim]{bpmodels::chain_sim()}}. See details.}
 
 \item{case_threshold}{A number for the threshold of the number of cases below
 which the epidemic is considered contained.}
@@ -51,6 +52,12 @@ A \code{number} for the probability of containment.
 \description{
 Containment is defined as the size of the transmission chain
 not reaching the \code{case_threshold} (default = 100).
+}
+\details{
+When using \code{stochastic = TRUE}, the default arguments to simulate the
+transmission chains with \code{\link[bpmodels:chain_sim]{bpmodels::chain_sim()}} are \code{1e5} replicates,
+a negative binomial (\code{nbinom}) offspring distribution, parameterised with
+\code{R} (and \code{pop_control} if > 0) and \code{k}.
 }
 \examples{
 # population-level control measures
