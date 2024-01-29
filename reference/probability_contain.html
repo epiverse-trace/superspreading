@@ -126,7 +126,8 @@ analytical calculation.</p></dd>
 
 
 <dt>...</dt>
-<dd><p>arguments to be passed to <code><a href="https://epiverse-trace.github.io/bpmodels/reference/chain_sim.html" class="external-link">bpmodels::chain_sim()</a></code>.</p></dd>
+<dd><p>&lt;<code><a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic-dots</a></code>&gt; Named elements to replace
+default arguments in <code><a href="https://epiverse-trace.github.io/bpmodels/reference/chain_sim.html" class="external-link">bpmodels::chain_sim()</a></code>. See details.</p></dd>
 
 
 <dt>case_threshold</dt>
@@ -144,6 +145,13 @@ epidemiological parameters/distributions, see <code><a href="https://epiverse-tr
     
 
 <p>A <code>number</code> for the probability of containment.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>When using <code>stochastic = TRUE</code>, the default arguments to simulate the
+transmission chains with <code><a href="https://epiverse-trace.github.io/bpmodels/reference/chain_sim.html" class="external-link">bpmodels::chain_sim()</a></code> are <code>1e5</code> replicates,
+a negative binomial (<code>nbinom</code>) offspring distribution, parameterised with
+<code>R</code> (and <code>pop_control</code> if &gt; 0) and <code>k</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
