@@ -3,11 +3,18 @@
 #' @description Containment is defined as the size of the transmission chain
 #' not reaching the `case_threshold` (default = 100).
 #'
+#' @details
+#' When using `stochastic = TRUE`, the default arguments to simulate the
+#' transmission chains with [bpmodels::chain_sim()] are `1e5` replicates,
+#' a negative binomial (`nbinom`) offspring distribution, parameterised with
+#' `R` (and `pop_control` if > 0) and `k`.
+#'
 #' @inheritParams probability_epidemic
 #' @param stochastic Whether to use a stochastic branching process model or the
 #' analytical probability of extinction. Default (`FALSE`) is to use the
 #' analytical calculation.
-#' @param ... arguments to be passed to [bpmodels::chain_sim()].
+#' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named elements to replace
+#' default arguments in [bpmodels::chain_sim()]. See details.
 #' @param case_threshold A number for the threshold of the number of cases below
 #' which the epidemic is considered contained.
 #'
@@ -48,6 +55,19 @@ probability_contain <- function(R,
                                 ...,
                                 case_threshold = 100,
                                 offspring_dist) {
+  # capture dynamic dots
+  dots <- rlang::dots_list(..., .ignore_empty = "none", .homonyms = "error")
+  dots_names <- names(dots)
+
+  # bpmodels::chain_sim cannot be called within formals() as it's not in base
+  bp_func <- bpmodels::chain_sim
+  bp_args <- names(formals(bp_func))
+  # check arguments in dots match arg list
+  stopifnot(
+    "Arguments supplied in `...` not valid" =
+      all(dots_names %in% bp_args)
+  )
+
   input_params <- missing(R) && missing(k)
   if (!xor(input_params, missing(offspring_dist))) {
     stop("Only one of R and k or <epidist> must be supplied.", call. = FALSE)
@@ -83,8 +103,8 @@ probability_contain <- function(R,
       infinite = case_threshold
     )
 
-    # replace default args if in dots (remove args not for chain_sim)
-    args <- utils::modifyList(args, list(...)[...names() %in% names(args)])
+    # replace default args if in dots
+    args <- utils::modifyList(args, dots)
 
     chain_size <- lapply(
       seq_len(num_init_infect),
