@@ -91,12 +91,6 @@ test_that("probability_contain works as when using dots", {
   )
 })
 
-test_that("probability_contain works as when using dots with incorrect name", {
-  expect_snapshot(
-    probability_contain(R = 1.5, k = 0.5, num_init_infect = 1, random = 100)
-  )
-})
-
 test_that("probability_contain works with <epidist>", {
   skip_if_not_installed(pkg = "epiparameter")
   edist <- suppressMessages(
@@ -144,6 +138,13 @@ test_that("probability_contain fails as expected", {
     ),
     regexp =
       "individual-level control not yet implemented for stochastic calculation"
+  )
+})
+
+test_that("probability_contain fails using dots with incorrect name", {
+  expect_error(
+    probability_contain(R = 1.5, k = 0.5, num_init_infect = 1, random = 100),
+    regexp = "Arguments supplied in `...` not valid"
   )
 })
 
