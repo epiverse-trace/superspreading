@@ -26,7 +26,8 @@ offspring distribution from fitted negative binomial).}
 for which a proportion of cases has produced.}
 
 \item{simulate}{A \code{logical} whether the calculation should be done
-numerically (i.e. simulate secondary contacts) or analytically.}
+numerically (i.e. simulate secondary contacts) or analytically. Default is
+\code{FALSE} which uses the analytical calculation.}
 
 \item{...}{\link{dots} not used, extra arguments supplied will cause a warning.}
 
