@@ -37,8 +37,9 @@ default optimisation settings. Currently only \code{"fit_method"} is accepted
 and can be either \code{"optim"} (default) or \code{"grid"} for numerical
 optimisation routine or grid search, respectively.}
 
-\item{offspring_dist}{An \verb{<epidist>} object. An S3 class for working with
-epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}.}
+\item{offspring_dist}{An \verb{<epiparameter>} object. An S3 class for working
+with epidemiological parameters/distributions, see
+\code{\link[epiparameter:epiparameter]{epiparameter::epiparameter()}}.}
 }
 \value{
 A value with the probability of going extinct.

@@ -38,7 +38,7 @@ The distribution functions return a vector of `numeric`s of equal length to the 
 
 - The distribution functions are vectorised (i.e. wrapped in `Vectorize()`). This enables them to be used identically to base R distribution functions.
 
-- Native interoperability with `<epidist>` objects, from the {epiparameter} package is enabled for `probability_*()` and `proportion_*()` via the `offspring_dist` argument. This allows user to pass in a single object and the parameters required by the {superspreading} function will be extracted, if these are not available within the `<epidist>` object the function returns an informative error. The `offspring_dist` argument is after `...` to ensure users specify the argument in full and not accidentally provide data to this argument.
+- Native interoperability with `<epiparameter>` objects, from the {epiparameter} package is enabled for `probability_*()` and `proportion_*()` via the `offspring_dist` argument. This allows user to pass in a single object and the parameters required by the {superspreading} function will be extracted, if these are not available within the `<epiparameter>` object the function returns an informative error. The `offspring_dist` argument is after `...` to ensure users specify the argument in full and not accidentally provide data to this argument.
 
 - Internal functions have a dot (`.`) prefix, exported functions do not.
 

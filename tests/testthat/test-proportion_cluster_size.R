@@ -84,17 +84,17 @@ test_that("proportion_cluster_size fails as expected", {
   )
 })
 
-test_that("proportion_cluster_size works with <epidist>", {
+test_that("proportion_cluster_size works with <epiparameter>", {
   skip_if_not_installed(pkg = "epiparameter")
-  edist <- suppressMessages(
-    epiparameter::epidist_db(
+  od <- suppressMessages(
+    epiparameter::epiparameter_db(
       disease = "SARS",
       epi_dist = "offspring distribution",
       author = "Lloyd-Smith",
-      single_epidist = TRUE
+      single_epiparameter = TRUE
     )
   )
-  res <- proportion_cluster_size(cluster_size = 20, offspring_dist = edist)
+  res <- proportion_cluster_size(cluster_size = 20, offspring_dist = od)
 
   expect_s3_class(res, "data.frame")
   expect_identical(dim(res), c(1L, 3L))
@@ -104,9 +104,9 @@ test_that("proportion_cluster_size works with <epidist>", {
   )
 })
 
-test_that("proportion_cluster_size fails without R and k or <epidist>", {
+test_that("proportion_cluster_size fails without R and k or <epiparameter>", {
   expect_error(
     proportion_cluster_size(cluster_size = 10),
-    regexp = "Only one of R and k or <epidist> must be supplied."
+    regexp = "Only one of R and k or <epiparameter> must be supplied."
   )
 })

@@ -1,4 +1,4 @@
-#' Get a parameter out of <epidist>
+#' Get a parameter out of <epiparameter>
 #'
 #' @inheritParams probability_epidemic
 #' @param parameter A character string, either `"R"` or `"k"`.
@@ -6,13 +6,13 @@
 #' @return An unnamed numeric.
 #' @keywords internal
 #' @noRd
-get_epidist_param <- function(epidist,
-                              parameter = c("R", "k")) {
-  # check inputs (<epidist> already checked)
+get_epiparameter_param <- function(epiparameter,
+                                   parameter = c("R", "k")) {
+  # check inputs (<epiparameter> already checked)
   parameter <- match.arg(parameter)
 
-  # extract parameters from <epidist>
-  params <- epiparameter::get_parameters(epidist)
+  # extract parameters from <epiparameter>
+  params <- epiparameter::get_parameters(epiparameter)
 
   regexpr_pattern <- switch(parameter,
     R = "^r$|^r0$|^mean$",
@@ -28,7 +28,10 @@ get_epidist_param <- function(epidist,
   if (length(idx) == 0) {
     stop(
       sprintf(
-        "Cannot find %s in <epidist>, check if parameters have correct names.",
+        paste(
+          "Cannot find %s in <epiparameter>,",
+          "check if parameters have correct names."
+        ),
         parameter
       ),
       call. = FALSE
