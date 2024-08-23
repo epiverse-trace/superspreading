@@ -16,8 +16,8 @@
 #' @details
 #' Calculates the expected proportion of transmission from a given
 #' proportion of infectious cases. There are two methods to calculate this with
-#' distinct formulations, \eqn{p_{80}} and \eqn{t_{20}} these can be specified by
-#' the `method` argument.
+#' distinct formulations, \eqn{p_{80}} and \eqn{t_{20}} these can be specified
+#' by the `method` argument.
 #'
 #' `method = p_80` calculates relative transmission heterogeneity
 #' from the offspring distribution of secondary cases, \eqn{Z}, where the upper
