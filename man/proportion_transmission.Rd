@@ -36,8 +36,9 @@ numerically (i.e. simulate secondary contacts) or analytically. Default is
 
 \item{...}{\link{dots} not used, extra arguments supplied will cause a warning.}
 
-\item{offspring_dist}{An \verb{<epidist>} object. An S3 class for working with
-epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}.}
+\item{offspring_dist}{An \verb{<epiparameter>} object. An S3 class for working
+with epidemiological parameters/distributions, see
+\code{\link[epiparameter:epiparameter]{epiparameter::epiparameter()}}.}
 
 \item{format_prop}{A \code{logical} determining whether the proportion column
 of the \verb{<data.frame>} returned by the function is formatted as a string with

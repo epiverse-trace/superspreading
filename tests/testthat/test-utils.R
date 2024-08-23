@@ -1,41 +1,41 @@
 if (requireNamespace("epiparameter", quietly = TRUE)) {
-  edist <- suppressMessages(
-    epiparameter::epidist_db(
+  od <- suppressMessages(
+    epiparameter::epiparameter_db(
       disease = "SARS",
       epi_dist = "offspring distribution",
       author = "Lloyd-Smith",
-      single_epidist = TRUE
+      single_epiparameter = TRUE
     )
   )
 }
 
 test_that("get_param works as expected", {
   skip_if_not_installed(pkg = "epiparameter")
-  expect_type(get_epidist_param(epidist = edist, parameter = "R"), "double")
-  expect_type(get_epidist_param(epidist = edist, parameter = "k"), "double")
+  expect_type(get_epiparameter_param(epiparameter = od, parameter = "R"), "double")
+  expect_type(get_epiparameter_param(epiparameter = od, parameter = "k"), "double")
 })
 
 test_that("get_param fails as expected", {
   skip_if_not_installed(pkg = "epiparameter")
   expect_error(
-    get_epidist_param(epidist = edist, parameter = "random"),
+    get_epiparameter_param(epiparameter = od, parameter = "random"),
     regexp = "(arg)*(should be one of)*(R)*(k)"
   )
-  expect_error(get_epidist_param(epidist = list(), parameter = "R"))
+  expect_error(get_epiparameter_param(epiparameter = list(), parameter = "R"))
 })
 
 test_that("get_param fails as expected with incorrect parameters", {
   skip_if_not_installed(pkg = "epiparameter")
-  edist <- suppressMessages(
-    epiparameter::epidist_db(
+  od <- suppressMessages(
+    epiparameter::epiparameter_db(
       disease = "COVID-19",
       epi_dist = "incubation period",
       author = "Linton",
-      single_epidist = TRUE
+      single_epiparameter = TRUE
     )
   )
   expect_error(
-    get_epidist_param(epidist = edist, parameter = "R"),
+    get_epiparameter_param(epiparameter = od, parameter = "R"),
     regexp = "(arg)*(should be one of)*(R)*(k)"
   )
 })

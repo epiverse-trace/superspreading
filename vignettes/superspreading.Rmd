@@ -121,15 +121,15 @@ Here we can use [{epiparameter}](https://github.com/epiverse-trace/epiparameter)
 diseases and evaluate how likely they are to cause epidemics.
 
 ```{r, epiparam}
-sars <- epidist_db(
+sars <- epiparameter_db(
   disease = "SARS",
   epi_dist = "offspring distribution",
-  single_epidist = TRUE
+  single_epiparameter = TRUE
 )
-evd <- epidist_db(
+evd <- epiparameter_db(
   disease = "Ebola Virus Disease",
   epi_dist = "offspring distribution",
-  single_epidist = TRUE
+  single_epiparameter = TRUE
 )
 ```
 

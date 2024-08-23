@@ -126,20 +126,20 @@ test_that(".prop_transmission_analytical works as expected", {
   )
 })
 
-test_that("proportion_transmission works with <epidist>", {
+test_that("proportion_transmission works with <epiparameter>", {
   skip_if_not_installed(pkg = "epiparameter")
-  edist <- suppressMessages(
-    epiparameter::epidist_db(
+  od <- suppressMessages(
+    epiparameter::epiparameter_db(
       disease = "SARS",
       epi_dist = "offspring distribution",
       author = "Lloyd-Smith",
-      single_epidist = TRUE
+      single_epiparameter = TRUE
     )
   )
   expect_snapshot(
     proportion_transmission(
       percent_transmission = 0.8,
-      offspring_dist = edist
+      offspring_dist = od
     )
   )
 })
@@ -166,9 +166,9 @@ test_that("proportion_transmission works for t_20 method", {
   expect_equal(df$prop_20, expected = 0.20, tolerance = 0.1)
 })
 
-test_that("proportion_transmission fails without R and k or <epidist>", {
+test_that("proportion_transmission fails without R and k or <epiparameter>", {
   expect_error(
     proportion_transmission(percent_transmission = 0.8),
-    regexp = "Only one of R and k or <epidist> must be supplied."
+    regexp = "Only one of R and k or <epiparameter> must be supplied."
   )
 })
