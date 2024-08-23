@@ -41,10 +41,10 @@
     Output
       [1] 0.1084924
 
-# probability_epidemic works with <epidist>
+# probability_epidemic works with <epiparameter>
 
     Code
-      probability_epidemic(num_init_infect = 1, offspring_dist = edist)
+      probability_epidemic(num_init_infect = 1, offspring_dist = od)
     Output
       [1] 0.1198705
 

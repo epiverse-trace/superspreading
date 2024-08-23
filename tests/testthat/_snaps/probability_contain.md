@@ -73,17 +73,17 @@
       "value": [0.7636]
     }
 
-# probability_contain works with <epidist>
+# probability_contain works with <epiparameter>
 
     Code
-      probability_contain(num_init_infect = 1, pop_control = 0.1, offspring_dist = edist)
+      probability_contain(num_init_infect = 1, pop_control = 0.1, offspring_dist = od)
     Output
       [1] 0.9037105
 
 ---
 
     Code
-      probability_contain(num_init_infect = 1, ind_control = 0.1, offspring_dist = edist)
+      probability_contain(num_init_infect = 1, ind_control = 0.1, offspring_dist = od)
     Output
       [1] 0.9133394
 
@@ -91,7 +91,7 @@
 
     Code
       probability_contain(num_init_infect = 5, ind_control = 0.1, pop_control = 0.1,
-        offspring_dist = edist)
+        offspring_dist = od)
     Output
       [1] 0.7168911
 

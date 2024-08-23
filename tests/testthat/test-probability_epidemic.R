@@ -94,25 +94,25 @@ test_that("probability_epidemic works for R > 1", {
   )
 })
 
-test_that("probability_epidemic works with <epidist>", {
+test_that("probability_epidemic works with <epiparameter>", {
   skip_if_not_installed(pkg = "epiparameter")
-  edist <- suppressMessages(
-    epiparameter::epidist_db(
+  od <- suppressMessages(
+    epiparameter::epiparameter_db(
       disease = "SARS",
       epi_dist = "offspring distribution",
       author = "Lloyd-Smith",
-      single_epidist = TRUE
+      single_epiparameter = TRUE
     )
   )
   expect_snapshot(
-    probability_epidemic(num_init_infect = 1, offspring_dist = edist)
+    probability_epidemic(num_init_infect = 1, offspring_dist = od)
   )
 })
 
-test_that("probability_epidemic fails without R and k or <epidist>", {
+test_that("probability_epidemic fails without R and k or <epiparameter>", {
   expect_error(
     probability_epidemic(num_init_infect = 1),
-    regexp = "Only one of R and k or <epidist> must be supplied."
+    regexp = "Only one of R and k or <epiparameter> must be supplied."
   )
 })
 

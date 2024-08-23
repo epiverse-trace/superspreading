@@ -43,8 +43,9 @@ default arguments in \code{\link[bpmodels:chain_sim]{bpmodels::chain_sim()}}. Se
 \item{case_threshold}{A number for the threshold of the number of cases below
 which the epidemic is considered contained.}
 
-\item{offspring_dist}{An \verb{<epidist>} object. An S3 class for working with
-epidemiological parameters/distributions, see \code{\link[epiparameter:epidist]{epiparameter::epidist()}}.}
+\item{offspring_dist}{An \verb{<epiparameter>} object. An S3 class for working
+with epidemiological parameters/distributions, see
+\code{\link[epiparameter:epiparameter]{epiparameter::epiparameter()}}.}
 }
 \value{
 A \code{number} for the probability of containment.

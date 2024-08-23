@@ -65,10 +65,10 @@
     Output
       [1] 0.264419
 
-# proportion_transmission works with <epidist>
+# proportion_transmission works with <epiparameter>
 
     Code
-      proportion_transmission(percent_transmission = 0.8, offspring_dist = edist)
+      proportion_transmission(percent_transmission = 0.8, offspring_dist = od)
     Output
            R    k prop_80
       1 1.63 0.16     13%

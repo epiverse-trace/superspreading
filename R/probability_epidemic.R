@@ -20,8 +20,9 @@
 #' default optimisation settings. Currently only `"fit_method"` is accepted
 #' and can be either `"optim"` (default) or `"grid"` for numerical
 #' optimisation routine or grid search, respectively.
-#' @param offspring_dist An `<epidist>` object. An S3 class for working with
-#' epidemiological parameters/distributions, see [epiparameter::epidist()].
+#' @param offspring_dist An `<epiparameter>` object. An S3 class for working
+#' with epidemiological parameters/distributions, see
+#' [epiparameter::epiparameter()].
 #'
 #' @return A value with the probability of a large epidemic.
 #' @export
@@ -89,14 +90,17 @@ probability_extinct <- function(R,
                                 offspring_dist) {
   input_params <- missing(R) && missing(k)
   if (!xor(input_params, missing(offspring_dist))) {
-    stop("Only one of R and k or <epidist> must be supplied.", call. = FALSE)
+    stop(
+      "Only one of R and k or <epiparameter> must be supplied.",
+      call. = FALSE
+    )
   }
 
   # check inputs
   if (input_params) {
-    checkmate::assert_class(offspring_dist, classes = "epidist")
-    R <- get_epidist_param(epidist = offspring_dist, parameter = "R")
-    k <- get_epidist_param(epidist = offspring_dist, parameter = "k")
+    checkmate::assert_class(offspring_dist, classes = "epiparameter")
+    R <- get_epiparameter_param(epiparameter = offspring_dist, parameter = "R")
+    k <- get_epiparameter_param(epiparameter = offspring_dist, parameter = "k")
   }
 
   checkmate::assert_number(R, lower = 0, finite = TRUE)

@@ -91,21 +91,21 @@ test_that("probability_contain works as when using dots", {
   )
 })
 
-test_that("probability_contain works with <epidist>", {
+test_that("probability_contain works with <epiparameter>", {
   skip_if_not_installed(pkg = "epiparameter")
-  edist <- suppressMessages(
-    epiparameter::epidist_db(
+  od <- suppressMessages(
+    epiparameter::epiparameter_db(
       disease = "SARS",
       epi_dist = "offspring distribution",
       author = "Lloyd-Smith",
-      single_epidist = TRUE
+      single_epiparameter = TRUE
     )
   )
   expect_snapshot(
     probability_contain(
       num_init_infect = 1,
       pop_control = 0.1,
-      offspring_dist = edist
+      offspring_dist = od
     )
   )
 
@@ -113,7 +113,7 @@ test_that("probability_contain works with <epidist>", {
     probability_contain(
       num_init_infect = 1,
       ind_control = 0.1,
-      offspring_dist = edist
+      offspring_dist = od
     )
   )
 
@@ -122,7 +122,7 @@ test_that("probability_contain works with <epidist>", {
       num_init_infect = 5,
       ind_control = 0.1,
       pop_control = 0.1,
-      offspring_dist = edist
+      offspring_dist = od
     )
   )
 })
@@ -148,9 +148,9 @@ test_that("probability_contain fails using dots with incorrect name", {
   )
 })
 
-test_that("probability_contain fails without R and k or <epidist>", {
+test_that("probability_contain fails without R and k or <epiparameter>", {
   expect_error(
     probability_contain(num_init_infect = 1, pop_control = 0.5),
-    regexp = "Only one of R and k or <epidist> must be supplied."
+    regexp = "Only one of R and k or <epiparameter> must be supplied."
   )
 })
