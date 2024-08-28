@@ -144,6 +144,28 @@ test_that("proportion_transmission works with <epiparameter>", {
   )
 })
 
+test_that("proportion_transmission works for t_20 method", {
+  # R0 = 3 and k = 1, the upper 20% most infectious individuals are expected
+  # to produce 52% of all transmissions
+  df <- proportion_transmission(
+    R = 3,
+    k = 1,
+    percent_transmission = 0.2,
+    method = "t_20",
+    format_prop = FALSE
+  )
+  expect_equal(df$prop_20, expected = 0.52, tolerance = 0.1)
+
+  df <- proportion_transmission(
+    R = 2,
+    k = 10e4,
+    percent_transmission = 0.2,
+    method = "t_20",
+    format_prop = FALSE
+  )
+  expect_equal(df$prop_20, expected = 0.20, tolerance = 0.1)
+})
+
 test_that("proportion_transmission fails without R and k or <epiparameter>", {
   expect_error(
     proportion_transmission(percent_transmission = 0.8),

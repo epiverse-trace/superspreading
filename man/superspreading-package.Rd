@@ -23,6 +23,7 @@ Useful links:
 Authors:
 \itemize{
   \item Adam Kucharski \email{adam.kucharski@lshtm.ac.uk} (\href{https://orcid.org/0000-0001-8814-9421}{ORCID}) [copyright holder]
+  \item Dillon C. Adam \email{dcadam@hku.hk} (\href{https://orcid.org/0000-0002-7485-9905}{ORCID})
 }
 
 Other contributors:

@@ -193,3 +193,68 @@ ic_tbl <- function(..., sort_by = c("AIC", "BIC", "none")) {
 }
 
 `%||%` <- function(x, y) if (is.null(x)) y else x
+
+#' Defines the gamma functions in terms of the mean reproductive number
+#' (R) and the dispersion parameter (k)
+#'
+#' @description
+#' * [dgammaRk()] for the gamma density function
+#' * [pgammaRk()] for the gamma distribution function
+#' * [fvx()] fore the gamma probability density function (pdf) describing the
+#' individual reproductive number \eqn{\nu} given R0 and k
+#'
+#' @inheritParams stats::dgamma
+#' @inheritParams probability_epidemic
+#'
+#' @keywords internal
+#' @name gamma
+dgammaRk <- function(x, R, k) {
+  out <- stats::dgamma(x, shape = k, scale = R / k)
+  return(out)
+}
+
+#' @name gamma
+pgammaRk <- function(x, R, k) {
+  out <- stats::pgamma(x, shape = k, scale = R / k)
+  return(out)
+}
+
+#' @name gamma
+fvx <- function(x, R, k) {
+  dgammaRk(x = x, R = R, k = k)
+}
+
+
+#' Generates a log scaled sequence of real numbers
+#'
+#' @inheritParams base::seq
+#'
+#' @inherit base::seq return
+#' @keywords internal
+lseq <- function(from, to, length.out) {
+  exp(seq(log(from), log(to), length.out = length.out))
+}
+
+#' Unitroot solver for the solution to u, or the value of x from the gamma CDF
+#' given the desired proportion of transmission
+#'
+#' @return A `numeric` with the location of the root.
+#' @keywords internal
+#' @noRd
+solve_for_u <- function(prop, R, k) {
+  f <- function(x, prop) {
+    res <- 1 - pgammaRk(x, R, k)
+    res - prop
+  }
+  # Initial interval for u
+  lower <- 0
+  upper <- 1
+  # Find the root using uniroot
+  root <- stats::uniroot(
+    f,
+    prop = prop,
+    interval = c(lower, upper),
+    extendInt = "yes"
+  )
+  return(root$root)
+}
