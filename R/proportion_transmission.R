@@ -185,7 +185,7 @@ proportion_transmission <- function(R, k,
     }
 
     if (format_prop) {
-      prop <- paste0(round(prop * 100, digits = 1), "%")
+      prop <- paste0(signif(prop * 100, digits = 3), "%")
     }
     # df is ways i x 3 so insert value into col 3
     df[i, 3] <- prop
