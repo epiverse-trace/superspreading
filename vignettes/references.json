@@ -785,5 +785,59 @@
 				]
 			]
 		}
+	},
+	{
+		"id": "endoEstimatingOverdispersionCOVID192020",
+		"type": "article-journal",
+		"abstract": "Background:\n              A novel coronavirus disease (COVID-19) outbreak has now spread to a number of countries worldwide. While sustained transmission chains of human-to-human transmission suggest high basic reproduction number\n              R\n              0\n              , variation in the number of secondary transmissions (often characterised by so-called superspreading events) may be large as some countries have observed fewer local transmissions than others.\n            \n            \n              Methods:\n              We quantified individual-level variation in COVID-19 transmission by applying a mathematical model to observed outbreak sizes in affected countries. We extracted the number of imported and local cases in the affected countries from the World Health Organization situation report and applied a branching process model where the number of secondary transmissions was assumed to follow a negative-binomial distribution.\n            \n            \n              Results:\n              Our model suggested a high degree of individual-level variation in the transmission of COVID-19. Within the current consensus range of\n              R\n              0\n              (2-3), the overdispersion parameter\n              k\n              of a negative-binomial distribution was estimated to be around 0.1 (median estimate 0.1; 95% CrI: 0.05-0.2 for R0 = 2.5), suggesting that 80% of secondary transmissions may have been caused by a small fraction of infectious individuals (~10%). A joint estimation yielded likely ranges for\n              R\n              0\n              and\n              k\n              (95% CrIs:\n              R\n              0\n              1.4-12;\n              k\n              0.04-0.2); however, the upper bound of\n              R\n              0\n              was not well informed by the model and data, which did not notably differ from that of the prior distribution.\n            \n            \n              Conclusions:\n              Our finding of a highly-overdispersed offspring distribution highlights a potential benefit to focusing intervention efforts on superspreading. As most infected individuals do not contribute to the expansion of an epidemic, the effective reproduction number could be drastically reduced by preventing relatively rare superspreading events.",
+		"container-title": "Wellcome Open Research",
+		"DOI": "10.12688/wellcomeopenres.15842.3",
+		"ISSN": "2398-502X",
+		"journalAbbreviation": "Wellcome Open Res",
+		"language": "en",
+		"page": "67",
+		"source": "DOI.org (Crossref)",
+		"title": "Estimating the overdispersion in COVID-19 transmission using outbreak sizes outside China",
+		"URL": "https://wellcomeopenresearch.org/articles/5-67/v3",
+		"volume": "5",
+		"author": [
+			{
+				"family": "Endo",
+				"given": "Akira"
+			},
+			{
+				"literal": "Centre for the Mathematical Modelling of Infectious Diseases COVID-19 Working Group"
+			},
+			{
+				"family": "Abbott",
+				"given": "Sam"
+			},
+			{
+				"family": "Kucharski",
+				"given": "Adam J."
+			},
+			{
+				"family": "Funk",
+				"given": "Sebastian"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					9,
+					2
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2020",
+					7,
+					10
+				]
+			]
+		}
 	}
 ]
