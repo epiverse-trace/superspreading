@@ -76,6 +76,8 @@ Suggests:
     spelling,
     ggtext,
     scales,
+    purrr,
+    dplyr,
     testthat (>= 3.0.0)
 Remotes:
     epiverse-trace/epiparameter,
