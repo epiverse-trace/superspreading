@@ -77,6 +77,23 @@ test_that("proportion_transmission works as expected for format_prop = FALSE", {
   )
 })
 
+test_that("proportion_transmission works as expected for Inf k", {
+  expect_snapshot(
+    proportion_transmission(R = 2, k = Inf, percent_transmission = 0.8)
+  )
+})
+
+test_that("proportion_transmission works for k > 1e7 for method = t_20", {
+  expect_snapshot(
+    proportion_transmission(
+      R = 2,
+      k = 1e10,
+      percent_transmission = 0.8,
+      method = "t_20"
+    )
+  )
+})
+
 test_that("proportion_transmission fails as expected", {
   expect_error(
     proportion_transmission(R = "1", k = 0.1, percent_transmission = 0.8),
@@ -101,6 +118,22 @@ test_that("proportion_transmission fails as expected", {
       simulate = 1
     ),
     regexp = "Assertion on 'simulate' failed"
+  )
+
+  expect_error(
+    proportion_transmission(R = 1, k = 0, percent_transmission = 0.8),
+    regexp = "k cannot be zero"
+  )
+
+  expect_error(
+    proportion_transmission(
+      R = 1,
+      k = 0.1,
+      percent_transmission = 0.8,
+      method = "t_20",
+      simulate = TRUE
+    ),
+    regexp = "The simulate argument must be FALSE when method = t_20."
   )
 })
 
