@@ -48,6 +48,10 @@ articles:
   navbar: Superspreading for decision-making
   contents:
   - epidemic_risk
+- title: Proportion transmission
+  navbar: Proportion transmission
+  contents:
+  - proportion_transmission
 - title: Developer Documentation
   navbar: Developer Documentation
   contents:
