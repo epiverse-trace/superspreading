@@ -17,7 +17,10 @@ Conall
 CoV
 COVID
 Delignette
+dplyr
 Driessche
+du
+dx
 Dutang
 Eggo
 Endo
@@ -41,11 +44,13 @@ infector
 infectors
 infty
 init
+int
 integerish
 knitr
 Koen
 Kremer
 Laure
+lfloor
 Lifecycle
 Lim
 linetype
@@ -58,6 +63,7 @@ Meuwissen
 mpox
 N’Faly
 Natsal
+neq
 Niel
 num
 ORCID
@@ -70,7 +76,9 @@ pointrange
 poisson
 Poisson
 prob
+purrr
 res
+rfloor
 rightarrow
 rlang
 rmarkdown
@@ -79,11 +87,13 @@ SARS
 Schreiber
 Selina
 Sien
+sim
 SJ
 Soropogui
 testthat
 Torneri
 Tsang
+u
 vars
 Verdonschot
 viridis
