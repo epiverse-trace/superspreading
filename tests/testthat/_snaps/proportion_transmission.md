@@ -50,6 +50,26 @@
       8 2 0.3 0.20282175
       9 3 0.3 0.21039108
 
+# proportion_transmission works as expected for Inf k
+
+    Code
+      proportion_transmission(R = 2, k = Inf, percent_transmission = 0.8)
+    Message
+      Infinite values of k are being approximated by 1e5 for calculations.
+    Output
+        R     k prop_80
+      1 2 1e+05   52.9%
+
+# proportion_transmission works for k > 1e7 for method = t_20
+
+    Code
+      proportion_transmission(R = 2, k = 1e+10, percent_transmission = 0.8, method = "t_20")
+    Message
+      Values of k > 1e7 are set to 1e7 to due to numerical integration issues at higher values.
+    Output
+        R     k prop_80
+      1 2 1e+10   80.4%
+
 # .prop_transmission_numerical works as expected
 
     {
