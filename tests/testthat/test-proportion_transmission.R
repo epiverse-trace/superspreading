@@ -94,6 +94,25 @@ test_that("proportion_transmission works for k > 1e7 for method = t_20", {
   )
 })
 
+test_that("proportion_transmission works for percent_transmission > 0.99", {
+  expect_snapshot(
+    proportion_transmission(
+      R = 2,
+      k = 0.5,
+      percent_transmission = 0.9999,
+      method = "p_80"
+    )
+  )
+  expect_snapshot(
+    proportion_transmission(
+      R = 2,
+      k = 0.5,
+      percent_transmission = 0.9999,
+      method = "t_20"
+    )
+  )
+})
+
 test_that("proportion_transmission fails as expected", {
   expect_error(
     proportion_transmission(R = "1", k = 0.1, percent_transmission = 0.8),
@@ -122,7 +141,7 @@ test_that("proportion_transmission fails as expected", {
 
   expect_error(
     proportion_transmission(R = 1, k = 0, percent_transmission = 0.8),
-    regexp = "k cannot be zero"
+    regexp = "k must be greater than zero."
   )
 
   expect_error(
