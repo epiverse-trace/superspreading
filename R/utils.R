@@ -194,6 +194,18 @@ ic_tbl <- function(..., sort_by = c("AIC", "BIC", "none")) {
 
 `%||%` <- function(x, y) if (is.null(x)) y else x
 
+`%gt%` <- function(x, y) {
+  if (any(x > y)) {
+    # message uses var name in current frame so may not match user-defined var
+    message(
+      "Values of `", deparse(substitute(x)), "` > ", y, " are set to ", y,
+      " due to numerical integration issues at higher values."
+    )
+    x[x > y] <- y
+  }
+  x
+}
+
 #' Defines the gamma functions in terms of the mean reproductive number
 #' (R) and the dispersion parameter (k)
 #'
