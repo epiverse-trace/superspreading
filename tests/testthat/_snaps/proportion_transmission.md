@@ -70,6 +70,24 @@
         R     k prop_80
       1 2 1e+10   80.4%
 
+# proportion_transmission works for percent_transmission > 0.99
+
+    Code
+      proportion_transmission(R = 2, k = 0.5, percent_transmission = 0.9999, method = "p_80")
+    Output
+        R   k prop_99.99
+      1 2 0.5      55.3%
+
+---
+
+    Code
+      proportion_transmission(R = 2, k = 0.5, percent_transmission = 0.9999, method = "t_20")
+    Message
+      Values of percent_transmission greater than 0.99 are set to 0.99 due to numerical integration issues at higher values.
+    Output
+        R   k prop_99.99
+      1 2 0.5       100%
+
 # .prop_transmission_numerical works as expected
 
     {
