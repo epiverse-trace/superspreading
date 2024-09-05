@@ -264,6 +264,13 @@ proportion_transmission <- function(R, k,
       "issues at higher values."
     ))
   }
+  if (percent_transmission > 0.99) {
+    percent_transmission <- 0.99
+    message(
+      "Values of percent_transmission greater than 0.99 are set to 0.99 due ",
+      "to numerical integration issues at higher values."
+    )
+  }
   u <- solve_for_u(prop = percent_transmission, R = R, k = k)
   integral_result <- stats::integrate(
     function(u) u * fvx(u, R, k), lower = 0, upper = u
