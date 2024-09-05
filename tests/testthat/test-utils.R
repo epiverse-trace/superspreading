@@ -117,3 +117,18 @@ test_that(".fit fails as expected", {
     regexp = "Arguments supplied in `...` not valid"
   )
 })
+
+test_that("%gt% operator works as expected", {
+  expect_identical(1 %gt% 2, 1)
+  expect_identical(1 %gt% 1, 1)
+  expect_identical(suppressMessages(2 %gt% 1), 1)
+  expect_message(
+    2 %gt% 1,
+    regexp = "(Values of `2` > 1 are set to 1)"
+  )
+  var <- 2
+  expect_message(
+    var %gt% 1,
+    regexp = "(Values of `var` > 1 are set to 1)"
+  )
+})
