@@ -260,10 +260,10 @@ proportion_transmission <- function(R, k,
 .prop_transmission_t20 <- function(R, k, percent_transmission) {
   if (any(k > 1e7)) {
     k[k > 1e7] <- 1e7
-    message(paste(
-      "Values of k > 1e7 are set to 1e7 to due to numerical integration",
+    message(
+      "Values of k > 1e7 are set to 1e7 to due to numerical integration ",
       "issues at higher values."
-    ))
+    )
   }
   if (percent_transmission > 0.99) {
     percent_transmission <- 0.99
