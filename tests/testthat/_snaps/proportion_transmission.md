@@ -65,7 +65,7 @@
     Code
       proportion_transmission(R = 2, k = 1e+10, percent_transmission = 0.8, method = "t_20")
     Message
-      Values of k > 1e7 are set to 1e7 to due to numerical integration issues at higher values.
+      Values of `k` > 1e+07 are set to 1e+07 due to numerical integration issues at higher values.
     Output
         R     k prop_80
       1 2 1e+10   80.4%
@@ -83,7 +83,7 @@
     Code
       proportion_transmission(R = 2, k = 0.5, percent_transmission = 0.9999, method = "t_20")
     Message
-      Values of percent_transmission greater than 0.99 are set to 0.99 due to numerical integration issues at higher values.
+      Values of `percent_transmission` > 0.99 are set to 0.99 due to numerical integration issues at higher values.
     Output
         R   k prop_99.99
       1 2 0.5       100%
