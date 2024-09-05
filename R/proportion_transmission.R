@@ -258,20 +258,8 @@ proportion_transmission <- function(R, k,
 #' @keywords internal
 #' @noRd
 .prop_transmission_t20 <- function(R, k, percent_transmission) {
-  if (any(k > 1e7)) {
-    k[k > 1e7] <- 1e7
-    message(
-      "Values of k > 1e7 are set to 1e7 to due to numerical integration ",
-      "issues at higher values."
-    )
-  }
-  if (percent_transmission > 0.99) {
-    percent_transmission <- 0.99
-    message(
-      "Values of percent_transmission greater than 0.99 are set to 0.99 due ",
-      "to numerical integration issues at higher values."
-    )
-  }
+  k <- k %gt% 1e7
+  percent_transmission <- percent_transmission %gt% 0.99
   u <- solve_for_u(prop = percent_transmission, R = R, k = k)
   integral_result <- stats::integrate(
     function(u) u * fvx(u, R, k), lower = 0, upper = u
