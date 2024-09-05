@@ -158,7 +158,8 @@ proportion_transmission <- function(R, k,
   }
   checkmate::assert_number(percent_transmission, lower = 0, upper = 1)
   stopifnot(
-    "percent_transmission must be less than 1." = percent_transmission != 1
+    "percent_transmission must be less than 1." = percent_transmission != 1,
+    "percent_transmission must be greater than 0." = percent_transmission != 0
   )
   checkmate::assert_logical(simulate, any.missing = FALSE, len = 1)
   checkmate::assert_logical(format_prop, any.missing = FALSE, len = 1)
