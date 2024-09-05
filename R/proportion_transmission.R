@@ -148,7 +148,7 @@ proportion_transmission <- function(R, k,
   checkmate::assert_numeric(R, lower = 0, finite = TRUE)
   checkmate::assert_numeric(k, lower = 0)
   # checkmate lower is >= 0 but k must be > 0
-  stopifnot("k cannot be zero." = k != 0)
+  stopifnot("k must be greater than zero." = k != 0)
   # k must be finite for analytical p_80 and t_20 methods
   if (any(is.infinite(k))) {
     k[is.infinite(k)] <- 1e5
