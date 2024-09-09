@@ -10,9 +10,11 @@ probability_contain(
   num_init_infect,
   ind_control = 0,
   pop_control = 0,
-  stochastic = FALSE,
+  simulate = FALSE,
   ...,
   case_threshold = 100,
+  outbreak_time = Inf,
+  generation_time = NULL,
   offspring_dist
 )
 }
@@ -33,15 +35,28 @@ control measures. Between \code{0} (default) and \code{1} (maximum).}
 \item{pop_control}{A \code{numeric} specifying the strength of population-level
 control measures. Between \code{0} (default) and \code{1} (maximum).}
 
-\item{stochastic}{Whether to use a stochastic branching process model or the
-analytical probability of extinction. Default (\code{FALSE}) is to use the
-analytical calculation.}
+\item{simulate}{A \code{logical} boolean determining whether the probability
+of containment is calculated analytically or numerically using a stochastic
+branching process model. Default is \code{FALSE} which calls
+\code{\link[=probability_extinct]{probability_extinct()}}, setting to \code{TRUE} uses a branching process and
+enables setting the \code{case_threshold}, \code{outbreak_time} and \code{generation_time}
+arguments.}
 
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> Named elements to replace
-default arguments in \code{\link[bpmodels:chain_sim]{bpmodels::chain_sim()}}. See details.}
+default arguments in \code{\link[=chain_sim]{chain_sim()}}. See details.}
 
 \item{case_threshold}{A number for the threshold of the number of cases below
-which the epidemic is considered contained.}
+which the epidemic is considered contained. \code{case_threshold} is only used
+when \code{simulate = TRUE}.}
+
+\item{outbreak_time}{A number for the time since the start of
+the outbreak to determine if outbreaks are contained within a given period
+of time. \code{outbreak_time} is only used when \code{simulate = TRUE}.}
+
+\item{generation_time}{A \code{function} to generate generation times. The
+function must have a single argument and return a \code{numeric} vector with
+generation times. See details for example. The \code{function} can be defined or
+anonymous. \code{generation_time} is only used when \code{simulate = TRUE}.}
 
 \item{offspring_dist}{An \verb{<epiparameter>} object. An S3 class for working
 with epidemiological parameters/distributions, see
@@ -51,14 +66,36 @@ with epidemiological parameters/distributions, see
 A \code{number} for the probability of containment.
 }
 \description{
-Containment is defined as the size of the transmission chain
-not reaching the \code{case_threshold} (default = 100).
+Outbreak containment is defined as outbreak extinction when
+\code{simulate = FALSE}. When \code{simulate = FALSE}, \code{\link[=probability_contain]{probability_contain()}} is
+equivalent to calling \code{\link[=probability_extinct]{probability_extinct()}}.
+
+When \code{simulate = TRUE}, outbreak containment is defined by the
+\code{case_threshold} (default = 100) and \code{outbreak_time} arguments.
+Firstly, \code{case_threshold} sets the size of the transmission chain below
+which the outbreak is considered contained. Secondly, \code{outbreak_time} sets
+the time duration from the start of the outbreak within which the outbreak
+is contained if there is no more onwards transmission beyond this time.
+When setting an \code{outbreak_time}, a \code{generation_time} is also required.
+\code{case_threshold} and \code{outbreak_time} can be jointly set.
+Overall, when \code{simulate = TRUE}, containment is defined as the size and
+time duration of a transmission chain not reaching the \code{case_threshold}
+and \code{outbreak_time}, respectively.
 }
 \details{
-When using \code{stochastic = TRUE}, the default arguments to simulate the
-transmission chains with \code{\link[bpmodels:chain_sim]{bpmodels::chain_sim()}} are \code{1e5} replicates,
+When using \code{simulate = TRUE}, the default arguments to simulate the
+transmission chains with \code{\link[=chain_sim]{chain_sim()}} are \code{1e5} replicates,
 a negative binomial (\code{nbinom}) offspring distribution, parameterised with
 \code{R} (and \code{pop_control} if > 0) and \code{k}.
+
+When setting the \code{outbreak_time} argument, the \code{generation_time} argument is
+also required. The \code{generation_time} argument requires a random number
+generator function. For example, if we assume the generation time is
+lognormally distributed with \code{meanlog = 1} and \code{sdlog = 1.5}, then we can
+define the \code{function} to pass to \code{generation_time} as:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{function(x) rlnorm(x, meanlog = 1, sdlog = 1.5)
+}\if{html}{\out{</div>}}
 }
 \examples{
 # population-level control measures
@@ -78,6 +115,21 @@ probability_contain(
 
 # multi initial infections with population-level control measures
 probability_contain(R = 1.5, k = 0.5, num_init_infect = 5, pop_control = 0.1)
+
+# probability of containment within a certain amount of time
+# this requires parameterising a generation time
+gt <- function(n) {
+  rlnorm(n, meanlog = 1, sdlog = 1.5)
+}
+probability_contain(
+  R = 1.5,
+  k = 0.5,
+  num_init_infect = 1,
+  stochastic = TRUE,
+  case_threshold = 100,
+  outbreak_time = 20,
+  generation_time = gt
+)
 }
 \references{
 Lloyd-Smith, J. O., Schreiber, S. J., Kopp, P. E., & Getz, W. M. (2005)
