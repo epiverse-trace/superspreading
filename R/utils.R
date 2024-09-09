@@ -270,3 +270,163 @@ solve_for_u <- function(prop, R, k) {
   )
   return(root$root)
 }
+
+
+#' Simulate transmission chains using a stochastic branching process
+#'
+#' @description
+#' Code modified from the [bpmodels::chain_sim()] function.
+#' The function `chain_sim()` function from \pkg{bpmodels} is reused with
+#' permission and licensed under MIT as is \pkg{bpmodels}.
+#' \pkg{bpmodels} is not on CRAN and is retired.
+#'
+#' @author Sebastian Funk, James M. Azam, Joshua W. Lambert
+#'
+#' @param n Number of simulations to run.
+#' @param offspring Offspring distribution: a character string corresponding to
+#' the R distribution function (e.g., "pois" for Poisson, where
+#' [rpois()] is the R function to generate Poisson random numbers).
+#' @param stat String; Statistic to calculate. Can be one of:
+#' \itemize{
+#'   \item "size": the total number of offspring.
+#'   \item "length": the total number of ancestors.
+#' }
+#' @param stat_threshold A size or length above which the simulation results
+#' should be set to `Inf`. Defaults to `Inf`, resulting in no results
+#' ever set to `Inf`
+#' @param generation_time The generation time generator function; the name of a
+#' user-defined named or anonymous function with only one argument `n`,
+#' representing the number of generation times to generate.
+#' @param tf End time (if `generation_time` interval is given).
+#' @param ... Parameters of the offspring distribution as required by R.
+#'
+#' @return A `<data.frame>` with columns `n` (simulation ID), `id` (a unique
+#' ID within each simulation for each individual element of the chain),
+#' `ancestor` (the ID of the ancestor of each element), and `generation`. A
+#' `time` column is also appended if the generation_time interval is supplied to
+#' `serial`.
+#' @keywords internal
+.chain_sim <- function(n, offspring, stat = c("size", "length"),
+                      stat_threshold = Inf, generation_time, tf = Inf, ...) {
+  stat <- match.arg(stat)
+
+  # first, get random function as given by `offspring`
+  if (!is.character(offspring)) {
+    stop(sprintf("%s %s",
+                 "Object passed as 'offspring' is not a character string.",
+                 "Did you forget to enclose it in quotes?"
+    )
+    )
+  }
+
+  roffspring_name <- paste0("r", offspring)
+  if (!(exists(roffspring_name)) || !is.function(get(roffspring_name))) {
+    stop("Function ", roffspring_name, " does not exist.")
+  }
+  # If both parameters of the negative binomial are zero, you get NaNs
+  if (roffspring_name == "rnbinom" && all(c(...) == 0)) {
+    stop(
+      "The negative binomial parameters must have at least one ",
+      "non-zero parameter."
+    )
+  }
+
+  if (!missing(generation_time)) {
+    if (!is.function(generation_time)) {
+      stop(sprintf("%s %s",
+                   "The `generation_time` argument must be a function",
+                   "(see details in ?chain_sim)."
+      )
+      )
+    }
+  } else if (!missing(tf)) {
+    stop("If `tf` is specified, `generation_time` must be specified too.")
+  }
+
+  stat_track <- rep(1, n) # track length or size (depending on `stat`)
+  n_offspring <- rep(1, n) # current number of offspring
+  sim <- seq_len(n) # track chains that are still being simulated
+
+  # initialise data frame to hold the trees
+  generation <- 1L
+  tdf <-
+    data.frame(
+      n = seq_len(n),
+      id = 1L,
+      ancestor = NA_integer_,
+      generation = generation
+    )
+
+  ancestor_ids <- rep(1, n)
+  if (!missing(generation_time)) {
+    tdf$time <- 0
+    times <- tdf$time
+  }
+
+  # next, simulate n chains
+  while (length(sim) > 0) {
+    # simulate next generation
+    next_gen <- get(roffspring_name)(n = sum(n_offspring[sim]), ...)
+    if (any(next_gen %% 1 > 0)) {
+      stop("Offspring distribution must return integers")
+    }
+
+    # record indices corresponding to the number of offspring
+    indices <- rep(sim, n_offspring[sim])
+
+    # initialise number of offspring
+    n_offspring <- rep(0, n)
+    # assign offspring sum to indices still being simulated
+    n_offspring[sim] <- tapply(next_gen, indices, sum)
+
+    # track size/length
+    if (stat == "size") {
+      stat_track <- stat_track + n_offspring
+    } else if (stat == "length") {
+      stat_track <- stat_track + pmin(1, n_offspring)
+    }
+
+    # record times/ancestors
+    if (sum(n_offspring[sim]) > 0) {
+      ancestors <- rep(ancestor_ids, next_gen)
+      current_max_id <- unname(tapply(ancestor_ids, indices, max))
+      indices <- rep(sim, n_offspring[sim])
+      ids <- rep(current_max_id, n_offspring[sim]) +
+        unlist(lapply(n_offspring[sim], seq_len))
+      generation <- generation + 1L
+      new_df <-
+        data.frame(
+          n = indices,
+          id = ids,
+          ancestor = ancestors,
+          generation = generation
+        )
+      if (!missing(generation_time)) {
+        times <- rep(times, next_gen) + generation_time(sum(n_offspring))
+        current_min_time <- unname(tapply(times, indices, min))
+        new_df$time <- times
+      }
+      tdf <- rbind(tdf, new_df)
+    }
+
+    # only continue to simulate chains that offspring and aren't of
+    # infinite size/length
+    sim <- which(n_offspring > 0 & stat_track < stat_threshold)
+    if (length(sim) > 0) {
+      if (!missing(generation_time)) {
+        # only continue to simulate chains that don't go beyond tf
+        sim <- intersect(sim, unique(indices)[current_min_time < tf])
+      }
+      if (!missing(generation_time)) {
+        times <- times[indices %in% sim]
+      }
+      ancestor_ids <- ids[indices %in% sim]
+    }
+  }
+
+  if (!missing(tf)) {
+    tdf <- tdf[tdf$time < tf, ]
+  }
+  rownames(tdf) <- NULL
+  return(tdf)
+}
