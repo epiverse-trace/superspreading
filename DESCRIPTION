@@ -27,9 +27,12 @@ Authors@R:
         person(
             given = "Sebastian",
             family = "Funk",
-            role = "ctb",
+            role = c("ctb", "cph"),
             email = "sebastian.funk@lshtm.ac.uk",
-            comment = c(ORCID = "0000-0002-2842-3406")
+            comment = c(
+              ORCID = "0000-0002-2842-3406",
+              ".chain_sim uses code from bpmodels::chain_sim"
+            )
         ),
         person(
             given = "Pratik",
@@ -48,7 +51,7 @@ Authors@R:
         person(
             given = "James M.",
             family = "Azam", 
-            role = c("rev"),
+            role = c("rev", "ctb"),
             email = "james.azam@lshtm.ac.uk",
             comment = c(ORCID = "0000-0001-5782-7330")
         )
