@@ -90,7 +90,7 @@
 #'   R = 1.5,
 #'   k = 0.5,
 #'   num_init_infect = 1,
-#'   stochastic = TRUE,
+#'   simulate = TRUE,
 #'   case_threshold = 100,
 #'   outbreak_time = 20,
 #'   generation_time = gt
@@ -138,7 +138,7 @@ probability_contain <- function(R,
   checkmate::assert_number(case_threshold, lower = 1)
   checkmate::assert_number(outbreak_time, lower = 0)
 
-  if (ind_control > 0 && stochastic) {
+  if (ind_control > 0 && simulate) {
     stop(
       "individual-level control not yet implemented for `simulate` calculation",
       call. = FALSE
@@ -152,7 +152,7 @@ probability_contain <- function(R,
     )
   }
 
-  if (stochastic) {
+  if (simulate) {
     nsim <- 1e5
     # arguments for .chain_sim()
     args <- list(
@@ -172,7 +172,7 @@ probability_contain <- function(R,
     # lapply() wraps output <data.frame> in a list so unpack with `[[`
     chain <- lapply(
       seq_len(num_init_infect),
-      function(x) do.call(chain_sim, args)
+      function(x) do.call(.chain_sim, args)
     )[[1]]
 
     # size is the total offspring produced by a chain

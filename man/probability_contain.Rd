@@ -125,7 +125,7 @@ probability_contain(
   R = 1.5,
   k = 0.5,
   num_init_infect = 1,
-  stochastic = TRUE,
+  simulate = TRUE,
   case_threshold = 100,
   outbreak_time = 20,
   generation_time = gt

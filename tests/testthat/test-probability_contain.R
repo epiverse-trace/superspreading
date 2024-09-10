@@ -2,10 +2,10 @@ test_that("probability_contain works as expected for deterministic", {
   expect_snapshot(probability_contain(R = 1.5, k = 0.5, num_init_infect = 1))
 })
 
-test_that("probability_contain works as expected for stochastic", {
+test_that("probability_contain works as expected for simulate", {
   expect_snapshot_value(
     probability_contain(
-      R = 1.5, k = 0.5, num_init_infect = 1, stochastic = TRUE
+      R = 1.5, k = 0.5, num_init_infect = 1, simulate = TRUE
     ),
     style = "json2",
     tolerance = 0.05
@@ -28,10 +28,10 @@ test_that("probability_contain works as expected for individual control", {
   )
 })
 
-test_that("probability_contain works as expected for stochastic pop control", {
+test_that("probability_contain works as expected for simulate pop control", {
   expect_snapshot_value(
     probability_contain(
-      R = 1.5, k = 0.5, num_init_infect = 1, pop_control = 0.1, stochastic = TRUE
+      R = 1.5, k = 0.5, num_init_infect = 1, pop_control = 0.1, simulate = TRUE
     ),
     style = "json2",
     tolerance = 0.05
@@ -68,7 +68,7 @@ test_that("probability_contain works as expected for different threshold", {
       R = 1.5,
       k = 0.5,
       num_init_infect = 1,
-      stochastic = TRUE,
+      simulate = TRUE,
       case_threshold = 50
     ),
     style = "json2",
@@ -82,9 +82,9 @@ test_that("probability_contain works as when using dots", {
       R = 1.5,
       k = 0.5,
       num_init_infect = 1,
-      stochastic = TRUE,
+      simulate = TRUE,
       n = 1e4,
-      infinite = 50
+      stat_threshold = 50
     ),
     style = "json2",
     tolerance = 0.05
@@ -134,10 +134,10 @@ test_that("probability_contain fails as expected", {
       k = 1,
       num_init_infect = 2,
       ind_control = 1,
-      stochastic = TRUE
+      simulate = TRUE
     ),
     regexp =
-      "individual-level control not yet implemented for stochastic calculation"
+      "individual-level control not yet implemented for `simulate` calculation"
   )
 })
 

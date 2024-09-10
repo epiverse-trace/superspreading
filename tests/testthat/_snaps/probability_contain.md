@@ -5,12 +5,12 @@
     Output
       [1] 0.7675919
 
-# probability_contain works as expected for stochastic
+# probability_contain works as expected for simulate
 
     {
       "type": "double",
       "attributes": {},
-      "value": [0.76625]
+      "value": [0.7694]
     }
 
 # probability_contain works as expected for population control
@@ -27,12 +27,12 @@
     Output
       [1] 0.8391855
 
-# probability_contain works as expected for stochastic pop control
+# probability_contain works as expected for simulate pop control
 
     {
       "type": "double",
       "attributes": {},
-      "value": [0.81856]
+      "value": [0.81833]
     }
 
 # probability_contain works as expected for both controls
@@ -70,7 +70,7 @@
     {
       "type": "double",
       "attributes": {},
-      "value": [0.7636]
+      "value": [0.09957]
     }
 
 # probability_contain works with <epiparameter>
