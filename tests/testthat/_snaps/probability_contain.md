@@ -95,3 +95,19 @@
     Output
       [1] 0.7168911
 
+# probability_contain works with generation_time
+
+    {
+      "type": "double",
+      "attributes": {},
+      "value": [0.76712]
+    }
+
+# probability_contain works for outbreak_time & num_init_infect > 1
+
+    {
+      "type": "double",
+      "attributes": {},
+      "value": [0.27099]
+    }
+
