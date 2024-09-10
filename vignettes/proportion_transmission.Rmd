@@ -16,12 +16,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette explores the `proportion_transmission()` function in {superspreading}. The function calculates what proportion of cases causes a certain proportion of transmission for an infectious disease outbreak. 
+This vignette explores the `proportion_transmission()` function in {superspreading}. The function calculates what proportion of cases cause a certain proportion of transmission for an infectious disease outbreak. 
 
 The function is parameterised assuming that the offspring distribution of disease transmission is a negative binomial with parameters $R$, the mean of the negative binomial distribution and the average number of secondary cases caused by a primary case, and $k$, the dispersion parameter of the negative binomial distribution and controls the heterogeneity in transmission. A smaller $k$ results is more variability (overdispersion) in transmission and thus superspreading events are more likely. 
 
 ::: {.alert .alert-info}
-Poisson and geometric offspring distributions are special cases of the negative binomial offspring distribution. By setting $k$ to `Inf` (or approximately infinite, $> 10^5$) then the offspring distribution is a Poisson distribution. By setting $k$ to 1 the offspring distribution is a Geometric distribution.
+Poisson and geometric offspring distributions are special cases of the negative binomial offspring distribution. By setting $k$ to `Inf` (or approximately infinite, $> 10^5$) then the offspring distribution is a Poisson distribution. By setting $k$ to 1 the offspring distribution is a geometric distribution.
 
 It is currently not possible to calculate the proportion transmission using the Poisson-Lognormal and Poisson-Weibull distributions (whose density and cumulative distribution functions are included in the {superspreading} package).
 :::
