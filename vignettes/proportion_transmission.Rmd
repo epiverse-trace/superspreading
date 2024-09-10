@@ -146,15 +146,12 @@ The variability in individual-level transmission comes from modelling the indivi
 For this we will need to write a couple of custom functions.
 
 ```{r}
-lseq <- function(from, to, length.out) {
-  exp(seq(log(from), log(to), length.out = length.out))
-}
-
+# nolint start for `:::`
 get_infectious_curve <- function(R, k) {
   # upper limit of x when y = 0
   upper_u <- superspreading:::solve_for_u(prop = 0, R = R, k = k)
   upper_u <- round(upper_u)
-  u_seq <- lseq(from = 1e-5, to = upper_u, length.out = 500)
+  u_seq <- superspreading:::lseq(from = 1e-5, to = upper_u, length.out = 500)
   res <- lapply(u_seq, function(upper) {
     integrate(
       function(u) u * superspreading:::fvx(x = u, R, k),
@@ -168,6 +165,7 @@ get_infectious_curve <- function(R, k) {
     prop_i = proportion_more_than_x
   )
 }
+# nolint end
 ```
 
 We can now reproduce Figure 1b in @lloyd-smithSuperspreadingEffectIndividual2005 using the offspring distribution parameters obtained above.
@@ -217,7 +215,7 @@ ggplot(
 This plot shows the variability in transmission owing to the gamma-distributed individual reproduction number ($\nu$). If we take a slice through the above plot when the proportion of infectious cases equals 0.2 (shown by the dashed line) we can calculate the proportion of transmission caused by the most infectious 20% of cases using the `proportion_tranmission(..., method = "t_20")` function. 
 
 ```{r, fig.width=8}
-k_seq <- lseq(from = 0.01, to = 100, length.out = 1000)
+k_seq <- superspreading:::lseq(from = 0.01, to = 100, length.out = 1000) # nolint
 y <- map_dbl(
   k_seq,
   function(x) {
@@ -264,7 +262,7 @@ The above plot replicates Figure 1c from @lloyd-smithSuperspreadingEffectIndivid
 The plot uses an $R$ of 2, however, one characteristic of the $t_{20}$ method is that different values of $R$ do not influence the proportion of transmission, so the plot would look identical with other value of $R$. This is because as shown the equation defining the $t_{20}$ method above the integral is divided by $R_0$ so that only $f_{\nu}(u)$ control the proportion of transmission.
 
 ```{r}
-# k = 0.5
+# For k = 0.5
 proportion_transmission(
   R = 0.1, k = 0.5, percent_transmission = 0.8, method = "t_20"
 )
@@ -275,7 +273,7 @@ proportion_transmission(
   R = 5, k = 0.5, percent_transmission = 0.8, method = "t_20"
 )
 
-# k = 2
+# For k = 2
 proportion_transmission(
   R = 0.1, k = 2, percent_transmission = 0.8, method = "t_20"
 )
@@ -290,7 +288,7 @@ proportion_transmission(
 This is not the case for $p_{80}$, where changes in both $R$ and $k$ influence the proportion of transmission.
 
 ```{r}
-# k = 0.5
+# For k = 0.5
 proportion_transmission(
   R = 0.1, k = 0.5, percent_transmission = 0.8, method = "p_80"
 )
@@ -301,7 +299,7 @@ proportion_transmission(
   R = 5, k = 0.5, percent_transmission = 0.8, method = "p_80"
 )
 
-# k = 2
+# For k = 2
 proportion_transmission(
   R = 0.1, k = 2, percent_transmission = 0.8, method = "p_80"
 )
