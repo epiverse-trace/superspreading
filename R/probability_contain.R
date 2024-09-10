@@ -169,22 +169,35 @@ probability_contain <- function(R,
     # replace default args if in dots
     args <- utils::modifyList(args, dots)
 
-    # lapply() wraps output <data.frame> in a list so unpack with `[[`
+    # simulate independent transmission chain for each initial infection
     chain <- lapply(
       seq_len(num_init_infect),
       function(x) do.call(.chain_sim, args)
-    )[[1]]
+    )
 
     # size is the total offspring produced by a chain
-    chain_size <- as.vector(table(chain$n), mode = "numeric")
+    chain_size <- lapply(
+      chain,
+      function(x) as.vector(table(x$n), mode = "numeric")
+    )
+
+    # sum multiple chains if multiple initial initial infections
+    chain_size <- Reduce(f = `+`, x = chain_size)
 
     if (is.finite(outbreak_time)) {
       # subset chains that were under case_threshold by outbreak_time
-      contain_within_t <- aggregate(
-        time ~ n,
-        data = chain,
-        FUN = function(x) max(x) < outbreak_time
-      )$time
+      contain_within_t <- lapply(chain, function(x) {
+        stats::aggregate(
+          time ~ n,
+          data = x,
+          FUN = function(y) max(y) < outbreak_time
+        )$time
+      })
+      # for an outbreak to be contained within t all chains must have stopped
+      contain_within_t <- Reduce(f = `+`, x = contain_within_t)
+      contain_within_t <- contain_within_t == num_init_infect
+
+      # controlled outbreak has fewer cases and shorter time than thresholds
       control_chain_size <- sum(contain_within_t & chain_size < case_threshold)
     } else {
       control_chain_size <- sum(chain_size < case_threshold)
