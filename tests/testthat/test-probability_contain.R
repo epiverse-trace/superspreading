@@ -127,6 +127,36 @@ test_that("probability_contain works with <epiparameter>", {
   )
 })
 
+test_that("probability_contain works with generation_time", {
+  expect_snapshot_value(
+    probability_contain(
+      R = 1,
+      k = 0.5,
+      num_init_infect = 1,
+      simulate = TRUE,
+      outbreak_time = 10,
+      generation_time = function(x) rlnorm(n = x, meanlog = 1, sdlog = 1)
+    ),
+    style = "json2",
+    tolerance = 0.05
+  )
+})
+
+test_that("probability_contain works for outbreak_time & num_init_infect > 1", {
+  expect_snapshot_value(
+    probability_contain(
+      R = 1,
+      k = 0.5,
+      num_init_infect = 5,
+      simulate = TRUE,
+      outbreak_time = 10,
+      generation_time = function(x) rlnorm(n = x, meanlog = 1, sdlog = 1)
+    ),
+    style = "json2",
+    tolerance = 0.05
+  )
+})
+
 test_that("probability_contain fails as expected", {
   expect_error(
     probability_contain(
@@ -152,5 +182,14 @@ test_that("probability_contain fails without R and k or <epiparameter>", {
   expect_error(
     probability_contain(num_init_infect = 1, pop_control = 0.5),
     regexp = "Only one of R and k or <epiparameter> must be supplied."
+  )
+})
+
+test_that("probability_contain fails with outbreak_time & no generation_time", {
+  expect_error(
+    probability_contain(
+      R = 2, k = 0.5, num_init_infect = 1, outbreak_time = 100
+    ),
+    regexp = "(`generation_time` is required)*(within an `outbreak_time`)"
   )
 })
