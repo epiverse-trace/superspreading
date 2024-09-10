@@ -54,6 +54,7 @@ lfloor
 Lifecycle
 Lim
 linetype
+lognormally
 Loucoubar
 lw
 Magassouba
@@ -73,6 +74,7 @@ parameterised
 params
 pkgdown
 pointrange
+pois
 poisson
 Poisson
 prob
