@@ -24,7 +24,7 @@ The {superspreading} package aims to provide a range of summary metrics to chara
 
 The other aspect of the package is to provide probability density functions and cumulative distribution functions to compute the likelihood for distribution models to estimate heterogeneity in individual-level disease transmission that are not available in R (i.e. base R). At present we include two models: Poisson-lognormal (`dpoislnorm()` & `ppoislnorm()`) and Poisson-Weibull (`dpoisweibull()` & `ppoisweibull()`) distributions.
 
-The package does not implement any branching process simulations and uses the `{bpmodels}` package for this. It focuses mostly on analytical functions that are derived from branching process models. The package provides functions to calculate variation in individual-level transmission but does not provide functions for inference, and currently relies on {fitdistrplus} for fitting models.
+The package implements a branching process simulation based on [`bpmodels::chain_sim()`](https://github.com/epiforecasts/bpmodels/blob/3d892baa64b6bc239d6e4cf4430d7c5f1b4d0591/R/simulate.r) to enable the numerical calculation of the probability of containment within a outbreak time and outbreak duration threshold. In the future this function could be removed in favour of using a package implementing branching process models as a dependency. The package is mostly focused on analytical functions that are derived from branching process models. The package provides functions to calculate variation in individual-level transmission but does not provide functions for inference, and currently relies on {fitdistrplus} for fitting models.
 
 ## Output
 
@@ -48,9 +48,8 @@ The aim is to restrict the number of dependencies to a minimal required set for 
 
 * {stats}
 * [{checkmate}](https://CRAN.R-project.org/package=checkmate)
-* [{bpmodels}](https://github.com/epiverse-trace/bpmodels)
 
-{stats} is distributed with the R language so is viewed as a lightweight dependency, that should already be installed on a user's machine if they have R. {checkmate} is an input checking package widely used across Epiverse-TRACE packages.  {bpmodels} is used to simulate a single-type branching process model to calculate the probability of containment (`probability_contain()`), as mentioned above, branching process simulations are beyond the scope of {superspreading}.
+{stats} is distributed with the R language so is viewed as a lightweight dependency, that should already be installed on a user's machine if they have R. {checkmate} is an input checking package widely used across Epiverse-TRACE packages.
 
 Suggested dependencies (not including package documentation ({knitr}, {bookdown}, {rmarkdown}), testing ({spelling} and {testthat}), and plotting ({ggplot2})) are: [{epiparameter}](https://github.com/epiverse-trace/epiparameter), used to easily access epidemiological parameters from the package's library, and [{fitdistrplus}](https://CRAN.R-project.org/package=fitdistrplus), used for model fitting methods.
 
