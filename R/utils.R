@@ -306,7 +306,7 @@ solve_for_u <- function(prop, R, k) {
 #' `time` column is also appended if the generation_time interval is supplied to
 #' `serial`.
 #' @keywords internal
-.chain_sim <- function(n, offspring, stat = c("size", "length"),
+.chain_sim <- function(n, offspring, stat = c("size", "length"), # nolint cyclocomp_linter
                       stat_threshold = Inf, generation_time, tf = Inf, ...) {
   stat <- match.arg(stat)
 
