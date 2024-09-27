@@ -16,9 +16,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette explores the `proportion_transmission()` function in {superspreading}. The function calculates what proportion of cases cause a certain proportion of transmission for an infectious disease outbreak. 
+This vignette explores the `proportion_transmission()` function in {superspreading}. The function calculates what proportion of cases we would expect to cause a certain proportion of transmission for a particular infectious disease (e.g. "how much transmission comes from the top 10% of infectious individuals?")
 
-The function is parameterised assuming that the offspring distribution of disease transmission is a negative binomial with parameters $R$, the mean of the negative binomial distribution and the average number of secondary cases caused by a primary case, and $k$, the dispersion parameter of the negative binomial distribution and controls the heterogeneity in transmission. A smaller $k$ results is more variability (overdispersion) in transmission and thus superspreading events are more likely. 
+To perform this calculation, we assume that the offspring distribution of disease transmission depends both on the distribution of individual variability in transmissibility, which we define using a Gamma distribution with mean $R$, as well as stochastic transmission within a population, which we define using a Poisson process, following @lloyd-smithSuperspreadingEffectIndividual2005.
+
+If we put a Gamma distributed individual transmissibility into a Poisson distribution, the result a negative binomial distribution. This is defined by two parameters: $R$, the mean of the negative binomial distribution and the average number of secondary cases caused by a typical primary case; and $k$, the dispersion parameter of the negative binomial distribution and controls the heterogeneity in transmission. A smaller $k$ results is more variability (overdispersion) in transmission and thus superspreading events are more likely. 
 
 ::: {.alert .alert-info}
 Poisson and geometric offspring distributions are special cases of the negative binomial offspring distribution. By setting $k$ to `Inf` (or approximately infinite, $> 10^5$) then the offspring distribution is a Poisson distribution. By setting $k$ to 1 the offspring distribution is a geometric distribution.
@@ -26,14 +28,16 @@ Poisson and geometric offspring distributions are special cases of the negative 
 It is currently not possible to calculate the proportion transmission using the Poisson-Lognormal and Poisson-Weibull distributions (whose density and cumulative distribution functions are included in the {superspreading} package).
 :::
 
-The proportion of transmission can be calculated using two methods, both of which are included in the `proportion_transmission()` function and can be changed using the `method` argument. These methods are $p_{80}$ and $t_{20}$. The $p_{80}$ method is the default (`method = "p_80"`). 
+The proportion of transmission can be calculated using two methods, both of which are included in the `proportion_transmission()` function and can be changed using the `method` argument. The first method focuses on transmission as it occurs in reality, accounting both for variation in the mean number of secondary cases at the individual *and* the stochastic nature of onwards transmission within a population; the second method focuses only on variation in the mean number of secondary cases at the individual level. The first method is denoted $p_{80}$ and the second $t_{20}$. The $p_{80}$ method is the default (`method = "p_80"`). 
 
 ::: {.alert .alert-danger}
-The output of `method = "p_80"` and `method = "t_20"` have different interpretations and cannot be used interchangeably without understanding the differences in output. 
+The output of `method = "p_80"` and `method = "t_20"` have different interpretations and cannot be used interchangeably without understanding the differences in what they are measuring. 
 
-The output of `method = "p_80"` gives the proportion of cases that produce a certain proportion of transmission. The most common use case is calculating what proportion of cases cause 80% of transmission. Thus a small proportion in the output `<data.frame>` means that there is a lot of overdispersion in individual-level transmission. The `percent_transmission` argument when `method = "p_80"` is to set the proportion of transmission.
+The output of `method = "p_80"` gives the proportion of cases that generate a certain proportion of realised transmission. The most common use case is calculating what proportion of cases would cause 80% of transmission during an outbreak of the infection. Thus a small proportion in the output `<data.frame>` means that there is a lot of overdispersion in individual-level transmission. The `percent_transmission` argument when `method = "p_80"` is to set the proportion of transmission.
 
-The output of `method = "t_20"` gives the proportion of cases that are produced by a certain proportion of the most infectious individuals. This is commonly used to calculate what proportion of cases are caused by the most infectious 20% of individuals. A high proportion in the output `<data.frame>` means that there is a lot of overdispersion in the transmission. The `percent_transmission` argument when `method = "t_20"` is to set the proportion of most infectious cases to calculate their proportion of total transmission.
+The output of `method = "t_20"` gives the proportion of cases that we would expected to produced by a certain proportion of the most infectious individuals. This is commonly used to calculate what proportion of cases are expected to be caused by the most infectious 20% of individuals. A high proportion in the output `<data.frame>` means that there is a lot of overdispersion in the transmission. The `percent_transmission` argument when `method = "t_20"` is to set the proportion of most infectious cases to calculate their proportion of total transmission.
+
+The key difference is that in a realised large outbreak (i.e. one that includes stochastic transmission), it is highly likely that some individuals will generate no secondary cases. This is because even a non-zero expected number of secondary cases can produce a zero when drawn from a Poisson process.
 :::
 
 ## Definitions
