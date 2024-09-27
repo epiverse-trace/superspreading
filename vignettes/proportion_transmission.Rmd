@@ -317,6 +317,8 @@ proportion_transmission(
 
 One thing that was mentioned above is that the interpretation of the $p_{80}$ and $t_{20}$ methods are not interchangeable, additionally, $t_{80}$ and $p_{20}$ are not equal. Stated differently, the $p_{80}$ method to calculate the proportion of transmission that cause 20% of cases, and the $t_{20}$ method to calculate the proportion of transmission caused by the most infectious 80% are not equivalent. It is also the case that $1 - p_{80} \neq t_{20}$, thus $1 - t_{20} \neq p_{80}$.
 
+Here we vary $R$ and $k$ and show that by setting the $p_{80}$ method to `percent_transmission = 0.2`, and the $t_{20}$ method to `percent_transmission = 0.8` the two cannot be interchangeably interpreted as outlined in the box above.
+
 ```{r}
 # R = 1, k = 0.5
 proportion_transmission(
@@ -334,6 +336,8 @@ proportion_transmission(
   R = 3, k = 2, percent_transmission = 0.8, method = "t_20"
 )
 ```
+
+Here we show that $1 - p_{80} \neq t_{20}$ and $1 - t_{20} \neq p_{80}$.
 
 ```{r}
 1 - proportion_transmission(
