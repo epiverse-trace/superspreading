@@ -74,7 +74,7 @@ geom_fit <- fitdist(data = all_cases, distr = "geom")
 nbinom_fit <- fitdist(data = all_cases, distr = "nbinom")
 ```
 
-```{r, fit-table, class.source = 'fold-hide'}
+```{r, fit-table}
 model_tbl <- ic_tbl(pois_fit, geom_fit, nbinom_fit)
 col.names <- gsub(
   pattern = "^Delta", replacement = "$\\\\Delta$", x = colnames(model_tbl)
@@ -130,7 +130,7 @@ nbinom_data <- data.frame(
 )
 ```
 
-```{r, plot-nbinom, class.source = 'fold-hide', fig.cap="Number of secondary cases from the empirical data (bar plot) and the density of the negative binomial with the maximum likelihood estimates when fit to the empirical data (points and line). This plot is reproduced from Althaus (2015) figure 1.", fig.width = 8, fig.height = 5}
+```{r, plot-nbinom, fig.cap="Number of secondary cases from the empirical data (bar plot) and the density of the negative binomial with the maximum likelihood estimates when fit to the empirical data (points and line). This plot is reproduced from Althaus (2015) figure 1.", fig.width = 8, fig.height = 5}
 # make plot
 ggplot(data = nbinom_data) +
   geom_col(
@@ -247,7 +247,7 @@ poisweibull_fit <- fitdist(
 )
 ```
 
-```{r, fit-extra-table, class.source = 'fold-hide'}
+```{r, fit-extra-table}
 model_tbl <- ic_tbl(
   pois_fit, geom_fit, nbinom_fit, poislnorm_fit, poisweibull_fit
 )
@@ -287,7 +287,7 @@ dist_compare_data <- data.frame(
 )
 ```
 
-```{r, plot-dists, class.source = 'fold-hide', fig.cap="Number of secondary cases from the empirical data (bar plot) and the density of the negative binomial (orange) and poisson-Weibull (pink) with the maximum likelihood estimates when fit to the empirical data (points and line).", fig.width = 8, fig.height = 5}
+```{r, plot-dists, fig.cap="Number of secondary cases from the empirical data (bar plot) and the density of the negative binomial (orange) and poisson-Weibull (pink) with the maximum likelihood estimates when fit to the empirical data (points and line).", fig.width = 8, fig.height = 5}
 # make plot
 ggplot(data = dist_compare_data) +
   geom_col(

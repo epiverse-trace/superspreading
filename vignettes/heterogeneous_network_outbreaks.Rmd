@@ -75,7 +75,7 @@ res <- reshape(
 )
 ```
 
-```{r, plot-zika-r, class.source = 'fold-hide', fig.cap="The reproduction number using the unadjusted and adjusted calculation -- calculated using `calc_network_R()` -- with mean duration of infection on the x-axis and transmission probability per sexual partner on the y-axis. The line shows the points that $R_0$ is equal to one. Both axes are plotted on a natural log scale. This plot is similar to Figure 1 from @yakobLowRiskSexuallytransmitted2016, but is plotted as a heatmap and without annotation.", fig.width = 8, fig.height = 5}
+```{r, plot-zika-r, fig.cap="The reproduction number using the unadjusted and adjusted calculation -- calculated using `calc_network_R()` -- with mean duration of infection on the x-axis and transmission probability per sexual partner on the y-axis. The line shows the points that $R_0$ is equal to one. Both axes are plotted on a natural log scale. This plot is similar to Figure 1 from @yakobLowRiskSexuallytransmitted2016, but is plotted as a heatmap and without annotation.", fig.width = 8, fig.height = 5}
 ggplot(data = res) +
   geom_tile(
     mapping = aes(
@@ -140,7 +140,7 @@ res <- reshape(
 )
 ```
 
-```{r, plot-mpox, class.source = 'fold-hide', fig.cap="The reproduction number using the unadjusted and adjusted calculation -- calculated using `calc_network_R()` -- with secondary attack rate on the x-axis and reproduction number ($R_0$) on the y-axis. This plot is similar to Figure 2A from @endoHeavytailedSexualContact2022.", fig.width = 8, fig.height = 5}
+```{r, plot-mpox, fig.cap="The reproduction number using the unadjusted and adjusted calculation -- calculated using `calc_network_R()` -- with secondary attack rate on the x-axis and reproduction number ($R_0$) on the y-axis. This plot is similar to Figure 2A from @endoHeavytailedSexualContact2022.", fig.width = 8, fig.height = 5}
 ggplot(data = res) +
   geom_line(mapping = aes(x = beta, y = R, colour = group)) +
   geom_hline(mapping = aes(yintercept = 1)) +
