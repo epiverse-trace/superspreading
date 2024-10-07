@@ -1,8 +1,6 @@
 ---
 title: "Getting started with {superspreading}"
-output: 
-  bookdown::html_vignette2:
-    code_folding: show
+output: rmarkdown::html_vignette
 bibliography: references.json
 link-citations: true
 vignette: >
