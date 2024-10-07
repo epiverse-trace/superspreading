@@ -141,7 +141,7 @@ probability_epidemic(
   k = param_index$estimate[["k"]],
   num_init_infect = initial_infections
 )
-#> [1] 0.9995781
+#> [1] 0.9995741
 
 # Probability of an epidemic using k estimated from non-index cases
 probability_epidemic(
@@ -197,18 +197,18 @@ By contributing to this project, you agree to abide by its terms.
 citation("superspreading")
 #> To cite package 'superspreading' in publications use:
 #> 
-#>   Lambert J, Kucharski A (2024). _superspreading: Estimate
+#>   Lambert J, Kucharski A, Adam D (2024). _superspreading: Estimate
 #>   Individual-Level Variation in Transmission_. R package version
-#>   0.1.0.9000, https://epiverse-trace.github.io/superspreading/,
+#>   0.2.0.9000, https://epiverse-trace.github.io/superspreading/,
 #>   <https://github.com/epiverse-trace/superspreading>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
 #>     title = {superspreading: Estimate Individual-Level Variation in Transmission},
-#>     author = {Joshua W. Lambert and Adam Kucharski},
+#>     author = {Joshua W. Lambert and Adam Kucharski and Dillon C. Adam},
 #>     year = {2024},
-#>     note = {R package version 0.1.0.9000, 
+#>     note = {R package version 0.2.0.9000, 
 #> https://epiverse-trace.github.io/superspreading/},
 #>     url = {https://github.com/epiverse-trace/superspreading},
 #>   }
@@ -230,7 +230,8 @@ This project has some overlap with other R packages:
 
 ## References
 
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 
 <div id="ref-althausEbolaSuperspreading2015" class="csl-entry">
 
