@@ -131,19 +131,6 @@ references:
   year: '2024'
   doi: 10.32614/CRAN.package.knitr
 - type: software
-  title: bookdown
-  abstract: 'bookdown: Authoring Books and Technical Documents with R Markdown'
-  notes: Suggests
-  url: https://pkgs.rstudio.com/bookdown/
-  repository: https://CRAN.R-project.org/package=bookdown
-  authors:
-  - family-names: Xie
-    given-names: Yihui
-    email: xie@yihui.name
-    orcid: https://orcid.org/0000-0003-0645-5666
-  year: '2024'
-  doi: 10.32614/CRAN.package.bookdown
-- type: software
   title: rmarkdown
   abstract: 'rmarkdown: Dynamic Documents for R'
   notes: Suggests
@@ -236,7 +223,7 @@ references:
   authors:
   - family-names: Ooms
     given-names: Jeroen
-    email: jeroen@berkeley.edu
+    email: jeroenooms@gmail.com
     orcid: https://orcid.org/0000-0002-4035-0289
   - family-names: Hester
     given-names: Jim
