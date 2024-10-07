@@ -21,6 +21,10 @@
 # RStudio files
 .Rproj.user/
 
+# vignette building
+/doc/
+/Meta/
+
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
@@ -47,7 +51,7 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
-R/.DS_Store
+
+# macOS hidden files
+.DS_Store
 inst/doc
-/doc/
-/Meta/
