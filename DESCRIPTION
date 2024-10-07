@@ -72,7 +72,6 @@ Suggests:
     epiparameter,
     fitdistrplus,
     knitr,
-    bookdown,
     rmarkdown,
     ggplot2,
     spelling,

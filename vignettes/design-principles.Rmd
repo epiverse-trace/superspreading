@@ -51,7 +51,7 @@ The aim is to restrict the number of dependencies to a minimal required set for 
 
 {stats} is distributed with the R language so is viewed as a lightweight dependency, that should already be installed on a user's machine if they have R. {checkmate} is an input checking package widely used across Epiverse-TRACE packages.
 
-Suggested dependencies (not including package documentation ({knitr}, {bookdown}, {rmarkdown}), testing ({spelling} and {testthat}), and plotting ({ggplot2})) are: [{epiparameter}](https://github.com/epiverse-trace/epiparameter), used to easily access epidemiological parameters from the package's library, and [{fitdistrplus}](https://CRAN.R-project.org/package=fitdistrplus), used for model fitting methods.
+Suggested dependencies (not including package documentation ({knitr}, {rmarkdown}), testing ({spelling} and {testthat}), and plotting ({ggplot2})) are: [{epiparameter}](https://github.com/epiverse-trace/epiparameter), used to easily access epidemiological parameters from the package's library, and [{fitdistrplus}](https://CRAN.R-project.org/package=fitdistrplus), used for model fitting methods.
 
 ## Contribute
 
