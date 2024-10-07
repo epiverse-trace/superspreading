@@ -4,8 +4,6 @@ subtitle: "Superspreading on policy, decision making and control measures"
 output: 
   bookdown::html_vignette2:
     code_folding: show
-pkgdown:
-   as_is: true
 bibliography: references.json
 link-citations: true
 vignette: >
