@@ -159,12 +159,10 @@ citation("superspreading")
 
 This project has some overlap with other R packages:
 
-- [`{bpmodels}`](https://github.com/epiverse-trace/bpmodels) is another Epiverse-TRACE
-R package that analyses transmission chain data to infer the transmission process for either
-the size or length of transmission chains. Two main differences between the packages
-are: 1) `{superspreading}` has more functions to compute metrics that characterise
-outbreaks and superspreading events (e.g. `probability_epidemic()` & 
-`probability_extinct()`); 2) `{bpmodels}` can simulate a branching process 
-(`chain_sim()`) with a specified process (e.g. negative binomial).
+- [`{epichains}`](https://github.com/epiverse-trace/epichains) is another Epiverse-TRACE R package that analyses transmission chain data to infer the likelihood for either the size or length of an outbreak cluster, or simulate transmission chains. It is based on the, now retired, [`{bpmodels}`](https://github.com/epiforecasts/bpmodels) package. 
+
+    Two main differences between `{superspreading}` and `{epichains}` are: 1) `{superspreading}` has functions to compute metrics that characterise outbreaks and superspreading events (e.g. `probability_epidemic()`, `probability_extinct()`, `proportion_cluster_size()` & `proportion_transmission()`); whereas `{epichains}` has functions to calculate the likelihood of a transmission chains' size and length. 2) `{epichains}` exports functions to simulate a single-type branching process (`simulate_chains()` & `simulate_chain_stats()`).
+
+- [`{modelSSE}`](https://CRAN.R-project.org/package=modelSSE) has a similar scope to `{superspreading}`, it contains functions to infer offspring distribution parameters. It exports several infectious disease outbreak datasets (see `data(package = "modelSSE")`). Both `{superspreading}` and `{modelSSE}` export functions to calculate the proportion of transmission using different methods. It also imports the [`{Delaporte}`](https://CRAN.R-project.org/package=Delaporte) package to model the offspring distribution as a Delaporte distribution.
 
 ## References
