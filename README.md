@@ -231,9 +231,9 @@ This project has some overlap with other R packages:
   (e.g. `probability_epidemic()`, `probability_extinct()`,
   `proportion_cluster_size()` & `proportion_transmission()`); whereas
   `{epichains}` has functions to calculate the likelihood of a
-  transmission chains’ size and length. 2) `{epichains}` exports
-  functions to simulate a single-type branching process
-  (`simulate_chains()` & `simulate_chain_stats()`).
+  transmission chain size and length. 2) `{epichains}` exports functions
+  to simulate a single-type branching process (`simulate_chains()` &
+  `simulate_chain_stats()`).
 
 - [`{modelSSE}`](https://CRAN.R-project.org/package=modelSSE) has a
   similar scope to `{superspreading}`, it contains functions to infer
