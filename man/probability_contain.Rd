@@ -43,7 +43,7 @@ enables setting the \code{case_threshold}, \code{outbreak_time} and \code{genera
 arguments.}
 
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> Named elements to replace
-default arguments in \code{\link[=chain_sim]{chain_sim()}}. See details.}
+default arguments in \code{\link[=.chain_sim]{.chain_sim()}}. See details.}
 
 \item{case_threshold}{A number for the threshold of the number of cases below
 which the epidemic is considered contained. \code{case_threshold} is only used
@@ -84,7 +84,7 @@ and \code{outbreak_time}, respectively.
 }
 \details{
 When using \code{simulate = TRUE}, the default arguments to simulate the
-transmission chains with \code{\link[=chain_sim]{chain_sim()}} are \code{1e5} replicates,
+transmission chains with \code{\link[=.chain_sim]{.chain_sim()}} are \code{1e5} replicates,
 a negative binomial (\code{nbinom}) offspring distribution, parameterised with
 \code{R} (and \code{pop_control} if > 0) and \code{k}.
 
