@@ -119,12 +119,12 @@ diseases and evaluate how likely they are to cause epidemics.
 ```{r, epiparam}
 sars <- epiparameter_db(
   disease = "SARS",
-  epi_dist = "offspring distribution",
+  epi_name = "offspring distribution",
   single_epiparameter = TRUE
 )
 evd <- epiparameter_db(
   disease = "Ebola Virus Disease",
-  epi_dist = "offspring distribution",
+  epi_name = "offspring distribution",
   single_epiparameter = TRUE
 )
 ```

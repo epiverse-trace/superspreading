@@ -2,7 +2,7 @@ if (requireNamespace("epiparameter", quietly = TRUE)) {
   od <- suppressMessages(
     epiparameter::epiparameter_db(
       disease = "SARS",
-      epi_dist = "offspring distribution",
+      epi_name = "offspring distribution",
       author = "Lloyd-Smith",
       single_epiparameter = TRUE
     )
@@ -29,7 +29,7 @@ test_that("get_param fails as expected with incorrect parameters", {
   od <- suppressMessages(
     epiparameter::epiparameter_db(
       disease = "COVID-19",
-      epi_dist = "incubation period",
+      epi_name = "incubation period",
       author = "Linton",
       single_epiparameter = TRUE
     )

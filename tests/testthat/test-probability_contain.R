@@ -96,7 +96,7 @@ test_that("probability_contain works with <epiparameter>", {
   od <- suppressMessages(
     epiparameter::epiparameter_db(
       disease = "SARS",
-      epi_dist = "offspring distribution",
+      epi_name = "offspring distribution",
       author = "Lloyd-Smith",
       single_epiparameter = TRUE
     )
