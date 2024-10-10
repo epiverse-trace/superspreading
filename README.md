@@ -1,247 +1,322 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# readepi
-
-*readepi* provides functions for importing epidemiological data into
-**R** from common *health information systems*.
+# *superspreading*: Estimate individual-level variation in transmission <img src="man/figures/logo.svg" align="right" width="120"/>
 
 <!-- badges: start -->
 
 [![License:
-MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![R-CMD-check](https://github.com/epiverse-trace/readepi/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/readepi/actions/workflows/R-CMD-check.yaml)
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit/)
+[![R-CMD-check](https://github.com/epiverse-trace/superspreading/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/superspreading/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/epiverse-trace/readepi/branch/main/graph/badge.svg)](https://app.codecov.io/gh/epiverse-trace/readepi?branch=main)
-[![lifecycle-concept](https://raw.githubusercontent.com/reconverse/reconverse.github.io/master/images/badge-concept.svg)](https://www.reconverse.org/lifecycle.html#concept)
+coverage](https://codecov.io/gh/epiverse-trace/superspreading/branch/main/graph/badge.svg)](https://app.codecov.io/gh/epiverse-trace/superspreading?branch=main)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
+
+`{superspreading}` is an R package that provides a set of functions to
+estimate and understand individual-level variation the in transmission
+of infectious diseases from data on secondary cases.
+
+`{superspreading}` implements methods outlined in Lloyd-Smith et al.
+([2005](#ref-lloyd-smithSuperspreadingEffectIndividual2005)), Adam J.
+Kucharski et al. ([2020](#ref-kucharskiEarlyDynamicsTransmission2020)),
+and Kremer et al.
+([2021](#ref-kremerQuantifyingSuperspreadingCOVID192021)), as well as
+additional functions.
+
+`{superspreading}` is developed at the [Centre for the Mathematical
+Modelling of Infectious
+Diseases](https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases)
+at the [London School of Hygiene and Tropical
+Medicine](https://www.lshtm.ac.uk/) as part of
+[Epiverse-TRACE](https://data.org/initiatives/epiverse/).
 
 ## Installation
 
-You can install the development version of *readepi* from
-[GitHub](https://github.com/) with:
+The easiest way to install the development version of `{superspreading}`
+from [GitHub](https://github.com/) is to use the `{pak}` package:
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("epiverse-trace/readepi")
+# check whether {pak} is installed
+if(!require("pak")) install.packages("pak")
+pak::pak("epiverse-trace/superspreading")
 ```
 
-## Example
-
-These examples illustrate some of the current functionalities:
+## Quick start
 
 ``` r
-library(readepi)
-
-# example of read_stuff():
-# (a placeholder function returning its own argument)
-path_to_file <- "some_path_here"
-read_stuff(path_to_file)
-#> [1] "some_path_here"
+library(superspreading)
 ```
 
-## Development
+### Calculate the heterogeneity of transmission
 
-### Lifecycle
+Case study using data from early Ebola outbreak in Guinea in 2014,
+stratified by index and non-index cases, as in Adam J. Kucharski et al.
+([2016](#ref-kucharskiEffectivenessRingVaccination2016)). Data on
+transmission from index and secondary cases for Ebola in 2014.
 
-This package is currently a *concept*, as defined by the [RECON software
-lifecycle](https://www.reconverse.org/lifecycle.html). This means that
-essential features and mechanisms are still being developed, and the
-package is not ready for use outside of the development team.
+***Source***: Faye et al.
+([2015](#ref-fayeChainsTransmissionControl2015)) & Althaus
+([2015](#ref-althausEbolaSuperspreading2015)).
 
-### Contributions
+[`{fitdistrplus}`](https://CRAN.R-project.org/package=fitdistrplus) is a
+well-developed and stable R package that provides a variety of methods
+for fitting distribution models to data ([Delignette-Muller and Dutang
+2015](#ref-delignette-mullerFitdistrplusPackageFitting2015)). Therefore,
+it is used throughout the documentation of `{superspreading}` and is a
+recommended package for those wanting to fit distribution models, for
+example those supplied in `{superspreading}` (Poisson-lognormal and
+Poisson-Weibull). We recommend reading the `{fitdistrplus}`
+documentation (specifically `?fitdist`) to explore the full range of
+functionality.
 
-Contributions are welcome via [pull
-requests](https://github.com/epiverse-trace/readepi/pulls).
+In this example we fit the negative binomial distribution to estimate
+the reproduction number ($R$, which is the mean of the distribution) and
+the dispersion ($k$, which a measure of the variance of the
+distribution). The parameters are estimated via maximum likelihood (the
+default method for `fitdist()`).
 
-Contributors to the project include:
+``` r
+# we use {fitdistrplus} to fit the models
+library(fitdistrplus)
+#> Loading required package: MASS
+#> Loading required package: survival
 
-  - Thibaut Jombart (author)
-  - Joshua W. Lambert (contributor)
+# transmission events from index cases
+index_case_transmission <- c(2, 17, 5, 1, 8, 2, 14)
 
-### Code of Conduct
+# transmission events from secondary cases
+secondary_case_transmission <- c(
+  1, 2, 1, 4, 4, 1, 3, 3, 1, 1, 4, 9, 9, 1, 2, 1, 1, 1, 4, 3, 3, 4, 2, 5,
+  1, 2, 2, 1, 9, 1, 3, 1, 2, 1, 1, 2
+)
 
-Please note that the linelist project is released with a [Contributor
-Code of
-Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+# Format data into index and non-index cases
+# total non-index cases
+n_non_index <- sum(c(index_case_transmission, secondary_case_transmission))
+# transmission from all non-index cases
+non_index_cases <- c(
+  secondary_case_transmission,
+  rep(0, n_non_index - length(secondary_case_transmission))
+)
+
+# Estimate R and k for index and non-index cases
+param_index <- fitdist(data = index_case_transmission, distr = "nbinom")
+# rename size and mu to k and R
+names(param_index$estimate) <- c("k", "R")
+param_index$estimate
+#>        k        R 
+#> 1.596646 7.000771
+param_non_index <- fitdist(data = non_index_cases, distr = "nbinom")
+# rename size and mu to k and R
+names(param_non_index$estimate) <- c("k", "R")
+param_non_index$estimate
+#>         k         R 
+#> 0.1937490 0.6619608
+```
+
+The reproduction number ($R$) is higher for index cases than for
+non-index cases, but the heterogeneity in transmission is higher for
+non-index cases (i.e. $k$ is lower).
+
+### Calculate the probability of a large epidemic
+
+Given the reproduction number ($R$) and the dispersion ($k$), the
+probability that a infectious disease will cause an epidemic, in other
+words the probability it does not go extinct, can be calculated using
+`probability_epidemic()`. Here we use `probability_epidemic()` for the
+parameters estimated in the above section for Ebola, assuming there are
+three initial infections seeding the potential outbreak.
+
+``` r
+# Compare probability of a large outbreak when k varies according to
+# index/non-index values, assuming 3 initial spillover infections
+
+initial_infections <- 3
+
+# Probability of an epidemic using k estimated from index cases
+probability_epidemic(
+  R = param_index$estimate[["R"]],
+  k = param_index$estimate[["k"]],
+  num_init_infect = initial_infections
+)
+#> [1] 0.9995741
+
+# Probability of an epidemic using k estimated from non-index cases
+probability_epidemic(
+  R = param_non_index$estimate[["R"]],
+  k = param_non_index$estimate[["k"]],
+  num_init_infect = initial_infections
+)
+#> [1] 0
+```
+
+The probability of causing a sustained outbreak is high for the index
+cases, but is zero for non-index cases (i.e. disease transmission will
+inevitably cease assuming transmission dynamics do not change).
+
+## Package vignettes
+
+More details on how to use `{superspreading}` can be found in the
+[online documentation as package
+vignettes](https://epiverse-trace.github.io/superspreading/), under
+“Articles”.
+
+### Visualisation and plotting functionality
+
+`{superspreading}` does not provide plotting functions, instead we
+provide example code chunks in the package’s vignettes that can be used
+as a templates upon which data visualisations can be modified. We
+recommend users copy and edit the examples for their own purposes. (This
+is permitted under the package’s MIT license). By default code chunks
+for plotting are folded, in order to unfold them and see the code simply
+click the code button at the top left of the plot.
+
+## Help
+
+To report a bug please open an
+[issue](https://github.com/epiverse-trace/superspreading/issues/new/choose)
+
+## Contribute
+
+Contributions to `{superspreading}` are welcomed. Please follow the
+[package contributing
+guide](https://github.com/epiverse-trace/.github/blob/main/CONTRIBUTING.md).
+
+## Code of Conduct
+
+Please note that the {superspreading} project is released with a
+[Contributor Code of
+Conduct](https://github.com/epiverse-trace/.github/blob/main/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
 
-### Command line instructions: Create a new Github repository using a template
-
-There’s a shortcut to this, which is provided here for people short on
-time, but the scenic route follows.
-
-**Github command line client**
-
-Install the Github command line client `gh` following the instructions
-for your OS here: <https://github.com/cli/cli>. Run `gh auth login` to
-link your device with your Github account the first time you use the
-CLI.
-
-Once installed and authenticated, run:
-
-``` sh
-gh repo create epiverse-trace/mypackage --public --template=epiverse-trace/packagetemplate
-```
-
-Clone the repository as usual using your preferred method.
-
-### Command line instructions: Create a repo and R package from scratch
-
-#### Make an R project
-
-``` sh
-Rscript -e 'devtools::create("mypackage")'
-```
-
-or
-
-``` sh
-Rscript -e 'usethis::create_package("mypackage")'
-```
-
-#### Initialise a git repository
-
-``` sh
-cd mypackage
-git init
-```
-
-#### Create a remote Github repository
-
-**Github command line client**
-
-Install the Github command line client `gh` following the instructions
-for your OS here: <https://github.com/cli/cli>. Run `gh auth login` to
-link your device with your Github account the first time you use the
-CLI.
-
-Create the package repository in the *Epiverse TRACE* organisation.
-
-``` sh
-# still in mypackage
-gh repo create epiverse-trace/mypackage
-```
-
-#### Initial commit to main
-
-``` sh
-git push --set-upstream origin main
-```
-
-#### Get R-related .gitignore
-
-Getting `R.gitignore` from <https://github.com/github/gitignore>, and
-renaming it to `.gitignore`.
-
-`wget` is cross platform and should be available on most systems.
-Alternatives using `curl` exist.
-
-``` sh
-wget https://raw.githubusercontent.com/github/gitignore/main/R.gitignore
-mv R.gitignore .gitignore
-```
-
-#### Set up R package components
-
-These next steps are from the R command line. If you are prompted to
-copy or edit text in the terminal (especially if you launched R from the
-terminal using `$ R`), you might be in Vim. Exit by typing `:wq`, and
-edit these files in a text editor.
-
-1.  Populate fields in the DESCRIPTION and NAMESPACE
-
-<!-- end list -->
+## Citing this package
 
 ``` r
-# e.g. using data.table
-usethis::use_package("data.table")
+citation("superspreading")
+#> To cite package 'superspreading' in publications use:
+#> 
+#>   Lambert J, Kucharski A, Adam D (2024). _superspreading: Estimate
+#>   Individual-Level Variation in Transmission_. R package version
+#>   0.2.0.9000, https://epiverse-trace.github.io/superspreading/,
+#>   <https://github.com/epiverse-trace/superspreading>.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {superspreading: Estimate Individual-Level Variation in Transmission},
+#>     author = {Joshua W. Lambert and Adam Kucharski and Dillon C. Adam},
+#>     year = {2024},
+#>     note = {R package version 0.2.0.9000, 
+#> https://epiverse-trace.github.io/superspreading/},
+#>     url = {https://github.com/epiverse-trace/superspreading},
+#>   }
 ```
 
-Actually `data.table` requires a bit more configuration to use many of
-its features, such as `:=` and `.SD`. Use instead:
+## Related projects
 
-``` r
-usethis::use_data_table()
-```
+This project has some overlap with other R packages:
 
-2.  Set up unit testing infrastructure
+- [`{epichains}`](https://github.com/epiverse-trace/epichains) is
+  another Epiverse-TRACE R package that analyses transmission chain data
+  to infer the likelihood for either the size or length of an outbreak
+  cluster, or simulate transmission chains. It is based on the, now
+  retired, [`{bpmodels}`](https://github.com/epiforecasts/bpmodels)
+  package.
 
-<!-- end list -->
+  Two main differences between `{superspreading}` and `{epichains}`
+  are: 1) `{superspreading}` has functions to compute metrics that
+  characterise outbreaks and superspreading events
+  (e.g. `probability_epidemic()`, `probability_extinct()`,
+  `proportion_cluster_size()` & `proportion_transmission()`); whereas
+  `{epichains}` has functions to calculate the likelihood of a
+  transmission chain size and length. 2) `{epichains}` exports functions
+  to simulate a single-type branching process (`simulate_chains()` &
+  `simulate_chain_stats()`).
 
-``` r
-usethis::use_testthat()
+- [`{modelSSE}`](https://CRAN.R-project.org/package=modelSSE) has a
+  similar scope to `{superspreading}`, it contains functions to infer
+  offspring distribution parameters. It exports several infectious
+  disease outbreak datasets (see `data(package = "modelSSE")`). Both
+  `{superspreading}` and `{modelSSE}` export functions to calculate the
+  proportion of transmission using different methods. It also imports
+  the [`{Delaporte}`](https://CRAN.R-project.org/package=Delaporte)
+  package to model the offspring distribution as a Delaporte
+  distribution.
 
-# and a basic test file
-usethis::use_test("basic-test")
+## References
 
-# code coverage YAML for codecov
-usethis::use_coverage("codecov")
-```
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 
-3.  Set a licence
+<div id="ref-althausEbolaSuperspreading2015" class="csl-entry">
 
-We prefer the MIT licence, primarily because it is short and easy to
-read.
+Althaus, Christian L. 2015. “Ebola Superspreading.” *The Lancet
+Infectious Diseases* 15 (5): 507–8.
+<https://doi.org/10.1016/S1473-3099(15)70135-0>.
 
-``` r
-usethis::use_mit_licence()
-```
+</div>
 
-4.  Make a README page
+<div id="ref-delignette-mullerFitdistrplusPackageFitting2015"
+class="csl-entry">
 
-<!-- end list -->
+Delignette-Muller, Marie Laure, and Christophe Dutang. 2015.
+“Fitdistrplus: An R Package for Fitting Distributions.” *Journal of
+Statistical Software* 64 (4). <https://doi.org/10.18637/jss.v064.i04>.
 
-``` r
-usethis::use_readme_rmd()
-```
+</div>
 
-Readme.md can be updated manually from the Readme.Rmd created above,
-using
+<div id="ref-fayeChainsTransmissionControl2015" class="csl-entry">
 
-``` r
-devtools::build_readme()
-```
+Faye, Ousmane, Pierre-Yves Boëlle, Emmanuel Heleze, Oumar Faye, Cheikh
+Loucoubar, N’Faly Magassouba, Barré Soropogui, et al. 2015. “Chains of
+Transmission and Control of Ebola Virus Disease in Conakry, Guinea, in
+2014: An Observational Study.” *The Lancet Infectious Diseases* 15 (3):
+320–26. <https://doi.org/10.1016/S1473-3099(14)71075-8>.
 
-or using a Github Actions setup (see the examples here
-<https://github.com/r-lib/actions/tree/v2-branch/examples>).
+</div>
 
-5.  Set up continuous integration using Github Actions
+<div id="ref-kremerQuantifyingSuperspreadingCOVID192021"
+class="csl-entry">
 
-<!-- end list -->
+Kremer, Cécile, Andrea Torneri, Sien Boesmans, Hanne Meuwissen, Selina
+Verdonschot, Koen Vanden Driessche, Christian L. Althaus, Christel Faes,
+and Niel Hens. 2021. “Quantifying Superspreading for COVID-19 Using
+Poisson Mixture Distributions.” *Scientific Reports* 11 (1): 14107.
+<https://doi.org/10.1038/s41598-021-93578-x>.
 
-``` r
-# to check package installation
-usethis::use_github_actions_check_standard()
+</div>
 
-# to report code coverage results to codecov
-usethis::use_github_action("test-coverage")
-```
+<div id="ref-kucharskiEffectivenessRingVaccination2016"
+class="csl-entry">
 
-6.  Set up documentation
+Kucharski, Adam J., Rosalind M. Eggo, Conall H. Watson, Anton Camacho,
+Sebastian Funk, and W. John Edmunds. 2016. “Effectiveness of Ring
+Vaccination as Control Strategy for Ebola Virus Disease.” *Emerging
+Infectious Diseases* 22 (1): 105–8.
+<https://doi.org/10.3201/eid2201.151410>.
 
-<!-- end list -->
+</div>
 
-1.  Document the package as required using
+<div id="ref-kucharskiEarlyDynamicsTransmission2020" class="csl-entry">
 
-<!-- end list -->
+Kucharski, Adam J, Timothy W Russell, Charlie Diamond, Yang Liu, John
+Edmunds, Sebastian Funk, Rosalind M Eggo, et al. 2020. “Early Dynamics
+of Transmission and Control of COVID-19: A Mathematical Modelling
+Study.” *The Lancet Infectious Diseases* 20 (5): 553–58.
+<https://doi.org/10.1016/S1473-3099(20)30144-4>.
 
-``` r
-devtools::document()
-```
+</div>
 
-2.  Set up a `pkgdown` website.
+<div id="ref-lloyd-smithSuperspreadingEffectIndividual2005"
+class="csl-entry">
 
-<!-- end list -->
+Lloyd-Smith, J. O., S. J. Schreiber, P. E. Kopp, and W. M. Getz. 2005.
+“Superspreading and the Effect of Individual Variation on Disease
+Emergence.” *Nature* 438 (7066): 355–59.
+<https://doi.org/10.1038/nature04153>.
 
-``` r
-# configure the pkgdown YAML.
-# can be saved and edited later
-usethis::use_pkgdown()
+</div>
 
-# build the website using
-pkgdown::build_site()
-```
-
-Or set up a Github Actions job using
-`usethis::use_github_action("pkgdown")`.
+</div>

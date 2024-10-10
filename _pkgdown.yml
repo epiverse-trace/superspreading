@@ -1,4 +1,63 @@
-url: ~
+url: https://epiverse-trace.github.io/superspreading
 template:
-  bootstrap: 5
+  includes:
+    in_header: |
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+      <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+      <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+  package: epiversetheme
+  bslib:
+    font_weight_base : 300
 
+development:
+  mode: unreleased
+
+reference:
+  - title: Offspring distributions
+
+  - subtitle: Poisson-lognormal
+    desc: PDF and CDF functions for the Poisson-lognormal compound distribution
+    contents:
+    - ends_with("poislnorm")
+
+  - subtitle: Poisson-Weibull
+    desc: PDF and CDF functions for the Poisson-Weibull compound distribution
+    contents:
+    - ends_with("poisweibull")
+
+  - title: Probability of epidemic, extinction or containment
+    desc: Probability of a disease causing an epidemic, going extinct or being contained
+    contents:
+    - starts_with("probability")
+
+  - title: Proportion of transmission
+    contents:
+    - proportion_transmission
+    - proportion_cluster_size
+
+  - title: Reproduction number in heterogeneous network
+    contents:
+    - calc_network_R
+
+  - title: Helper functions
+    contents:
+    - ic_tbl
+
+articles:
+- title: Parameter estimation
+  navbar: Parameter estimation
+  contents:
+  - estimate_individual_level_transmission
+  - heterogeneous_network_outbreaks
+- title: Superspreading for decision-making
+  navbar: Superspreading for decision-making
+  contents:
+  - epidemic_risk
+- title: Proportion transmission
+  navbar: Proportion transmission
+  contents:
+  - proportion_transmission
+- title: Developer Documentation
+  navbar: Developer Documentation
+  contents:
+  - design-principles

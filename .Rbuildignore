@@ -5,3 +5,10 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^\.lintr$
+^.*\.Rproj$
+^\.Rproj\.user$
+^doc$
+^Meta$
+^CITATION\.cff$
+^tools$

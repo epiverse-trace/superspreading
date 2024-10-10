@@ -1,17 +1,89 @@
-Package: readepi
-Title: Import Epidemiological Data into R
-Version: 0.0.1
+Package: superspreading
+Title: Estimate Individual-Level Variation in Transmission
+Version: 0.2.0.9000
 Authors@R: 
-    c(person("Thibaut", "Jombart", , "thibaut@data.org", role = c("aut", "cre")),
-      person("Avinash", "Laddha", , "avinash@data.org", role = c("aut")))
-Description: This package implements functions to read epidemiological data from health information systems.
+    c(
+        person(
+            given = "Joshua W.",
+            family = "Lambert",
+            role = c("aut", "cre", "cph"),
+            email = "joshua.lambert@lshtm.ac.uk",
+            comment = c(ORCID = "0000-0001-5218-3046")
+        ),
+        person(
+            given = "Adam", 
+            family = "Kucharski",
+            role = c("aut", "cph"),
+            email = "adam.kucharski@lshtm.ac.uk", 
+            comment = c(ORCID = "0000-0001-8814-9421")
+        ),
+        person(
+            given = "Dillon C.",
+            family = "Adam",
+            role = c("aut"),
+            email = "dcadam@hku.hk",
+            comment = c(ORCID = "0000-0002-7485-9905")
+        ),
+        person(
+            given = "Sebastian",
+            family = "Funk",
+            role = c("ctb", "cph"),
+            email = "sebastian.funk@lshtm.ac.uk",
+            comment = c(
+              ORCID = "0000-0002-2842-3406",
+              ".chain_sim uses code from bpmodels::chain_sim"
+            )
+        ),
+        person(
+            given = "Pratik",
+            family = "Gupte",
+            role = c("rev"),
+            email = "pratik.gupte@lshtm.ac.uk",
+            comment = c(ORCID = "0000-0001-5294-7819")
+        ),
+        person(
+            given = "Hugo",
+            family = "Gruson",
+            role = c("rev"),
+            email = "hugo@data.org",
+            comment = c(ORCID = "0000-0002-4094-1476")
+        ),
+        person(
+            given = "James M.",
+            family = "Azam", 
+            role = c("rev", "ctb"),
+            email = "james.azam@lshtm.ac.uk",
+            comment = c(ORCID = "0000-0001-5782-7330")
+        )
+    )
+Description: Implements functions to estimate individual-level variation in 
+    transmission.
 License: MIT + file LICENSE
+URL: https://github.com/epiverse-trace/superspreading, https://epiverse-trace.github.io/superspreading/
+BugReports: https://github.com/epiverse-trace/superspreading/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.2
 Imports:
-    checkmate
+    checkmate,
+    stats,
+    rlang
 Suggests: 
-    covr,
+    epiparameter,
+    fitdistrplus,
+    knitr,
+    rmarkdown,
+    ggplot2,
+    spelling,
+    ggtext,
+    scales,
+    purrr,
+    dplyr,
     testthat (>= 3.0.0)
+Remotes:
+    epiverse-trace/epiparameter
 Config/testthat/edition: 3
+Config/Needs/website:
+    epiverse-trace/epiversetheme
+VignetteBuilder: knitr
+Language: en-GB
