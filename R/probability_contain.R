@@ -18,7 +18,7 @@
 #'
 #' @details
 #' When using `simulate = TRUE`, the default arguments to simulate the
-#' transmission chains with [chain_sim()] are `1e5` replicates,
+#' transmission chains with [.chain_sim()] are `1e5` replicates,
 #' a negative binomial (`nbinom`) offspring distribution, parameterised with
 #' `R` (and `pop_control` if > 0) and `k`.
 #'
@@ -40,7 +40,7 @@
 #' enables setting the `case_threshold`, `outbreak_time` and `generation_time`
 #' arguments.
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named elements to replace
-#' default arguments in [chain_sim()]. See details.
+#' default arguments in [.chain_sim()]. See details.
 #' @param case_threshold A number for the threshold of the number of cases below
 #' which the epidemic is considered contained. `case_threshold` is only used
 #' when `simulate = TRUE`.

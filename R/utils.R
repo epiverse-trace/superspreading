@@ -335,7 +335,7 @@ solve_for_u <- function(prop, R, k) {
     if (!is.function(generation_time)) {
       stop(sprintf("%s %s",
                    "The `generation_time` argument must be a function",
-                   "(see details in ?chain_sim)."
+                   "(see details in ?.chain_sim)."
       )
       )
     }
