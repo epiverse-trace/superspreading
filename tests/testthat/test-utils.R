@@ -132,3 +132,23 @@ test_that("%gt% operator works as expected", {
     regexp = "(Values of `var` > 1 are set to 1)"
   )
 })
+
+test_that(".check_input_params works as expected", {
+  expect_invisible(
+    .check_input_params(missing_params = TRUE, missing_offspring_dist = FALSE)
+  )
+  expect_invisible(
+    .check_input_params(missing_params = FALSE, missing_offspring_dist = TRUE)
+  )
+})
+
+test_that(".check_input_params fails as expected", {
+  expect_error(
+    .check_input_params(missing_params = TRUE, missing_offspring_dist = TRUE),
+    regexp = "Only one of `R` and `k` or `offspring_dist` must be supplied."
+  )
+  expect_error(
+    .check_input_params(missing_params = FALSE, missing_offspring_dist = FALSE),
+    regexp = "Only one of `R` and `k` or `offspring_dist` must be supplied."
+  )
+})
