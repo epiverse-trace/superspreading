@@ -112,7 +112,7 @@ test_that("probability_epidemic works with <epiparameter>", {
 test_that("probability_epidemic fails without R and k or <epiparameter>", {
   expect_error(
     probability_epidemic(num_init_infect = 1),
-    regexp = "Only one of R and k or <epiparameter> must be supplied."
+    regexp = "Only one of `R` and `k` or `offspring_dist` must be supplied."
   )
 })
 
