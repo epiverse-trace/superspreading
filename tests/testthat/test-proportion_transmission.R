@@ -221,6 +221,6 @@ test_that("proportion_transmission works for t_20 method", {
 test_that("proportion_transmission fails without R and k or <epiparameter>", {
   expect_error(
     proportion_transmission(percent_transmission = 0.8),
-    regexp = "Only one of R and k or <epiparameter> must be supplied."
+    regexp = "Only one of `R` and `k` or `offspring_dist` must be supplied."
   )
 })

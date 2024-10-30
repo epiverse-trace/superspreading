@@ -107,6 +107,6 @@ test_that("proportion_cluster_size works with <epiparameter>", {
 test_that("proportion_cluster_size fails without R and k or <epiparameter>", {
   expect_error(
     proportion_cluster_size(cluster_size = 10),
-    regexp = "Only one of R and k or <epiparameter> must be supplied."
+    regexp = "Only one of `R` and `k` or `offspring_dist` must be supplied."
   )
 })

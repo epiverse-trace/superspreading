@@ -181,7 +181,7 @@ test_that("probability_contain fails using dots with incorrect name", {
 test_that("probability_contain fails without R and k or <epiparameter>", {
   expect_error(
     probability_contain(num_init_infect = 1, pop_control = 0.5),
-    regexp = "Only one of R and k or <epiparameter> must be supplied."
+    regexp = "Only one of `R` and `k` or `offspring_dist` must be supplied."
   )
 })
 
