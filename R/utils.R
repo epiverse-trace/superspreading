@@ -430,3 +430,22 @@ solve_for_u <- function(prop, R, k) {
   rownames(tdf) <- NULL
   return(tdf)
 }
+
+#' Check if input parameters are correctly specified by user
+#'
+#' @param missing_params A `logical` boolean.
+#' @param missing_offspring_dist A `logical` boolean.
+#'
+#' @return Invisibly returns `missing_params` or errors. Called for
+#' side-effect.
+#' @keywords internal
+#' @noRd
+.check_input_params <- function(missing_params, missing_offspring_dist) {
+  if (!xor(missing_params, missing_offspring_dist)) {
+    stop(
+      "Only one of `R` and `k` or `offspring_dist` must be supplied.",
+      call. = FALSE
+    )
+  }
+  invisible(missing_params)
+}
