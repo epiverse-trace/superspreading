@@ -27,10 +27,14 @@ offspring distribution from fitted negative binomial).}
 stored as double) specifying the number of initial infections.}
 
 \item{ind_control}{A \code{numeric} specifying the strength of individual-level
-control measures. Between \code{0} (default) and \code{1} (maximum).}
+control measures. These control measures assume that infected individuals
+do not produce any secondary infections with probability \code{ind_control},
+thus increasing the proportion of cases that do not create any subsequent
+infections. The control measure is between \code{0} (default) and \code{1} (maximum).}
 
 \item{pop_control}{A \code{numeric} specifying the strength of population-level
-control measures. Between \code{0} (default) and \code{1} (maximum).}
+control measures that reduce the transmissibility of all cases by a
+constant factor. Between \code{0} (default) and \code{1} (maximum).}
 
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> Named elements to replace
 default optimisation settings. Currently only \code{"fit_method"} is accepted

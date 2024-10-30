@@ -13,9 +13,13 @@
 #' ["integerish"](https://rlang.r-lib.org/reference/is_integerish.html) if
 #' stored as double) specifying the number of initial infections.
 #' @param ind_control A `numeric` specifying the strength of individual-level
-#' control measures. Between `0` (default) and `1` (maximum).
+#' control measures. These control measures assume that infected individuals
+#' do not produce any secondary infections with probability `ind_control`,
+#' thus increasing the proportion of cases that do not create any subsequent
+#' infections. The control measure is between `0` (default) and `1` (maximum).
 #' @param pop_control A `numeric` specifying the strength of population-level
-#' control measures. Between `0` (default) and `1` (maximum).
+#' control measures that reduce the transmissibility of all cases by a
+#' constant factor. Between `0` (default) and `1` (maximum).
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named elements to replace
 #' default optimisation settings. Currently only `"fit_method"` is accepted
 #' and can be either `"optim"` (default) or `"grid"` for numerical
