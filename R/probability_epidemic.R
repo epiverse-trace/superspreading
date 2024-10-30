@@ -92,16 +92,14 @@ probability_extinct <- function(R,
                                 pop_control = 0,
                                 ...,
                                 offspring_dist) {
-  input_params <- missing(R) && missing(k)
-  if (!xor(input_params, missing(offspring_dist))) {
-    stop(
-      "Only one of R and k or <epiparameter> must be supplied.",
-      call. = FALSE
-    )
-  }
+  missing_params <- missing(R) && missing(k)
+  .check_input_params(
+    missing_params = missing_params,
+    missing_offspring_dist = missing(offspring_dist)
+  )
 
   # check inputs
-  if (input_params) {
+  if (missing_params) {
     checkmate::assert_class(offspring_dist, classes = "epiparameter")
     R <- get_epiparameter_param(epiparameter = offspring_dist, parameter = "R")
     k <- get_epiparameter_param(epiparameter = offspring_dist, parameter = "k")
