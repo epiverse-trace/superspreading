@@ -275,7 +275,7 @@ solve_for_u <- function(prop, R, k) {
 #' Simulate transmission chains using a stochastic branching process
 #'
 #' @description
-#' Code modified from the [bpmodels::chain_sim()] function.
+#' Code modified from the `bpmodels::chain_sim()` function.
 #' The function `chain_sim()` function from \pkg{bpmodels} is reused with
 #' permission and licensed under MIT as is \pkg{bpmodels}.
 #' \pkg{bpmodels} is not on CRAN and is retired.
