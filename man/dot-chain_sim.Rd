@@ -47,7 +47,7 @@ ID within each simulation for each individual element of the chain),
 \code{serial}.
 }
 \description{
-Code modified from the \code{\link[bpmodels:chain_sim]{bpmodels::chain_sim()}} function.
+Code modified from the \code{bpmodels::chain_sim()} function.
 The function \code{chain_sim()} function from \pkg{bpmodels} is reused with
 permission and licensed under MIT as is \pkg{bpmodels}.
 \pkg{bpmodels} is not on CRAN and is retired.
