@@ -17,7 +17,7 @@
     Code
       probability_epidemic(R = 1.5, k = Inf, num_init_infect = 1)
     Output
-      [1] 0.5828111
+      [1] 0.5828074
 
 # probability_epidemic works with individual-level control
 
