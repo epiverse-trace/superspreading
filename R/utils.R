@@ -449,3 +449,19 @@ solve_for_u <- function(prop, R, k) {
   }
   invisible(missing_params)
 }
+
+#' Constants used in \pkg{superspreading}
+#'
+#' @name constants
+#'
+#' @description
+#' `FINITE_INF` is a large finite number used to approximate `Inf`.
+#'
+#' `NSIM` is the number of simulations run when generating random samples or
+#' branching process simulation replicates.
+
+#' @rdname constants
+FINITE_INF <- 1e5
+
+#' @rdname constants
+NSIM <- 1e5

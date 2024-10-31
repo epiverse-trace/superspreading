@@ -65,9 +65,8 @@ proportion_cluster_size <- function(R, k, cluster_size, ..., offspring_dist,
   colnames(df) <- c("R", "k", paste0("prop_", cluster_size))
 
   for (i in seq_len(nrow(df))) {
-    nsim <- 1e5
     simulate_secondary <- stats::rnbinom(
-      n = nsim,
+      n = NSIM,
       mu = df[i, "R"],
       size = df[i, "k"]
     )

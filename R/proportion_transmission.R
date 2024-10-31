@@ -56,7 +56,7 @@
 #'
 #' The numerical calculation for `method = p_80` uses random number generation
 #' to simulate secondary contacts so the answers may minimally vary between
-#' calls. The number of simulation replicates is fixed to `1e5`.
+#' calls. The number of simulation replicates is fixed to `r NSIM`.
 #'
 #' @inheritParams proportion_cluster_size
 #' @inheritParams probability_epidemic
@@ -149,9 +149,10 @@ proportion_transmission <- function(R, k,
   stopifnot("k must be greater than zero." = k != 0)
   # k must be finite for analytical p_80 and t_20 methods
   if (any(is.infinite(k))) {
-    k[is.infinite(k)] <- 1e5
+    k[is.infinite(k)] <- FINITE_INF
     message(
-      "Infinite values of k are being approximated by 1e5 for calculations."
+      "Infinite values of k are being approximated by ",
+      FINITE_INF, " for calculations."
     )
   }
   checkmate::assert_number(percent_transmission, lower = 0, upper = 1)
@@ -230,9 +231,8 @@ proportion_transmission <- function(R, k,
 #' @noRd
 .prop_transmission_numerical <- function(R, k, percent_transmission) {
 
-  nsim <- 1e5
   simulate_secondary <- stats::rnbinom(
-    n = nsim,
+    n = NSIM,
     mu = R,
     size = k
   )
@@ -244,7 +244,7 @@ proportion_transmission <- function(R, k,
   cumsum_secondary <- cumsum(sort(simulate_secondary, decreasing = TRUE))
 
   # proportion causing case
-  out <- sum(cumsum_secondary <= percent_cases) / nsim
+  out <- sum(cumsum_secondary <= percent_cases) / NSIM
 
   return(out)
 }
