@@ -115,7 +115,7 @@ probability_extinct <- function(R,
   dots <- rlang::dots_list(..., .ignore_empty = "none", .homonyms = "error")
 
   # change Inf k to 1e10 to prevent issue with grid search
-  if (is.infinite(k)) k <- 1e10
+  if (is.infinite(k)) k <- FINITE_INF
 
   if (R <= 1) {
     # If R<=1, P(extinction)=1

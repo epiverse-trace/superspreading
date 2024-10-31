@@ -18,7 +18,7 @@
 #'
 #' @details
 #' When using `simulate = TRUE`, the default arguments to simulate the
-#' transmission chains with [.chain_sim()] are `1e5` replicates,
+#' transmission chains with [.chain_sim()] are `r NSIM` replicates,
 #' a negative binomial (`nbinom`) offspring distribution, parameterised with
 #' `R` (and `pop_control` if > 0) and `k`.
 #'
@@ -151,10 +151,9 @@ probability_contain <- function(R,
   }
 
   if (simulate) {
-    nsim <- 1e5
     # arguments for .chain_sim()
     args <- list(
-      n = nsim,
+      n = NSIM,
       offspring = "nbinom",
       size = k,
       mu = (1 - pop_control) * R,
@@ -200,7 +199,7 @@ probability_contain <- function(R,
     } else {
       control_chain_size <- sum(chain_size < case_threshold)
     }
-    prob_contain <- control_chain_size / nsim
+    prob_contain <- control_chain_size / NSIM
   } else {
     prob_contain <- probability_extinct(
       R = R,

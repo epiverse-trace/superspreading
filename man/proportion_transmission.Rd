@@ -104,7 +104,7 @@ every combination of these will be returned.
 
 The numerical calculation for \code{method = p_80} uses random number generation
 to simulate secondary contacts so the answers may minimally vary between
-calls. The number of simulation replicates is fixed to \code{1e5}.
+calls. The number of simulation replicates is fixed to 10\if{html}{\out{<sup>}}5\if{html}{\out{</sup>}}.
 }
 \examples{
 # example of single values of R and k

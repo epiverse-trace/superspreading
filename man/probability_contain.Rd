@@ -88,7 +88,7 @@ and \code{outbreak_time}, respectively.
 }
 \details{
 When using \code{simulate = TRUE}, the default arguments to simulate the
-transmission chains with \code{\link[=.chain_sim]{.chain_sim()}} are \code{1e5} replicates,
+transmission chains with \code{\link[=.chain_sim]{.chain_sim()}} are 10\if{html}{\out{<sup>}}5\if{html}{\out{</sup>}} replicates,
 a negative binomial (\code{nbinom}) offspring distribution, parameterised with
 \code{R} (and \code{pop_control} if > 0) and \code{k}.
 
