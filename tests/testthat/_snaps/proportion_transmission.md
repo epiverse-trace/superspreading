@@ -55,7 +55,7 @@
     Code
       proportion_transmission(R = 2, k = Inf, percent_transmission = 0.8)
     Message
-      Infinite values of k are being approximated by 1e5 for calculations.
+      Infinite values of k are being approximated by 1e+05 for calculations.
     Output
         R     k prop_80
       1 2 1e+05   52.9%
