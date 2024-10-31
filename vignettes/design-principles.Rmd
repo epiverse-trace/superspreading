@@ -42,6 +42,8 @@ The distribution functions return a vector of `numeric`s of equal length to the 
 
 - Internal functions have a dot (`.`) prefix, exported functions do not.
 
+- Several functions use constants that are internally defined (e.g. `NSIM` and `FINITE_INF`). These are used in several functions to prevent the use of apparently arbitrary [magic numbers](https://en.wikipedia.org/wiki/Magic_number_(programming)). Constants are all uppercase to make clear they are _internal_ constants (following [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const#basic_const_usage) and [PEP8](https://peps.python.org/pep-0008/#constants) styles. These constants should not be exported (i.e. should not appear in the `NAMESPACE`) as they should only be used by functions and not package users.
+
 ## Dependencies
 
 The aim is to restrict the number of dependencies to a minimal required set for ease of maintenance. The current hard dependencies are:
