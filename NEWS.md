@@ -21,6 +21,8 @@ We are also pleased to welcome Dillon Adam (@dcadam) as a new package author for
 * Improve input checking, error messages and edge case handling for functions (#102).
 * Vignettes now use `rmarkdown::html_vignette` instead of `bookdown::html_vignette2` and `as_is: true` has been removed due to changes to {pkgdown} in v2.1.0. {bookdown} has been removed as a suggested package and code folding is removed from vignettes. KaTeX headers have been added to `_pkgdown.yml` for correct math rendering (#104 & #109).
 * The `get_epidist_params()` internal function has been renamed `get_epiparameter_params()` since {epiparameter} renamed the `<epidist>` class to `<epiparameter>` (#100).
+* Internal constants have been added to the package and used by functions (#111). 
+* Checking if the user specifies individual parameters (`R` and `k`) or provides an `<epiparameter>` object is now in `.check_input_params()` (#111).
 
 ## Bug fixes
 
