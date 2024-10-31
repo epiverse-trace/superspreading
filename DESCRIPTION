@@ -54,6 +54,13 @@ Authors@R:
             role = c("rev", "ctb"),
             email = "james.azam@lshtm.ac.uk",
             comment = c(ORCID = "0000-0001-5782-7330")
+        ),
+        person(
+            given = "Chris", 
+            family = "Hartgerink",
+            role = "rev",
+            email = "chris@data.org",
+            comment = c(ORCID = "0000-0003-1050-6809")
         )
     )
 Description: Implements functions to estimate individual-level variation in 
