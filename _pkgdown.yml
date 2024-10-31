@@ -43,6 +43,10 @@ reference:
     contents:
     - ic_tbl
 
+  - title: Constants
+    contents:
+    - constants
+
 articles:
 - title: Parameter estimation
   navbar: Parameter estimation
