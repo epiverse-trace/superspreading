@@ -137,12 +137,16 @@ stored as double) specifying the number of initial infections.</p></dd>
 
 <dt id="arg-ind-control">ind_control<a class="anchor" aria-label="anchor" href="#arg-ind-control"></a></dt>
 <dd><p>A <code>numeric</code> specifying the strength of individual-level
-control measures. Between <code>0</code> (default) and <code>1</code> (maximum).</p></dd>
+control measures. These control measures assume that infected individuals
+do not produce any secondary infections with probability <code>ind_control</code>,
+thus increasing the proportion of cases that do not create any subsequent
+infections. The control measure is between <code>0</code> (default) and <code>1</code> (maximum).</p></dd>
 
 
 <dt id="arg-pop-control">pop_control<a class="anchor" aria-label="anchor" href="#arg-pop-control"></a></dt>
 <dd><p>A <code>numeric</code> specifying the strength of population-level
-control measures. Between <code>0</code> (default) and <code>1</code> (maximum).</p></dd>
+control measures that reduce the transmissibility of all cases by a
+constant factor. Between <code>0</code> (default) and <code>1</code> (maximum).</p></dd>
 
 
 <dt id="arg-simulate">simulate<a class="anchor" aria-label="anchor" href="#arg-simulate"></a></dt>
@@ -191,7 +195,7 @@ with epidemiological parameters/distributions, see
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>When using <code>simulate = TRUE</code>, the default arguments to simulate the
-transmission chains with <code><a href="dot-chain_sim.html">.chain_sim()</a></code> are <code>1e5</code> replicates,
+transmission chains with <code><a href="dot-chain_sim.html">.chain_sim()</a></code> are 10<sup>5</sup> replicates,
 a negative binomial (<code>nbinom</code>) offspring distribution, parameterised with
 <code>R</code> (and <code>pop_control</code> if &gt; 0) and <code>k</code>.</p>
 <p>When setting the <code>outbreak_time</code> argument, the <code>generation_time</code> argument is

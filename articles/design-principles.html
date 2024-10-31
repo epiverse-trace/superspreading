@@ -176,6 +176,15 @@ informative error. The <code>offspring_dist</code> argument is after
 accidentally provide data to this argument.</p></li>
 <li><p>Internal functions have a dot (<code>.</code>) prefix, exported
 functions do not.</p></li>
+<li><p>Several functions use constants that are internally defined
+(e.g. <code>NSIM</code> and <code>FINITE_INF</code>). These are used in
+several functions to prevent the use of apparently arbitrary <a href="https://en.wikipedia.org/wiki/Magic_number_(programming)" class="external-link">magic
+numbers</a>. Constants are all uppercase to make clear they are
+<em>internal</em> constants (following <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const#basic_const_usage" class="external-link">MDN</a>
+and <a href="https://peps.python.org/pep-0008/#constants" class="external-link">PEP8</a>
+styles. These constants should not be exported (i.e. should not appear
+in the <code>NAMESPACE</code>) as they should only be used by functions
+and not package users.</p></li>
 </ul>
 </div>
 <div class="section level2">
