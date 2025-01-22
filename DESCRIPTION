@@ -37,7 +37,7 @@ Imports:
     stats
 Suggests: 
     dplyr,
-    epiparameter,
+    epiparameter (>= 0.4.0),
     fitdistrplus,
     ggplot2,
     ggtext,
@@ -49,8 +49,6 @@ Suggests:
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
-Remotes:
-    epiverse-trace/epiparameter
 Config/Needs/website:epiverse-trace/epiversetheme
 Config/testthat/edition: 3
 Encoding: UTF-8
