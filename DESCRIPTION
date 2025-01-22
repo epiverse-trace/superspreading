@@ -1,101 +1,59 @@
 Package: superspreading
-Title: Understand Individual-Level Variation in Infectious Disease Transmission
+Title: Understand Individual-Level Variation in Infectious Disease
+    Transmission
 Version: 0.2.0.9000
-Authors@R: 
-    c(
-        person(
-            given = "Joshua W.",
-            family = "Lambert",
-            role = c("aut", "cre", "cph"),
-            email = "joshua.lambert@lshtm.ac.uk",
-            comment = c(ORCID = "0000-0001-5218-3046")
-        ),
-        person(
-            given = "Adam", 
-            family = "Kucharski",
-            role = c("aut", "cph"),
-            email = "adam.kucharski@lshtm.ac.uk", 
-            comment = c(ORCID = "0000-0001-8814-9421")
-        ),
-        person(
-            given = "Dillon C.",
-            family = "Adam",
-            role = c("aut"),
-            email = "dcadam@hku.hk",
-            comment = c(ORCID = "0000-0002-7485-9905")
-        ),
-        person(
-            given = "Sebastian",
-            family = "Funk",
-            role = c("ctb", "cph"),
-            email = "sebastian.funk@lshtm.ac.uk",
-            comment = c(
-              ORCID = "0000-0002-2842-3406",
-              ".chain_sim uses code from bpmodels::chain_sim"
-            )
-        ),
-        person(
-            given = "Pratik",
-            family = "Gupte",
-            role = c("rev"),
-            email = "pratik.gupte@lshtm.ac.uk",
-            comment = c(ORCID = "0000-0001-5294-7819")
-        ),
-        person(
-            given = "Hugo",
-            family = "Gruson",
-            role = c("rev"),
-            email = "hugo@data.org",
-            comment = c(ORCID = "0000-0002-4094-1476")
-        ),
-        person(
-            given = "James M.",
-            family = "Azam", 
-            role = c("rev", "ctb"),
-            email = "james.azam@lshtm.ac.uk",
-            comment = c(ORCID = "0000-0001-5782-7330")
-        ),
-        person(
-            given = "Chris", 
-            family = "Hartgerink",
-            role = "rev",
-            email = "chris@data.org",
-            comment = c(ORCID = "0000-0003-1050-6809")
-        )
-    )
-Description: Estimate and understand individual-level variation in transmission.
-    Implements density and cumulative compound Poisson discrete distribution
-    functions, as well as functions to calculate infectious disease outbreak
-    statistics given epidemiological parameters on individual-level 
-    transmission; including the probability of an outbreak becoming an
-    epidemic/extinct, or the cluster size statistics, e.g. what proportion
-    of cases cause X\% of transmission.
+Authors@R: c(
+    person("Joshua W.", "Lambert", , "joshua.lambert@lshtm.ac.uk", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0000-0001-5218-3046")),
+    person("Adam", "Kucharski", , "adam.kucharski@lshtm.ac.uk", role = c("aut", "cph"),
+           comment = c(ORCID = "0000-0001-8814-9421")),
+    person("Dillon C.", "Adam", , "dcadam@hku.hk", role = "aut",
+           comment = c(ORCID = "0000-0002-7485-9905")),
+    person("Sebastian", "Funk", , "sebastian.funk@lshtm.ac.uk", role = c("ctb", "cph"),
+           comment = c(ORCID = "0000-0002-2842-3406", ".chain_sim uses code from bpmodels::chain_sim")),
+    person("Pratik", "Gupte", , "pratik.gupte@lshtm.ac.uk", role = "rev",
+           comment = c(ORCID = "0000-0001-5294-7819")),
+    person("Hugo", "Gruson", , "hugo@data.org", role = "rev",
+           comment = c(ORCID = "0000-0002-4094-1476")),
+    person("James M.", "Azam", , "james.azam@lshtm.ac.uk", role = c("rev", "ctb"),
+           comment = c(ORCID = "0000-0001-5782-7330")),
+    person("Chris", "Hartgerink", , "chris@data.org", role = "rev",
+           comment = c(ORCID = "0000-0003-1050-6809"))
+  )
+Description: Estimate and understand individual-level variation in
+    transmission.  Implements density and cumulative compound Poisson
+    discrete distribution functions, as well as functions to calculate
+    infectious disease outbreak statistics given epidemiological
+    parameters on individual-level transmission; including the probability
+    of an outbreak becoming an epidemic/extinct, or the cluster size
+    statistics, e.g. what proportion of cases cause X\% of transmission.
 License: MIT + file LICENSE
-URL: https://github.com/epiverse-trace/superspreading, https://epiverse-trace.github.io/superspreading/
+URL: https://github.com/epiverse-trace/superspreading,
+    https://epiverse-trace.github.io/superspreading/
 BugReports: https://github.com/epiverse-trace/superspreading/issues
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
 Imports:
     checkmate,
-    stats,
-    rlang
+    rlang,
+    stats
 Suggests: 
+    dplyr,
     epiparameter,
     fitdistrplus,
-    knitr,
-    rmarkdown,
     ggplot2,
-    spelling,
     ggtext,
-    scales,
+    knitr,
     purrr,
-    dplyr,
+    rmarkdown,
+    scales,
+    spelling,
     testthat (>= 3.0.0)
+VignetteBuilder: 
+    knitr
 Remotes:
     epiverse-trace/epiparameter
+Config/Needs/website:epiverse-trace/epiversetheme
 Config/testthat/edition: 3
-Config/Needs/website:
-    epiverse-trace/epiversetheme
-VignetteBuilder: knitr
+Encoding: UTF-8
 Language: en-GB
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
