@@ -1,4 +1,4 @@
-# superspreading (development version)
+# superspreading 0.3.0
 
 The third minor release of the _superspreading_ package contains enhancements to several functions and a new vignette. 
 
