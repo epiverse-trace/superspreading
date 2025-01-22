@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![License:
-MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit/)
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit)
 [![R-CMD-check](https://github.com/epiverse-trace/superspreading/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/superspreading/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/epiverse-trace/superspreading/branch/main/graph/badge.svg)](https://app.codecov.io/gh/epiverse-trace/superspreading?branch=main)
@@ -34,6 +34,12 @@ Medicine](https://www.lshtm.ac.uk/) as part of
 
 ## Installation
 
+The package can be installed from CRAN using
+
+``` r
+install.packages("superspreading")
+```
+
 The easiest way to install the development version of `{superspreading}`
 from [GitHub](https://github.com/) is to use the `{pak}` package:
 
@@ -41,6 +47,13 @@ from [GitHub](https://github.com/) is to use the `{pak}` package:
 # check whether {pak} is installed
 if(!require("pak")) install.packages("pak")
 pak::pak("epiverse-trace/superspreading")
+```
+
+Alternatively, install pre-compiled binaries from [the Epiverse TRACE
+R-universe](https://epiverse-trace.r-universe.dev/superspreading)
+
+``` r
+install.packages("superspreading", repos = c("https://epiverse-trace.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
 ## Quick start
@@ -197,17 +210,19 @@ By contributing to this project, you agree to abide by its terms.
 citation("superspreading")
 #> To cite package 'superspreading' in publications use:
 #> 
-#>   Lambert J, Kucharski A, Adam D (2024). _superspreading: Estimate
-#>   Individual-Level Variation in Transmission_. R package version
-#>   0.2.0.9000, https://epiverse-trace.github.io/superspreading/,
+#>   Lambert J, Kucharski A, Adam D (2025). _superspreading: Understand
+#>   Individual-Level Variation in Infectious Disease Transmission_. R
+#>   package version 0.2.0.9000,
+#>   https://epiverse-trace.github.io/superspreading/,
 #>   <https://github.com/epiverse-trace/superspreading>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {superspreading: Estimate Individual-Level Variation in Transmission},
+#>     title = {superspreading: Understand Individual-Level Variation in Infectious Disease
+#> Transmission},
 #>     author = {Joshua W. Lambert and Adam Kucharski and Dillon C. Adam},
-#>     year = {2024},
+#>     year = {2025},
 #>     note = {R package version 0.2.0.9000, 
 #> https://epiverse-trace.github.io/superspreading/},
 #>     url = {https://github.com/epiverse-trace/superspreading},
