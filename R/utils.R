@@ -46,7 +46,7 @@ get_epiparameter_param <- function(epiparameter,
 #' @description This is a helper function for creating a model comparison
 #' `<data.frame>` primarily for use in the \pkg{superspreading} vignettes. It
 #' is designed specifically for handling [fitdistrplus::fitdist()] output and
-#' not a generalised function. See [bbmle::ICtab()] for a more general use
+#' not a generalised function. See `bbmle::ICtab()` for a more general use
 #' function to create information criteria tables.
 #'
 #' @param ... [dots] One or more model fit results from
