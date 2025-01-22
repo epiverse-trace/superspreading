@@ -4,9 +4,9 @@
 \name{superspreading-package}
 \alias{superspreading}
 \alias{superspreading-package}
-\title{superspreading: Estimate Individual-Level Variation in Transmission}
+\title{superspreading: Understand Individual-Level Variation in Infectious Disease Transmission}
 \description{
-Implements functions to estimate individual-level variation in transmission.
+Estimate and understand individual-level variation in transmission. Implements density and cumulative compound Poisson discrete distribution functions, as well as functions to calculate infectious disease outbreak statistics given epidemiological parameters on individual-level transmission; including the probability of an outbreak becoming an epidemic/extinct, or the cluster size statistics, e.g. what proportion of cases cause X\% of transmission.
 }
 \seealso{
 Useful links:
