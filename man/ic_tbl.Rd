@@ -21,7 +21,7 @@ A \verb{<data.frame>}.
 This is a helper function for creating a model comparison
 \verb{<data.frame>} primarily for use in the \pkg{superspreading} vignettes. It
 is designed specifically for handling \code{\link[fitdistrplus:fitdist]{fitdistrplus::fitdist()}} output and
-not a generalised function. See \code{\link[bbmle:ICtab]{bbmle::ICtab()}} for a more general use
+not a generalised function. See \code{bbmle::ICtab()} for a more general use
 function to create information criteria tables.
 }
 \examples{
