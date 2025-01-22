@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 # _superspreading_: Estimate individual-level variation in transmission <img src="man/figures/logo.svg" align="right" width="120"/>
 
 <!-- badges: start -->
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit)
 [![R-CMD-check](https://github.com/epiverse-trace/superspreading/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/superspreading/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/epiverse-trace/superspreading/branch/main/graph/badge.svg)](https://app.codecov.io/gh/epiverse-trace/superspreading?branch=main)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
