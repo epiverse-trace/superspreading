@@ -91,7 +91,7 @@
 #'   k = 0.5,
 #'   num_init_infect = 1,
 #'   simulate = TRUE,
-#'   case_threshold = 100,
+#'   case_threshold = 50,
 #'   outbreak_time = 20,
 #'   generation_time = gt
 #' )
