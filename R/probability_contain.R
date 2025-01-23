@@ -87,7 +87,7 @@
 #'   rlnorm(n, meanlog = 1, sdlog = 1.5)
 #' }
 #' probability_contain(
-#'   R = 1.5,
+#'   R = 1.2,
 #'   k = 0.5,
 #'   num_init_infect = 1,
 #'   simulate = TRUE,
