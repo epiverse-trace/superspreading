@@ -12,6 +12,10 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 coverage](https://codecov.io/gh/epiverse-trace/superspreading/branch/main/graph/badge.svg)](https://app.codecov.io/gh/epiverse-trace/superspreading?branch=main)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/superspreading)](https://CRAN.R-project.org/package=superspreading)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/superspreading)](https://cran.r-project.org/package=superspreading)
 <!-- badges: end -->
 
 `{superspreading}` is an R package that provides a set of functions to
@@ -212,7 +216,7 @@ citation("superspreading")
 #> 
 #>   Lambert J, Kucharski A, Adam D (2025). _superspreading: Understand
 #>   Individual-Level Variation in Infectious Disease Transmission_. R
-#>   package version 0.2.0.9000,
+#>   package version 0.3.0,
 #>   https://epiverse-trace.github.io/superspreading/,
 #>   <https://github.com/epiverse-trace/superspreading>.
 #> 
@@ -223,7 +227,7 @@ citation("superspreading")
 #> Transmission},
 #>     author = {Joshua W. Lambert and Adam Kucharski and Dillon C. Adam},
 #>     year = {2025},
-#>     note = {R package version 0.2.0.9000, 
+#>     note = {R package version 0.3.0, 
 #> https://epiverse-trace.github.io/superspreading/},
 #>     url = {https://github.com/epiverse-trace/superspreading},
 #>   }
