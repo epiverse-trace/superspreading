@@ -9,7 +9,7 @@ type: software
 license: MIT
 title: 'superspreading: Understand Individual-Level Variation in Infectious Disease
   Transmission'
-version: 0.3.0
+version: 0.3.0.9000
 doi: 10.32614/CRAN.package.superspreading
 abstract: Estimate and understand individual-level variation in transmission. Implements
   density and cumulative compound Poisson discrete distribution functions ('Kremer
