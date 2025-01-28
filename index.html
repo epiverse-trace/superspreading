@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Estimate Individual-Level Variation in Transmission • superspreading</title>
+<title>Understand Individual-Level Variation in Infectious Disease Transmission • superspreading</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -14,11 +14,11 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="lightswitch.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Estimate Individual-Level Variation in Transmission">
-<meta name="description" content="Implements functions to estimate individual-level variation in transmission.">
-<meta property="og:description" content="Implements functions to estimate individual-level variation in transmission.">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Understand Individual-Level Variation in Infectious Disease Transmission">
+<meta name="description" content="Estimate and understand individual-level variation in transmission. Implements density and cumulative compound Poisson discrete distribution functions (Kremer et al. (2021) &lt;doi:10.1038/s41598-021-93578-x&gt;), as well as functions to calculate infectious disease outbreak statistics given epidemiological parameters on individual-level transmission; including the probability of an outbreak becoming an epidemic/extinct (Kucharski et al. (2020) &lt;doi:10.1016/S1473-3099(20)30144-4&gt;), or the cluster size statistics, e.g. what proportion of cases cause X\% of transmission (Lloyd-Smith et al. (2005) &lt;doi:10.1038/nature04153&gt;).">
+<meta property="og:description" content="Estimate and understand individual-level variation in transmission. Implements density and cumulative compound Poisson discrete distribution functions (Kremer et al. (2021) &lt;doi:10.1038/s41598-021-93578-x&gt;), as well as functions to calculate infectious disease outbreak statistics given epidemiological parameters on individual-level transmission; including the probability of an outbreak becoming an epidemic/extinct (Kucharski et al. (2020) &lt;doi:10.1016/S1473-3099(20)30144-4&gt;), or the cluster size statistics, e.g. what proportion of cases cause X\% of transmission (Lloyd-Smith et al. (2005) &lt;doi:10.1038/nature04153&gt;).">
 <meta property="og:image" content="https://epiverse-trace.github.io/superspreading/logo.svg">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
@@ -31,7 +31,7 @@
     <a href="https://epiverse-trace.github.io/" class="external-link"><img src="https://epiverse-trace.github.io/blueprints/logo_white.svg" id="logo" alt="Epiverse-TRACE"></a>
     <a class="navbar-brand me-2" href="index.html">superspreading</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.2.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,16 +96,22 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>The easiest way to install the development version of <a href="https://github.com/epiverse-trace/superspreading" class="external-link">superspreading</a> from <a href="https://github.com/" class="external-link">GitHub</a> is to use the <a href="https://pak.r-lib.org/" class="external-link">pak</a> package:</p>
+<p>The package can be installed from CRAN using</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"superspreading"</span><span class="op">)</span></span></code></pre></div>
+<p>The easiest way to install the development version of <a href="https://github.com/epiverse-trace/superspreading" class="external-link">superspreading</a> from <a href="https://github.com/" class="external-link">GitHub</a> is to use the <a href="https://pak.r-lib.org/" class="external-link">pak</a> package:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># check whether {pak} is installed</span></span>
 <span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://pak.r-lib.org/" class="external-link">"pak"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"epiverse-trace/superspreading"</span><span class="op">)</span></span></code></pre></div>
+<p>Alternatively, install pre-compiled binaries from <a href="https://epiverse-trace.r-universe.dev/superspreading" class="external-link">the Epiverse TRACE R-universe</a></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"superspreading"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://epiverse-trace.r-universe.dev"</span>, <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/superspreading" class="external-link">superspreading</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="calculate-the-heterogeneity-of-transmission">Calculate the heterogeneity of transmission<a class="anchor" aria-label="anchor" href="#calculate-the-heterogeneity-of-transmission"></a>
@@ -114,7 +120,7 @@
 <p><strong><em>Source</em></strong>: Faye et al. (<a href="#ref-fayeChainsTransmissionControl2015">2015</a>) &amp; Althaus (<a href="#ref-althausEbolaSuperspreading2015">2015</a>).</p>
 <p><a href="https://CRAN.R-project.org/package=fitdistrplus" class="external-link"><code>{fitdistrplus}</code></a> is a well-developed and stable R package that provides a variety of methods for fitting distribution models to data (<a href="#ref-delignette-mullerFitdistrplusPackageFitting2015">Delignette-Muller and Dutang 2015</a>). Therefore, it is used throughout the documentation of <a href="https://github.com/epiverse-trace/superspreading" class="external-link">superspreading</a> and is a recommended package for those wanting to fit distribution models, for example those supplied in <a href="https://github.com/epiverse-trace/superspreading" class="external-link">superspreading</a> (Poisson-lognormal and Poisson-Weibull). We recommend reading the <a href="https://lbbe-software.github.io/fitdistrplus/" class="external-link">fitdistrplus</a> documentation (specifically <code><a href="https://lbbe-software.github.io/fitdistrplus/reference/fitdist.html" class="external-link">?fitdist</a></code>) to explore the full range of functionality.</p>
 <p>In this example we fit the negative binomial distribution to estimate the reproduction number (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>, which is the mean of the distribution) and the dispersion (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>, which a measure of the variance of the distribution). The parameters are estimated via maximum likelihood (the default method for <code><a href="https://lbbe-software.github.io/fitdistrplus/reference/fitdist.html" class="external-link">fitdist()</a></code>).</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># we use {fitdistrplus} to fit the models</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lbbe-software.github.io/fitdistrplus/" class="external-link">fitdistrplus</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: MASS</span></span>
@@ -157,7 +163,7 @@
 <h3 id="calculate-the-probability-of-a-large-epidemic">Calculate the probability of a large epidemic<a class="anchor" aria-label="anchor" href="#calculate-the-probability-of-a-large-epidemic"></a>
 </h3>
 <p>Given the reproduction number (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>) and the dispersion (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>), the probability that a infectious disease will cause an epidemic, in other words the probability it does not go extinct, can be calculated using <code><a href="reference/probability_epidemic.html">probability_epidemic()</a></code>. Here we use <code><a href="reference/probability_epidemic.html">probability_epidemic()</a></code> for the parameters estimated in the above section for Ebola, assuming there are three initial infections seeding the potential outbreak.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compare probability of a large outbreak when k varies according to</span></span>
 <span><span class="co"># index/non-index values, assuming 3 initial spillover infections</span></span>
 <span></span>
@@ -209,21 +215,23 @@
 <div class="section level2">
 <h2 id="citing-this-package">Citing this package<a class="anchor" aria-label="anchor" href="#citing-this-package"></a>
 </h2>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"superspreading"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; To cite package 'superspreading' in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Lambert J, Kucharski A, Adam D (2024). _superspreading: Estimate</span></span>
-<span><span class="co">#&gt;   Individual-Level Variation in Transmission_. R package version</span></span>
-<span><span class="co">#&gt;   0.2.0.9000, https://epiverse-trace.github.io/superspreading/,</span></span>
+<span><span class="co">#&gt;   Lambert J, Kucharski A, Adam D (2025). _superspreading: Understand</span></span>
+<span><span class="co">#&gt;   Individual-Level Variation in Infectious Disease Transmission_. R</span></span>
+<span><span class="co">#&gt;   package version 0.2.0.9000,</span></span>
+<span><span class="co">#&gt;   https://epiverse-trace.github.io/superspreading/,</span></span>
 <span><span class="co">#&gt;   &lt;https://github.com/epiverse-trace/superspreading&gt;.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   @Manual{,</span></span>
-<span><span class="co">#&gt;     title = {superspreading: Estimate Individual-Level Variation in Transmission},</span></span>
+<span><span class="co">#&gt;     title = {superspreading: Understand Individual-Level Variation in Infectious Disease</span></span>
+<span><span class="co">#&gt; Transmission},</span></span>
 <span><span class="co">#&gt;     author = {Joshua W. Lambert and Adam Kucharski and Dillon C. Adam},</span></span>
-<span><span class="co">#&gt;     year = {2024},</span></span>
+<span><span class="co">#&gt;     year = {2025},</span></span>
 <span><span class="co">#&gt;     note = {R package version 0.2.0.9000, </span></span>
 <span><span class="co">#&gt; https://epiverse-trace.github.io/superspreading/},</span></span>
 <span><span class="co">#&gt;     url = {https://github.com/epiverse-trace/superspreading},</span></span>
@@ -272,6 +280,7 @@ Lloyd-Smith, J. O., S. J. Schreiber, P. E. Kopp, and W. M. Getz. 2005. “Supers
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=superspreading" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/epiverse-trace/superspreading/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/epiverse-trace/superspreading/issues" class="external-link">Report a bug</a></li>
 </ul>
@@ -316,7 +325,7 @@ Lloyd-Smith, J. O., S. J. Schreiber, P. E. Kopp, and W. M. Getz. 2005. “Supers
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://opensource.org/license/mit/" class="external-link"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></li>
+<li><a href="https://opensource.org/license/mit" class="external-link"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></li>
 <li><a href="https://github.com/epiverse-trace/superspreading/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/epiverse-trace/superspreading/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://app.codecov.io/gh/epiverse-trace/superspreading?branch=main" class="external-link"><img src="https://codecov.io/gh/epiverse-trace/superspreading/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
