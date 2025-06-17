@@ -19,8 +19,8 @@ downloads](https://cranlogs.r-pkg.org/badges/superspreading)](https://cran.r-pro
 <!-- badges: end -->
 
 `{superspreading}` is an R package that provides a set of functions to
-estimate and understand individual-level variation the in transmission
-of infectious diseases from data on secondary cases.
+estimate and understand individual-level variation in transmission of
+infectious diseases from data on secondary cases.
 
 `{superspreading}` implements methods outlined in Antia et al.
 ([2003](#ref-antiaRoleEvolutionEmergence2003)), Lloyd-Smith et al.
