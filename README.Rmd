@@ -26,9 +26,9 @@ knitr::opts_chunk$set(
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/superspreading)](https://cran.r-project.org/package=superspreading)
 <!-- badges: end -->
 
-`{superspreading}` is an R package that provides a set of functions to estimate 
-and understand individual-level variation the in transmission of infectious diseases
-from data on secondary cases.  
+`{superspreading}` is an R package that provides a set of functions to estimate
+and understand individual-level variation in transmission of infectious diseases
+from data on secondary cases.
 
 `{superspreading}` implements methods outlined in @antiaRoleEvolutionEmergence2003, @lloyd-smithSuperspreadingEffectIndividual2005, @kucharskiEarlyDynamicsTransmission2020, and @kremerQuantifyingSuperspreadingCOVID192021, as well as additional functions.
 
@@ -44,7 +44,7 @@ install.packages("superspreading")
 
 The easiest way to install the development version of `{superspreading}` from
 [GitHub](https://github.com/) is to use the `{pak}` package:
-  
+
 ``` r
 # check whether {pak} is installed
 if(!require("pak")) install.packages("pak")
@@ -149,17 +149,17 @@ More details on how to use `{superspreading}` can be found in the [online docume
 
 `{superspreading}` does not provide plotting functions, instead we provide example code chunks in the package's vignettes that can be used as a templates upon which data visualisations can be modified. We recommend users copy and edit the examples for their own purposes. (This is permitted under the package's MIT license). By default code chunks for plotting are folded, in order to unfold them and see the code simply click the code button at the top left of the plot.
 
-## Help 
+## Help
 
 To report a bug please open an [issue](https://github.com/epiverse-trace/superspreading/issues/new/choose)
 
-## Contribute 
+## Contribute
 
 Contributions to `{superspreading}` are welcomed. Please follow the [package contributing guide](https://github.com/epiverse-trace/.github/blob/main/CONTRIBUTING.md).
 
 ## Code of Conduct
 
-Please note that the {superspreading} project is released with a 
+Please note that the {superspreading} project is released with a
 [Contributor Code of Conduct](https://github.com/epiverse-trace/.github/blob/main/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
 
@@ -173,7 +173,7 @@ citation("superspreading")
 
 This project has some overlap with other R packages:
 
-- [`{epichains}`](https://github.com/epiverse-trace/epichains) is another Epiverse-TRACE R package that analyses transmission chain data to infer the likelihood for either the size or length of an outbreak cluster, or simulate transmission chains. It is based on the, now retired, [`{bpmodels}`](https://github.com/epiforecasts/bpmodels) package. 
+- [`{epichains}`](https://github.com/epiverse-trace/epichains) is another Epiverse-TRACE R package that analyses transmission chain data to infer the likelihood for either the size or length of an outbreak cluster, or simulate transmission chains. It is based on the, now retired, [`{bpmodels}`](https://github.com/epiforecasts/bpmodels) package.
 
     Two main differences between `{superspreading}` and `{epichains}` are: 1) `{superspreading}` has functions to compute metrics that characterise outbreaks and superspreading events (e.g. `probability_epidemic()`, `probability_extinct()`, `proportion_cluster_size()` & `proportion_transmission()`); whereas `{epichains}` has functions to calculate the likelihood of a transmission chain size and length. 2) `{epichains}` exports functions to simulate a single-type branching process (`simulate_chains()` & `simulate_chain_stats()`).
 
