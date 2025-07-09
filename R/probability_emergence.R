@@ -38,8 +38,6 @@ probability_emergence <- function(R_wild,
                                   tol = 1e-10,
                                   max_iter = 1000) {
 
-  checkmate::assert_number(R_wild, upper = 1)
-  checkmate::assert_number(R_mutant, lower = 1)
   checkmate::assert_number(mutation_rate, lower = 0, upper = 1)
 
   # Initialize extinction probabilities
