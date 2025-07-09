@@ -1,0 +1,80 @@
+---
+title: "Pathogen evolution in the emergence of infectious disease outbreaks"
+output: rmarkdown::html_vignette
+bibliography: references.json
+link-citations: true
+vignette: >
+  %\VignetteIndexEntry{Pathogen evolution in the emergence of infectious disease outbreaks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette explores the `probability_emergence()` function. This is based on the framework of @antiaRoleEvolutionEmergence2003 which uses a multi-type branching process to calculate the probability that a subcritical zoonotic spillover will evolve into a more transmissible pathogen with a reproduction number greater than 1 and thus be able to cause a sustained epidemic from human-to-human transmission. 
+
+```{r setup}
+library(superspreading)
+library(ggplot2)
+library(scales)
+```
+
+We use `probability_emergence()` to replicate Figure 2b from @antiaRoleEvolutionEmergence2003 showing how the probability of emergence changes for different wild-type reproduction numbers and different mutation rates. This assumes a 2-type branching process with a wild-type pathogen with $R_0 < 1$ and a mutant pathogen with $R_0 > 1$ ($R_{\text{mutant}} \in {1.2, 1.5, 1,000}$).
+
+```{r calc-prob-emerge}
+R_wild <- seq(0, 1, by = 0.01)
+R_mutant <- c( 1.2, 1.5, 1000)
+mutation_rate <- c(10^-1, 10^-3)
+
+params <- expand.grid(
+  R_wild = R_wild, 
+  R_mutant = R_mutant, 
+  mutation_rate = mutation_rate
+)
+
+prob_emerge <- apply(
+  params, 
+  MARGIN = 1, 
+  FUN = function(x) {
+    probability_emergence(
+      R_wild = x[["R_wild"]], 
+      R_mutant = x[["R_mutant"]], 
+      mutation_rate = x[["mutation_rate"]]
+    )
+  } 
+)
+res <- cbind(params, prob_emerge = prob_emerge)
+```
+
+```{r plot-prob-emerge, fig.width = 8, fig.height = 5}
+ggplot(data = res) +
+  geom_line(
+    mapping = aes(
+      x = R_wild, 
+      y = prob_emerge, 
+      colour = as.factor(mutation_rate), 
+      linetype = as.factor(R_mutant)
+    )
+  ) +
+  scale_y_continuous(
+    name = "Probability of emergence",
+    transform = "log",
+    breaks = scales::log_breaks(n = 6),
+    limits = c(10^-5, 1)
+  ) +
+  scale_colour_manual(
+    name = "Mutation rate", 
+    values = c("#228B22", "black")
+  ) +
+  scale_linetype_manual(
+    name = "Mutant pathogen R0", 
+    values = c("dotted", "dashed", "solid")
+  ) +
+  scale_x_continuous(name = expression(R[0]~of~introduced~pathogen)) +
+  theme_bw()
+```
