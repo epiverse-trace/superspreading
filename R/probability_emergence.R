@@ -8,10 +8,18 @@
 #' greater than 1, and thus can cause a sustained human-to-human epidemic.
 #' The reproduction number for a pathogen changes at the `mutation_rate`.
 #'
+#' @details
+#' Following Antia et al. (2003), we assume that the mutation rate for all
+#' variants is the same.
+#'
 #' @param R_wild  A `number` specifying the R parameter (i.e. average
 #' secondary cases per infectious individual) for the wild-type pathogen.
-#' @param R_mutant  A `number` specifying the R parameter (i.e. average
-#' secondary cases per infectious individual) for the mutant pathogen.
+#' @param R_mutant  A `number` or vector of `numbers` specifying the R
+#' parameter (i.e. average secondary cases per infectious individual) for the
+#' mutant pathogen(s). If there is more than one value supplied to `R_mutant`,
+#' then the first element is the reproduction number for \eqn{m - 1} mutant
+#' and the last element is the reproduction number for the \eqn{m} mutant
+#' (i.e. fully evolved).
 #' @param mutation_rate A `number` specifying the mutation rate (\eqn{\mu}),
 #' must be between zero and one.
 #' @param tol A `number` for the tolerance of the numerical convergence.
@@ -38,25 +46,41 @@ probability_emergence <- function(R_wild,
                                   tol = 1e-10,
                                   max_iter = 1000) {
 
+  checkmate::assert_number(R_wild)
+  checkmate::assert_numeric(R_mutant)
   checkmate::assert_number(mutation_rate, lower = 0, upper = 1)
 
+  # one R vector for indexing in equations
+  R <- c(R_wild, R_mutant)
+  m <- length(R)
   # Initialize extinction probabilities
-  q1 <- 0.5
-  q2 <- 0.5
+  q <- rep(0.5, m)
 
   for (i in 1:max_iter) {
-    q1_new <- exp(-(1 - mutation_rate) * R_wild * (1 - q1)) *
-      exp(-mutation_rate * R_wild * (1 - q2))
-    q2_new <- exp(-R_mutant * (1 - q2))
+    # create vector to hold new values for fixed-point convergence check
+    q_new <- numeric(m)
 
-    if (abs(q1_new - q1) < tol && abs(q2_new - q2) < tol) break
+    # wild type
+    q_new[1] <- exp(-(1 - mutation_rate) * R[1] * (1 - q[1])) *
+      exp(-mutation_rate * R[1] * (1 - q[2]))
 
-    q1 <- q1_new
-    q2 <- q2_new
+    if (m > 2) {
+      # intermediate types (excludes wild-type and fully evolved mutant)
+      for (j in 2:(m - 1)) {
+        q_new[j] <- exp(-(1 - mutation_rate) * R[j] * (1 - q[j])) *
+          exp(-mutation_rate * R[j]) * (1 - q[j + 1])
+      }
+    }
+
+    # fully evolved mutant
+    q_new[m] <- exp(-R[m] * (1 - q[m]))
+
+    if (max(abs(q_new - q)) < tol) break
+    q <- q_new
   }
 
   # probability of emergence from probability of extinction of wild type
-  prob_emerge <- 1 - q1
+  prob_emerge <- 1 - q[1]
 
   return(prob_emerge)
 }
