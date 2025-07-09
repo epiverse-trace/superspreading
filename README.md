@@ -22,7 +22,8 @@ downloads](https://cranlogs.r-pkg.org/badges/superspreading)](https://cran.r-pro
 estimate and understand individual-level variation the in transmission
 of infectious diseases from data on secondary cases.
 
-`{superspreading}` implements methods outlined in Lloyd-Smith et al.
+`{superspreading}` implements methods outlined in Antia et al.
+([2003](#ref-antiaRoleEvolutionEmergence2003)), Lloyd-Smith et al.
 ([2005](#ref-lloyd-smithSuperspreadingEffectIndividual2005)), Adam J.
 Kucharski et al. ([2020](#ref-kucharskiEarlyDynamicsTransmission2020)),
 and Kremer et al.
@@ -216,8 +217,7 @@ citation("superspreading")
 #> 
 #>   Lambert J, Kucharski A, Adam D (2025). _superspreading: Understand
 #>   Individual-Level Variation in Infectious Disease Transmission_. R
-#>   package version 0.3.0,
-#>   https://epiverse-trace.github.io/superspreading/,
+#>   package version 0.3.0.9000,
 #>   <https://github.com/epiverse-trace/superspreading>.
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -227,8 +227,7 @@ citation("superspreading")
 #> Transmission},
 #>     author = {Joshua W. Lambert and Adam Kucharski and Dillon C. Adam},
 #>     year = {2025},
-#>     note = {R package version 0.3.0, 
-#> https://epiverse-trace.github.io/superspreading/},
+#>     note = {R package version 0.3.0.9000},
 #>     url = {https://github.com/epiverse-trace/superspreading},
 #>   }
 ```
@@ -274,6 +273,14 @@ entry-spacing="0">
 Althaus, Christian L. 2015. “Ebola Superspreading.” *The Lancet
 Infectious Diseases* 15 (5): 507–8.
 <https://doi.org/10.1016/S1473-3099(15)70135-0>.
+
+</div>
+
+<div id="ref-antiaRoleEvolutionEmergence2003" class="csl-entry">
+
+Antia, Rustom, Roland R. Regoes, Jacob C. Koella, and Carl T. Bergstrom.
+2003. “The Role of Evolution in the Emergence of Infectious Diseases.”
+*Nature* 426 (6967): 658–61. <https://doi.org/10.1038/nature02104>.
 
 </div>
 
