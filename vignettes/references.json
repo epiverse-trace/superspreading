@@ -839,5 +839,57 @@
 				]
 			]
 		}
+	},
+	{
+		"id": "antiaRoleEvolutionEmergence2003",
+		"type": "article-journal",
+		"container-title": "Nature",
+		"DOI": "10.1038/nature02104",
+		"ISSN": "0028-0836, 1476-4687",
+		"issue": "6967",
+		"journalAbbreviation": "Nature",
+		"language": "en",
+		"license": "https://www.springernature.com/gp/researchers/text-and-data-mining",
+		"page": "658-661",
+		"source": "DOI.org (Crossref)",
+		"title": "The role of evolution in the emergence of infectious diseases",
+		"URL": "https://www.nature.com/articles/nature02104",
+		"volume": "426",
+		"author": [
+			{
+				"family": "Antia",
+				"given": "Rustom"
+			},
+			{
+				"family": "Regoes",
+				"given": "Roland R."
+			},
+			{
+				"family": "Koella",
+				"given": "Jacob C."
+			},
+			{
+				"family": "Bergstrom",
+				"given": "Carl T."
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2025",
+					6,
+					25
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2003",
+					12,
+					11
+				]
+			]
+		}
 	}
 ]
