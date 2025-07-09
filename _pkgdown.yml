@@ -57,6 +57,7 @@ articles:
   navbar: Superspreading for decision-making
   contents:
   - epidemic_risk
+  - emergence
 - title: Proportion transmission
   navbar: Proportion transmission
   contents:
