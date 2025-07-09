@@ -30,7 +30,7 @@ knitr::opts_chunk$set(
 and understand individual-level variation the in transmission of infectious diseases
 from data on secondary cases.  
 
-`{superspreading}` implements methods outlined in @lloyd-smithSuperspreadingEffectIndividual2005, @kucharskiEarlyDynamicsTransmission2020, and @kremerQuantifyingSuperspreadingCOVID192021, as well as additional functions.
+`{superspreading}` implements methods outlined in @antiaRoleEvolutionEmergence2003, @lloyd-smithSuperspreadingEffectIndividual2005, @kucharskiEarlyDynamicsTransmission2020, and @kremerQuantifyingSuperspreadingCOVID192021, as well as additional functions.
 
 `{superspreading}` is developed at the [Centre for the Mathematical Modelling of Infectious Diseases](https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases) at the [London School of Hygiene and Tropical Medicine](https://www.lshtm.ac.uk/) as part of [Epiverse-TRACE](https://data.org/initiatives/epiverse/).
 
