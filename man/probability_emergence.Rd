@@ -17,8 +17,12 @@ probability_emergence(
 \item{R_wild}{A \code{number} specifying the R parameter (i.e. average
 secondary cases per infectious individual) for the wild-type pathogen.}
 
-\item{R_mutant}{A \code{number} specifying the R parameter (i.e. average
-secondary cases per infectious individual) for the mutant pathogen.}
+\item{R_mutant}{A \code{number} or vector of \code{numbers} specifying the R
+parameter (i.e. average secondary cases per infectious individual) for the
+mutant pathogen(s). If there is more than one value supplied to \code{R_mutant},
+then the first element is the reproduction number for \eqn{m - 1} mutant
+and the last element is the reproduction number for the \eqn{m} mutant
+(i.e. fully evolved).}
 
 \item{mutation_rate}{A \code{number} specifying the mutation rate (\eqn{\mu}),
 must be between zero and one.}
@@ -40,6 +44,10 @@ branching process model with an initial (wild-type) reproduction number,
 usually below 1, and a evolved reproduction number that is
 greater than 1, and thus can cause a sustained human-to-human epidemic.
 The reproduction number for a pathogen changes at the \code{mutation_rate}.
+}
+\details{
+Following Antia et al. (2003), we assume that the mutation rate for all
+variants is the same.
 }
 \examples{
 probability_emergence(R_wild = 0.5, R_mutant = 1.5, mutation_rate = 0.5)
