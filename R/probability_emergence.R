@@ -49,6 +49,8 @@ probability_emergence <- function(R_wild,
   checkmate::assert_number(R_wild)
   checkmate::assert_numeric(R_mutant)
   checkmate::assert_number(mutation_rate, lower = 0, upper = 1)
+  checkmate::assert_number(tol, lower = 0)
+  checkmate::assert_integerish(max_iter, lower = 0)
 
   if (R_wild <= 1 && mutation_rate == 0) {
     # If R<=1, P(extinction)=1
