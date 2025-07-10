@@ -50,10 +50,15 @@ probability_emergence <- function(R_wild,
   checkmate::assert_numeric(R_mutant)
   checkmate::assert_number(mutation_rate, lower = 0, upper = 1)
 
+  if (R_wild <= 1 && mutation_rate == 0) {
+    # If R<=1, P(extinction)=1
+    return(0)
+  }
+
   # one R vector for indexing in equations
   R <- c(R_wild, R_mutant)
   m <- length(R)
-  # Initialize extinction probabilities
+  # initialise extinction probabilities
   q <- rep(0.5, m)
 
   for (i in 1:max_iter) {
