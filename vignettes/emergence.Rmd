@@ -82,3 +82,61 @@ ggplot(data = res) +
   ) +
   theme_bw()
 ```
+
+Next we'll replicate Figure 3a from @antiaRoleEvolutionEmergence2003. This uses an extension of the 2-type (or one-step) branching process model to include multiple intermediate mutants/variants between the introduced wild-type and the fully-evolved pathogen with an $R > 1$. In @antiaRoleEvolutionEmergence2003 this is called the _jackpot model_. The introduced pathogen is subcritical ($R < 1$), and the intermediate variants have the same reproduction number as the wild-type. Only the final fully-evolved variant is supercritical ($R > 1$). 
+
+We use the same number of intermediate mutants between the wild-type and the fully-evolved strain as @antiaRoleEvolutionEmergence2003.
+
+```{r calc-prob-emerge-multi-type}
+R_wild <- seq(0, 1.2, by = 0.01)
+R_mutant <- c(1.5)
+mutation_rate <- c(10^-1)
+num_mutants <- 0:4
+
+params <- expand.grid(
+  R_wild = R_wild, 
+  R_mutant = R_mutant, 
+  mutation_rate = mutation_rate,
+  num_mutants = num_mutants
+)
+
+prob_emerge <- apply(
+  params, 
+  MARGIN = 1, 
+  FUN = function(x) {
+    probability_emergence(
+      R_wild = x[["R_wild"]], 
+      R_mutant = c(rep(x[["R_wild"]], x[["num_mutants"]]), x[["R_mutant"]]), 
+      mutation_rate = x[["mutation_rate"]]
+    )
+  } 
+)
+res <- cbind(params, prob_emerge = prob_emerge)
+```
+
+```{r plot-prob-emerge-multi-type, fig.width = 8, fig.height = 5}
+ggplot(data = res) +
+  geom_line(
+    mapping = aes(
+      x = R_wild, 
+      y = prob_emerge, 
+      colour = as.factor(num_mutants)
+    )
+  ) +
+  scale_y_continuous(
+    name = "Probability of emergence",
+    transform = "log",
+    breaks = scales::log_breaks(n = 6),
+    limits = c(10^-5, 1)
+  ) +
+  scale_colour_brewer(
+    name = "Number of \nintermediate mutants", 
+    palette = "Set1"
+  ) +
+  scale_x_continuous(
+    name = expression(R[0]~of~introduced~pathogen), 
+    limits = c(0, 1.2),
+    n.breaks = 7
+  ) +
+  theme_bw()
+```
