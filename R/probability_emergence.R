@@ -68,7 +68,7 @@ probability_emergence <- function(R_wild,
       # intermediate types (excludes wild-type and fully evolved mutant)
       for (j in 2:(m - 1)) {
         q_new[j] <- exp(-(1 - mutation_rate) * R[j] * (1 - q[j])) *
-          exp(-mutation_rate * R[j]) * (1 - q[j + 1])
+          exp(-mutation_rate * R[j] * (1 - q[j + 1]))
       }
     }
 
