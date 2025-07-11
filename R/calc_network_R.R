@@ -1,8 +1,9 @@
 #' Calculate the reproduction number (\eqn{R}) for a (heterogeneous)
 #' network
 #'
-#' @description The calculation of the reproduction number adjusting for
-#' heterogeneity in number of contacts.
+#' @description
+#' The calculation of the reproduction number adjusting for heterogeneity in
+#' number of contacts.
 #'
 #' @param mean_num_contact A `numeric`, mean (average) number of new contacts
 #'   per unit time.

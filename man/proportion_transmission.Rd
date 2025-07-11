@@ -42,16 +42,17 @@ with epidemiological parameters/distributions, see
 \code{\link[epiparameter:epiparameter]{epiparameter::epiparameter()}}.}
 
 \item{format_prop}{A \code{logical} determining whether the proportion column
-of the \verb{<data.frame>} returned by the function is formatted as a string with
-a percentage sign (\verb{\%}), (\code{TRUE}, default), or as a \code{numeric} (\code{FALSE}).}
+of the \verb{<data.frame>} returned by the function is formatted as a string
+with a percentage sign (\verb{\%}), (\code{TRUE}, default), or as a \code{numeric}
+(\code{FALSE}).}
 }
 \value{
 A \verb{<data.frame>} with the value for the proportion of cases for a
 given value of R and k.
 }
 \description{
-Calculates the proportion of cases that cause a certain
-percentage of transmission.
+Calculates the proportion of cases that cause a certain percentage of
+transmission.
 
 It is commonly estimated what proportion of cases cause 80\% of transmission
 (i.e. secondary cases).

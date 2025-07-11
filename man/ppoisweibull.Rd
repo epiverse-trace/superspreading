@@ -22,8 +22,8 @@ Cumulative distribution function of the poisson-Weibull compound
 distribution
 }
 \details{
-The function is vectorised so a vector of quantiles can be input
-and the output will have an equal length.
+The function is vectorised so a vector of quantiles can be input and the
+output will have an equal length.
 }
 \examples{
 ppoisweibull(q = 10, shape = 1, scale = 2)

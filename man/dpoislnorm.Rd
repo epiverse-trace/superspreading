@@ -22,8 +22,8 @@ distribution.
 Density of the poisson-lognormal compound distribution
 }
 \details{
-The function is vectorised so a vector of quantiles can be input
-and the output will have an equal length.
+The function is vectorised so a vector of quantiles can be input and the
+output will have an equal length.
 }
 \examples{
 dpoislnorm(x = 10, meanlog = 1, sdlog = 2)

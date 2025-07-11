@@ -1,6 +1,7 @@
 #' Probability that an outbreak will be contained
 #'
-#' @description Outbreak containment is defined as outbreak extinction when
+#' @description
+#' Outbreak containment is defined as outbreak extinction when
 #' `simulate = FALSE`. When `simulate = FALSE`, [probability_contain()] is
 #' equivalent to calling [probability_extinct()].
 #'

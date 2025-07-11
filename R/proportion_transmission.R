@@ -1,8 +1,9 @@
 #' Estimate what proportion of cases cause a certain proportion of
 #' transmission
 #'
-#' @description Calculates the proportion of cases that cause a certain
-#' percentage of transmission.
+#' @description
+#' Calculates the proportion of cases that cause a certain percentage of
+#' transmission.
 #'
 #' It is commonly estimated what proportion of cases cause 80% of transmission
 #' (i.e. secondary cases).
@@ -61,17 +62,17 @@
 #' @inheritParams proportion_cluster_size
 #' @inheritParams probability_epidemic
 #' @param prop_transmission A `number` of the proportion of transmission
-#' for which a proportion of cases has produced. Must be between 0 and 1
-#' (exclusive, \eqn{(0, 1)}).
+#'   for which a proportion of cases has produced. Must be between 0 and 1
+#'   (exclusive, \eqn{(0, 1)}).
 #' @param method A `character` string defining which method is used to calculate
-#' the proportion of transmission. Options are `"p_80"` (default) or `"t_20"`.
-#' See details for more information on each of these methods.
+#'   the proportion of transmission. Options are `"p_80"` (default) or `"t_20"`.
+#'   See details for more information on each of these methods.
 #' @param simulate A `logical` whether the calculation should be done
-#' numerically (i.e. simulate secondary contacts) or analytically. Default is
-#' `FALSE` which uses the analytical calculation.
+#'   numerically (i.e. simulate secondary contacts) or analytically. Default is
+#'   `FALSE` which uses the analytical calculation.
 #'
 #' @return A `<data.frame>` with the value for the proportion of cases for a
-#' given value of R and k.
+#'   given value of R and k.
 #' @export
 #'
 #' @references

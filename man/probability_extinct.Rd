@@ -49,9 +49,9 @@ with epidemiological parameters/distributions, see
 A value with the probability of going extinct.
 }
 \description{
-Calculates the probability a branching process will not causes
-an epidemic and will go extinct. This is the complement of the probability
-of a disease causing an epidemic (\code{\link[=probability_epidemic]{probability_epidemic()}}).
+Calculates the probability a branching process will not causes an epidemic
+and will go extinct. This is the complement of the probability of a disease
+causing an epidemic (\code{\link[=probability_epidemic]{probability_epidemic()}}).
 }
 \examples{
 probability_extinct(R = 1.5, k = 0.1, num_init_infect = 10)
