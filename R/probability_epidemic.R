@@ -2,31 +2,31 @@
 #' and initial cases
 #'
 #' @description Calculates the probability a branching process will cause an
-#' epidemic (i.e. probability will fail to go extinct) based on R, k and
-#' initial cases.
+#'   epidemic (i.e. probability will fail to go extinct) based on R, k and
+#'   initial cases.
 #'
 #' @param R A `number` specifying the R parameter (i.e. average secondary cases
-#' per infectious individual).
+#'   per infectious individual).
 #' @param k A `number` specifying the  k parameter (i.e. overdispersion in
-#' offspring distribution from fitted negative binomial).
+#'   offspring distribution from fitted negative binomial).
 #' @param num_init_infect An `integer` (or at least
-#' ["integerish"](https://rlang.r-lib.org/reference/is_integerish.html) if
-#' stored as double) specifying the number of initial infections.
+#'   ["integerish"](https://rlang.r-lib.org/reference/is_integerish.html) if
+#'   stored as double) specifying the number of initial infections.
 #' @param ind_control A `numeric` specifying the strength of individual-level
-#' control measures. These control measures assume that infected individuals
-#' do not produce any secondary infections with probability `ind_control`,
-#' thus increasing the proportion of cases that do not create any subsequent
-#' infections. The control measure is between `0` (default) and `1` (maximum).
+#'   control measures. These control measures assume that infected individuals
+#'   do not produce any secondary infections with probability `ind_control`,
+#'   thus increasing the proportion of cases that do not create any subsequent
+#'   infections. The control measure is between `0` (default) and `1` (maximum).
 #' @param pop_control A `numeric` specifying the strength of population-level
-#' control measures that reduce the transmissibility of all cases by a
-#' constant factor. Between `0` (default) and `1` (maximum).
+#'   control measures that reduce the transmissibility of all cases by a
+#'   constant factor. Between `0` (default) and `1` (maximum).
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named elements to replace
-#' default optimisation settings. Currently only `"fit_method"` is accepted
-#' and can be either `"optim"` (default) or `"grid"` for numerical
-#' optimisation routine or grid search, respectively.
+#'   default optimisation settings. Currently only `"fit_method"` is accepted
+#'   and can be either `"optim"` (default) or `"grid"` for numerical
+#'   optimisation routine or grid search, respectively.
 #' @param offspring_dist An `<epiparameter>` object. An S3 class for working
-#' with epidemiological parameters/distributions, see
-#' [epiparameter::epiparameter()].
+#'   with epidemiological parameters/distributions, see
+#'   [epiparameter::epiparameter()].
 #'
 #' @return A value with the probability of a large epidemic.
 #' @export

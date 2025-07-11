@@ -50,10 +50,10 @@ get_epiparameter_param <- function(epiparameter,
 #' function to create information criteria tables.
 #'
 #' @param ... [dots] One or more model fit results from
-#' [fitdistrplus::fitdist()].
+#'   [fitdistrplus::fitdist()].
 #' @param sort_by A `character` string specifying which information criterion
-#' to order the table by, either `"AIC"` (default), `"BIC"`, or `"none"`
-#' (i.e. no ordering).
+#'   to order the table by, either `"AIC"` (default), `"BIC"`, or `"none"`
+#'   (i.e. no ordering).
 #'
 #' @return A `<data.frame>`.
 #' @export
@@ -124,8 +124,8 @@ ic_tbl <- function(..., sort_by = c("AIC", "BIC", "none")) {
 #' @param func A `function`.
 #' @param fit_method A `character` string, either `"optim"` or `"grid"`.
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named elements to replace
-#' default optimisation settings for either [optim()] or grid search. See
-#' details.
+#'   default optimisation settings for either [optim()] or grid search. See
+#'   details.
 #'
 #' @return A single `numeric`.
 #' @keywords internal
@@ -282,27 +282,27 @@ solve_for_u <- function(prop, R, k) {
 #'
 #' @param n Number of simulations to run.
 #' @param offspring Offspring distribution: a character string corresponding to
-#' the R distribution function (e.g., "pois" for Poisson, where
-#' [rpois()] is the R function to generate Poisson random numbers).
+#'   the R distribution function (e.g., "pois" for Poisson, where
+#'   [rpois()] is the R function to generate Poisson random numbers).
 #' @param stat String; Statistic to calculate. Can be one of:
 #' \itemize{
 #'   \item "size": the total number of offspring.
 #'   \item "length": the total number of ancestors.
 #' }
 #' @param stat_threshold A size or length above which the simulation results
-#' should be set to `Inf`. Defaults to `Inf`, resulting in no results
-#' ever set to `Inf`
+#'   should be set to `Inf`. Defaults to `Inf`, resulting in no results
+#'   ever set to `Inf`
 #' @param generation_time The generation time generator function; the name of a
-#' user-defined named or anonymous function with only one argument `n`,
-#' representing the number of generation times to generate.
+#'   user-defined named or anonymous function with only one argument `n`,
+#'   representing the number of generation times to generate.
 #' @param tf End time (if `generation_time` interval is given).
 #' @param ... Parameters of the offspring distribution as required by R.
 #'
 #' @return A `<data.frame>` with columns `n` (simulation ID), `id` (a unique
-#' ID within each simulation for each individual element of the chain),
-#' `ancestor` (the ID of the ancestor of each element), and `generation`. A
-#' `time` column is also appended if the generation_time interval is supplied to
-#' `serial`.
+#'   ID within each simulation for each individual element of the chain),
+#'   `ancestor` (the ID of the ancestor of each element), and `generation`. A
+#'   `time` column is also appended if the generation_time interval is supplied
+#'   to `serial`.
 #' @keywords internal
 .chain_sim <- function(n, offspring, stat = c("size", "length"), # nolint cyclocomp_linter
                       stat_threshold = Inf, generation_time, tf = Inf, ...) {

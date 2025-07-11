@@ -6,10 +6,10 @@
 #' @param x A `number` for the quantile of the distribution.
 #' @param meanlog A `number` for the mean of the distribution on the log scale.
 #' @param sdlog A `number` for the standard deviation of the distribution on
-#' the log scale.
+#'   the log scale.
 #'
 #' @return A `numeric` vector of the density of the poisson-lognormal
-#' distribution.
+#'   distribution.
 #' @export
 #'
 #' @examples
