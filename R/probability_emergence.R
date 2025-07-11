@@ -58,8 +58,8 @@ probability_emergence <- function(R_wild,
   }
 
   # one R vector for indexing in equations
-  R <- c(R_wild, R_mutant)
-  m <- length(R)
+  R0 <- c(R_wild, R_mutant)
+  m <- length(R0)
   # initialise extinction probabilities
   extinct_prob <- rep(0.5, m)
 
@@ -69,20 +69,20 @@ probability_emergence <- function(R_wild,
 
     # wild type
     extinct_prob_new[1] <-
-      exp(-(1 - mutation_rate) * R[1] * (1 - extinct_prob[1])) *
-      exp(-mutation_rate * R[1] * (1 - extinct_prob[2]))
+      exp(-(1 - mutation_rate) * R0[1] * (1 - extinct_prob[1])) *
+      exp(-mutation_rate * R0[1] * (1 - extinct_prob[2]))
 
     if (m > 2) {
       # intermediate types (excludes wild-type and fully evolved mutant)
       for (j in 2:(m - 1)) {
         extinct_prob_new[j] <-
-          exp(-(1 - mutation_rate) * R[j] * (1 - extinct_prob[j])) *
-          exp(-mutation_rate * R[j] * (1 - extinct_prob[j + 1]))
+          exp(-(1 - mutation_rate) * R0[j] * (1 - extinct_prob[j])) *
+          exp(-mutation_rate * R0[j] * (1 - extinct_prob[j + 1]))
       }
     }
 
     # fully evolved mutant
-    extinct_prob_new[m] <- exp(-R[m] * (1 - extinct_prob[m]))
+    extinct_prob_new[m] <- exp(-R0[m] * (1 - extinct_prob[m]))
 
     if (max(abs(extinct_prob_new - extinct_prob)) < tol) break
     extinct_prob <- extinct_prob_new
