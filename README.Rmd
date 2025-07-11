@@ -21,7 +21,8 @@ knitr::opts_chunk$set(
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit)
 [![R-CMD-check](https://github.com/epiverse-trace/superspreading/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/superspreading/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/epiverse-trace/superspreading/branch/main/graph/badge.svg)](https://app.codecov.io/gh/epiverse-trace/superspreading?branch=main)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![CRAN status](https://www.r-pkg.org/badges/version/superspreading)](https://CRAN.R-project.org/package=superspreading)
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/superspreading)](https://cran.r-project.org/package=superspreading)
 <!-- badges: end -->
