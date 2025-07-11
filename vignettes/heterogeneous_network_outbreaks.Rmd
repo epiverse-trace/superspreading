@@ -164,7 +164,7 @@ res <- reshape(
 #|   representing the unadjusted R values and a blue line representing adjusted
 #|   R values. Both curves start near zero at low SAR values and increase as
 #|   SAR increases, but the adjusted R (blue) line shows consistently higher
-#|   values than the unadjusted R (red) line throughout the range. The 
+#|   values than the unadjusted R (red) line throughout the range. The
 #|   unadjusted R (red) curve rises more gradually, reaching approximately 0.02
 #|   at SAR = 1, while the adjusted R (blue) curve rises more steeply
 #|   initially then levels off, reaching 0.58 at SAR = 1. Both curves show the
