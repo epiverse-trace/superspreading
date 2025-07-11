@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+Infectious diseases that cannot transmit effectively between humans cannot cause sustained disease outbreaks. However, they can cause stuttering chains of transmission with several cases. These short human-to-human transmission chains provide opportunities for the pathogen to adapt to humans and enhance transmission potential. Therefore, even in cases where a pathogen initially introduced into a human population might have a reproduction number below 1, that is on average it is transmitted to less than one other person (bound to inevitably going extinct without pathogen evolution), if a pathogen mutates while infecting humans, its reproduction number might evolve to exceed 1, and emerge to cause sustained outbreaks. 
+
 This vignette explores the `probability_emergence()` function. This is based on the framework of @antiaRoleEvolutionEmergence2003 which uses a multi-type branching process to calculate the probability that a subcritical zoonotic spillover will evolve into a more transmissible pathogen with a reproduction number greater than 1 and thus be able to cause a sustained epidemic from human-to-human transmission. 
 
 ```{r setup}
