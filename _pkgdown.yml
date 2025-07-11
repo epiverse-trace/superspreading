@@ -25,8 +25,8 @@ reference:
     contents:
     - ends_with("poisweibull")
 
-  - title: Probability of epidemic, extinction or containment
-    desc: Probability of a disease causing an epidemic, going extinct or being contained
+  - title: Probability of epidemic, extinction, containment or emergence
+    desc: Probability of a disease causing an epidemic, going extinct, being contained, or emerging
     contents:
     - starts_with("probability")
 
