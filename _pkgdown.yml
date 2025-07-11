@@ -57,11 +57,14 @@ articles:
   navbar: Superspreading for decision-making
   contents:
   - epidemic_risk
-  - emergence
 - title: Proportion transmission
   navbar: Proportion transmission
   contents:
   - proportion_transmission
+- title: Pathogen evolution and emergence
+  navbar: Pathogen evolution and emergence
+  contents:
+  - emergence
 - title: Developer Documentation
   navbar: Developer Documentation
   contents:
