@@ -33,8 +33,8 @@ A named \code{numeric} vector of length 2, the unadjusted (\code{R})
 and network adjusted (\code{R_net}) estimates of \eqn{R}.
 }
 \description{
-The calculation of the reproduction number adjusting for
-heterogeneity in number of contacts.
+The calculation of the reproduction number adjusting for heterogeneity in
+number of contacts.
 }
 \examples{
 # example using NATSAL data

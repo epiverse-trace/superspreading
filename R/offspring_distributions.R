@@ -1,7 +1,8 @@
 #' Density of the poisson-lognormal compound distribution
 #'
-#' @details The function is vectorised so a vector of quantiles can be input
-#' and the output will have an equal length.
+#' @details
+#' The function is vectorised so a vector of quantiles can be input and the
+#' output will have an equal length.
 #'
 #' @param x A `number` for the quantile of the distribution.
 #' @param meanlog A `number` for the mean of the distribution on the log scale.
@@ -36,8 +37,9 @@ dpoislnorm <- Vectorize(function(x, meanlog, sdlog) {
 #' Cumulative distribution function of the poisson-lognormal compound
 #' distribution
 #'
-#' @details The function is vectorised so a vector of quantiles can be input
-#' and the output will have an equal length.
+#' @details
+#' The function is vectorised so a vector of quantiles can be input and the
+#' output will have an equal length.
 #'
 #' @param q A `number` for the quantile of the distribution.
 #' @inheritParams dpoislnorm
@@ -63,15 +65,16 @@ ppoislnorm <- Vectorize(function(q, meanlog, sdlog) {
 
 #' Density of the poisson-Weibull compound distribution
 #'
-#' @details The function is vectorised so a vector of quantiles can be input
-#' and the output will have an equal length.
+#' @details
+#' The function is vectorised so a vector of quantiles can be input and the
+#' output will have an equal length.
 #'
 #' @param x A `number` for the quantile of the distribution.
 #' @param shape A `number` for the shape parameter of the distribution.
 #' @param scale A `number` for the scale parameter of the distribution.
 #'
 #' @return A `numeric` vector of the density of the poisson-Weibull
-#' distribution.
+#'   distribution.
 #' @export
 #'
 #' @examples
@@ -100,8 +103,9 @@ dpoisweibull <- Vectorize(function(x, shape, scale) {
 #' Cumulative distribution function of the poisson-Weibull compound
 #' distribution
 #'
-#' @details The function is vectorised so a vector of quantiles can be input
-#' and the output will have an equal length.
+#' @details
+#' The function is vectorised so a vector of quantiles can be input and the
+#' output will have an equal length.
 #'
 #' @param q A `number` for the quantile of the distribution.
 #' @inheritParams dpoisweibull

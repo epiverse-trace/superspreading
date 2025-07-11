@@ -21,8 +21,8 @@ distribution.
 Density of the poisson-Weibull compound distribution
 }
 \details{
-The function is vectorised so a vector of quantiles can be input
-and the output will have an equal length.
+The function is vectorised so a vector of quantiles can be input and the
+output will have an equal length.
 }
 \examples{
 dpoisweibull(x = 10, shape = 1, scale = 2)

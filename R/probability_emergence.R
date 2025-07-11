@@ -1,12 +1,13 @@
 #' Calculate the probability a disease will emerge and cause a sustained
 #' outbreak (\eqn{R > 1}) based on R
 #'
-#' @description The method for the evolution of pathogen emergence described in
-#'   Antia et al. (2003) (\doi{10.1038/nature02104}). The model is a multi-type
-#'   branching process model with an initial (wild-type) reproduction number,
-#'   usually below 1, and a evolved reproduction number that is
-#'   greater than 1, and thus can cause a sustained human-to-human epidemic.
-#'   The reproduction number for a pathogen changes at the `mutation_rate`.
+#' @description
+#' The method for the evolution of pathogen emergence described in
+#' Antia et al. (2003) (\doi{10.1038/nature02104}). The model is a multi-type
+#' branching process model with an initial (wild-type) reproduction number,
+#' usually below 1, and a evolved reproduction number that is
+#' greater than 1, and thus can cause a sustained human-to-human epidemic.
+#' The reproduction number for a pathogen changes at the `mutation_rate`.
 #'
 #' @details
 #' Following Antia et al. (2003), we assume that the mutation rate for all

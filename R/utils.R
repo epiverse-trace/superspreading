@@ -43,11 +43,12 @@ get_epiparameter_param <- function(epiparameter,
 
 #' Helper function to create a model comparison table
 #'
-#' @description This is a helper function for creating a model comparison
-#' `<data.frame>` primarily for use in the \pkg{superspreading} vignettes. It
-#' is designed specifically for handling [fitdistrplus::fitdist()] output and
-#' not a generalised function. See `bbmle::ICtab()` for a more general use
-#' function to create information criteria tables.
+#' @description
+#' This is a helper function for creating a model comparison `<data.frame>`
+#' primarily for use in the \pkg{superspreading} vignettes. It is designed
+#' specifically for handling [fitdistrplus::fitdist()] output and not a
+#' generalised function. See `bbmle::ICtab()` for a more general use function
+#' to create information criteria tables.
 #'
 #' @param ... [dots] One or more model fit results from
 #'   [fitdistrplus::fitdist()].
@@ -443,7 +444,7 @@ solve_for_u <- function(prop, R, k) {
 #' @param missing_offspring_dist A `logical` boolean.
 #'
 #' @return Invisibly returns `missing_params` or errors. Called for
-#' side-effect.
+#'   side-effect.
 #' @keywords internal
 #' @noRd
 .check_input_params <- function(missing_params, missing_offspring_dist) {

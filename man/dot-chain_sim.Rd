@@ -43,8 +43,8 @@ representing the number of generation times to generate.}
 A \verb{<data.frame>} with columns \code{n} (simulation ID), \code{id} (a unique
 ID within each simulation for each individual element of the chain),
 \code{ancestor} (the ID of the ancestor of each element), and \code{generation}. A
-\code{time} column is also appended if the generation_time interval is supplied to
-\code{serial}.
+\code{time} column is also appended if the generation_time interval is supplied
+to \code{serial}.
 }
 \description{
 Code modified from the \code{bpmodels::chain_sim()} function.

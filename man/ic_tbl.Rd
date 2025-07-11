@@ -18,11 +18,11 @@ to order the table by, either \code{"AIC"} (default), \code{"BIC"}, or \code{"no
 A \verb{<data.frame>}.
 }
 \description{
-This is a helper function for creating a model comparison
-\verb{<data.frame>} primarily for use in the \pkg{superspreading} vignettes. It
-is designed specifically for handling \code{\link[fitdistrplus:fitdist]{fitdistrplus::fitdist()}} output and
-not a generalised function. See \code{bbmle::ICtab()} for a more general use
-function to create information criteria tables.
+This is a helper function for creating a model comparison \verb{<data.frame>}
+primarily for use in the \pkg{superspreading} vignettes. It is designed
+specifically for handling \code{\link[fitdistrplus:fitdist]{fitdistrplus::fitdist()}} output and not a
+generalised function. See \code{bbmle::ICtab()} for a more general use function
+to create information criteria tables.
 }
 \examples{
 if (requireNamespace("fitdistrplus", quietly = TRUE)) {

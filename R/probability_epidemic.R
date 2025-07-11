@@ -1,9 +1,9 @@
 #' Calculate the probability a disease will cause an outbreak based on R, k
 #' and initial cases
 #'
-#' @description Calculates the probability a branching process will cause an
-#'   epidemic (i.e. probability will fail to go extinct) based on R, k and
-#'   initial cases.
+#' @description
+#' Calculates the probability a branching process will cause an epidemic
+#' (i.e. probability will fail to go extinct) based on R, k and initial cases.
 #'
 #' @param R A `number` specifying the R parameter (i.e. average secondary cases
 #'   per infectious individual).
@@ -67,9 +67,10 @@ probability_epidemic <- function(R,
 #' Calculate the probability a branching process will go extinct based on
 #' R, k and initial cases
 #'
-#' @description Calculates the probability a branching process will not causes
-#' an epidemic and will go extinct. This is the complement of the probability
-#' of a disease causing an epidemic ([probability_epidemic()]).
+#' @description
+#' Calculates the probability a branching process will not causes an epidemic
+#' and will go extinct. This is the complement of the probability of a disease
+#' causing an epidemic ([probability_epidemic()]).
 #'
 #' @inheritParams probability_epidemic
 #'

@@ -1,16 +1,18 @@
 #' Estimate what proportion of new cases originated within a transmission
 #' event of a given size
 #'
-#' @description Calculates the proportion of new cases that originated with a
-#' transmission event of a given size. It can be useful to inform backwards
-#' contact tracing efforts, i.e. how many cases are associated with large
-#' clusters. Here we define a cluster to as a transmission of a primary case
-#' to at least one secondary case.
+#' @description
+#' Calculates the proportion of new cases that originated with a transmission
+#' event of a given size. It can be useful to inform backwards contact tracing
+#' efforts, i.e. how many cases are associated with large clusters. Here we
+#' define a cluster to as a transmission of a primary case to at least one
+#' secondary case.
 #'
-#' @details This function calculates the proportion of secondary cases that
-#' are caused by transmission events of a certain size. It does not calculate
-#' the proportion of transmission events that cause a cluster of secondary
-#' cases of a certain size. In other words it is the number of cases above a
+#' @details
+#' This function calculates the proportion of secondary cases that are caused
+#' by transmission events of a certain size. It does not calculate the
+#' proportion of transmission events that cause a cluster of secondary cases
+#' of a certain size. In other words it is the number of cases above a
 #' threshold divided by the total number of cases, not the number of
 #' transmission events above a certain threshold divided by the number of
 #' transmission events.

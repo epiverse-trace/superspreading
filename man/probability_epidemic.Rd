@@ -49,9 +49,8 @@ with epidemiological parameters/distributions, see
 A value with the probability of a large epidemic.
 }
 \description{
-Calculates the probability a branching process will cause an
-epidemic (i.e. probability will fail to go extinct) based on R, k and
-initial cases.
+Calculates the probability a branching process will cause an epidemic
+(i.e. probability will fail to go extinct) based on R, k and initial cases.
 }
 \examples{
 probability_epidemic(R = 1.5, k = 0.1, num_init_infect = 10)
