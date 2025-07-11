@@ -12,7 +12,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 8,
+  fig.height = 5
 )
 ```
 
@@ -53,7 +55,18 @@ prob_emerge <- apply(
 res <- cbind(params, prob_emerge = prob_emerge)
 ```
 
-```{r plot-prob-emerge, fig.width = 8, fig.height = 5}
+```{r plot-prob-emerge}
+#| fig.alt: >
+#|   Line plot showing the probability of emergence of a pathogen as a function
+#|   of the basic reproduction number (R0) of the introduced pathogen. The
+#|   x-axis represents the R0 of the introduced pathogen, ranging from 0 to
+#|   1.2. The y-axis shows the probability of emergence on a logarithmic scale
+#|   from 1e-05 to 1. Lines vary by mutation rate (green for 0.001 and black
+#|   for 0.1) and by mutant pathogen R0 (dotted for R0 = 1.2, dashed for R0 =
+#|   1.5, solid for R0 = 1000). For both mutation rates, the probability of
+#|   emergence increases with the R0 of the introduced pathogen and with the
+#|   R0 of the mutant. Higher mutation rates and higher mutant R0s lead to
+#|   higher probabilities of emergence.
 ggplot(data = res) +
   geom_line(
     mapping = aes(
@@ -116,7 +129,19 @@ prob_emerge <- apply(
 res <- cbind(params, prob_emerge = prob_emerge)
 ```
 
-```{r plot-prob-emerge-multi-type, fig.width = 8, fig.height = 5}
+```{r plot-prob-emerge-multi-type}
+#| fig.alt: >
+#|   Line plot showing the probability of emergence of a pathogen as a function
+#|   of the basic reproduction number (R0) of the introduced pathogen, with
+#|   varying numbers of intermediate mutants before reaching the fully-evolved
+#|   mutant. The x-axis represents the R0 of the introduced pathogen (ranging
+#|   from 0 to 1.2), and the y-axis shows the probability of emergence on a
+#|   logarithmic scale from 1e-05 to 1. Lines represent different numbers of
+#|   intermediate mutants: red for 0, blue for 1, green for 2, purple for 3,
+#|   and orange for 4. As the number of required intermediate mutants
+#|   increases, the probability of emergence decreases across all R0 values.
+#|   All curves rise with increasing R0, and converge at higher R0 values near
+#|   1.2.
 ggplot(data = res) +
   geom_line(
     mapping = aes(

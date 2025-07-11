@@ -13,7 +13,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 8,
+  fig.height = 5
 )
 ```
 
@@ -97,7 +99,20 @@ to only include those with a single initial infection seeding transmission (`a =
 homogeneity <- subset(epidemic_params, num_init_infect == 1)
 ```
 
-```{r, plot-dispersion, fig.cap="The probability that an initial infection (introduction) will cause a sustained outbreak (transmission chain). The dispersion of the individual-level transmission is plotted on the x-axis and probability of outbreak -- calculated using `probability_epidemic()` -- is on the y-axis. This plot is reproduced from @kucharskiEarlyDynamicsTransmission2020 figure 3A.", fig.width = 8, fig.height = 5}
+```{r, plot-dispersion, fig.cap="The probability that an initial infection (introduction) will cause a sustained outbreak (transmission chain). The dispersion of the individual-level transmission is plotted on the x-axis and probability of outbreak -- calculated using `probability_epidemic()` -- is on the y-axis. This plot is reproduced from @kucharskiEarlyDynamicsTransmission2020 figure 3A."}
+#| fig.alt: >
+#|   A graph showing the relationship between extent of homogeneity in
+#|   transmission (x-axis, from 0 to 1) and probability of a large outbreak
+#|   (y-axis, from 0 to 1). A black curved line shows an increasing
+#|   relationship, starting near 0 and rising to 0.57, with the
+#|   curve flattening as homogeneity increases. A grey shaded area around the
+#|   line indicates confidence intervals, widening toward higher homogeneity
+#|   values. Two vertical dashed lines mark specific diseases: SARS at 0.2
+#|   extent of homogeneity (corresponding to a 0.23 probability of large
+#|   outbreak), and MERS at 0.4 extent of homogeneity (corresponding to 0.37
+#|   probability of large outbreak). The graph illustrates that diseases
+#|   with more homogeneous transmission patterns have higher probabilities of
+#|   causing large outbreaks.
 # plot probability of epidemic across dispersion
 ggplot(data = homogeneity) +
   geom_ribbon(
@@ -140,7 +155,20 @@ introductions, the higher the chance one will lead to an epidemic.
 introductions <- subset(epidemic_params, k == 0.5)
 ```
 
-```{r, plot-introductions, fig.cap="The probability that an a number of introduction events will cause a sustained outbreak (transmission chain). The number of disease introductions is plotted on the x-axis and probability of outbreak -- calculated using `probability_epidemic()` -- is on the y-axis. This plot is reproduced from Kucharski et al. (2020) figure 3B.", fig.width = 8, fig.height = 5}
+```{r, plot-introductions, fig.cap="The probability that an a number of introduction events will cause a sustained outbreak (transmission chain). The number of disease introductions is plotted on the x-axis and probability of outbreak -- calculated using `probability_epidemic()` -- is on the y-axis. This plot is reproduced from Kucharski et al. (2020) figure 3B."}
+#| fig.alt: >
+#|   A scatter plot showing the relationship between the number of
+#|   introductions of an infectious disease (x-axis, ranging from 0 to 10) and
+#|   the probability of large outbreak (y-axis, ranging from 0 to 1). Each
+#|   point estimate has vertical error bars showing confidence
+#|   intervals. The plot shows a clear increasing trend: starting at 0
+#|   introductions with 0% probability of large outbreak, rising to 42% at 1
+#|   introduction, 66% at 2 introductions, 81% at 3 introductions, 89% at 4
+#|   introductions, 93% at 5 introductions, 96% at 6 introductions, and
+#|   plateauing near 99% for 7-10 introductions. The confidence intervals are
+#|   widest at intermediate values (1-5 introductions). The pattern
+#|   demonstrates the more introduction increase the probability of a large
+#|   outbreak but has minimal impact once the probability approaches 1.
 # plot probability of epidemic across introductions
 ggplot(data = introductions) +
   geom_pointrange(
@@ -161,7 +189,21 @@ ggplot(data = introductions) +
 
 Different levels of heterogeneity in transmission will produce different probabilities of epidemics.
 
-```{r, plot-introductions-multi-k, fig.cap="The probability that an a number of introduction events will cause a sustained outbreak (transmission chain). The number of disease introductions is plotted on the x-axis and probability of outbreak -- calculated using `probability_epidemic()` -- is on the y-axis. Different values of dispersion are plotted to show the effect of increased transmission variability on an epidemic establishing", fig.width = 8, fig.height = 5}
+```{r, plot-introductions-multi-k, fig.cap="The probability that an a number of introduction events will cause a sustained outbreak (transmission chain). The number of disease introductions is plotted on the x-axis and probability of outbreak -- calculated using `probability_epidemic()` -- is on the y-axis. Different values of dispersion are plotted to show the effect of increased transmission variability on an epidemic establishing"}
+#| fig.alt: >
+#|   A scatter plot showing the relationship between the number of
+#|   introductions (x-axis, ranging from 0 to 10) and the probability of a
+#|   large outbreak (y-axis, ranging from 0 to 1). Points are coloured
+#|   according to a dispersion parameter (k) ranging from 0 (purple) to
+#|   1.00 (yellow), as shown in the legend. The plot demonstrates that higher
+#|   dispersion values (yellow and green points) consistently show higher
+#|   probabilities of large outbreaks across all numbers of introductions. For
+#|   any given number of introductions, there is a clear gradient from low
+#|   outbreak probability (purple points at bottom) to high outbreak
+#|   probability (yellow points at top). The relationship shows that both the
+#|   number of introductions and the dispersion parameter influence outbreak
+#|   probability, with the steepest increases occurring between 1-4
+#|   introductions.
 # plot probability of epidemic across introductions for multiple k
 ggplot(data = epidemic_params) +
   geom_point(
@@ -213,7 +255,20 @@ prob_extinct <- apply(extinction_params, 1, function(x) {
 extinction_params <- cbind(extinction_params, prob_extinct)
 ```
 
-```{r, plot-extinction, fig.cap="The probability that an infectious disease will go extinct for a given value of $R$ and $k$. This is calculated using `probability_extinct()` function. This plot is reproduced from @lloyd-smithSuperspreadingEffectIndividual2005 figure 2B.", fig.width = 8, fig.height = 5}
+```{r, plot-extinction, fig.cap="The probability that an infectious disease will go extinct for a given value of $R$ and $k$. This is calculated using `probability_extinct()` function. This plot is reproduced from @lloyd-smithSuperspreadingEffectIndividual2005 figure 2B."}
+#| fig.alt: >
+#|   A scatter plot showing the relationship between the reproduction number
+#|   (R) (x-axis, ranging from 0 to 5) and the probability of extinction
+#|   (y-axis, ranging from 0 to 1). Points are discretely coloured
+#|   according to a dispersion parameter (k) ranging from 0.01 (purple) to
+#|   infinite (yellow), with intermediate values of 0.1, 0.5, 1 and 4, as shown
+#|   in the legend. The plot demonstrates that higher dispersion values (yellow
+#|   and green points) consistently show lower probabilities of extinction
+#|   across all reproduction numbers greater than 1. All points for
+#|   reproduction numbers below 1 have a probability of extinction at 1.
+#|   The probability of extinction declines sharply in an exponential-like
+#|   fashion for higher dispersion values, whereas smaller values of dispersion
+#|   have a more gradual decline with higher reproduction numbers.
 # plot probability of extinction across R for multiple k
 ggplot(data = extinction_params) +
   geom_point(
@@ -308,7 +363,18 @@ prob_contain <- apply(contain_params, 1, function(x) {
 contain_params <- cbind(contain_params, prob_contain)
 ```
 
-```{r, plot-containment, fig.cap="The probability that an outbreak will be contained (i.e. not exceed 100 cases) for a variety of population-level control measures. The probability of containment is calculated using `probability_contain()`. This plot is reproduced from Lloyd-Smith et al. (2005) figure 3C.", fig.width = 8, fig.height = 5}
+```{r, plot-containment, fig.cap="The probability that an outbreak will be contained (i.e. not exceed 100 cases) for a variety of population-level control measures. The probability of containment is calculated using `probability_contain()`. This plot is reproduced from Lloyd-Smith et al. (2005) figure 3C."}
+#| fig.alt: >
+#|   A scatter plot showing the relationship between the strength of outbreak
+#|   control measures (c) (x-axis, ranging from 0 to 1) and the probability of
+#|   containment (y-axis, ranging from 0 to 1). Points are discretely coloured
+#|   according to a dispersion parameter (k) ranging from 0.1 (purple) to
+#|   infinite (yellow), with intermediate values of 0.5 and 1, as shown in the
+#|   legend. The plot demonstrates that the probability of outbreak containment
+#|   increases with greater control measures, with lower dispersion values
+#|   having a higher probability of containment than higher dispersion values
+#|   for each control measure value. Once control measures reach 0.7 all
+#|   dispersion values converge to a probability of containment of 1.
 # plot probability of epidemic across introductions for multiple k
 ggplot(data = contain_params) +
   geom_point(
