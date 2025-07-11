@@ -12,7 +12,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 8,
+  fig.height = 5
 )
 ```
 
@@ -75,7 +77,21 @@ res <- reshape(
 )
 ```
 
-```{r, plot-zika-r, fig.cap="The reproduction number using the unadjusted and adjusted calculation -- calculated using `calc_network_R()` -- with mean duration of infection on the x-axis and transmission probability per sexual partner on the y-axis. The line shows the points that $R_0$ is equal to one. Both axes are plotted on a natural log scale. This plot is similar to Figure 1 from @yakobLowRiskSexuallytransmitted2016, but is plotted as a heatmap and without annotation.", fig.width = 8, fig.height = 5}
+```{r, plot-zika-r, fig.cap="The reproduction number using the unadjusted and adjusted calculation -- calculated using `calc_network_R()` -- with mean duration of infection on the x-axis and transmission probability per sexual partner on the y-axis. The line shows the points that $R_0$ is equal to one. Both axes are plotted on a natural log scale. This plot is similar to Figure 1 from @yakobLowRiskSexuallytransmitted2016, but is plotted as a heat map and without annotation."}
+#| fig.alt: >
+#|   Two side-by-side heat maps showing the relationship between mean duration
+#|   of infectiousness (x-axis, logarithmic scale from 0.01 to 10) and Zika
+#|   virus transmission probability per sexual partners (y-axis, logarithmic
+#|   scale from 0.01 to 1). Both plots use a gradient colour scale representing
+#|   R values from 0.0001 (purple) to 10 (yellow). The left panel
+#|   shows the unadjusted R values and the right panel shows adjusted R values.
+#|   Both heat maps display similar patterns with higher R values (brighter
+#|   colours) appearing in the upper right regions where both duration of
+#|   infectiousness and transmission probability are high. A black diagonal
+#|   line runs across both plots showing the point R is equal to 1. The
+#|   adjusted R panel shows higher values overall compared to the unadjusted R
+#|   panel, with more yellow regions in the top right corner indicating higher
+#|   transmission potential.
 ggplot(data = res) +
   geom_tile(
     mapping = aes(
@@ -140,7 +156,20 @@ res <- reshape(
 )
 ```
 
-```{r, plot-mpox, fig.cap="The reproduction number using the unadjusted and adjusted calculation -- calculated using `calc_network_R()` -- with secondary attack rate on the x-axis and reproduction number ($R_0$) on the y-axis. This plot is similar to Figure 2A from @endoHeavytailedSexualContact2022.", fig.width = 8, fig.height = 5}
+```{r, plot-mpox, fig.cap="The reproduction number using the unadjusted and adjusted calculation -- calculated using `calc_network_R()` -- with secondary attack rate on the x-axis and reproduction number ($R_0$) on the y-axis. This plot is similar to Figure 2A from @endoHeavytailedSexualContact2022."}
+#| fig.alt: >
+#|   A line graph showing the relationship between Secondary Attack Rate (SAR)
+#|   on the x-axis (from 0 to 1) and reproduction number (R) on the y-axis
+#|   (logarithmic scale from 0.0001 to 1). Two curves are plotted: a red line
+#|   representing the unadjusted R values and a blue line representing adjusted
+#|   R values. Both curves start near zero at low SAR values and increase as
+#|   SAR increases, but the adjusted R (blue) line shows consistently higher
+#|   values than the unadjusted R (red) line throughout the range. The 
+#|   unadjusted R (red) curve rises more gradually, reaching approximately 0.02
+#|   at SAR = 1, while the adjusted R (blue) curve rises more steeply
+#|   initially then levels off, reaching 0.58 at SAR = 1. Both curves show the
+#|   steepest increases at low SAR values (0.00 to 0.25) before the rate of
+#|   increase diminishes at higher SAR values.
 ggplot(data = res) +
   geom_line(mapping = aes(x = beta, y = R, colour = group)) +
   geom_hline(mapping = aes(yintercept = 1)) +
@@ -159,8 +188,6 @@ ggplot(data = res) +
   theme_bw() +
   theme(legend.position = "top")
 ```
-
-
 
 ::: {.alert .alert-warning}
 _Methodological caveat_: There is a link with the theory for the main negative binomial models from the [superspreading package](https://epiverse-trace.github.io/superspreading/) here (which have a Gamma distributed mean), because the above Anderson and May formulation requires the 'true' mean and variance of the underlying static contact distribution, rather than the observed mean and variance. To give the superspreading version: in a simple branching process with fixed $R_0$ (i.e. zero variance in the individual-level reproduction number, perhaps because everyone has an identical number of contacts), the Poisson distributed number of transmissions per year measured exhibits more variation than the 'true' $R_0$ (which has zero variance). For the above STI model, taking the lifetime average deals with this problem some extent, because if we look at the sum of contacts over a large number of years, then calculate the mean per year, the observed distribution will converge as the number of years gets very large.

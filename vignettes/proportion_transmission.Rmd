@@ -12,7 +12,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 8,
+  fig.height = 5
 )
 ```
 
@@ -174,7 +176,7 @@ get_infectious_curve <- function(R, k) {
 
 We can now reproduce Figure 1b in @lloyd-smithSuperspreadingEffectIndividual2005 using the offspring distribution parameters obtained above.
 
-```{r, fig.width=8}
+```{r}
 infect_curve <- map(offspring_dist_params %>% # nolint nested_pipe_linter
       group_split(disease), function(x) {
         get_infectious_curve(R = x$mean, k = x$dispersion) %>%
@@ -185,7 +187,22 @@ infect_curve <- map(offspring_dist_params %>% # nolint nested_pipe_linter
       })
 
 infect_curve <- do.call(rbind, infect_curve)
+```
 
+```{r}
+#| fig.alt: >
+#|   Line plot showing the expected proportion of transmission as a function of
+#|   the proportion of infectious cases (ranked), for six infectious diseases.
+#|   The x-axis shows the cumulative proportion of infectious cases (from 0 to
+#|   1), and the y-axis shows the cumulative proportion of transmission. A
+#|   black diagonal line represents a homogeneous population where each case
+#|   contributes equally to transmission. Curves above the diagonal indicate
+#|   transmission heterogeneity. The diseases are colour-coded: Ebola Virus
+#|   Disease (red), Hantavirus Pulmonary Syndrome (gold), Mpox (green),
+#|   Pneumonic Plague (cyan), SARS (blue), and Smallpox (pink). SARS shows the
+#|   highest transmission heterogeneity, with the top ~20% of cases accounting
+#|   for 88% transmission. A vertical dashed line at x = 0.2 highlights
+#|   the 20% threshold.
 ggplot(
   data = infect_curve,
   aes(x = prop_i, y = exp_t, colour = disease)
@@ -218,7 +235,7 @@ ggplot(
 
 This plot shows the variability in transmission owing to the gamma-distributed individual reproduction number ($\nu$). If we take a slice through the above plot when the proportion of infectious cases equals 0.2 (shown by the dashed line) we can calculate the proportion of transmission caused by the most infectious 20% of cases using the `proportion_tranmission(..., method = "t_20")` function. 
 
-```{r, fig.width=8}
+```{r}
 k_seq <- superspreading:::lseq(from = 0.01, to = 100, length.out = 1000) # nolint
 y <- map_dbl(
   k_seq,
@@ -230,7 +247,24 @@ y <- map_dbl(
   }
 )
 prop_t20 <- data.frame(k_seq, y)
+```
 
+```{r}
+#| fig.alt: >
+#|   A graph showing the relationship between dispersion parameter (x-axis,
+#|   logarithmic scale from 0.1 to 100) and proportion of transmission expected
+#|   from the most infectious 20% of cases (y-axis, from 0.0 to 1.0). A black
+#|   curve shows a decreasing relationship - as the dispersion parameter
+#|   increases, the proportion decreases from 1.0 to approximately 0.2. Six
+#|   infectious diseases are plotted as colored points along this curve: SARS
+#|   (blue, 0.16 dispersion, 0.88 proportion), Smallpox (magenta, 0.37
+#|   dispersion, 0.71 proportion), Mpox (green, 0.58 dispersion, 0.62
+#|   proportion), Pneumonic Plague (teal, 1.37 dispersion, 0.47 proportion),
+#|   Hantavirus Pulmonary Syndrome (yellow, 1.66 dispersion, 0.45 proportion),
+#|   and Ebola Virus Disease (red, 5.10 dispersion, 0.34 proportion). The graph
+#|   illustrates that diseases with lower dispersion parameters show greater
+#|   superspreading potential, with a smaller proportion of highly infectious
+#|   individuals responsible for most transmission.
 ggplot() +
   geom_line(data = prop_t20, mapping = aes(x = k_seq, y = y)) +
   geom_point(

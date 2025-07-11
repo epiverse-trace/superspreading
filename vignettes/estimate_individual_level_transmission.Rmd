@@ -12,7 +12,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 8,
+  fig.height = 5
 )
 ```
 
@@ -130,8 +132,23 @@ nbinom_data <- data.frame(
 )
 ```
 
-```{r, plot-nbinom, fig.cap="Number of secondary cases from the empirical data (bar plot) and the density of the negative binomial with the maximum likelihood estimates when fit to the empirical data (points and line). This plot is reproduced from Althaus (2015) figure 1.", fig.width = 8, fig.height = 5}
-# make plot
+```{r, plot-nbinom, fig.cap="Number of secondary cases from the empirical data (bar plot) and the density of the negative binomial with the maximum likelihood estimates when fit to the empirical data (points and line). This plot is reproduced from Althaus (2015) figure 1."}
+#| fig.alt: >
+#|   A bar plot showing the frequency distribution of the number of secondary
+#|   cases (x-axis, ranging from 0 to 20) versus frequency (y-axis, ranging
+#|   from 0.0 to 0.7) from the empirical data. The distribution is heavily
+#|   right-skewed with cyan coloured bars showing that the empirical data has
+#|   a vast majority of cases (72%) produce zero secondary cases. The
+#|   frequency drops sharply for higher numbers of secondary cases,
+#|   11% producing 1 secondary case, 6% producing 2 secondary cases, and
+#|   progressively smaller percentages for higher numbers of secondary cases.
+#|   An orange line with points overlays the histogram showing the probability
+#|   mass function following the same pattern as the bars and extending across
+#|   the full range to show the match between empirical data and negative
+#|   binomial parameter estimates. The distribution illustrates the
+#|   characteristic pattern of infectious disease transmission where most
+#|   infected individuals transmit to few or no others, while a small
+#|   proportion become superspreaders responsible for many secondary infections.
 ggplot(data = nbinom_data) +
   geom_col(
     mapping = aes(x = x, y = prop_num_cases),
@@ -287,8 +304,22 @@ dist_compare_data <- data.frame(
 )
 ```
 
-```{r, plot-dists, fig.cap="Number of secondary cases from the empirical data (bar plot) and the density of the negative binomial (orange) and poisson-Weibull (pink) with the maximum likelihood estimates when fit to the empirical data (points and line).", fig.width = 8, fig.height = 5}
-# make plot
+```{r, plot-dists, fig.cap="Number of secondary cases from the empirical data (bar plot) and the density of the negative binomial (orange) and poisson-Weibull (pink) with the maximum likelihood estimates when fit to the empirical data (points and line)."}
+#| fig.alt: >
+#|   A histogram showing the frequency distribution of the number of secondary
+#|   cases (x-axis, ranging from 0 to 20) versus frequency (y-axis, ranging
+#|   from 0 to 0.7). The distribution is heavily right-skewed with cyan
+#|   coloured bars showing that the empirical data has 72% of cases produce
+#|   zero secondary cases. Two fitted distribution probability mass function
+#|   curves are overlaid: an orange line with points representing the Negative
+#|   Binomial distribution, and a yellow line with points representing the
+#|   Poisson-Weibull distribution. Both estimated curves closely follow the
+#|   observed data pattern. The frequency drops sharply from 0 secondary cases
+#|   (0.72 frequency) to 1 secondary case (0.11 frequency), then continues to
+#|   decline for higher numbers of secondary cases. This pattern illustrates
+#|   the characteristic overdispersion in infectious disease transmission
+#|   where most individuals infect few or no others, while a small proportion
+#|   become superspreaders.
 ggplot(data = dist_compare_data) +
   geom_col(
     mapping = aes(x = x, y = prop_num_cases),
