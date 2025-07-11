@@ -48,11 +48,11 @@ calc_network_R <- function(mean_num_contact,
   )
 
   # calculate R0 with and without correction
-  R <- prob_transmission * contacts_per_time[["mean"]] * infect_duration
-  R_net <- prob_transmission * infect_duration *
+  R0 <- prob_transmission * contacts_per_time[["mean"]] * infect_duration
+  R0_net <- prob_transmission * infect_duration *
     (contacts_per_time[["mean"]] + contacts_per_time[["var"]] /
       contacts_per_time[["mean"]])
 
   # return R0 with and without variance correction
-  c(R = R, R_net = R_net)
+  c(R = R0, R_net = R0_net)
 }
