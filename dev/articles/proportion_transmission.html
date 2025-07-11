@@ -408,9 +408,9 @@ using the offspring distribution parameters obtained above.</p>
 <span>          <span class="op">)</span></span>
 <span>      <span class="op">}</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">infect_curve</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">infect_curve</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span></span>
+<span><span class="va">infect_curve</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">infect_curve</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">infect_curve</span>,</span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop_i</span>, y <span class="op">=</span> <span class="va">exp_t</span>, colour <span class="op">=</span> <span class="va">disease</span><span class="op">)</span></span>
 <span><span class="op">)</span> <span class="op">+</span></span>
@@ -438,7 +438,7 @@ using the offspring distribution parameters obtained above.</p>
 <span>    colour <span class="op">=</span> <span class="st">""</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html" class="external-link">coord_cartesian</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="proportion_transmission_files/figure-html/unnamed-chunk-5-1.png" width="768"></p>
+<p><img src="proportion_transmission_files/figure-html/unnamed-chunk-6-1.png" alt="Line plot showing the expected proportion of transmission as a function of the proportion of infectious cases (ranked), for six infectious diseases. The x-axis shows the cumulative proportion of infectious cases (from 0 to 1), and the y-axis shows the cumulative proportion of transmission. A black diagonal line represents a homogeneous population where each case contributes equally to transmission. Curves above the diagonal indicate transmission heterogeneity. The diseases are colour-coded: Ebola Virus Disease (red), Hantavirus Pulmonary Syndrome (gold), Mpox (green), Pneumonic Plague (cyan), SARS (blue), and Smallpox (pink). SARS shows the highest transmission heterogeneity, with the top ~20% of cases accounting for 88% transmission. A vertical dashed line at x = 0.2 highlights the 20% threshold." width="768"></p>
 <p>This plot shows the variability in transmission owing to the
 gamma-distributed individual reproduction number
 (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ν</mi><annotation encoding="application/x-tex">\nu</annotation></semantics></math>).
@@ -447,7 +447,7 @@ infectious cases equals 0.2 (shown by the dashed line) we can calculate
 the proportion of transmission caused by the most infectious 20% of
 cases using the
 <code>proportion_tranmission(..., method = "t_20")</code> function.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">k_seq</span> <span class="op">&lt;-</span> <span class="fu">superspreading</span><span class="fu">:::</span><span class="fu"><a href="../reference/lseq.html">lseq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">0.01</span>, to <span class="op">=</span> <span class="fl">100</span>, length.out <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span> <span class="co"># nolint</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span></span>
 <span>  <span class="va">k_seq</span>,</span>
@@ -458,9 +458,9 @@ cases using the
 <span>    <span class="op">)</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">prop_t20</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">k_seq</span>, <span class="va">y</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="va">prop_t20</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">k_seq</span>, <span class="va">y</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">prop_t20</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">k_seq</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">offspring_dist_params</span>,</span>
@@ -488,7 +488,7 @@ cases using the
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_log10</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Dispersion parameter"</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
-<p><img src="proportion_transmission_files/figure-html/unnamed-chunk-6-1.png" width="768"></p>
+<p><img src="proportion_transmission_files/figure-html/unnamed-chunk-8-1.png" alt="A graph showing the relationship between dispersion parameter (x-axis, logarithmic scale from 0.1 to 100) and proportion of transmission expected from the most infectious 20% of cases (y-axis, from 0.0 to 1.0). A black curve shows a decreasing relationship - as the dispersion parameter increases, the proportion decreases from 1.0 to approximately 0.2. Six infectious diseases are plotted as colored points along this curve: SARS (blue, 0.16 dispersion, 0.88 proportion), Smallpox (magenta, 0.37 dispersion, 0.71 proportion), Mpox (green, 0.58 dispersion, 0.62 proportion), Pneumonic Plague (teal, 1.37 dispersion, 0.47 proportion), Hantavirus Pulmonary Syndrome (yellow, 1.66 dispersion, 0.45 proportion), and Ebola Virus Disease (red, 5.10 dispersion, 0.34 proportion). The graph illustrates that diseases with lower dispersion parameters show greater superspreading potential, with a smaller proportion of highly infectious individuals responsible for most transmission." width="768"></p>
 <p>The above plot replicates Figure 1c from <span class="citation">Lloyd-Smith et al. (<a href="#ref-lloyd-smithSuperspreadingEffectIndividual2005">2005</a>)</span>.
 It shows how different diseases have different proportion of
 transmission from the most infectious 20% owing to varying degrees of
@@ -510,7 +510,7 @@ method above the integral is divided by
 so that only
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>ν</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>u</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f_{\nu}(u)</annotation></semantics></math>
 control the proportion of transmission.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># For k = 0.5</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fl">0.1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
@@ -551,7 +551,7 @@ where changes in both
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
 influence the proportion of transmission.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># For k = 0.5</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fl">0.1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
@@ -613,7 +613,7 @@ method to <code>percent_transmission = 0.2</code>, and the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>t</mi><mn>20</mn></msub><annotation encoding="application/x-tex">t_{20}</annotation></semantics></math>
 method to <code>percent_transmission = 0.8</code> the two cannot be
 interchangeably interpreted as outlined in the box above.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># R = 1, k = 0.5</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, percent_transmission <span class="op">=</span> <span class="fl">0.2</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
@@ -641,7 +641,7 @@ interchangeably interpreted as outlined in the box above.</p>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><msub><mi>p</mi><mn>80</mn></msub><mo>≠</mo><msub><mi>t</mi><mn>20</mn></msub></mrow><annotation encoding="application/x-tex">1 - p_{80} \neq t_{20}</annotation></semantics></math>
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><msub><mi>t</mi><mn>20</mn></msub><mo>≠</mo><msub><mi>p</mi><mn>80</mn></msub></mrow><annotation encoding="application/x-tex">1 - t_{20} \neq p_{80}</annotation></semantics></math>.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span>,</span>
 <span>  format_prop <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -672,7 +672,7 @@ whereas the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mn>80</mn></msub><annotation encoding="application/x-tex">p_{80}</annotation></semantics></math>
 method does not allow for true homogeneity
 (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mn>80</mn></msub><mo>≠</mo><mn>80</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">p_{80} \neq 80\%</annotation></semantics></math>).</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="cn">Inf</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
 <span><span class="op">)</span></span>

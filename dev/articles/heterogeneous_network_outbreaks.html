@@ -226,7 +226,7 @@ on the mean and variance in the number of sexual partners and age range
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="heterogeneous_network_outbreaks_files/figure-html/plot-zika-r-1.png" alt="The reproduction number using the unadjusted and adjusted calculation -- calculated using `calc_network_R()` -- with mean duration of infection on the x-axis and transmission probability per sexual partner on the y-axis. The line shows the points that $R_0$ is equal to one. Both axes are plotted on a natural log scale. This plot is similar to Figure 1 from @yakobLowRiskSexuallytransmitted2016, but is plotted as a heatmap and without annotation." width="768"><p class="caption">
+<img src="heterogeneous_network_outbreaks_files/figure-html/plot-zika-r-1.png" alt="Two side-by-side heat maps showing the relationship between mean duration of infectiousness (x-axis, logarithmic scale from 0.01 to 10) and Zika virus transmission probability per sexual partners (y-axis, logarithmic scale from 0.01 to 1). Both plots use a gradient colour scale representing R values from 0.0001 (purple) to 10 (yellow). The left panel shows the unadjusted R values and the right panel shows adjusted R values. Both heat maps display similar patterns with higher R values (brighter colours) appearing in the upper right regions where both duration of infectiousness and transmission probability are high. A black diagonal line runs across both plots showing the point R is equal to 1. The adjusted R panel shows higher values overall compared to the unadjusted R panel, with more yellow regions in the top right corner indicating higher transmission potential." width="768"><p class="caption">
 The reproduction number using the unadjusted and adjusted calculation –
 calculated using <code><a href="../reference/calc_network_R.html">calc_network_R()</a></code> – with mean duration of
 infection on the x-axis and transmission probability per sexual partner
@@ -234,7 +234,7 @@ on the y-axis. The line shows the points that
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>R</mi><mn>0</mn></msub><annotation encoding="application/x-tex">R_0</annotation></semantics></math>
 is equal to one. Both axes are plotted on a natural log scale. This plot
 is similar to Figure 1 from <span class="citation">Yakob et al. (<a href="#ref-yakobLowRiskSexuallytransmitted2016">2016</a>)</span>, but is
-plotted as a heatmap and without annotation.
+plotted as a heat map and without annotation.
 </p>
 </div>
 <p>Another study that showed the network effects on transmission of an
@@ -298,7 +298,7 @@ under the assumptions described above.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="heterogeneous_network_outbreaks_files/figure-html/plot-mpox-1.png" alt="The reproduction number using the unadjusted and adjusted calculation -- calculated using `calc_network_R()` -- with secondary attack rate on the x-axis and reproduction number ($R_0$) on the y-axis. This plot is similar to Figure 2A from @endoHeavytailedSexualContact2022." width="768"><p class="caption">
+<img src="heterogeneous_network_outbreaks_files/figure-html/plot-mpox-1.png" alt="A line graph showing the relationship between Secondary Attack Rate (SAR) on the x-axis (from 0 to 1) and reproduction number (R) on the y-axis (logarithmic scale from 0.0001 to 1). Two curves are plotted: a red line representing the unadjusted R values and a blue line representing adjusted R values. Both curves start near zero at low SAR values and increase as SAR increases, but the adjusted R (blue) line shows consistently higher values than the unadjusted R (red) line throughout the range. The unadjusted R (red) curve rises more gradually, reaching approximately 0.02 at SAR = 1, while the adjusted R (blue) curve rises more steeply initially then levels off, reaching 0.58 at SAR = 1. Both curves show the steepest increases at low SAR values (0.00 to 0.25) before the rate of increase diminishes at higher SAR values." width="768"><p class="caption">
 The reproduction number using the unadjusted and adjusted calculation –
 calculated using <code><a href="../reference/calc_network_R.html">calc_network_R()</a></code> – with secondary attack
 rate on the x-axis and reproduction number
