@@ -69,7 +69,7 @@ The results are combined with the the parameters.
 ```{r, calc-prob-endemic}
 # results are transposed to pivot to long rather than wide data
 prob_epidemic <- t(apply(epidemic_params, 1, function(x) {
-  median <- probability_epidemic(
+  central <- probability_epidemic(
     R = x[["R"]],
     k = x[["k"]],
     num_init_infect = x[["num_init_infect"]]
@@ -84,7 +84,7 @@ prob_epidemic <- t(apply(epidemic_params, 1, function(x) {
     k = x[["k"]],
     num_init_infect = x[["num_init_infect"]]
   )
-  c(prob_epidemic = median, prob_epidemic_lw = lower, prob_epidemic_up = upper)
+  c(prob_epidemic = central, prob_epidemic_lw = lower, prob_epidemic_up = upper)
 }))
 epidemic_params <- cbind(epidemic_params, prob_epidemic)
 ```
@@ -203,12 +203,12 @@ extinction_params <- expand.grid(
 )
 # results are transposed to pivot to long rather than wide data
 prob_extinct <- apply(extinction_params, 1, function(x) {
-  median <- probability_extinct(
+  central <- probability_extinct(
     R = x[["R"]],
     k = x[["k"]],
     num_init_infect = x[["num_init_infect"]]
   )
-  median
+  central
 })
 extinction_params <- cbind(extinction_params, prob_extinct)
 ```

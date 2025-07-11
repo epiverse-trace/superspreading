@@ -60,15 +60,18 @@ proportion_cluster_size <- function(R, k, cluster_size, ..., offspring_dist,
   checkmate::assert_integerish(cluster_size, lower = 1)
   checkmate::assert_logical(format_prop, any.missing = FALSE, len = 1)
 
-  df <- expand.grid(R, k)
-  df <- cbind(df, as.data.frame(matrix(nrow = 1, ncol = length(cluster_size))))
-  colnames(df) <- c("R", "k", paste0("prop_", cluster_size))
+  params <- expand.grid(R, k)
+  params <- cbind(
+    params,
+    as.data.frame(matrix(nrow = 1, ncol = length(cluster_size)))
+  )
+  colnames(params) <- c("R", "k", paste0("prop_", cluster_size))
 
-  for (i in seq_len(nrow(df))) {
+  for (i in seq_len(nrow(params))) {
     simulate_secondary <- stats::rnbinom(
       n = NSIM,
-      mu = df[i, "R"],
-      size = df[i, "k"]
+      mu = params[i, "R"],
+      size = params[i, "k"]
     )
     propn_cluster <- vapply(cluster_size, function(x) {
       sum(simulate_secondary[simulate_secondary >= x])
@@ -76,8 +79,8 @@ proportion_cluster_size <- function(R, k, cluster_size, ..., offspring_dist,
     if (format_prop) {
       propn_cluster <- paste0(signif(propn_cluster * 100, digits = 3), "%")
     }
-    col <- seq(3, 2 + length(propn_cluster), by = 1)
-    df[i, col] <- propn_cluster
+    col_idx <- seq(3, 2 + length(propn_cluster), by = 1)
+    params[i, col_idx] <- propn_cluster
   }
-  return(df)
+  params
 }

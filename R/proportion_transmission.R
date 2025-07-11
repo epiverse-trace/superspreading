@@ -170,39 +170,37 @@ proportion_transmission <- function(R, k,
     )
   }
 
-  df <- expand.grid(R = R, k = k, NA_real_)
-  colnames(df) <- c("R", "k", paste0("prop_", percent_transmission * 100))
+  params <- expand.grid(R = R, k = k, NA_real_)
+  colnames(params) <- c("R", "k", paste0("prop_", percent_transmission * 100))
 
-  for (i in seq_len(nrow(df))) {
+  for (i in seq_len(nrow(params))) {
     if (simulate) {
       prop <- .prop_transmission_numerical(
-        R = df[i, "R"],
-        k = df[i, "k"],
+        R = params[i, "R"],
+        k = params[i, "k"],
+        percent_transmission = percent_transmission
+      )
+    } else if (method == "p_80") {
+      prop <- .prop_transmission_analytical(
+        R = params[i, "R"],
+        k = params[i, "k"],
         percent_transmission = percent_transmission
       )
     } else {
-      if (method == "p_80") {
-        prop <- .prop_transmission_analytical(
-          R = df[i, "R"],
-          k = df[i, "k"],
-          percent_transmission = percent_transmission
-        )
-      } else {
-        prop <- .prop_transmission_t20(
-          R = df[i, "R"],
-          k = df[i, "k"],
-          percent_transmission = percent_transmission
-        )
-      }
+      prop <- .prop_transmission_t20(
+        R = params[i, "R"],
+        k = params[i, "k"],
+        percent_transmission = percent_transmission
+      )
     }
 
     if (format_prop) {
       prop <- paste0(signif(prop * 100, digits = 3), "%")
     }
-    # df is ways i x 3 so insert value into col 3
-    df[i, 3] <- prop
+    # params is ways i x 3 so insert value into col 3
+    params[i, 3] <- prop
   }
-  return(df)
+  params
 }
 
 #' Analytical calculation of proportion of cases that cause \eqn{x} percent
@@ -220,7 +218,7 @@ proportion_transmission <- function(R, k,
   x <- xm1 + 1
   out <- 1 - stats::pnbinom(x - 1, k, mu = R) -
     stats::dnbinom(x, k, mu = R) * remx
-  return(out)
+  out
 }
 
 #' Numerical calculation of proportion of cases that cause \eqn{x} percent
@@ -246,7 +244,7 @@ proportion_transmission <- function(R, k,
   # proportion causing case
   out <- sum(cumsum_secondary <= percent_cases) / NSIM
 
-  return(out)
+  out
 }
 
 #' Calculates the expected proportion of transmission from the upper `prop`%
@@ -263,5 +261,6 @@ proportion_transmission <- function(R, k,
     function(u) u * fvx(u, R, k), lower = 0, upper = u
   )
   res <- integral_result$value / R
-  return(1 - res)
+  res <- 1 - res
+  res
 }
