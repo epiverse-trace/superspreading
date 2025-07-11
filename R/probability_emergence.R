@@ -63,7 +63,7 @@ probability_emergence <- function(R_wild,
   # initialise extinction probabilities
   q <- rep(0.5, m)
 
-  for (i in 1:max_iter) {
+  for (i in seq_len(max_iter)) {
     # create vector to hold new values for fixed-point convergence check
     q_new <- numeric(m)
 
