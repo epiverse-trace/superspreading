@@ -30,25 +30,25 @@ We use `probability_emergence()` to replicate Figure 2b from @antiaRoleEvolution
 
 ```{r calc-prob-emerge}
 R_wild <- seq(0, 1.2, by = 0.01)
-R_mutant <- c( 1.2, 1.5, 1000)
+R_mutant <- c(1.2, 1.5, 1000)
 mutation_rate <- c(10^-1, 10^-3)
 
 params <- expand.grid(
-  R_wild = R_wild, 
-  R_mutant = R_mutant, 
+  R_wild = R_wild,
+  R_mutant = R_mutant,
   mutation_rate = mutation_rate
 )
 
 prob_emerge <- apply(
-  params, 
-  MARGIN = 1, 
+  params,
+  MARGIN = 1,
   FUN = function(x) {
     probability_emergence(
-      R_wild = x[["R_wild"]], 
-      R_mutant = x[["R_mutant"]], 
+      R_wild = x[["R_wild"]],
+      R_mutant = x[["R_mutant"]],
       mutation_rate = x[["mutation_rate"]]
     )
-  } 
+  }
 )
 res <- cbind(params, prob_emerge = prob_emerge)
 ```
@@ -57,28 +57,28 @@ res <- cbind(params, prob_emerge = prob_emerge)
 ggplot(data = res) +
   geom_line(
     mapping = aes(
-      x = R_wild, 
-      y = prob_emerge, 
-      colour = as.factor(mutation_rate), 
+      x = R_wild,
+      y = prob_emerge,
+      colour = as.factor(mutation_rate),
       linetype = as.factor(R_mutant)
     )
   ) +
   scale_y_continuous(
     name = "Probability of emergence",
     transform = "log",
-    breaks = scales::log_breaks(n = 6),
+    breaks = log_breaks(n = 6),
     limits = c(10^-5, 1)
   ) +
   scale_colour_manual(
-    name = "Mutation rate", 
+    name = "Mutation rate",
     values = c("#228B22", "black")
   ) +
   scale_linetype_manual(
-    name = "Mutant pathogen R0", 
+    name = "Mutant pathogen R0",
     values = c("dotted", "dashed", "solid")
   ) +
   scale_x_continuous(
-    name = expression(R[0]~of~introduced~pathogen), 
+    name = expression(R[0] ~ of ~ introduced ~ pathogen),
     limits = c(0, 1.2),
     n.breaks = 7
   ) +
@@ -91,27 +91,27 @@ We use the same number of intermediate mutants between the wild-type and the ful
 
 ```{r calc-prob-emerge-multi-type}
 R_wild <- seq(0, 1.2, by = 0.01)
-R_mutant <- c(1.5)
+R_mutant <- 1.5
 mutation_rate <- c(10^-1)
 num_mutants <- 0:4
 
 params <- expand.grid(
-  R_wild = R_wild, 
-  R_mutant = R_mutant, 
+  R_wild = R_wild,
+  R_mutant = R_mutant,
   mutation_rate = mutation_rate,
   num_mutants = num_mutants
 )
 
 prob_emerge <- apply(
-  params, 
-  MARGIN = 1, 
+  params,
+  MARGIN = 1,
   FUN = function(x) {
     probability_emergence(
-      R_wild = x[["R_wild"]], 
-      R_mutant = c(rep(x[["R_wild"]], x[["num_mutants"]]), x[["R_mutant"]]), 
+      R_wild = x[["R_wild"]],
+      R_mutant = c(rep(x[["R_wild"]], x[["num_mutants"]]), x[["R_mutant"]]),
       mutation_rate = x[["mutation_rate"]]
     )
-  } 
+  }
 )
 res <- cbind(params, prob_emerge = prob_emerge)
 ```
@@ -120,23 +120,23 @@ res <- cbind(params, prob_emerge = prob_emerge)
 ggplot(data = res) +
   geom_line(
     mapping = aes(
-      x = R_wild, 
-      y = prob_emerge, 
+      x = R_wild,
+      y = prob_emerge,
       colour = as.factor(num_mutants)
     )
   ) +
   scale_y_continuous(
     name = "Probability of emergence",
     transform = "log",
-    breaks = scales::log_breaks(n = 6),
+    breaks = log_breaks(n = 6),
     limits = c(10^-5, 1)
   ) +
   scale_colour_brewer(
-    name = "Number of \nintermediate mutants", 
+    name = "Number of \nintermediate mutants",
     palette = "Set1"
   ) +
   scale_x_continuous(
-    name = expression(R[0]~of~introduced~pathogen), 
+    name = expression(R[0] ~ of ~ introduced ~ pathogen),
     limits = c(0, 1.2),
     n.breaks = 7
   ) +
