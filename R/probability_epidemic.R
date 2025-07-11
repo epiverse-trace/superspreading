@@ -146,5 +146,5 @@ probability_extinct <- function(R,
   # calculate P(extinction) given 'num_init_infect' introductions
   prob_extinct <- prob_extinct^num_init_infect
 
-  return(prob_extinct)
+  prob_extinct
 }

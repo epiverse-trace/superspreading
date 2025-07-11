@@ -38,7 +38,7 @@ get_epiparameter_param <- function(epiparameter,
     )
   }
 
-  return(unname(params[idx]))
+  unname(params[idx])
 }
 
 #' Helper function to create a model comparison table
@@ -141,7 +141,7 @@ ic_tbl <- function(..., sort_by = c("AIC", "BIC", "none")) {
   dots <- rlang::dots_list(..., .ignore_empty = "none", .homonyms = "error")
   dots_names <- names(dots)
 
-  args <- list(
+  fit_args <- list(
     lower = 0.001,
     upper = 0.999
   )
@@ -149,23 +149,23 @@ ic_tbl <- function(..., sort_by = c("AIC", "BIC", "none")) {
   func_args <- names(formals(func))
   if (fit_method == "optim") {
     optim_args <- names(formals("optim"))
-    args <- c(args, method = "Brent")
-    chk_args <- unique(c(names(args), func_args, optim_args))
+    fit_args <- c(fit_args, method = "Brent")
+    chk_args <- unique(c(names(fit_args), func_args, optim_args))
   } else {
-    args <- c(args, res = 0.001)
-    chk_args <- unique(c(names(args), func_args))
+    fit_args <- c(fit_args, res = 0.001)
+    chk_args <- unique(c(names(fit_args), func_args))
   }
   # replace default args if in dots
-  args <- utils::modifyList(args, dots)
+  fit_args <- utils::modifyList(fit_args, dots)
 
   # check arguments in dots match arg list
   stopifnot(
     "Arguments supplied in `...` not valid" =
-      all(dots_names %in% chk_args)
+      dots_names %in% chk_args
   )
 
   if (fit_method == "optim") {
-    optim_dots <- args[!names(args) %in% c("lower", "upper", "method")]
+    optim_dots <- fit_args[!names(fit_args) %in% c("lower", "upper", "method")]
     prob_est <- do.call(
       stats::optim,
       args = c(
@@ -173,18 +173,18 @@ ic_tbl <- function(..., sort_by = c("AIC", "BIC", "none")) {
         fn = func,
         gr = NULL,
         optim_dots,
-        method = args$method,
-        lower = args$lower,
-        upper = args$upper
+        method = fit_args$method,
+        lower = fit_args$lower,
+        upper = fit_args$upper
       )
     )
     prob_est <- prob_est$par
   } else {
     # set up grid search
-    ss <- seq(args$lower, args$upper, args$res)
-    args <- c(ss = list(ss), args)
-    args <- args[!names(args) %in% c("lower", "upper", "res")]
-    prob_est <- do.call(func, args = args)
+    ss <- seq(fit_args$lower, fit_args$upper, fit_args$res)
+    fit_args <- c(ss = list(ss), fit_args)
+    fit_args <- fit_args[!names(fit_args) %in% c("lower", "upper", "res")]
+    prob_est <- do.call(func, args = fit_args)
     prob_est <- ss[which.min(prob_est)]
   }
 
@@ -221,14 +221,12 @@ ic_tbl <- function(..., sort_by = c("AIC", "BIC", "none")) {
 #' @keywords internal
 #' @name gamma
 dgammaRk <- function(x, R, k) {
-  out <- stats::dgamma(x, shape = k, scale = R / k)
-  return(out)
+  stats::dgamma(x, shape = k, scale = R / k)
 }
 
 #' @name gamma
 pgammaRk <- function(x, R, k) {
-  out <- stats::pgamma(x, shape = k, scale = R / k)
-  return(out)
+  stats::pgamma(x, shape = k, scale = R / k)
 }
 
 #' @name gamma
@@ -268,7 +266,7 @@ solve_for_u <- function(prop, R, k) {
     interval = c(lower, upper),
     extendInt = "yes"
   )
-  return(root$root)
+  root$root
 }
 
 
@@ -312,35 +310,43 @@ solve_for_u <- function(prop, R, k) {
 
   # first, get random function as given by `offspring`
   if (!is.character(offspring)) {
-    stop(sprintf("%s %s",
-                 "Object passed as 'offspring' is not a character string.",
-                 "Did you forget to enclose it in quotes?"
-    )
+    stop(
+      sprintf("%s %s",
+              "Object passed as 'offspring' is not a character string.",
+              "Did you forget to enclose it in quotes?"
+      ),
+      call. = FALSE
     )
   }
 
   roffspring_name <- paste0("r", offspring)
   if (!(exists(roffspring_name)) || !is.function(get(roffspring_name))) {
-    stop("Function ", roffspring_name, " does not exist.")
+    stop("Function ", roffspring_name, " does not exist.", call. = FALSE)
   }
   # If both parameters of the negative binomial are zero, you get NaNs
   if (roffspring_name == "rnbinom" && all(c(...) == 0)) {
     stop(
       "The negative binomial parameters must have at least one ",
-      "non-zero parameter."
+      "non-zero parameter.",
+      call. = FALSE
     )
   }
 
   if (!missing(generation_time)) {
     if (!is.function(generation_time)) {
-      stop(sprintf("%s %s",
-                   "The `generation_time` argument must be a function",
-                   "(see details in ?.chain_sim)."
-      )
+      stop(
+        sprintf("%s %s",
+                "The `generation_time` argument must be a function",
+                "(see details in ?.chain_sim)."
+        ),
+        call. = FALSE
       )
     }
   } else if (!missing(tf)) {
-    stop("If `tf` is specified, `generation_time` must be specified too.")
+    stop(
+      "If `tf` is specified, `generation_time` must be specified too.",
+      call. = FALSE
+    )
   }
 
   stat_track <- rep(1, n) # track length or size (depending on `stat`)
@@ -368,7 +374,7 @@ solve_for_u <- function(prop, R, k) {
     # simulate next generation
     next_gen <- get(roffspring_name)(n = sum(n_offspring[sim]), ...)
     if (any(next_gen %% 1 > 0)) {
-      stop("Offspring distribution must return integers")
+      stop("Offspring distribution must return integers", call. = FALSE)
     }
 
     # record indices corresponding to the number of offspring
@@ -428,7 +434,7 @@ solve_for_u <- function(prop, R, k) {
     tdf <- tdf[tdf$time < tf, ]
   }
   rownames(tdf) <- NULL
-  return(tdf)
+  tdf
 }
 
 #' Check if input parameters are correctly specified by user

@@ -175,7 +175,7 @@ get_infectious_curve <- function(R, k) {
 We can now reproduce Figure 1b in @lloyd-smithSuperspreadingEffectIndividual2005 using the offspring distribution parameters obtained above.
 
 ```{r, fig.width=8}
-infect_curve <- map(offspring_dist_params %>%
+infect_curve <- map(offspring_dist_params %>% # nolint nested_pipe_linter
       group_split(disease), function(x) {
         get_infectious_curve(R = x$mean, k = x$dispersion) %>%
           mutate(

@@ -113,7 +113,7 @@ probability_contain <- function(R,
   # check arguments in dots match arg list
   stopifnot(
     "Arguments supplied in `...` not valid" =
-      all(dots_names %in% bp_args)
+      dots_names %in% bp_args
   )
 
   missing_params <- missing(R) && missing(k)
@@ -152,7 +152,7 @@ probability_contain <- function(R,
 
   if (simulate) {
     # arguments for .chain_sim()
-    args <- list(
+    sim_args <- list(
       n = NSIM,
       offspring = "nbinom",
       size = k,
@@ -160,16 +160,16 @@ probability_contain <- function(R,
       stat_threshold = case_threshold
     )
     if (!is.null(generation_time)) {
-      args$generation_time <- generation_time
+      sim_args$generation_time <- generation_time
     }
 
     # replace default args if in dots
-    args <- utils::modifyList(args, dots)
+    sim_args <- utils::modifyList(sim_args, dots)
 
     # simulate independent transmission chain for each initial infection
     chain <- lapply(
       seq_len(num_init_infect),
-      function(x) do.call(.chain_sim, args)
+      function(x) do.call(.chain_sim, sim_args)
     )
 
     # size is the total offspring produced by a chain
@@ -209,5 +209,5 @@ probability_contain <- function(R,
       pop_control = pop_control
     )
   }
-  return(prob_contain)
+  prob_contain
 }

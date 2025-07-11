@@ -47,11 +47,9 @@ calc_network_R <- function(mean_num_contact,
     var = sd_num_contact^2 * scale_by_active^2
   )
 
-  beta <- prob_transmission
-
   # calculate R0 with and without correction
-  R <- beta * contacts_per_time[["mean"]] * infect_duration
-  R_net <- beta * infect_duration *
+  R <- prob_transmission * contacts_per_time[["mean"]] * infect_duration
+  R_net <- prob_transmission * infect_duration *
     (contacts_per_time[["mean"]] + contacts_per_time[["var"]] /
       contacts_per_time[["mean"]])
 

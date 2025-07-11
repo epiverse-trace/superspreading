@@ -25,15 +25,11 @@ dpoislnorm <- Vectorize(function(x, meanlog, sdlog) {
 
   out <- tryCatch(
     stats::integrate(f = integrand, lower = 0, upper = Inf)$value,
-    error = function(cnd) {
-      return(0)
-    },
-    warning = function(cnd) {
-      return(0)
-    }
+    error = function(cnd) 0,
+    warning = function(cnd) 0
   )
 
-  return(out)
+  out
 })
 
 
@@ -94,15 +90,11 @@ dpoisweibull <- Vectorize(function(x, shape, scale) {
       lower = 0,
       upper = Inf
     )$value * (shape / (factorial(x) * scale^shape)),
-    error = function(cnd) {
-      return(0)
-    },
-    warning = function(cnd) {
-      return(0)
-    }
+    error = function(cnd) 0,
+    warning = function(cnd) 0
   )
 
-  return(out)
+  out
 })
 
 #' Cumulative distribution function of the poisson-Weibull compound
