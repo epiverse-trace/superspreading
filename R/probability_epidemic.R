@@ -5,9 +5,9 @@
 #' Calculates the probability a branching process will cause an epidemic
 #' (i.e. probability will fail to go extinct) based on R, k and initial cases.
 #'
-#' @param R A `number` specifying the R parameter (i.e. average secondary cases
-#'   per infectious individual).
-#' @param k A `number` specifying the  k parameter (i.e. overdispersion in
+#' @param R A `number` specifying the \eqn{R} parameter (i.e. average
+#'   secondary cases per infectious individual).
+#' @param k A `number` specifying the  \eqn{k} parameter (i.e. dispersion in
 #'   offspring distribution from fitted negative binomial).
 #' @param num_init_infect An `integer` (or at least
 #'   ["integerish"](https://rlang.r-lib.org/reference/is_integerish.html) if

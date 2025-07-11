@@ -15,10 +15,10 @@ proportion_cluster_size(
 )
 }
 \arguments{
-\item{R}{A \code{number} specifying the R parameter (i.e. average secondary cases
-per infectious individual).}
+\item{R}{A \code{number} specifying the \eqn{R} parameter (i.e. average
+secondary cases per infectious individual).}
 
-\item{k}{A \code{number} specifying the  k parameter (i.e. overdispersion in
+\item{k}{A \code{number} specifying the  \eqn{k} parameter (i.e. dispersion in
 offspring distribution from fitted negative binomial).}
 
 \item{cluster_size}{A \code{number} for the cluster size threshold.}
