@@ -161,7 +161,7 @@ most common use case is calculating what proportion of cases would cause
 80% of transmission during an outbreak of the infection. Thus a small
 proportion in the output <code>&lt;data.frame&gt;</code> means that
 there is a lot of overdispersion in individual-level transmission. The
-<code>percent_transmission</code> argument when
+<code>prop_transmission</code> argument when
 <code>method = "p_80"</code> is to set the proportion of
 transmission.</p>
 <p>The output of <code>method = "t_20"</code> gives the proportion of
@@ -170,10 +170,10 @@ most infectious individuals. This is commonly used to calculate what
 proportion of cases are expected to be caused by the most infectious 20%
 of individuals. A high proportion in the output
 <code>&lt;data.frame&gt;</code> means that there is a lot of
-overdispersion in the transmission. The
-<code>percent_transmission</code> argument when
-<code>method = "t_20"</code> is to set the proportion of most infectious
-cases to calculate their proportion of total transmission.</p>
+overdispersion in the transmission. The <code>prop_transmission</code>
+argument when <code>method = "t_20"</code> is to set the proportion of
+most infectious cases to calculate their proportion of total
+transmission.</p>
 <p>The key difference is that in a realised large outbreak (i.e. one
 that includes stochastic transmission), it is highly likely that some
 individuals will generate no secondary cases. This is because even a
@@ -219,7 +219,7 @@ is the probability density function (pdf) of the gamma distribution of
 the individual reproduction number
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ν</mi><annotation encoding="application/x-tex">\nu</annotation></semantics></math>.</p>
 <p>For both methods the proportion of transmission can be modified using
-the <code>percent_transmission</code> argument in
+the <code>prop_transmission</code> argument in
 <code><a href="../reference/proportion_transmission.html">proportion_transmission()</a></code> so they are not fixed at 80 and
 20, respectively, for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mn>80</mn></msub><annotation encoding="application/x-tex">p_{80}</annotation></semantics></math>
@@ -323,7 +323,7 @@ method.</p>
 <span>    MARGIN <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>    <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>      <span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>        R <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>, percent_transmission <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>        R <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>, prop_transmission <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span>        method <span class="op">=</span> <span class="st">"t_20"</span>, format_prop <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>      <span class="op">)</span></span>
 <span>    <span class="op">}</span></span>
@@ -337,7 +337,7 @@ method.</p>
 <span>    MARGIN <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>    <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>      <span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>        R <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>,</span>
+<span>        R <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>,</span>
 <span>        method <span class="op">=</span> <span class="st">"p_80"</span>, format_prop <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>      <span class="op">)</span></span>
 <span>    <span class="op">}</span></span>
@@ -453,7 +453,7 @@ cases using the
 <span>  <span class="va">k_seq</span>,</span>
 <span>  <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>      R <span class="op">=</span> <span class="fl">2</span>, k <span class="op">=</span> <span class="va">x</span>, percent_transmission <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>      R <span class="op">=</span> <span class="fl">2</span>, k <span class="op">=</span> <span class="va">x</span>, prop_transmission <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span>      method <span class="op">=</span> <span class="st">"t_20"</span>, format_prop <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>    <span class="op">)</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span></span>
 <span>  <span class="op">}</span></span>
@@ -513,34 +513,34 @@ control the proportion of transmission.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># For k = 0.5</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">0.1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">0.1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;     R   k prop_80</span></span>
 <span><span class="co">#&gt; 1 0.1 0.5   99.6%</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;   R   k prop_80</span></span>
 <span><span class="co">#&gt; 1 1 0.5   99.6%</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">5</span>, k <span class="op">=</span> <span class="fl">0.5</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">5</span>, k <span class="op">=</span> <span class="fl">0.5</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;   R   k prop_80</span></span>
 <span><span class="co">#&gt; 1 5 0.5   99.6%</span></span>
 <span></span>
 <span><span class="co"># For k = 2</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">0.1</span>, k <span class="op">=</span> <span class="fl">2</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">0.1</span>, k <span class="op">=</span> <span class="fl">2</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;     R k prop_80</span></span>
 <span><span class="co">#&gt; 1 0.1 2   94.9%</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">2</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">2</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;   R k prop_80</span></span>
 <span><span class="co">#&gt; 1 1 2   94.9%</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">5</span>, k <span class="op">=</span> <span class="fl">2</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">5</span>, k <span class="op">=</span> <span class="fl">2</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;   R k prop_80</span></span>
 <span><span class="co">#&gt; 1 5 2   94.9%</span></span></code></pre></div>
@@ -554,34 +554,34 @@ influence the proportion of transmission.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># For k = 0.5</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">0.1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">0.1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;     R   k prop_80</span></span>
 <span><span class="co">#&gt; 1 0.1 0.5   6.71%</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;   R   k prop_80</span></span>
 <span><span class="co">#&gt; 1 1 0.5   22.6%</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">5</span>, k <span class="op">=</span> <span class="fl">0.5</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">5</span>, k <span class="op">=</span> <span class="fl">0.5</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;   R   k prop_80</span></span>
 <span><span class="co">#&gt; 1 5 0.5   29.3%</span></span>
 <span></span>
 <span><span class="co"># For k = 2</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">0.1</span>, k <span class="op">=</span> <span class="fl">2</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">0.1</span>, k <span class="op">=</span> <span class="fl">2</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;     R k prop_80</span></span>
 <span><span class="co">#&gt; 1 0.1 2    7.3%</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">2</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">2</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;   R k prop_80</span></span>
 <span><span class="co">#&gt; 1 1 2   35.6%</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">5</span>, k <span class="op">=</span> <span class="fl">2</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">5</span>, k <span class="op">=</span> <span class="fl">2</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;   R k prop_80</span></span>
 <span><span class="co">#&gt; 1 5 2   48.9%</span></span></code></pre></div>
@@ -609,31 +609,31 @@ and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
 and show that by setting the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mn>80</mn></msub><annotation encoding="application/x-tex">p_{80}</annotation></semantics></math>
-method to <code>percent_transmission = 0.2</code>, and the
+method to <code>prop_transmission = 0.2</code>, and the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>t</mi><mn>20</mn></msub><annotation encoding="application/x-tex">t_{20}</annotation></semantics></math>
-method to <code>percent_transmission = 0.8</code> the two cannot be
+method to <code>prop_transmission = 0.8</code> the two cannot be
 interchangeably interpreted as outlined in the box above.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># R = 1, k = 0.5</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, percent_transmission <span class="op">=</span> <span class="fl">0.2</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, prop_transmission <span class="op">=</span> <span class="fl">0.2</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;   R   k prop_20</span></span>
 <span><span class="co">#&gt; 1 1 0.5   2.45%</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;   R   k prop_80</span></span>
 <span><span class="co">#&gt; 1 1 0.5   99.6%</span></span>
 <span></span>
 <span><span class="co"># R = 3, k = 2</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fl">2</span>, percent_transmission <span class="op">=</span> <span class="fl">0.2</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fl">2</span>, prop_transmission <span class="op">=</span> <span class="fl">0.2</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;   R k prop_20</span></span>
 <span><span class="co">#&gt; 1 3 2   5.86%</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fl">2</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fl">2</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;   R k prop_80</span></span>
 <span><span class="co">#&gt; 1 3 2   94.9%</span></span></code></pre></div>
@@ -643,23 +643,23 @@ and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><msub><mi>t</mi><mn>20</mn></msub><mo>≠</mo><msub><mi>p</mi><mn>80</mn></msub></mrow><annotation encoding="application/x-tex">1 - t_{20} \neq p_{80}</annotation></semantics></math>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span>,</span>
+<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span>,</span>
 <span>  format_prop <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span></span>
 <span><span class="co">#&gt; [1] 0.7735753</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, percent_transmission <span class="op">=</span> <span class="fl">0.2</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, prop_transmission <span class="op">=</span> <span class="fl">0.2</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;   R   k prop_20</span></span>
 <span><span class="co">#&gt; 1 1 0.5     65%</span></span>
 <span></span>
 <span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, percent_transmission <span class="op">=</span> <span class="fl">0.2</span>, method <span class="op">=</span> <span class="st">"t_20"</span>,</span>
+<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, prop_transmission <span class="op">=</span> <span class="fl">0.2</span>, method <span class="op">=</span> <span class="st">"t_20"</span>,</span>
 <span>  format_prop <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span></span>
 <span><span class="co">#&gt; [1] 0.3501798</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="fl">0.5</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;   R   k prop_80</span></span>
 <span><span class="co">#&gt; 1 1 0.5   22.6%</span></span></code></pre></div>
@@ -674,13 +674,13 @@ method does not allow for true homogeneity
 (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mn>80</mn></msub><mo>≠</mo><mn>80</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">p_{80} \neq 80\%</annotation></semantics></math>).</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="cn">Inf</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="cn">Inf</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"p_80"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Infinite values of k are being approximated by 1e+05 for calculations.</span></span>
 <span><span class="co">#&gt;   R     k prop_80</span></span>
 <span><span class="co">#&gt; 1 1 1e+05   43.2%</span></span>
 <span><span class="fu"><a href="../reference/proportion_transmission.html">proportion_transmission</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="cn">Inf</span>, percent_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
+<span>  R <span class="op">=</span> <span class="fl">1</span>, k <span class="op">=</span> <span class="cn">Inf</span>, prop_transmission <span class="op">=</span> <span class="fl">0.8</span>, method <span class="op">=</span> <span class="st">"t_20"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Infinite values of k are being approximated by 1e+05 for calculations.</span></span>
 <span><span class="co">#&gt;   R     k prop_80</span></span>
