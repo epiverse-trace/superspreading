@@ -2,33 +2,33 @@
 #' outbreak (\eqn{R > 1}) based on R
 #'
 #' @description The method for the evolution of pathogen emergence described in
-#' Antia et al. (2003) (\doi{10.1038/nature02104}). The model is a multi-type
-#' branching process model with an initial (wild-type) reproduction number,
-#' usually below 1, and a evolved reproduction number that is
-#' greater than 1, and thus can cause a sustained human-to-human epidemic.
-#' The reproduction number for a pathogen changes at the `mutation_rate`.
+#'   Antia et al. (2003) (\doi{10.1038/nature02104}). The model is a multi-type
+#'   branching process model with an initial (wild-type) reproduction number,
+#'   usually below 1, and a evolved reproduction number that is
+#'   greater than 1, and thus can cause a sustained human-to-human epidemic.
+#'   The reproduction number for a pathogen changes at the `mutation_rate`.
 #'
 #' @details
 #' Following Antia et al. (2003), we assume that the mutation rate for all
 #' variants is the same.
 #'
 #' @param R_wild  A `number` specifying the R parameter (i.e. average
-#' secondary cases per infectious individual) for the wild-type pathogen.
+#'   secondary cases per infectious individual) for the wild-type pathogen.
 #' @param R_mutant  A `number` or vector of `numbers` specifying the R
-#' parameter (i.e. average secondary cases per infectious individual) for the
-#' mutant pathogen(s). If there is more than one value supplied to `R_mutant`,
-#' then the first element is the reproduction number for \eqn{m - 1} mutant
-#' and the last element is the reproduction number for the \eqn{m} mutant
-#' (i.e. fully evolved).
+#'   parameter (i.e. average secondary cases per infectious individual) for the
+#'   mutant pathogen(s). If there is more than one value supplied to `R_mutant`,
+#'   then the first element is the reproduction number for \eqn{m - 1} mutant
+#'   and the last element is the reproduction number for the \eqn{m} mutant
+#'   (i.e. fully evolved).
 #' @param mutation_rate A `number` specifying the mutation rate (\eqn{\mu}),
-#' must be between zero and one.
+#'   must be between zero and one.
 #' @param tol A `number` for the tolerance of the numerical convergence.
-#' Default is `1e-10`
+#'   Default is `1e-10`
 #' @param max_iter A `number` for the maximum number of iterations for the
-#' optimisation. Default is `1000`.
+#'   optimisation. Default is `1000`.
 #'
 #' @return A value with the probability of a disease emerging and causing an
-#' outbreak.
+#'   outbreak.
 #' @export
 #' @seealso [probability_epidemic()], [probability_extinct()]
 #'

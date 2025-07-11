@@ -31,26 +31,25 @@
 #' function(x) rlnorm(x, meanlog = 1, sdlog = 1.5)
 #' ```
 #'
-#'
 #' @inheritParams probability_epidemic
 #' @param simulate A `logical` boolean determining whether the probability
-#' of containment is calculated analytically or numerically using a stochastic
-#' branching process model. Default is `FALSE` which calls
-#' [probability_extinct()], setting to `TRUE` uses a branching process and
-#' enables setting the `case_threshold`, `outbreak_time` and `generation_time`
-#' arguments.
+#'   of containment is calculated analytically or numerically using a stochastic
+#'   branching process model. Default is `FALSE` which calls
+#'   [probability_extinct()], setting to `TRUE` uses a branching process and
+#'   enables setting the `case_threshold`, `outbreak_time` and `generation_time`
+#'   arguments.
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named elements to replace
-#' default arguments in [.chain_sim()]. See details.
+#'   default arguments in [.chain_sim()]. See details.
 #' @param case_threshold A number for the threshold of the number of cases below
-#' which the epidemic is considered contained. `case_threshold` is only used
-#' when `simulate = TRUE`.
+#'   which the epidemic is considered contained. `case_threshold` is only used
+#'   when `simulate = TRUE`.
 #' @param outbreak_time A number for the time since the start of
-#' the outbreak to determine if outbreaks are contained within a given period
-#' of time. `outbreak_time` is only used when `simulate = TRUE`.
+#'   the outbreak to determine if outbreaks are contained within a given period
+#'   of time. `outbreak_time` is only used when `simulate = TRUE`.
 #' @param generation_time A `function` to generate generation times. The
-#' function must have a single argument and return a `numeric` vector with
-#' generation times. See details for example. The `function` can be defined or
-#' anonymous. `generation_time` is only used when `simulate = TRUE`.
+#'   function must have a single argument and return a `numeric` vector with
+#'   generation times. See details for example. The `function` can be defined or
+#'   anonymous. `generation_time` is only used when `simulate = TRUE`.
 #'
 #' @return A `number` for the probability of containment.
 #' @export

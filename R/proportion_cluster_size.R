@@ -19,12 +19,13 @@
 #' @param cluster_size A `number` for the cluster size threshold.
 #' @param ... [dots] not used, extra arguments supplied will cause a warning.
 #' @param format_prop A `logical` determining whether the proportion column
-#' of the `<data.frame>` returned by the function is formatted as a string with
-#' a percentage sign (`%`), (`TRUE`, default), or as a `numeric` (`FALSE`).
+#'   of the `<data.frame>` returned by the function is formatted as a string
+#'   with a percentage sign (`%`), (`TRUE`, default), or as a `numeric`
+#'   (`FALSE`).
 #'
 #' @return A `<data.frame>` with the value for the proportion of new cases
-#' that are part of a transmission event above a threshold for a given value
-#' of R and k.
+#'   that are part of a transmission event above a threshold for a given value
+#'   of R and k.
 #' @export
 #'
 #' @examples
