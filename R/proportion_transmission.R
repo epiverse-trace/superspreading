@@ -60,8 +60,9 @@
 #'
 #' @inheritParams proportion_cluster_size
 #' @inheritParams probability_epidemic
-#' @param percent_transmission A `number` of the percentage transmission
-#' for which a proportion of cases has produced.
+#' @param prop_transmission A `number` of the proportion of transmission
+#' for which a proportion of cases has produced. Must be between 0 and 1
+#' (exclusive, \eqn{(0, 1)}).
 #' @param method A `character` string defining which method is used to calculate
 #' the proportion of transmission. Options are `"p_80"` (default) or `"t_20"`.
 #' See details for more information on each of these methods.
@@ -98,13 +99,13 @@
 #'
 #' @examples
 #' # example of single values of R and k
-#' percent_transmission <- 0.8 # 80% of transmission
+#' prop_transmission <- 0.8 # 80% of transmission
 #' R <- 2
 #' k <- 0.5
 #' proportion_transmission(
 #'   R = R,
 #'   k = k,
-#'   percent_transmission = percent_transmission
+#'   prop_transmission = prop_transmission
 #' )
 #'
 #' # example with multiple values of k
@@ -112,7 +113,7 @@
 #' proportion_transmission(
 #'   R = R,
 #'   k = k,
-#'   percent_transmission = percent_transmission
+#'   prop_transmission = prop_transmission
 #' )
 #'
 #' # example with vectors of R and k
@@ -120,10 +121,10 @@
 #' proportion_transmission(
 #'   R = R,
 #'   k = k,
-#'   percent_transmission = percent_transmission
+#'   prop_transmission = prop_transmission
 #' )
 proportion_transmission <- function(R, k,
-                                    percent_transmission,
+                                    prop_transmission,
                                     method = c("p_80", "t_20"),
                                     simulate = FALSE,
                                     ...,
@@ -155,10 +156,10 @@ proportion_transmission <- function(R, k,
       FINITE_INF, " for calculations."
     )
   }
-  checkmate::assert_number(percent_transmission, lower = 0, upper = 1)
+  checkmate::assert_number(prop_transmission, lower = 0, upper = 1)
   stopifnot(
-    "percent_transmission must be less than 1." = percent_transmission != 1,
-    "percent_transmission must be greater than 0." = percent_transmission != 0
+    "prop_transmission must be less than 1." = prop_transmission != 1,
+    "prop_transmission must be greater than 0." = prop_transmission != 0
   )
   checkmate::assert_logical(simulate, any.missing = FALSE, len = 1)
   checkmate::assert_logical(format_prop, any.missing = FALSE, len = 1)
@@ -171,26 +172,26 @@ proportion_transmission <- function(R, k,
   }
 
   params <- expand.grid(R = R, k = k, NA_real_)
-  colnames(params) <- c("R", "k", paste0("prop_", percent_transmission * 100))
+  colnames(params) <- c("R", "k", paste0("prop_", prop_transmission * 100))
 
   for (i in seq_len(nrow(params))) {
     if (simulate) {
       prop <- .prop_transmission_numerical(
         R = params[i, "R"],
         k = params[i, "k"],
-        percent_transmission = percent_transmission
+        prop_transmission = prop_transmission
       )
     } else if (method == "p_80") {
       prop <- .prop_transmission_analytical(
         R = params[i, "R"],
         k = params[i, "k"],
-        percent_transmission = percent_transmission
+        prop_transmission = prop_transmission
       )
     } else {
       prop <- .prop_transmission_t20(
         R = params[i, "R"],
         k = params[i, "k"],
-        percent_transmission = percent_transmission
+        prop_transmission = prop_transmission
       )
     }
 
@@ -209,10 +210,10 @@ proportion_transmission <- function(R, k,
 #' @return A numeric
 #' @keywords internal
 #' @noRd
-.prop_transmission_analytical <- function(R, k, percent_transmission) {
+.prop_transmission_analytical <- function(R, k, prop_transmission) {
 
-  xm1 <- stats::qnbinom(1 - percent_transmission, k + 1, mu = R * (k + 1) / k)
-  remq <- 1 - percent_transmission -
+  xm1 <- stats::qnbinom(1 - prop_transmission, k + 1, mu = R * (k + 1) / k)
+  remq <- 1 - prop_transmission -
     stats::pnbinom(xm1 - 1, k + 1, mu = R * (k + 1) / k)
   remx <- remq / stats::dnbinom(xm1, k + 1, mu = R * (k + 1) / k)
   x <- xm1 + 1
@@ -227,7 +228,7 @@ proportion_transmission <- function(R, k,
 #' @return A numeric
 #' @keywords internal
 #' @noRd
-.prop_transmission_numerical <- function(R, k, percent_transmission) {
+.prop_transmission_numerical <- function(R, k, prop_transmission) {
 
   simulate_secondary <- stats::rnbinom(
     n = NSIM,
@@ -235,14 +236,14 @@ proportion_transmission <- function(R, k,
     size = k
   )
 
-  # percentage of cases
-  percent_cases <- percent_transmission * sum(simulate_secondary)
+  # number of cases at user-specified proportion
+  prop_cases <- prop_transmission * sum(simulate_secondary)
 
   # cumulative sum of simulated secondary cases
   cumsum_secondary <- cumsum(sort(simulate_secondary, decreasing = TRUE))
 
   # proportion causing case
-  out <- sum(cumsum_secondary <= percent_cases) / NSIM
+  out <- sum(cumsum_secondary <= prop_cases) / NSIM
 
   out
 }
@@ -253,10 +254,10 @@ proportion_transmission <- function(R, k,
 #' @return A `numeric`
 #' @keywords internal
 #' @noRd
-.prop_transmission_t20 <- function(R, k, percent_transmission) {
+.prop_transmission_t20 <- function(R, k, prop_transmission) {
   k <- k %gt% 1e7
-  percent_transmission <- percent_transmission %gt% 0.99
-  u <- solve_for_u(prop = percent_transmission, R = R, k = k)
+  prop_transmission <- prop_transmission %gt% 0.99
+  u <- solve_for_u(prop = prop_transmission, R = R, k = k)
   integral_result <- stats::integrate(
     function(u) u * fvx(u, R, k), lower = 0, upper = u
   )

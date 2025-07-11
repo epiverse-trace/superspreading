@@ -8,7 +8,7 @@ transmission}
 proportion_transmission(
   R,
   k,
-  percent_transmission,
+  prop_transmission,
   method = c("p_80", "t_20"),
   simulate = FALSE,
   ...,
@@ -23,8 +23,9 @@ per infectious individual).}
 \item{k}{A \code{number} specifying the  k parameter (i.e. overdispersion in
 offspring distribution from fitted negative binomial).}
 
-\item{percent_transmission}{A \code{number} of the percentage transmission
-for which a proportion of cases has produced.}
+\item{prop_transmission}{A \code{number} of the proportion of transmission
+for which a proportion of cases has produced. Must be between 0 and 1
+(exclusive, \eqn{(0, 1)}).}
 
 \item{method}{A \code{character} string defining which method is used to calculate
 the proportion of transmission. Options are \code{"p_80"} (default) or \code{"t_20"}.
@@ -108,13 +109,13 @@ calls. The number of simulation replicates is fixed to 10\if{html}{\out{<sup>}}5
 }
 \examples{
 # example of single values of R and k
-percent_transmission <- 0.8 # 80\% of transmission
+prop_transmission <- 0.8 # 80\% of transmission
 R <- 2
 k <- 0.5
 proportion_transmission(
   R = R,
   k = k,
-  percent_transmission = percent_transmission
+  prop_transmission = prop_transmission
 )
 
 # example with multiple values of k
@@ -122,7 +123,7 @@ k <- c(0.1, 0.2, 0.3, 0.4, 0.5, 1)
 proportion_transmission(
   R = R,
   k = k,
-  percent_transmission = percent_transmission
+  prop_transmission = prop_transmission
 )
 
 # example with vectors of R and k
@@ -130,7 +131,7 @@ R <- c(1, 2, 3)
 proportion_transmission(
   R = R,
   k = k,
-  percent_transmission = percent_transmission
+  prop_transmission = prop_transmission
 )
 }
 \references{
