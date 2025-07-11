@@ -35,9 +35,9 @@ The proportion of transmission can be calculated using two methods, both of whic
 ::: {.alert .alert-danger}
 The output of `method = "p_80"` and `method = "t_20"` have different interpretations and cannot be used interchangeably without understanding the differences in what they are measuring. 
 
-The output of `method = "p_80"` gives the proportion of cases that generate a certain proportion of realised transmission. The most common use case is calculating what proportion of cases would cause 80% of transmission during an outbreak of the infection. Thus a small proportion in the output `<data.frame>` means that there is a lot of overdispersion in individual-level transmission. The `percent_transmission` argument when `method = "p_80"` is to set the proportion of transmission.
+The output of `method = "p_80"` gives the proportion of cases that generate a certain proportion of realised transmission. The most common use case is calculating what proportion of cases would cause 80% of transmission during an outbreak of the infection. Thus a small proportion in the output `<data.frame>` means that there is a lot of overdispersion in individual-level transmission. The `prop_transmission` argument when `method = "p_80"` is to set the proportion of transmission.
 
-The output of `method = "t_20"` gives the proportion of cases that we would expected to produced by a certain proportion of the most infectious individuals. This is commonly used to calculate what proportion of cases are expected to be caused by the most infectious 20% of individuals. A high proportion in the output `<data.frame>` means that there is a lot of overdispersion in the transmission. The `percent_transmission` argument when `method = "t_20"` is to set the proportion of most infectious cases to calculate their proportion of total transmission.
+The output of `method = "t_20"` gives the proportion of cases that we would expected to produced by a certain proportion of the most infectious individuals. This is commonly used to calculate what proportion of cases are expected to be caused by the most infectious 20% of individuals. A high proportion in the output `<data.frame>` means that there is a lot of overdispersion in the transmission. The `prop_transmission` argument when `method = "t_20"` is to set the proportion of most infectious cases to calculate their proportion of total transmission.
 
 The key difference is that in a realised large outbreak (i.e. one that includes stochastic transmission), it is highly likely that some individuals will generate no secondary cases. This is because even a non-zero expected number of secondary cases can produce a zero when drawn from a Poisson process.
 :::
@@ -68,7 +68,7 @@ $$
 
 $f_\nu(x)$ is the probability density function (pdf) of the gamma distribution of the individual reproduction number $\nu$.
 
-For both methods the proportion of transmission can be modified using the `percent_transmission` argument in `proportion_transmission()` so they are not fixed at 80 and 20, respectively, for $p_{80}$ and $t_{20}$.
+For both methods the proportion of transmission can be modified using the `prop_transmission` argument in `proportion_transmission()` so they are not fixed at 80 and 20, respectively, for $p_{80}$ and $t_{20}$.
 
 There are two methods for calculating the $p_{80}$ method, analytically as given by @endoEstimatingOverdispersionCOVID192020, or numerically by sampling from a negative binomial distribution (`proportion_transmission(..., simulate = TRUE)`. For the purpose of this vignette to compare all of the methods we will term the analytical calculation $p_{80}$, and the numerical calculation $p_{80}^{sim}$.
 
@@ -122,7 +122,7 @@ offspring_dist_params$t20 <- do.call(
     MARGIN = 1,
     function(x) {
       proportion_transmission(
-        R = as.numeric(x[2]), k = as.numeric(x[3]), percent_transmission = 0.2,
+        R = as.numeric(x[2]), k = as.numeric(x[3]), prop_transmission = 0.2,
         method = "t_20", format_prop = FALSE
       )
     }
@@ -136,7 +136,7 @@ offspring_dist_params$p80 <- do.call(
     MARGIN = 1,
     function(x) {
       proportion_transmission(
-        R = as.numeric(x[2]), k = as.numeric(x[3]), percent_transmission = 0.8,
+        R = as.numeric(x[2]), k = as.numeric(x[3]), prop_transmission = 0.8,
         method = "p_80", format_prop = FALSE
       )
     }
@@ -241,7 +241,7 @@ y <- map_dbl(
   k_seq,
   function(x) {
     proportion_transmission(
-      R = 2, k = x, percent_transmission = 0.2,
+      R = 2, k = x, prop_transmission = 0.2,
       method = "t_20", format_prop = FALSE
     )[, 3]
   }
@@ -302,24 +302,24 @@ The plot uses an $R$ of 2, however, one characteristic of the $t_{20}$ method is
 ```{r}
 # For k = 0.5
 proportion_transmission(
-  R = 0.1, k = 0.5, percent_transmission = 0.8, method = "t_20"
+  R = 0.1, k = 0.5, prop_transmission = 0.8, method = "t_20"
 )
 proportion_transmission(
-  R = 1, k = 0.5, percent_transmission = 0.8, method = "t_20"
+  R = 1, k = 0.5, prop_transmission = 0.8, method = "t_20"
 )
 proportion_transmission(
-  R = 5, k = 0.5, percent_transmission = 0.8, method = "t_20"
+  R = 5, k = 0.5, prop_transmission = 0.8, method = "t_20"
 )
 
 # For k = 2
 proportion_transmission(
-  R = 0.1, k = 2, percent_transmission = 0.8, method = "t_20"
+  R = 0.1, k = 2, prop_transmission = 0.8, method = "t_20"
 )
 proportion_transmission(
-  R = 1, k = 2, percent_transmission = 0.8, method = "t_20"
+  R = 1, k = 2, prop_transmission = 0.8, method = "t_20"
 )
 proportion_transmission(
-  R = 5, k = 2, percent_transmission = 0.8, method = "t_20"
+  R = 5, k = 2, prop_transmission = 0.8, method = "t_20"
 )
 ```
 
@@ -328,46 +328,46 @@ This is not the case for $p_{80}$, where changes in both $R$ and $k$ influence t
 ```{r}
 # For k = 0.5
 proportion_transmission(
-  R = 0.1, k = 0.5, percent_transmission = 0.8, method = "p_80"
+  R = 0.1, k = 0.5, prop_transmission = 0.8, method = "p_80"
 )
 proportion_transmission(
-  R = 1, k = 0.5, percent_transmission = 0.8, method = "p_80"
+  R = 1, k = 0.5, prop_transmission = 0.8, method = "p_80"
 )
 proportion_transmission(
-  R = 5, k = 0.5, percent_transmission = 0.8, method = "p_80"
+  R = 5, k = 0.5, prop_transmission = 0.8, method = "p_80"
 )
 
 # For k = 2
 proportion_transmission(
-  R = 0.1, k = 2, percent_transmission = 0.8, method = "p_80"
+  R = 0.1, k = 2, prop_transmission = 0.8, method = "p_80"
 )
 proportion_transmission(
-  R = 1, k = 2, percent_transmission = 0.8, method = "p_80"
+  R = 1, k = 2, prop_transmission = 0.8, method = "p_80"
 )
 proportion_transmission(
-  R = 5, k = 2, percent_transmission = 0.8, method = "p_80"
+  R = 5, k = 2, prop_transmission = 0.8, method = "p_80"
 )
 ```
 
 One thing that was mentioned above is that the interpretation of the $p_{80}$ and $t_{20}$ methods are not interchangeable, additionally, $t_{80}$ and $p_{20}$ are not equal. Stated differently, the $p_{80}$ method to calculate the proportion of transmission that cause 20% of cases, and the $t_{20}$ method to calculate the proportion of transmission caused by the most infectious 80% are not equivalent. It is also the case that $1 - p_{80} \neq t_{20}$, thus $1 - t_{20} \neq p_{80}$.
 
-Here we vary $R$ and $k$ and show that by setting the $p_{80}$ method to `percent_transmission = 0.2`, and the $t_{20}$ method to `percent_transmission = 0.8` the two cannot be interchangeably interpreted as outlined in the box above.
+Here we vary $R$ and $k$ and show that by setting the $p_{80}$ method to `prop_transmission = 0.2`, and the $t_{20}$ method to `prop_transmission = 0.8` the two cannot be interchangeably interpreted as outlined in the box above.
 
 ```{r}
 # R = 1, k = 0.5
 proportion_transmission(
-  R = 1, k = 0.5, percent_transmission = 0.2, method = "p_80"
+  R = 1, k = 0.5, prop_transmission = 0.2, method = "p_80"
 )
 proportion_transmission(
-  R = 1, k = 0.5, percent_transmission = 0.8, method = "t_20"
+  R = 1, k = 0.5, prop_transmission = 0.8, method = "t_20"
 )
 
 # R = 3, k = 2
 proportion_transmission(
-  R = 3, k = 2, percent_transmission = 0.2, method = "p_80"
+  R = 3, k = 2, prop_transmission = 0.2, method = "p_80"
 )
 proportion_transmission(
-  R = 3, k = 2, percent_transmission = 0.8, method = "t_20"
+  R = 3, k = 2, prop_transmission = 0.8, method = "t_20"
 )
 ```
 
@@ -375,19 +375,19 @@ Here we show that $1 - p_{80} \neq t_{20}$ and $1 - t_{20} \neq p_{80}$.
 
 ```{r}
 1 - proportion_transmission(
-  R = 1, k = 0.5, percent_transmission = 0.8, method = "p_80",
+  R = 1, k = 0.5, prop_transmission = 0.8, method = "p_80",
   format_prop = FALSE
 )[, 3]
 proportion_transmission(
-  R = 1, k = 0.5, percent_transmission = 0.2, method = "t_20"
+  R = 1, k = 0.5, prop_transmission = 0.2, method = "t_20"
 )
 
 1 - proportion_transmission(
-  R = 1, k = 0.5, percent_transmission = 0.2, method = "t_20",
+  R = 1, k = 0.5, prop_transmission = 0.2, method = "t_20",
   format_prop = FALSE
 )[, 3]
 proportion_transmission(
-  R = 1, k = 0.5, percent_transmission = 0.8, method = "p_80"
+  R = 1, k = 0.5, prop_transmission = 0.8, method = "p_80"
 )
 ```
 
@@ -395,10 +395,10 @@ The $t_{20}$ method allows for true homogeneity when $k \rightarrow \infty$ ($t_
 
 ```{r}
 proportion_transmission(
-  R = 1, k = Inf, percent_transmission = 0.8, method = "p_80"
+  R = 1, k = Inf, prop_transmission = 0.8, method = "p_80"
 )
 proportion_transmission(
-  R = 1, k = Inf, percent_transmission = 0.8, method = "t_20"
+  R = 1, k = Inf, prop_transmission = 0.8, method = "t_20"
 )
 ```
 
