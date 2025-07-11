@@ -61,33 +61,35 @@ probability_emergence <- function(R_wild,
   R <- c(R_wild, R_mutant)
   m <- length(R)
   # initialise extinction probabilities
-  q <- rep(0.5, m)
+  extinct_prob <- rep(0.5, m)
 
   for (i in seq_len(max_iter)) {
     # create vector to hold new values for fixed-point convergence check
-    q_new <- numeric(m)
+    extinct_prob_new <- numeric(m)
 
     # wild type
-    q_new[1] <- exp(-(1 - mutation_rate) * R[1] * (1 - q[1])) *
-      exp(-mutation_rate * R[1] * (1 - q[2]))
+    extinct_prob_new[1] <-
+      exp(-(1 - mutation_rate) * R[1] * (1 - extinct_prob[1])) *
+      exp(-mutation_rate * R[1] * (1 - extinct_prob[2]))
 
     if (m > 2) {
       # intermediate types (excludes wild-type and fully evolved mutant)
       for (j in 2:(m - 1)) {
-        q_new[j] <- exp(-(1 - mutation_rate) * R[j] * (1 - q[j])) *
-          exp(-mutation_rate * R[j] * (1 - q[j + 1]))
+        extinct_prob_new[j] <-
+          exp(-(1 - mutation_rate) * R[j] * (1 - extinct_prob[j])) *
+          exp(-mutation_rate * R[j] * (1 - extinct_prob[j + 1]))
       }
     }
 
     # fully evolved mutant
-    q_new[m] <- exp(-R[m] * (1 - q[m]))
+    extinct_prob_new[m] <- exp(-R[m] * (1 - extinct_prob[m]))
 
-    if (max(abs(q_new - q)) < tol) break
-    q <- q_new
+    if (max(abs(extinct_prob_new - extinct_prob)) < tol) break
+    extinct_prob <- extinct_prob_new
   }
 
   # probability of emergence from probability of extinction of wild type
-  prob_emerge <- 1 - q[1]
+  prob_emerge <- 1 - extinct_prob[1]
 
   return(prob_emerge)
 }
