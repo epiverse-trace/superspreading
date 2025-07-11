@@ -26,7 +26,7 @@ library(ggplot2)
 library(scales)
 ```
 
-We use `probability_emergence()` to replicate Figure 2b from @antiaRoleEvolutionEmergence2003 showing how the probability of emergence changes for different wild-type reproduction numbers and different mutation rates. This assumes a 2-type branching process with a wild-type pathogen with $R_0 < 1$ and a mutant pathogen with $R_0 > 1$ ($R_{\text{mutant}} \in {1.2, 1.5, 1,000}$).
+We use `probability_emergence()` to replicate Figure 2b from @antiaRoleEvolutionEmergence2003 showing how the probability of emergence changes for different wild-type reproduction numbers and different mutation rates. This assumes a 2-type branching process with a wild-type pathogen with $R_0 < 1$ and a mutant pathogen with $R_0 > 1$, we test with mutant reproduction numbers of 1.2, 1.5, 1,000.
 
 ```{r calc-prob-emerge}
 R_wild <- seq(0, 1.2, by = 0.01)
