@@ -292,7 +292,7 @@ solve_for_u <- function(prop, R, k) {
 #' }
 #' @param stat_threshold A size or length above which the simulation results
 #'   should be set to `Inf`. Defaults to `Inf`, resulting in no results
-#'   ever set to `Inf`
+#'   ever set to `Inf`.
 #' @param generation_time The generation time generator function; the name of a
 #'   user-defined named or anonymous function with only one argument `n`,
 #'   representing the number of generation times to generate.
