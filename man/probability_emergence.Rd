@@ -28,7 +28,7 @@ and the last element is the reproduction number for the \eqn{m} mutant
 must be between zero and one.}
 
 \item{tol}{A \code{number} for the tolerance of the numerical convergence.
-Default is \code{1e-10}}
+Default is \code{1e-10}.}
 
 \item{max_iter}{A \code{number} for the maximum number of iterations for the
 optimisation. Default is \code{1000}.}

@@ -29,7 +29,7 @@ the R distribution function (e.g., "pois" for Poisson, where
 
 \item{stat_threshold}{A size or length above which the simulation results
 should be set to \code{Inf}. Defaults to \code{Inf}, resulting in no results
-ever set to \code{Inf}}
+ever set to \code{Inf}.}
 
 \item{generation_time}{The generation time generator function; the name of a
 user-defined named or anonymous function with only one argument \code{n},

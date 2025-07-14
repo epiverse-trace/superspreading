@@ -24,7 +24,7 @@
 #' @param mutation_rate A `number` specifying the mutation rate (\eqn{\mu}),
 #'   must be between zero and one.
 #' @param tol A `number` for the tolerance of the numerical convergence.
-#'   Default is `1e-10`
+#'   Default is `1e-10`.
 #' @param max_iter A `number` for the maximum number of iterations for the
 #'   optimisation. Default is `1000`.
 #'
