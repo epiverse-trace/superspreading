@@ -1,5 +1,5 @@
 #' Calculate the probability a disease will emerge and cause a sustained
-#' outbreak (\eqn{R > 1}) based on R
+#' outbreak (\eqn{R > 1}) based on R and initial cases
 #'
 #' @description
 #' The method for the evolution of pathogen emergence described in
