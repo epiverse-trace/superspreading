@@ -149,7 +149,7 @@ More details on how to use `{superspreading}` can be found in the [online docume
 
 ### Visualisation and plotting functionality
 
-`{superspreading}` does not provide plotting functions, instead we provide example code chunks in the package's vignettes that can be used as a templates upon which data visualisations can be modified. We recommend users copy and edit the examples for their own purposes. (This is permitted under the package's MIT license). By default code chunks for plotting are folded, in order to unfold them and see the code simply click the code button at the top left of the plot.
+`{superspreading}` does not provide plotting functions, instead we provide example code chunks in the package's vignettes that can be used as a templates upon which data visualisations can be modified. We recommend users copy and edit the examples for their own purposes. (This is permitted under the package's MIT license).
 
 ## Help
 
