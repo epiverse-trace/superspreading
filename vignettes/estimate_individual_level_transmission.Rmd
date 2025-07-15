@@ -304,7 +304,7 @@ dist_compare_data <- data.frame(
 )
 ```
 
-```{r, plot-dists, fig.cap="Number of secondary cases from the empirical data (bar plot) and the density of the negative binomial (orange) and poisson-Weibull (pink) with the maximum likelihood estimates when fit to the empirical data (points and line)."}
+```{r, plot-dists, fig.cap="Number of secondary cases from the empirical data (bar plot) and the density of the negative binomial (orange) and poisson-Weibull (yellow) with the maximum likelihood estimates when fit to the empirical data (points and line)."}
 #| fig.alt: >
 #|   A histogram showing the frequency distribution of the number of secondary
 #|   cases (x-axis, ranging from 0 to 20) versus frequency (y-axis, ranging
