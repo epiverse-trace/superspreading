@@ -63,7 +63,7 @@ probability_emergence(
 )
 }
 \references{
-Antia, R., Regoes, R., Koella, J. & Bergstrom, C. T. (2003).
+Antia, R., Regoes, R., Koella, J. & Bergstrom, C. T. (2003)
 The role of evolution in the emergence of infectious diseases.
 Nature 426, 658–661. \doi{10.1038/nature02104}
 }

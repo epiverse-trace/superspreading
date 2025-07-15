@@ -87,16 +87,18 @@
 #' The \eqn{t_{20}} method follows the formula defined in section 2.2.5 of the
 #' supplementary material for:
 #'
-#' Lloyd-Smith JO, Schreiber SJ, Kopp PE, Getz WM. Superspreading and the
-#' effect of individual variation on disease emergence. Nature. 2005
-#' Nov;438(7066):355–9. \doi{10.1038/nature04153}
+#' Lloyd-Smith, J. O., Schreiber, S. J., Kopp, P. E., & Getz, W. M. (2005)
+#' Superspreading and the effect of individual variation on disease emergence.
+#' Nature. Nov;438(7066):355–9. \doi{10.1038/nature04153}
 #'
 #' The original code for the \eqn{t_{20}} method is from ongoing work
 #' originating from \url{https://github.com/dcadam/kt} and:
 #'
-#' Adam D, Gostic K, Tsang T, Wu P, Lim WW, Yeung A, et al.
-#' Time-varying transmission heterogeneity of SARS and COVID-19 in Hong Kong.
-#' 2022. \doi{10.21203/rs.3.rs-1407962/v1}
+#' Adam, D., Gostic, K., Tsang, T., Wu, P., Lim, W. W., Yeung, A., Wong, J.,
+#' Lau, E., Du, Z., Chen, D., Ho, L.-M., Martín-Sánchez, M., Cauchemez, S.,
+#' Cobey, S., Leung, G., & Cowling, B. (2022) Time-varying transmission
+#' heterogeneity of SARS and COVID-19 in Hong Kong.
+#' \doi{10.21203/rs.3.rs-1407962/v1}
 #'
 #' @examples
 #' # example of single values of R and k

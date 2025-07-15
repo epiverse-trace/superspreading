@@ -61,7 +61,7 @@ Superspreading and the effect of individual variation on disease emergence.
 Nature, 438(7066), 355-359. \doi{10.1038/nature04153}
 
 Kucharski, A. J., Russell, T. W., Diamond, C., Liu, Y., Edmunds, J.,
-Funk, S. & Eggo, R. M. (2020). Early dynamics of transmission and control
+Funk, S. & Eggo, R. M. (2020) Early dynamics of transmission and control
 of COVID-19: a mathematical modelling study. The Lancet Infectious Diseases,
 20(5), 553-558. \doi{10.1016/S1473-3099(20)30144-4}
 }
