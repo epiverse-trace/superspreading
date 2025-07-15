@@ -112,9 +112,9 @@ These include calculating the probability an outbreak becomes an
 epidemic (<code><a href="../reference/probability_epidemic.html">probability_epidemic()</a></code>), or conversely goes
 extinct (<code><a href="../reference/probability_extinct.html">probability_extinct()</a></code>), the probability an
 outbreak can be contained (<code><a href="../reference/probability_contain.html">probability_contain()</a></code>), the
-proportion of cases in cluster of a given size
-(<code><a href="../reference/proportion_cluster_size.html">proportion_cluster_size()</a></code>), and the proportion of cases
-that cause a proportion of transmission
+probability of a pathogen evolving and emerging, the proportion of cases
+in cluster of a given size (<code><a href="../reference/proportion_cluster_size.html">proportion_cluster_size()</a></code>), and
+the proportion of cases that cause a proportion of transmission
 (<code><a href="../reference/proportion_transmission.html">proportion_transmission()</a></code>).</p>
 <p>The other aspect of the package is to provide probability density
 functions and cumulative distribution functions to compute the
@@ -176,7 +176,12 @@ function will be extracted, if these are not available within the
 <code>&lt;epiparameter&gt;</code> object the function returns an
 informative error. The <code>offspring_dist</code> argument is after
 <code>...</code> to ensure users specify the argument in full and not
-accidentally provide data to this argument.</p></li>
+accidentally provide data to this argument. The exception is
+<code><a href="../reference/probability_emergence.html">probability_emergence()</a></code> which does not have an
+<code>offspring_dist</code> argument and thus no interoperability with
+{epiparameter} due to the function using two reproduction numbers so
+handling multiple <code>&lt;epiparameter&gt;</code> objects was judged
+to add too much complexity for the benefit.</p></li>
 <li><p>Internal functions have a dot (<code>.</code>) prefix, exported
 functions do not.</p></li>
 <li><p>Several functions use constants that are internally defined
@@ -199,17 +204,20 @@ are:</p>
 <ul>
 <li>{stats}</li>
 <li><a href="https://CRAN.R-project.org/package=checkmate" class="external-link">{checkmate}</a></li>
+<li><a href="https://CRAN.R-project.org/package=rlang" class="external-link">{rlang}</a></li>
 </ul>
 <p>{stats} is distributed with the R language so is viewed as a
 lightweight dependency, that should already be installed on a user’s
 machine if they have R. {checkmate} is an input checking package widely
-used across Epiverse-TRACE packages.</p>
-<p>Suggested dependencies (not including package documentation ({knitr},
-{rmarkdown}), testing ({spelling} and {testthat}), and plotting
-({ggplot2})) are: <a href="https://github.com/epiverse-trace/epiparameter" class="external-link">{epiparameter}</a>,
-used to easily access epidemiological parameters from the package’s
-library, and <a href="https://CRAN.R-project.org/package=fitdistrplus" class="external-link">{fitdistrplus}</a>,
-used for model fitting methods.</p>
+used across Epiverse-TRACE packages. {rlang} is used to accept <a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic dots</a>
+in various {superspreading} functions.</p>
+<p>Suggested dependencies are used for package documentation, including
+building vignettes (<a href="https://CRAN.R-project.org/package=knitr" class="external-link">{knitr}</a>, <a href="https://CRAN.R-project.org/package=rmarkdown" class="external-link">{rmarkdown}</a>),
+data wrangling (<a href="https://CRAN.R-project.org/package=dplyr" class="external-link">{dplyr}</a>, <a href="https://CRAN.R-project.org/package=purrr" class="external-link">{purrr}</a>), plotting
+(<a href="https://CRAN.R-project.org/package=ggplot2" class="external-link">{ggplot2}</a>, <a href="https://CRAN.R-project.org/package=scales" class="external-link">{scales}</a>, <a href="https://CRAN.R-project.org/package=ggtext" class="external-link">{ggtext}</a>), loading
+epidemiological parameters from <a href="https://CRAN.R-project.org/package=epiparameter" class="external-link">{epiparameter}</a>,
+and model fitting with <a href="https://CRAN.R-project.org/package=fitdistrplus" class="external-link">{fitdistrplus}</a>.
+There are also suggested dependencies for testing and spell checking (<a href="https://CRAN.R-project.org/package=testthat" class="external-link">{testthat}</a>, <a href="https://CRAN.R-project.org/package=spelling" class="external-link">{spelling}</a>).</p>
 </div>
 <div class="section level2">
 <h2 id="contribute">Contribute<a class="anchor" aria-label="anchor" href="#contribute"></a>

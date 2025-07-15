@@ -158,10 +158,10 @@ effective reproduction number at a given point in time
 (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>R</mi><mi>t</mi></msub><annotation encoding="application/x-tex">R_t</annotation></semantics></math>,
 representing the extent of transmission at time
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>).
-Either can be input into the functions provided by {superspreading}</p>
+Either can be input into the functions provided by {superspreading}.</p>
 </div>
 <p>The <code><a href="../reference/probability_epidemic.html">probability_epidemic()</a></code> function in {superspreading}
-can calculate this probability.
+can calculate the probability of sustained transmission.
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
 is the dispersion parameter of a negative binomial distribution and
 controls the variability of individual-level transmission.</p>
@@ -176,7 +176,7 @@ controls the variability of individual-level transmission.</p>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
 values above one represent low heterogeneity (in the case
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>→</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">k \rightarrow \infty</annotation></semantics></math>
-it is a poisson distribution), and as
+it is a Poisson distribution), and as
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
 decreases, heterogeneity increases. When
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
@@ -203,9 +203,8 @@ remains the same.</p>
 less than or equal to one will have zero probability of causing a
 sustained epidemic.</p>
 <p>Finally, the probability that a new infection will cause a large
-epidemic is influenced by the number of initial infections seeding the
-outbreak. We define <code>a</code> to be this number of initial
-infections.</p>
+epidemic is influenced by the number of initial infections
+(<code>num_init_infect</code>) seeding the outbreak.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/probability_epidemic.html">probability_epidemic</a></span><span class="op">(</span>R <span class="op">=</span> <span class="fl">1.5</span>, k <span class="op">=</span> <span class="fl">1</span>, num_init_infect <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.3333333</span></span>
@@ -217,7 +216,7 @@ infections.</p>
 <div class="section level2">
 <h2 id="empirical-superspreading">Empirical superspreading<a class="anchor" aria-label="anchor" href="#empirical-superspreading"></a>
 </h2>
-<p>Given <code><a href="../reference/probability_epidemic.html">probability_epidemic()</a></code> it is possible to determine
+<p>Using <code><a href="../reference/probability_epidemic.html">probability_epidemic()</a></code> it is possible to determine
 the probability of an epidemic for diseases for which parameters of an
 offspring distribution have been estimated. An offspring distribution is
 simply the distribution of the number of secondary infections caused by
@@ -286,7 +285,13 @@ distribution of Ebola having a larger dispersion (dispersion
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
 = 5.1), compared to SARS, which has a relatively small dispersion
 (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
-= 0.16).</p>
+= 0.16), with relatively similar values of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+(Ebola
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo></mrow><annotation encoding="application/x-tex">R =</annotation></semantics></math>
+1.5, SARS
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo></mrow><annotation encoding="application/x-tex">R =</annotation></semantics></math>
+1.63).</p>
 </div>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>

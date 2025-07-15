@@ -127,7 +127,7 @@ and informing decision-makers for a variety of outbreak scenarios.</p>
 <p>Early in the COVID-19 epidemic, a number of studies including <span class="citation">Kucharski et al. (<a href="#ref-kucharskiEarlyDynamicsTransmission2020">2020</a>)</span>
 investigated whether data on SARS-CoV-2 incidence had evidence of
 superspreading events. These events are often estimated as some measure
-of overdispersion. This was in light of evidence that other corona virus
+of overdispersion. This was in light of evidence that other coronavirus
 outbreaks (Severe acute respiratory syndrome (SARS) and Middle East
 respiratory syndrome (MERS)) had superspreading events. The detection of
 variability in individual-transmission is important in understanding or
@@ -136,7 +136,7 @@ into a new location (e.g. country).</p>
 <p>First we set up the parameters to use for calculating the probability
 of an epidemic. In this case we are varying the heterogeneity of
 transmission (<code>k</code>) and number of initial infections
-(<code>a</code>).</p>
+(<code>num_init_infect</code>).</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epidemic_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fl">2.35</span>,</span>
@@ -170,7 +170,7 @@ combination. The results are combined with the the parameters.</p>
 <span><span class="va">epidemic_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">epidemic_params</span>, <span class="va">prob_epidemic</span><span class="op">)</span></span></code></pre></div>
 <p>To visualise the influence of transmission variation (<code>k</code>)
 we subset the results to only include those with a single initial
-infection seeding transmission (<code>a = 1</code>).</p>
+infection seeding transmission (<code>num_init_infect = 1</code>).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># subset data for a single initial infection</span></span>
 <span><span class="va">homogeneity</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">epidemic_params</span>, <span class="va">num_init_infect</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
@@ -218,6 +218,8 @@ decreases <span class="citation">(<a href="#ref-lloyd-smithSuperspreadingEffectI
 al. 2005</a>)</span>. So the probability of a large outbreak is smaller
 for smaller values of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>,
+for a given value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>,
 meaning that if COVID-19 is more similar to SARS than MERS it will be
 less likely to establish and cause an outbreak if introduced into a
 newly susceptible population.</p>
@@ -246,7 +248,7 @@ to an epidemic.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="epidemic_risk_files/figure-html/plot-introductions-1.png" alt="A scatter plot showing the relationship between the number of introductions of an infectious disease (x-axis, ranging from 0 to 10) and the probability of large outbreak (y-axis, ranging from 0 to 1). Each point estimate has vertical error bars showing confidence intervals. The plot shows a clear increasing trend: starting at 0 introductions with 0% probability of large outbreak, rising to 42% at 1 introduction, 66% at 2 introductions, 81% at 3 introductions, 89% at 4 introductions, 93% at 5 introductions, 96% at 6 introductions, and plateauing near 99% for 7-10 introductions. The confidence intervals are widest at intermediate values (1-5 introductions). The pattern demonstrates the more introduction increase the probability of a large outbreak but has minimal impact once the probability approaches 1." width="768"><p class="caption">
-The probability that an a number of introduction events will cause a
+The probability that a number of introduction events will cause a
 sustained outbreak (transmission chain). The number of disease
 introductions is plotted on the x-axis and probability of outbreak –
 calculated using <code><a href="../reference/probability_epidemic.html">probability_epidemic()</a></code> – is on the y-axis.
@@ -288,16 +290,18 @@ increased transmission variability on an epidemic establishing
 assume a known value of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
 in order to more clearly show the pattern.</p>
-<p>Applications that make it easy to explore this functionality and
+<p>These calculations enable us to understand epidemics and
+applications, such as Shiny apps, to explore this functionality and
 compare between existing parameter estimates of offspring distributions
-are also useful. An example of this is the <a href="https://cmmid.github.io/visualisations/new-outbreak-probability" class="external-link">Shiny
-app developed by the Centre for Mathematical Modelling of Infectious
-diseases</a> at the London School of Hygiene and Tropical Medicine, for
-comparing SARS-like and MERS-like scenarios, as well as random
-mixing.</p>
-<p>Conversely to the probability of an epidemics, the probability that
-an outbreak will go extinct (i.e. transmission will subside), can also
-be plotted for different values of
+are also useful. An example application called <a href="https://cmmid.github.io/visualisations/" class="external-link">Probability of a large
+2019-nCoV outbreak following introduction of cases</a>, that is no
+longer maintained, was developed by the Centre for Mathematical
+Modelling of Infectious diseases at the London School of Hygiene and
+Tropical Medicine, for comparing SARS-like and MERS-like scenarios, as
+well as random mixing during the COVID-19 pandemic.</p>
+<p>Conversely to the probability of an epidemic, the probability that an
+outbreak will go extinct (i.e. transmission will subside), can also be
+plotted for different values of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">extinction_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span></span>
@@ -372,15 +376,14 @@ intuitive understanding of transmission patterns can be tabulated. For
 example the proportion of transmission events in a given cluster size
 can be calculated using the {superspreading} function
 <code><a href="../reference/proportion_cluster_size.html">proportion_cluster_size()</a></code>.</p>
-<p>This calculates the proportion of new cases that originated within a
-transmission event of a given size. In other words, what proportion of
+<p>This calculates the proportion of new cases that originate within a
+transmission cluster of a given size. In other words, what proportion of
 all transmission events were part of secondary case clusters (i.e. from
 the same primary case) of at least, for example, five cases. This
 calculation is useful to inform backwards contact tracing efforts.</p>
-<p>In this example we look at clusters of at least five, ten and
-twenty-five secondary cases, at different numbers of initial infections
-and for two reproduction numbers to see how this affects cluster
-sizes.</p>
+<p>In this example we look at clusters of at least 5, 10 and 25
+secondary cases, at different numbers of initial infections and for two
+reproduction numbers to see how this affects cluster sizes.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># For R = 0.8</span></span>
 <span><span class="fu"><a href="../reference/proportion_cluster_size.html">proportion_cluster_size</a></span><span class="op">(</span></span>

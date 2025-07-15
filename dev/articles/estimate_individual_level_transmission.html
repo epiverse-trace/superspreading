@@ -125,8 +125,8 @@ transmission and select the best fitting model.</p>
 <h2 id="transmission-data">Transmission data<a class="anchor" aria-label="anchor" href="#transmission-data"></a>
 </h2>
 <p>For this example we use transmission chain data from <span class="citation">Faye et al. (<a href="#ref-fayeChainsTransmissionControl2015">2015</a>)</span> from the
-Ebola virus disease outbreak in West Africa, between the period from
-February to August 2014. Specifically, this data reconstructs the
+Ebola virus disease (EVD) outbreak in West Africa, between the period
+from February to August 2014. Specifically, this data reconstructs the
 pathway of Ebola transmission in Conakry, Guinea.</p>
 <p>This data has been used by <span class="citation">Althaus (<a href="#ref-althausEbolaSuperspreading2015">2015</a>)</span> to show that
 the Ebola outbreak in Conakry displayed signatures of overdispersion
@@ -215,8 +215,8 @@ negative binomial.</p>
 <p>AIC and BIC are model fitting metrics (information criterion) to
 determine the model that best fits the data while penalising model
 complexity to prevent overfitting and allows comparison of models with a
-different number of parameters. In this case the Poisson and Geometric
-models have a single parameter, whereas the Negative binomial has two
+different number of parameters. In this case the Poisson and geometric
+models have a single parameter, whereas the negative binomial has two
 parameters.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nbinom_fit</span><span class="op">$</span><span class="va">estimate</span></span>
@@ -354,7 +354,7 @@ data sets.</p>
 distribution. Hereafter we refer to it is the negative binomial.</p>
 </div>
 <p>R has the density functions and cumulative distribution functions for
-the poisson (<code><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">dpois()</a></code> and <code><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">ppois()</a></code>), geometric
+the Poisson (<code><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">dpois()</a></code> and <code><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">ppois()</a></code>), geometric
 (<code><a href="https://rdrr.io/r/stats/Geometric.html" class="external-link">dgeom()</a></code> and <code><a href="https://rdrr.io/r/stats/Geometric.html" class="external-link">pgeom()</a></code>) and negative binomial
 (<code><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">dnbinom()</a></code> and <code><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">pnbinom()</a></code>) distributions, but
 does not supply Poisson compound distributions.</p>
@@ -514,7 +514,7 @@ distributions.</p>
 <div class="figure">
 <img src="estimate_individual_level_transmission_files/figure-html/plot-dists-1.png" alt="A histogram showing the frequency distribution of the number of secondary cases (x-axis, ranging from 0 to 20) versus frequency (y-axis, ranging from 0 to 0.7). The distribution is heavily right-skewed with cyan coloured bars showing that the empirical data has 72% of cases produce zero secondary cases. Two fitted distribution probability mass function curves are overlaid: an orange line with points representing the Negative Binomial distribution, and a yellow line with points representing the Poisson-Weibull distribution. Both estimated curves closely follow the observed data pattern. The frequency drops sharply from 0 secondary cases (0.72 frequency) to 1 secondary case (0.11 frequency), then continues to decline for higher numbers of secondary cases. This pattern illustrates the characteristic overdispersion in infectious disease transmission where most individuals infect few or no others, while a small proportion become superspreaders." width="768"><p class="caption">
 Number of secondary cases from the empirical data (bar plot) and the
-density of the negative binomial (orange) and poisson-Weibull (pink)
+density of the negative binomial (orange) and poisson-Weibull (yellow)
 with the maximum likelihood estimates when fit to the empirical data
 (points and line).
 </p>
