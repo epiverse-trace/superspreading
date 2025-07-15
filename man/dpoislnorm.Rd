@@ -2,7 +2,7 @@
 % Please edit documentation in R/offspring_distributions.R
 \name{dpoislnorm}
 \alias{dpoislnorm}
-\title{Density of the poisson-lognormal compound distribution}
+\title{Density of the Poisson-lognormal compound distribution}
 \usage{
 dpoislnorm(x, meanlog, sdlog)
 }
@@ -15,11 +15,11 @@ dpoislnorm(x, meanlog, sdlog)
 the log scale.}
 }
 \value{
-A \code{numeric} vector of the density of the poisson-lognormal
+A \code{numeric} vector of the density of the Poisson-lognormal
 distribution.
 }
 \description{
-Density of the poisson-lognormal compound distribution
+Density of the Poisson-lognormal compound distribution
 }
 \details{
 The function is vectorised so a vector of quantiles can be input and the

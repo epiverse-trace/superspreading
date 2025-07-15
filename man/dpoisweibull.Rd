@@ -2,7 +2,7 @@
 % Please edit documentation in R/offspring_distributions.R
 \name{dpoisweibull}
 \alias{dpoisweibull}
-\title{Density of the poisson-Weibull compound distribution}
+\title{Density of the Poisson-Weibull compound distribution}
 \usage{
 dpoisweibull(x, shape, scale)
 }
@@ -14,11 +14,11 @@ dpoisweibull(x, shape, scale)
 \item{scale}{A \code{number} for the scale parameter of the distribution.}
 }
 \value{
-A \code{numeric} vector of the density of the poisson-Weibull
+A \code{numeric} vector of the density of the Poisson-Weibull
 distribution.
 }
 \description{
-Density of the poisson-Weibull compound distribution
+Density of the Poisson-Weibull compound distribution
 }
 \details{
 The function is vectorised so a vector of quantiles can be input and the

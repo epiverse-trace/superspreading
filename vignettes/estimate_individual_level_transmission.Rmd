@@ -43,7 +43,7 @@ library(ggplot2)
 
 ## Transmission data
 
-For this example we use transmission chain data from @fayeChainsTransmissionControl2015 from the Ebola virus disease outbreak in West Africa, between the period from February to August 2014. Specifically, this data reconstructs the pathway of Ebola transmission in Conakry, Guinea.
+For this example we use transmission chain data from @fayeChainsTransmissionControl2015 from the Ebola virus disease (EVD) outbreak in West Africa, between the period from February to August 2014. Specifically, this data reconstructs the pathway of Ebola transmission in Conakry, Guinea.
 
 This data has been used by @althausEbolaSuperspreading2015 to show that the Ebola outbreak in Conakry displayed signatures of overdispersion (i.e. superspreading events), and by @kucharskiEffectivenessRingVaccination2016 to determine the effectiveness of ring- and mass-vaccination campaigns for ongoing Ebola outbreaks.
 
@@ -90,7 +90,7 @@ The best performing model, for both AIC and BIC comparison, is the negative bino
 AIC and BIC are model fitting metrics (information criterion) to determine the model 
 that best fits the data while penalising model complexity to prevent overfitting and allows
 comparison of models with a different number of parameters. In this case the Poisson
-and Geometric models have a single parameter, whereas the Negative binomial has two
+and geometric models have a single parameter, whereas the negative binomial has two
 parameters.
 
 ```{r, nbinom-estim}
@@ -230,7 +230,7 @@ The Poisson-Gamma distribution is the same as the negative binomial distribution
 Hereafter we refer to it is the negative binomial.
 :::
 
-R has the density functions and cumulative distribution functions for the poisson 
+R has the density functions and cumulative distribution functions for the Poisson 
 (`dpois()` and `ppois()`), geometric (`dgeom()` and `pgeom()`) and negative binomial
 (`dnbinom()` and `pnbinom()`) distributions, but does not supply Poisson compound 
 distributions. 
