@@ -23,7 +23,7 @@ is often quantified as the population-level reproduction number ($R$). However,
 there may be individual-level heterogeneity in transmission that this metric does not capture. 
 
 In their landmark work, @lloyd-smithSuperspreadingEffectIndividual2005 showed
-that variation in individual-level disease transmission often exceed that of a poisson
+that variation in individual-level disease transmission often exceed that of a Poisson
 model and in some cases that of a geometric model. They fit a negative binomial
 distribution to show that the distribution of secondary cases displayed overdispersion,
 in other words, the variance exceeded the mean. In the negative binomial distribution
@@ -304,7 +304,7 @@ dist_compare_data <- data.frame(
 )
 ```
 
-```{r, plot-dists, fig.cap="Number of secondary cases from the empirical data (bar plot) and the density of the negative binomial (orange) and poisson-Weibull (yellow) with the maximum likelihood estimates when fit to the empirical data (points and line)."}
+```{r, plot-dists, fig.cap="Number of secondary cases from the empirical data (bar plot) and the density of the negative binomial (orange) and Poisson-Weibull (yellow) with the maximum likelihood estimates when fit to the empirical data (points and line)."}
 #| fig.alt: >
 #|   A histogram showing the frequency distribution of the number of secondary
 #|   cases (x-axis, ranging from 0 to 20) versus frequency (y-axis, ranging
