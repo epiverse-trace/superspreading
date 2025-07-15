@@ -2,7 +2,7 @@
 
 The fourth minor release of the _superspreading_ package contains new functionality, a new vignette and various minor improvements to documentation.
 
-With this release the development status of the package has been updated from _experiemental_ to _stable_. 
+With this release the development status of the package has been updated from _experimental_ to _stable_. 
 
 ## New features
 

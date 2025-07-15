@@ -31,6 +31,7 @@ Endo
 epiparameter
 Epiverse
 EVD
+experimental
 Faes
 Faye
 fitdistrplus
@@ -58,6 +59,7 @@ Koen
 Kremer
 Laure
 lfloor
+lifecycle
 Lifecycle
 Lim
 linetype
@@ -105,6 +107,7 @@ sim
 SJ
 Soropogui
 testthat
+Tidyverse
 Torneri
 Tsang
 u
@@ -120,4 +123,5 @@ Yeung
 yintercept
 ymax
 ymin
+Zenodo
 zika
