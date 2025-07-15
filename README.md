@@ -183,7 +183,7 @@ inevitably cease assuming transmission dynamics do not change).
 More details on how to use `{superspreading}` can be found in the
 [online documentation as package
 vignettes](https://epiverse-trace.github.io/superspreading/), under
-“Articles”.
+[Articles](https://epiverse-trace.github.io/superspreading/articles/).
 
 ### Visualisation and plotting functionality
 
@@ -191,9 +191,7 @@ vignettes](https://epiverse-trace.github.io/superspreading/), under
 provide example code chunks in the package’s vignettes that can be used
 as a templates upon which data visualisations can be modified. We
 recommend users copy and edit the examples for their own purposes. (This
-is permitted under the package’s MIT license). By default code chunks
-for plotting are folded, in order to unfold them and see the code simply
-click the code button at the top left of the plot.
+is permitted under the package’s MIT license).
 
 ## Help
 
@@ -208,7 +206,7 @@ guide](https://github.com/epiverse-trace/.github/blob/main/CONTRIBUTING.md).
 
 ## Code of Conduct
 
-Please note that the {superspreading} project is released with a
+Please note that the `{superspreading}` project is released with a
 [Contributor Code of
 Conduct](https://github.com/epiverse-trace/.github/blob/main/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
