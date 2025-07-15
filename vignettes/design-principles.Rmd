@@ -20,7 +20,7 @@ This document is primarily intended to be read by those interested in understand
 
 ## Scope
 
-The {superspreading} package aims to provide a range of summary metrics to characterise individual-level variation in disease transmission and its impact on the growth or decline of an epidemic. These include calculating the probability an outbreak becomes an epidemic (`probability_epidemic()`), or conversely goes extinct (`probability_extinct()`), the probability an outbreak can be contained (`probability_contain()`), the proportion of cases in cluster of a given size (`proportion_cluster_size()`), and the proportion of cases that cause a proportion of transmission (`proportion_transmission()`).
+The {superspreading} package aims to provide a range of summary metrics to characterise individual-level variation in disease transmission and its impact on the growth or decline of an epidemic. These include calculating the probability an outbreak becomes an epidemic (`probability_epidemic()`), or conversely goes extinct (`probability_extinct()`), the probability an outbreak can be contained (`probability_contain()`), the probability of a pathogen evolving and emerging, the proportion of cases in cluster of a given size (`proportion_cluster_size()`), and the proportion of cases that cause a proportion of transmission (`proportion_transmission()`).
 
 The other aspect of the package is to provide probability density functions and cumulative distribution functions to compute the likelihood for distribution models to estimate heterogeneity in individual-level disease transmission that are not available in R (i.e. base R). At present we include two models: Poisson-lognormal (`dpoislnorm()` & `ppoislnorm()`) and Poisson-Weibull (`dpoisweibull()` & `ppoisweibull()`) distributions.
 
@@ -38,7 +38,7 @@ The distribution functions return a vector of `numeric`s of equal length to the 
 
 - The distribution functions are vectorised (i.e. wrapped in `Vectorize()`). This enables them to be used identically to base R distribution functions.
 
-- Native interoperability with `<epiparameter>` objects, from the {epiparameter} package is enabled for `probability_*()` and `proportion_*()` via the `offspring_dist` argument. This allows user to pass in a single object and the parameters required by the {superspreading} function will be extracted, if these are not available within the `<epiparameter>` object the function returns an informative error. The `offspring_dist` argument is after `...` to ensure users specify the argument in full and not accidentally provide data to this argument.
+- Native interoperability with `<epiparameter>` objects, from the {epiparameter} package is enabled for `probability_*()` and `proportion_*()` via the `offspring_dist` argument. This allows user to pass in a single object and the parameters required by the {superspreading} function will be extracted, if these are not available within the `<epiparameter>` object the function returns an informative error. The `offspring_dist` argument is after `...` to ensure users specify the argument in full and not accidentally provide data to this argument. The exception is `probability_emergence()` which does not have an `offspring_dist` argument and thus no interoperability with {epiparameter} due to the function using two reproduction numbers so handling multiple `<epiparameter>` objects was judged to add too much complexity for the benefit.
 
 - Internal functions have a dot (`.`) prefix, exported functions do not.
 
@@ -50,10 +50,11 @@ The aim is to restrict the number of dependencies to a minimal required set for 
 
 * {stats}
 * [{checkmate}](https://CRAN.R-project.org/package=checkmate)
+* [{rlang}](https://CRAN.R-project.org/package=rlang)
 
-{stats} is distributed with the R language so is viewed as a lightweight dependency, that should already be installed on a user's machine if they have R. {checkmate} is an input checking package widely used across Epiverse-TRACE packages.
+{stats} is distributed with the R language so is viewed as a lightweight dependency, that should already be installed on a user's machine if they have R. {checkmate} is an input checking package widely used across Epiverse-TRACE packages. {rlang} is used to accept [dynamic dots](https://rlang.r-lib.org/reference/dyn-dots.html) in various {superspreading} functions. 
 
-Suggested dependencies (not including package documentation ({knitr}, {rmarkdown}), testing ({spelling} and {testthat}), and plotting ({ggplot2})) are: [{epiparameter}](https://github.com/epiverse-trace/epiparameter), used to easily access epidemiological parameters from the package's library, and [{fitdistrplus}](https://CRAN.R-project.org/package=fitdistrplus), used for model fitting methods.
+Suggested dependencies are used for package documentation, including building vignettes ([{knitr}]( https://CRAN.R-project.org/package=knitr), [{rmarkdown}](https://CRAN.R-project.org/package=rmarkdown)), data wrangling ([{dplyr}](https://CRAN.R-project.org/package=dplyr), [{purrr}](https://CRAN.R-project.org/package=purrr)), plotting ([{ggplot2}](https://CRAN.R-project.org/package=ggplot2), [{scales}](https://CRAN.R-project.org/package=scales), [{ggtext}](https://CRAN.R-project.org/package=ggtext)), loading epidemiological parameters from [{epiparameter}](https://CRAN.R-project.org/package=epiparameter), and model fitting with [{fitdistrplus}](https://CRAN.R-project.org/package=fitdistrplus). There are also suggested dependencies for testing and spell checking ([{testthat}](https://CRAN.R-project.org/package=testthat), [{spelling}](https://CRAN.R-project.org/package=spelling)).
 
 ## Contribute
 
