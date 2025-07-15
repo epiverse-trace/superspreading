@@ -23,6 +23,7 @@
 #'   (i.e. fully evolved).
 #' @param mutation_rate A `number` specifying the mutation rate (\eqn{\mu}),
 #'   must be between zero and one.
+#' @inheritParams probability_epidemic
 #' @param tol A `number` for the tolerance of the numerical convergence.
 #'   Default is `1e-10`.
 #' @param max_iter A `number` for the maximum number of iterations for the
@@ -40,16 +41,23 @@
 #' Nature 426, 658–661. \doi{10.1038/nature02104}
 #'
 #' @examples
-#' probability_emergence(R_wild = 0.5, R_mutant = 1.5, mutation_rate = 0.5)
+#' probability_emergence(
+#'   R_wild = 0.5,
+#'   R_mutant = 1.5,
+#'   mutation_rate = 0.5,
+#'   num_init_infect = 1
+#' )
 probability_emergence <- function(R_wild,
                                   R_mutant,
                                   mutation_rate = 0,
+                                  num_init_infect,
                                   tol = 1e-10,
                                   max_iter = 1000) {
 
   checkmate::assert_number(R_wild)
   checkmate::assert_numeric(R_mutant)
   checkmate::assert_number(mutation_rate, lower = 0, upper = 1)
+  checkmate::assert_count(num_init_infect)
   checkmate::assert_number(tol, lower = 0)
   checkmate::assert_integerish(max_iter, lower = 0)
 
@@ -90,7 +98,7 @@ probability_emergence <- function(R_wild,
   }
 
   # probability of emergence from probability of extinction of wild type
-  prob_emerge <- 1 - extinct_prob[1]
+  prob_emerge <- 1 - extinct_prob[1]^num_init_infect
 
   return(prob_emerge)
 }

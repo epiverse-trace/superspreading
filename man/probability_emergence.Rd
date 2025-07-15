@@ -9,6 +9,7 @@ probability_emergence(
   R_wild,
   R_mutant,
   mutation_rate = 0,
+  num_init_infect,
   tol = 1e-10,
   max_iter = 1000
 )
@@ -26,6 +27,10 @@ and the last element is the reproduction number for the \eqn{m} mutant
 
 \item{mutation_rate}{A \code{number} specifying the mutation rate (\eqn{\mu}),
 must be between zero and one.}
+
+\item{num_init_infect}{An \code{integer} (or at least
+\href{https://rlang.r-lib.org/reference/is_integerish.html}{"integerish"} if
+stored as double) specifying the number of initial infections.}
 
 \item{tol}{A \code{number} for the tolerance of the numerical convergence.
 Default is \code{1e-10}.}
@@ -50,7 +55,12 @@ Following Antia et al. (2003), we assume that the mutation rate for all
 variants is the same.
 }
 \examples{
-probability_emergence(R_wild = 0.5, R_mutant = 1.5, mutation_rate = 0.5)
+probability_emergence(
+  R_wild = 0.5,
+  R_mutant = 1.5,
+  mutation_rate = 0.5,
+  num_init_infect = 1
+)
 }
 \references{
 Antia, R., Regoes, R., Koella, J. & Bergstrom, C. T. (2003).
