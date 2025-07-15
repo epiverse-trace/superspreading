@@ -146,7 +146,8 @@ we test with mutant reproduction numbers of 1.2, 1.5, 1,000.</p>
 <span>    <span class="fu"><a href="../reference/probability_emergence.html">probability_emergence</a></span><span class="op">(</span></span>
 <span>      R_wild <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"R_wild"</span><span class="op">]</span><span class="op">]</span>,</span>
 <span>      R_mutant <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"R_mutant"</span><span class="op">]</span><span class="op">]</span>,</span>
-<span>      mutation_rate <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"mutation_rate"</span><span class="op">]</span><span class="op">]</span></span>
+<span>      mutation_rate <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"mutation_rate"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>      num_init_infect <span class="op">=</span> <span class="fl">1</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span>
@@ -219,7 +220,8 @@ and the fully-evolved strain as <span class="citation">Antia et al. (<a href="#r
 <span>    <span class="fu"><a href="../reference/probability_emergence.html">probability_emergence</a></span><span class="op">(</span></span>
 <span>      R_wild <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"R_wild"</span><span class="op">]</span><span class="op">]</span>,</span>
 <span>      R_mutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="va">x</span><span class="op">[[</span><span class="st">"R_wild"</span><span class="op">]</span><span class="op">]</span>, <span class="va">x</span><span class="op">[[</span><span class="st">"num_mutants"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, <span class="va">x</span><span class="op">[[</span><span class="st">"R_mutant"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>      mutation_rate <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"mutation_rate"</span><span class="op">]</span><span class="op">]</span></span>
+<span>      mutation_rate <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"mutation_rate"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>      num_init_infect <span class="op">=</span> <span class="fl">1</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span>
@@ -252,6 +254,67 @@ and the fully-evolved strain as <span class="citation">Antia et al. (<a href="#r
 <span><span class="co">#&gt; Warning in scale_y_continuous(name = "Probability of emergence", transform =</span></span>
 <span><span class="co">#&gt; "log", : <span style="color: #00BB00;">log-2.718282</span> transformation introduced infinite values.</span></span></code></pre></div>
 <p><img src="emergence_files/figure-html/plot-prob-emerge-multi-type-1.png" alt="Line plot showing the probability of emergence of a pathogen as a function of the basic reproduction number (R0) of the introduced pathogen, with varying numbers of intermediate mutants before reaching the fully-evolved mutant. The x-axis represents the R0 of the introduced pathogen (ranging from 0 to 1.2), and the y-axis shows the probability of emergence on a logarithmic scale from 1e-05 to 1. Lines represent different numbers of intermediate mutants: red for 0, blue for 1, green for 2, purple for 3, and orange for 4. As the number of required intermediate mutants increases, the probability of emergence decreases across all R0 values. All curves rise with increasing R0, and converge at higher R0 values near 1.2." width="768"></p>
+<p>Thus far we’ve only introduced a single infection, however, just as
+with <code><a href="../reference/probability_epidemic.html">probability_epidemic()</a></code> and
+<code><a href="../reference/probability_extinct.html">probability_extinct()</a></code>, we extend the method of <span class="citation">Antia et al. (<a href="#ref-antiaRoleEvolutionEmergence2003">2003</a>)</span> and
+introduce multiple initial human infections using the
+<code>num_init_infect</code> argument.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">R_wild</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1.2</span>, by <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="va">R_mutant</span> <span class="op">&lt;-</span> <span class="fl">1.5</span></span>
+<span><span class="va">mutation_rate</span> <span class="op">&lt;-</span> <span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="fl">1</span></span>
+<span><span class="va">num_mutants</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">num_init_infect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">9</span>, by <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span></span>
+<span>  R_wild <span class="op">=</span> <span class="va">R_wild</span>,</span>
+<span>  R_mutant <span class="op">=</span> <span class="va">R_mutant</span>,</span>
+<span>  mutation_rate <span class="op">=</span> <span class="va">mutation_rate</span>,</span>
+<span>  num_mutants <span class="op">=</span> <span class="va">num_mutants</span>,</span>
+<span>  num_init_infect <span class="op">=</span> <span class="va">num_init_infect</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">prob_emerge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span></span>
+<span>  <span class="va">params</span>,</span>
+<span>  MARGIN <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="../reference/probability_emergence.html">probability_emergence</a></span><span class="op">(</span></span>
+<span>      R_wild <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"R_wild"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>      R_mutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="va">x</span><span class="op">[[</span><span class="st">"R_wild"</span><span class="op">]</span><span class="op">]</span>, <span class="va">x</span><span class="op">[[</span><span class="st">"num_mutants"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, <span class="va">x</span><span class="op">[[</span><span class="st">"R_mutant"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>      mutation_rate <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"mutation_rate"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>      num_init_infect <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="st">"num_init_infect"</span><span class="op">]</span><span class="op">]</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">params</span>, prob_emerge <span class="op">=</span> <span class="va">prob_emerge</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">res</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span></span>
+<span>    mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
+<span>      x <span class="op">=</span> <span class="va">R_wild</span>,</span>
+<span>      y <span class="op">=</span> <span class="va">prob_emerge</span>,</span>
+<span>      colour <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">num_init_infect</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span></span>
+<span>    name <span class="op">=</span> <span class="st">"Probability of emergence"</span>,</span>
+<span>    transform <span class="op">=</span> <span class="st">"log"</span>,</span>
+<span>    breaks <span class="op">=</span> <span class="fu"><a href="https://scales.r-lib.org/reference/breaks_log.html" class="external-link">log_breaks</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>,</span>
+<span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_colour_brewer</a></span><span class="op">(</span></span>
+<span>    name <span class="op">=</span> <span class="st">"Number of introductions"</span>,</span>
+<span>    palette <span class="op">=</span> <span class="st">"Set1"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span></span>
+<span>    name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">R</span><span class="op">[</span><span class="fl">0</span><span class="op">]</span> <span class="op">~</span> <span class="va">of</span> <span class="op">~</span> <span class="va">introduced</span> <span class="op">~</span> <span class="va">pathogen</span><span class="op">)</span>,</span>
+<span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1.2</span><span class="op">)</span>,</span>
+<span>    n.breaks <span class="op">=</span> <span class="fl">7</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in scale_y_continuous(name = "Probability of emergence", transform =</span></span>
+<span><span class="co">#&gt; "log", : <span style="color: #00BB00;">log-2.718282</span> transformation introduced infinite values.</span></span></code></pre></div>
+<p><img src="emergence_files/figure-html/plot-prob-emerge-multi-init-infect-1.png" alt="Line graph showing the relationship between the basic reproduction number (R0) of an introduced pathogen and the probability of emergence, under varying numbers of introductions. The x-axis represents R0 values from 0 to 1.2, and the y-axis (logarithmic scale) represents the probability of emergence, from 1e-05 to 1. Five curves are shown for different numbers of introductions: 1 (red), 3 (blue), 5 (green), 7 (purple), and 9 (orange). All curves show increasing probability of emergence with higher R0, and higher numbers of introductions consistently increase emergence probability. Increasing the number of initial infections has diminishing increases on the probability of emergence with greater number of introductions." width="768"></p>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-antiaRoleEvolutionEmergence2003" class="csl-entry">
 Antia, Rustom, Roland R. Regoes, Jacob C. Koella, and Carl T. Bergstrom.
