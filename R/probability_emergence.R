@@ -49,7 +49,7 @@
 #' )
 probability_emergence <- function(R_wild,
                                   R_mutant,
-                                  mutation_rate = 0,
+                                  mutation_rate,
                                   num_init_infect,
                                   tol = 1e-10,
                                   max_iter = 1000) {
