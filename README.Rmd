@@ -145,7 +145,7 @@ dynamics do not change).
 
 ## Package vignettes
 
-More details on how to use `{superspreading}` can be found in the [online documentation as package vignettes](https://epiverse-trace.github.io/superspreading/), under "Articles".
+More details on how to use `{superspreading}` can be found in the [online documentation as package vignettes](https://epiverse-trace.github.io/superspreading/), under [Articles](https://epiverse-trace.github.io/superspreading/articles/).
 
 ### Visualisation and plotting functionality
 
