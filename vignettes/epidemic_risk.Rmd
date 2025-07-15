@@ -227,7 +227,7 @@ ggplot(data = epidemic_params) +
 In the above plot we drop the uncertainty around each point and assume a known value
 of $R$ in order to more clearly show the pattern.
 
-These calculations enable us to understand epidemics and applications, such as Shiny apps, to explore this functionality and compare between existing parameter estimates of offspring distributions are also useful. An example application called [Probability of a large 2019-nCoV outbreak following introduction of cases](https://cmmid.github.io/visualisations/), that is no longer maintained, was developed by the Centre for Mathematical Modelling of Infectious diseases at the London School of Hygiene and Tropical Medicine, for comparing SARS-like and MERS-like scenarios, as well as random mixing during the COVID-19 pandemic.
+These calculations enable us to understand epidemics and applications, such as Shiny apps, to explore this functionality and compare between existing parameter estimates of offspring distributions are also useful. An example application called [Probability of a large 2019-nCoV outbreak following introduction of cases](https://cmmid.github.io/visualisations), that is no longer maintained, was developed by the Centre for Mathematical Modelling of Infectious diseases at the London School of Hygiene and Tropical Medicine, for comparing SARS-like and MERS-like scenarios, as well as random mixing during the COVID-19 pandemic.
 
 Conversely to the probability of an epidemic, the probability that an outbreak will 
 go extinct (i.e. transmission will subside), can also be plotted for different values of 
