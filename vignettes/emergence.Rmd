@@ -48,7 +48,8 @@ prob_emerge <- apply(
     probability_emergence(
       R_wild = x[["R_wild"]],
       R_mutant = x[["R_mutant"]],
-      mutation_rate = x[["mutation_rate"]]
+      mutation_rate = x[["mutation_rate"]],
+      num_init_infect = 1
     )
   }
 )
@@ -122,7 +123,8 @@ prob_emerge <- apply(
     probability_emergence(
       R_wild = x[["R_wild"]],
       R_mutant = c(rep(x[["R_wild"]], x[["num_mutants"]]), x[["R_mutant"]]),
-      mutation_rate = x[["mutation_rate"]]
+      mutation_rate = x[["mutation_rate"]],
+      num_init_infect = 1
     )
   }
 )
@@ -158,6 +160,77 @@ ggplot(data = res) +
   ) +
   scale_colour_brewer(
     name = "Number of \nintermediate mutants",
+    palette = "Set1"
+  ) +
+  scale_x_continuous(
+    name = expression(R[0] ~ of ~ introduced ~ pathogen),
+    limits = c(0, 1.2),
+    n.breaks = 7
+  ) +
+  theme_bw()
+```
+
+Thus far we've only introduced a single infection, however, just as with `probability_epidemic()` and `probability_extinct()`, we extend the method of @antiaRoleEvolutionEmergence2003 and introduce multiple initial human infections using the `num_init_infect` argument. 
+
+```{r calc-prob-emerge-multi-init-infect}
+R_wild <- seq(0, 1.2, by = 0.01)
+R_mutant <- 1.5
+mutation_rate <- 10^-1
+num_mutants <- 1
+num_init_infect <- seq(1, 9, by = 2)
+
+params <- expand.grid(
+  R_wild = R_wild,
+  R_mutant = R_mutant,
+  mutation_rate = mutation_rate,
+  num_mutants = num_mutants,
+  num_init_infect = num_init_infect
+)
+
+prob_emerge <- apply(
+  params,
+  MARGIN = 1,
+  FUN = function(x) {
+    probability_emergence(
+      R_wild = x[["R_wild"]],
+      R_mutant = c(rep(x[["R_wild"]], x[["num_mutants"]]), x[["R_mutant"]]),
+      mutation_rate = x[["mutation_rate"]],
+      num_init_infect = x[["num_init_infect"]]
+    )
+  }
+)
+res <- cbind(params, prob_emerge = prob_emerge)
+```
+
+```{r plot-prob-emerge-multi-init-infect}
+#| fig.alt: >
+#|   Line graph showing the relationship between the basic reproduction number
+#|   (R0) of an introduced pathogen and the probability of emergence, under
+#|   varying numbers of introductions. The x-axis represents R0 values from 0
+#|   to 1.2, and the y-axis (logarithmic scale) represents the probability of
+#|   emergence, from 1e-05 to 1. Five curves are shown for different numbers
+#|   of introductions: 1 (red), 3 (blue), 5 (green), 7 (purple), and 9
+#|   (orange). All curves show increasing probability of emergence with
+#|   higher R0, and higher numbers of introductions consistently increase
+#|   emergence probability. Increasing the number of initial infections has 
+#|   diminishing increases on the probability of emergence with greater number
+#|   of introductions.
+ggplot(data = res) +
+  geom_line(
+    mapping = aes(
+      x = R_wild,
+      y = prob_emerge,
+      colour = as.factor(num_init_infect)
+    )
+  ) +
+  scale_y_continuous(
+    name = "Probability of emergence",
+    transform = "log",
+    breaks = log_breaks(n = 6),
+    limits = c(10^-5, 1)
+  ) +
+  scale_colour_brewer(
+    name = "Number of introductions",
     palette = "Set1"
   ) +
   scale_x_continuous(
