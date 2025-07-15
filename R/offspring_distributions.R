@@ -1,4 +1,4 @@
-#' Density of the poisson-lognormal compound distribution
+#' Density of the Poisson-lognormal compound distribution
 #'
 #' @details
 #' The function is vectorised so a vector of quantiles can be input and the
@@ -9,7 +9,7 @@
 #' @param sdlog A `number` for the standard deviation of the distribution on
 #'   the log scale.
 #'
-#' @return A `numeric` vector of the density of the poisson-lognormal
+#' @return A `numeric` vector of the density of the Poisson-lognormal
 #'   distribution.
 #' @export
 #'
@@ -34,7 +34,7 @@ dpoislnorm <- Vectorize(function(x, meanlog, sdlog) {
 })
 
 
-#' Cumulative distribution function of the poisson-lognormal compound
+#' Cumulative distribution function of the Poisson-lognormal compound
 #' distribution
 #'
 #' @details
@@ -63,7 +63,7 @@ ppoislnorm <- Vectorize(function(q, meanlog, sdlog) {
   sum(dpoislnorm(x = seq(0, q, by = 1), meanlog = meanlog, sdlog = sdlog))
 })
 
-#' Density of the poisson-Weibull compound distribution
+#' Density of the Poisson-Weibull compound distribution
 #'
 #' @details
 #' The function is vectorised so a vector of quantiles can be input and the
@@ -73,7 +73,7 @@ ppoislnorm <- Vectorize(function(q, meanlog, sdlog) {
 #' @param shape A `number` for the shape parameter of the distribution.
 #' @param scale A `number` for the scale parameter of the distribution.
 #'
-#' @return A `numeric` vector of the density of the poisson-Weibull
+#' @return A `numeric` vector of the density of the Poisson-Weibull
 #'   distribution.
 #' @export
 #'
@@ -100,7 +100,7 @@ dpoisweibull <- Vectorize(function(x, shape, scale) {
   out
 })
 
-#' Cumulative distribution function of the poisson-Weibull compound
+#' Cumulative distribution function of the Poisson-Weibull compound
 #' distribution
 #'
 #' @details

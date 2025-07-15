@@ -2,7 +2,7 @@
 % Please edit documentation in R/offspring_distributions.R
 \name{ppoislnorm}
 \alias{ppoislnorm}
-\title{Cumulative distribution function of the poisson-lognormal compound
+\title{Cumulative distribution function of the Poisson-lognormal compound
 distribution}
 \usage{
 ppoislnorm(q, meanlog, sdlog)
@@ -19,7 +19,7 @@ the log scale.}
 A \code{numeric} vector of the distribution function.
 }
 \description{
-Cumulative distribution function of the poisson-lognormal compound
+Cumulative distribution function of the Poisson-lognormal compound
 distribution
 }
 \details{

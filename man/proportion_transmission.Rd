@@ -89,7 +89,7 @@ probability distribution with population mean \eqn{R_0} and dispersion
 parameter \eqn{k}, which encodes all variation in infectious histories of
 individuals, including properties of the host and pathogen and environmental
 circumstances." The value of \eqn{k} corresponds to the shape parameters of
-the gamma distribution which encodes the variation in the gamma-poisson
+the gamma distribution which encodes the variation in the gamma-Poisson
 mixture a.k.a. the negative binomial.
 
 For \code{method = t_20}, we define the upper proportion of infectiousness,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/offspring_distributions.R
 \name{ppoisweibull}
 \alias{ppoisweibull}
-\title{Cumulative distribution function of the poisson-Weibull compound
+\title{Cumulative distribution function of the Poisson-Weibull compound
 distribution}
 \usage{
 ppoisweibull(q, shape, scale)
@@ -18,7 +18,7 @@ ppoisweibull(q, shape, scale)
 A \code{numeric} vector of the distribution function.
 }
 \description{
-Cumulative distribution function of the poisson-Weibull compound
+Cumulative distribution function of the Poisson-Weibull compound
 distribution
 }
 \details{
