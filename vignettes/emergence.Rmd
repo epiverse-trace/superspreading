@@ -212,7 +212,7 @@ res <- cbind(params, prob_emerge = prob_emerge)
 #|   of introductions: 1 (red), 3 (blue), 5 (green), 7 (purple), and 9
 #|   (orange). All curves show increasing probability of emergence with
 #|   higher R0, and higher numbers of introductions consistently increase
-#|   emergence probability. Increasing the number of initial infections has 
+#|   emergence probability. Increasing the number of initial infections has
 #|   diminishing increases on the probability of emergence with greater number
 #|   of introductions.
 ggplot(data = res) +
