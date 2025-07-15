@@ -59,6 +59,34 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="superspreading-development-version">superspreading (development version)<a class="anchor" aria-label="anchor" href="#superspreading-development-version"></a></h2>
+<p>The fourth minor release of the <em>superspreading</em> package contains new functionality, a new vignette and various minor improvements to documentation.</p>
+<p>With this release the development status of the package has been updated from <em>experimental</em> to <em>stable</em>.</p>
+<div class="section level3">
+<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<ul><li><p>The <code><a href="../reference/probability_emergence.html">probability_emergence()</a></code> function has been added to calculate the probability that a pathogen introduced to humans can evolve and emerge to cause a sustained human-to-human outbreak, implementing and extending the framework of <a href="https://doi.org/10.1038/nature02104" class="external-link">Antia et al. (2003)</a> (<a href="https://github.com/epiverse-trace/superspreading/issues/124" class="external-link">#124</a>, <a href="https://github.com/epiverse-trace/superspreading/issues/133" class="external-link">#133</a>).</p></li>
+<li><p>A new vignette, <code>emergence.Rmd</code>, has been added that covers the functionality of <code><a href="../reference/probability_emergence.html">probability_emergence()</a></code> and reproduces the two figures from <a href="https://doi.org/10.1038/nature02104" class="external-link">Antia et al. (2003)</a> as well as a figure using the multiple introductions extension (<a href="https://github.com/epiverse-trace/superspreading/issues/124" class="external-link">#124</a>, <a href="https://github.com/epiverse-trace/superspreading/issues/133" class="external-link">#133</a>).</p></li>
+<li><p>Alt-text has been added to all plots across all vignettes (<a href="https://github.com/epiverse-trace/superspreading/issues/129" class="external-link">#129</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<ul><li>The <code>percent_transmission</code> argument in <code><a href="../reference/proportion_transmission.html">proportion_transmission()</a></code> has been renamed to <code>prop_transmission</code> (<a href="https://github.com/epiverse-trace/superspreading/issues/130" class="external-link">#130</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-changes-development-version">Minor changes<a class="anchor" aria-label="anchor" href="#minor-changes-development-version"></a></h3>
+<ul><li><p>An <code>.aspell/</code> folder is added to the package including <code>defaults.R</code> and <code>superspreading.rds</code> to supply a wordlist to the CRAN spell checking to avoid quoting names in the <code>DESCRIPTION</code> (<a href="https://github.com/epiverse-trace/superspreading/issues/127" class="external-link">#127</a>).</p></li>
+<li><p>Package and function documentation has been updated. Vignette changes include minor reworking of text, updating any information or links that were outdated; function documentation is styled more consistently and follows the <a href="https://style.tidyverse.org/documentation.html" class="external-link">Tidyverse style guide</a> (<a href="https://github.com/epiverse-trace/superspreading/issues/131" class="external-link">#131</a>, <a href="https://github.com/epiverse-trace/superspreading/issues/134" class="external-link">#134</a>).</p></li>
+<li><p>Internal code style has been updated to adhere to current best practice (<a href="https://github.com/epiverse-trace/superspreading/issues/125" class="external-link">#125</a>).</p></li>
+<li><p>The package lifecycle badge has been updated from <em>experimental</em> to <em>stable</em>. CRAN status, CRAN downloads, repo status and Zenodo DOI badges have been added to the <code>README</code> (<a href="https://github.com/epiverse-trace/superspreading/issues/119" class="external-link">#119</a>, <a href="https://github.com/epiverse-trace/superspreading/issues/132" class="external-link">#132</a>).</p></li>
+<li><p>The {pkgdown} <code>development: mode</code> has been set to <code>auto</code> now the package is hosted on CRAN (<a href="https://github.com/epiverse-trace/superspreading/issues/118" class="external-link">#118</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<ul><li>None</li>
+</ul></div>
+<div class="section level3">
+<h3 id="deprecated-and-defunct-development-version">Deprecated and defunct<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-development-version"></a></h3>
+<ul><li>None</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.0" id="superspreading-030">superspreading 0.3.0<a class="anchor" aria-label="anchor" href="#superspreading-030"></a></h2><p class="text-muted">CRAN release: 2025-01-27</p>
