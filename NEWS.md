@@ -1,8 +1,44 @@
 # superspreading (development version)
 
+The fourth minor release of the _superspreading_ package contains new functionality, a new vignette and various minor improvements to documentation.
+
+With this release the development status of the package has been updated from _experiemental_ to _stable_. 
+
+## New features
+
+* The `probability_emergence()` function has been added to calculate the probability that a pathogen introduced to humans can evolve and emerge to cause a sustained human-to-human outbreak, implementing and extending the framework of [Antia et al. (2003)](https://doi.org/10.1038/nature02104) (#124, #133).
+
+* A new vignette, `emergence.Rmd`, has been added that covers the functionality of `probability_emergence()` and reproduces the two figures from [Antia et al. (2003)](https://doi.org/10.1038/nature02104) as well as a figure using the multiple introductions extension (#124, #133).
+
+* Alt-text has been added to all plots across all vignettes (#129).
+
+## Breaking changes
+
+* The `percent_transmission` argument in `proportion_transmission()` has been renamed to `prop_transmission` (#130).
+
+## Minor changes
+
+* An `.aspell/` folder is added to the package including `defaults.R` and `superspreading.rds` to supply a wordlist to the CRAN spell checking to avoid quoting names in the `DESCRIPTION` (#127). 
+
+* Package and function documentation has been updated. Vignette changes include minor reworking of text, updating any information or links that were outdated; function documentation is styled more consistently and follows the [Tidyverse style guide](https://style.tidyverse.org/documentation.html) (#131, #134).
+
+* Internal code style has been updated to adhere to current best practice (#125).
+
+* The package lifecycle badge has been updated from _experimental_ to _stable_. CRAN status, CRAN downloads, repo status and Zenodo DOI badges have been added to the `README` (#119, #132).
+
+* The {pkgdown} `development: mode` has been set to `auto` now the package is hosted on CRAN (#118).
+
+## Bug fixes
+
+* None
+
+## Deprecated and defunct
+
+* None
+
 # superspreading 0.3.0
 
-The third minor release of the _superspreading_ package contains enhancements to several functions and a new vignette. 
+The third minor release of the _superspreading_ package contains enhancements to several functions and a new vignette.
 
 We are also pleased to welcome Dillon Adam (@dcadam) as a new package author for his contributions towards this version.
 
