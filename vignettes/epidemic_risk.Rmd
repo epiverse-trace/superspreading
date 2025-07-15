@@ -45,7 +45,7 @@ library(ggtext)
 ```
 
 Early in the COVID-19 epidemic, a number of studies including @kucharskiEarlyDynamicsTransmission2020 investigated
-whether data on SARS-CoV-2 incidence had evidence of superspreading events. These events are often estimated as some measure of overdispersion. This was in light of evidence that other corona virus
+whether data on SARS-CoV-2 incidence had evidence of superspreading events. These events are often estimated as some measure of overdispersion. This was in light of evidence that other coronavirus
 outbreaks (Severe acute respiratory syndrome (SARS) and Middle East respiratory syndrome (MERS))
 had superspreading events. The detection of variability in individual-transmission
 is important in understanding or predicting the likelihood of transmission establishing
@@ -53,7 +53,7 @@ when imported into a new location (e.g. country).
 
 First we set up the parameters to use for calculating the probability of an
 epidemic. In this case we are varying the heterogeneity of transmission (`k`)
-and number of initial infections (`a`).
+and number of initial infections (`num_init_infect`).
 
 ```{r, prep-dispersion-plot}
 epidemic_params <- expand.grid(
@@ -92,7 +92,7 @@ epidemic_params <- cbind(epidemic_params, prob_epidemic)
 ```
 
 To visualise the influence of transmission variation (`k`) we subset the results
-to only include those with a single initial infection seeding transmission (`a = 1`).
+to only include those with a single initial infection seeding transmission (`num_init_infect = 1`).
 
 ```{r, subset-prob-epidemic}
 # subset data for a single initial infection
@@ -143,7 +143,7 @@ ggplot(data = homogeneity) +
 ```
 
 The degree of variability in transmission increases as $k$ decreases [@lloyd-smithSuperspreadingEffectIndividual2005]. 
-So the probability of a large outbreak is smaller for smaller values of $k$, meaning that if COVID-19
+So the probability of a large outbreak is smaller for smaller values of $k$, for a given value of $R$, meaning that if COVID-19
 is more similar to SARS than MERS it will be less likely to establish and cause an 
 outbreak if introduced into a newly susceptible population.
 
@@ -155,7 +155,7 @@ introductions, the higher the chance one will lead to an epidemic.
 introductions <- subset(epidemic_params, k == 0.5)
 ```
 
-```{r, plot-introductions, fig.cap="The probability that an a number of introduction events will cause a sustained outbreak (transmission chain). The number of disease introductions is plotted on the x-axis and probability of outbreak -- calculated using `probability_epidemic()` -- is on the y-axis. This plot is reproduced from Kucharski et al. (2020) figure 3B."}
+```{r, plot-introductions, fig.cap="The probability that a number of introduction events will cause a sustained outbreak (transmission chain). The number of disease introductions is plotted on the x-axis and probability of outbreak -- calculated using `probability_epidemic()` -- is on the y-axis. This plot is reproduced from Kucharski et al. (2020) figure 3B."}
 #| fig.alt: >
 #|   A scatter plot showing the relationship between the number of
 #|   introductions of an infectious disease (x-axis, ranging from 0 to 10) and
@@ -227,13 +227,9 @@ ggplot(data = epidemic_params) +
 In the above plot we drop the uncertainty around each point and assume a known value
 of $R$ in order to more clearly show the pattern.
 
-Applications that make it easy to explore this functionality and compare between existing
-parameter estimates of offspring distributions are also useful. An example of this is the
-[Shiny app developed by the Centre for Mathematical Modelling of Infectious diseases](https://cmmid.github.io/visualisations/new-outbreak-probability) at the London
-School of Hygiene and Tropical Medicine, for comparing SARS-like and MERS-like scenarios, 
-as well as random mixing.
+These calculations enable us to understand epidemics and applications, such as Shiny apps, to explore this functionality and compare between existing parameter estimates of offspring distributions are also useful. An example application called [Probability of a large 2019-nCoV outbreak following introduction of cases](https://cmmid.github.io/visualisations/), that is no longer maintained, was developed by the Centre for Mathematical Modelling of Infectious diseases at the London School of Hygiene and Tropical Medicine, for comparing SARS-like and MERS-like scenarios, as well as random mixing during the COVID-19 pandemic.
 
-Conversely to the probability of an epidemics, the probability that an outbreak will 
+Conversely to the probability of an epidemic, the probability that an outbreak will 
 go extinct (i.e. transmission will subside), can also be plotted for different values of 
 $R$.
 
@@ -308,12 +304,12 @@ contains a library of epidemiological parameters included offspring distribution
 Equipped with these parameter estimates, metrics that provide an intuitive understanding of transmission patterns can be tabulated.
 For example the proportion of transmission events in a given cluster size can be calculated using the {superspreading} function `proportion_cluster_size()`.
 
-This calculates the proportion of new cases that originated within a transmission event of a
+This calculates the proportion of new cases that originate within a transmission cluster of a
 given size. In other words, what proportion of all transmission events were part of secondary
 case clusters (i.e. from the same primary case) of at least, for example, five cases. This 
 calculation is useful to inform backwards contact tracing efforts. 
 
-In this example we look at clusters of at least five, ten and twenty-five secondary cases, at
+In this example we look at clusters of at least 5, 10 and 25 secondary cases, at
 different numbers of initial infections and for two reproduction numbers to see how this affects
 cluster sizes.
 
