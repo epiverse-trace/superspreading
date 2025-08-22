@@ -18,7 +18,9 @@ Authors@R: c(
     person("James M.", "Azam", , "james.azam@lshtm.ac.uk", role = c("rev", "ctb"),
            comment = c(ORCID = "0000-0001-5782-7330")),
     person("Chris", "Hartgerink", , "chris@data.org", role = "rev",
-           comment = c(ORCID = "0000-0003-1050-6809"))
+           comment = c(ORCID = "0000-0003-1050-6809")),
+    person("London School of Hygiene and Tropical Medicine, LSHTM", role = "cph",
+           comment = c(ROR = "00a0jsq62"))
   )
 Description: Estimate and understand individual-level variation in
     transmission. Implements density and cumulative compound Poisson
