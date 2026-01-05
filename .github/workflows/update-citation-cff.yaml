@@ -17,7 +17,6 @@ name: Update CITATION.cff
 permissions:
   contents: write
   pull-requests: write
-  workflows: write
 
 jobs:
   update-citation-cff:
@@ -58,3 +57,4 @@ jobs:
 
             Please verify the changes before merging.
           branch: update-citation-cff
+          add-paths: CITATION.cff
