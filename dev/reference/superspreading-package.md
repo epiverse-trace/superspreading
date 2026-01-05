@@ -56,5 +56,5 @@ Other contributors:
 - Chris Hartgerink <chris@data.org>
   ([ORCID](https://orcid.org/0000-0003-1050-6809)) \[reviewer\]
 
-- London School of Hygiene and Tropical Medicine, LSHTM (00a0jsq62)
-  \[copyright holder\]
+- London School of Hygiene and Tropical Medicine, LSHTM
+  ([ROR](https://ror.org/00a0jsq62)) \[copyright holder\]
