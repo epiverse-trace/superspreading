@@ -33,7 +33,7 @@ Other contributors:
   \item Hugo Gruson \email{hugo@data.org} (\href{https://orcid.org/0000-0002-4094-1476}{ORCID}) [reviewer]
   \item James M. Azam \email{james.azam@lshtm.ac.uk} (\href{https://orcid.org/0000-0001-5782-7330}{ORCID}) [reviewer, contributor]
   \item Chris Hartgerink \email{chris@data.org} (\href{https://orcid.org/0000-0003-1050-6809}{ORCID}) [reviewer]
-  \item London School of Hygiene and Tropical Medicine, LSHTM (00a0jsq62) [copyright holder]
+  \item London School of Hygiene and Tropical Medicine, LSHTM (\href{https://ror.org/00a0jsq62}{ROR}) [copyright holder]
 }
 
 }
