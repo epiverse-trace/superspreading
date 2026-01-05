@@ -7,7 +7,6 @@ on:
   push:
     branches:
       - main
-      - fix-update-citation-cff
     paths:
       - 'DESCRIPTION'
       - 'inst/CITATION'
