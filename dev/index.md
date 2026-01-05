@@ -210,9 +210,9 @@ By contributing to this project, you agree to abide by its terms.
 citation("superspreading")
 #> To cite package 'superspreading' in publications use:
 #> 
-#>   Lambert J, Kucharski A, Adam D (2025). _superspreading: Understand
+#>   Lambert J, Kucharski A, Adam D (2026). _superspreading: Understand
 #>   Individual-Level Variation in Infectious Disease Transmission_. R
-#>   package version 0.3.0.9000,
+#>   package version 0.4.0.9000,
 #>   <https://github.com/epiverse-trace/superspreading>.
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -221,8 +221,8 @@ citation("superspreading")
 #>     title = {superspreading: Understand Individual-Level Variation in Infectious Disease
 #> Transmission},
 #>     author = {Joshua W. Lambert and Adam Kucharski and Dillon C. Adam},
-#>     year = {2025},
-#>     note = {R package version 0.3.0.9000},
+#>     year = {2026},
+#>     note = {R package version 0.4.0.9000},
 #>     url = {https://github.com/epiverse-trace/superspreading},
 #>   }
 ```
