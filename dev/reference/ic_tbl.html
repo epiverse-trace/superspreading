@@ -108,14 +108,14 @@ to order the table by, either <code>"AIC"</code> (default), <code>"BIC"</code>, 
 <span class="r-in"><span>  <span class="va">nbinom_fit</span> <span class="op">&lt;-</span> <span class="fu">fitdistrplus</span><span class="fu">::</span><span class="fu"><a href="https://lbbe-software.github.io/fitdistrplus/reference/fitdist.html" class="external-link">fitdist</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">cases</span>, distr <span class="op">=</span> <span class="st">"nbinom"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">ic_tbl</span><span class="op">(</span><span class="va">pois_fit</span>, <span class="va">geom_fit</span>, <span class="va">nbinom_fit</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   distribution      AIC   DeltaAIC         wAIC      BIC    DeltaBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1       nbinom 544.9231   0.000000 8.282326e-01 550.1335   0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2         geom 548.0694   3.146305 1.717674e-01 550.6746   0.5411352</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3         pois 925.9316 381.008504 1.524779e-83 928.5368 378.4033341</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   distribution      AIC   DeltaAIC         wAIC      BIC   DeltaBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       nbinom 538.9290   0.000000 9.415687e-01 544.1393   0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2         geom 544.4884   5.559391 5.843130e-02 547.0936   2.954221</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3         pois 937.8823 398.953300 2.199093e-87 940.4875 396.348130</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           wBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 5.672322e-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 4.327678e-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3.841678e-83</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 8.141357e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 1.858643e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 6.995101e-87</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

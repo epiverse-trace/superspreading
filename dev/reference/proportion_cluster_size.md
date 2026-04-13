@@ -85,17 +85,17 @@ proportion_cluster_size(R = R, k = k, cluster_size = cluster_size)
 #>   R   k prop_10
 #> 1 2 0.1   69.6%
 #> 2 2 0.2   51.4%
-#> 3 2 0.3   39.2%
-#> 4 2 0.4   30.8%
+#> 3 2 0.3   39.1%
+#> 4 2 0.4   30.9%
 #> 5 2 0.5   25.3%
 
 # example with a vector of cluster sizes
 cluster_size <- c(5, 10, 25)
 proportion_cluster_size(R = R, k = k, cluster_size = cluster_size)
 #>   R   k prop_5 prop_10 prop_25
-#> 1 2 0.1  85.5%     69%   34.8%
+#> 1 2 0.1  85.5%   69.1%   34.8%
 #> 2 2 0.2  76.2%   51.1%   14.2%
-#> 3 2 0.3  69.2%   39.4%   6.05%
-#> 4 2 0.4  64.1%   31.1%    2.6%
-#> 5 2 0.5  59.8%   24.6%   1.47%
+#> 3 2 0.3  69.2%   39.5%   6.09%
+#> 4 2 0.4  64.2%   31.1%   2.62%
+#> 5 2 0.5  59.8%   24.6%   1.43%
 ```

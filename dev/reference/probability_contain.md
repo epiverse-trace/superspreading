@@ -181,5 +181,5 @@ probability_contain(
   outbreak_time = 20,
   generation_time = gt
 )
-#> [1] 0.73942
+#> [1] 0.7361
 ```

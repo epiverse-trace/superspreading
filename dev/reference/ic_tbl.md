@@ -41,12 +41,12 @@ if (requireNamespace("fitdistrplus", quietly = TRUE)) {
   nbinom_fit <- fitdistrplus::fitdist(data = cases, distr = "nbinom")
   ic_tbl(pois_fit, geom_fit, nbinom_fit)
 }
-#>   distribution      AIC   DeltaAIC         wAIC      BIC    DeltaBIC
-#> 1       nbinom 544.9231   0.000000 8.282326e-01 550.1335   0.0000000
-#> 2         geom 548.0694   3.146305 1.717674e-01 550.6746   0.5411352
-#> 3         pois 925.9316 381.008504 1.524779e-83 928.5368 378.4033341
+#>   distribution      AIC   DeltaAIC         wAIC      BIC   DeltaBIC
+#> 1       nbinom 538.9290   0.000000 9.415687e-01 544.1393   0.000000
+#> 2         geom 544.4884   5.559391 5.843130e-02 547.0936   2.954221
+#> 3         pois 937.8823 398.953300 2.199093e-87 940.4875 396.348130
 #>           wBIC
-#> 1 5.672322e-01
-#> 2 4.327678e-01
-#> 3 3.841678e-83
+#> 1 8.141357e-01
+#> 2 1.858643e-01
+#> 3 6.995101e-87
 ```
