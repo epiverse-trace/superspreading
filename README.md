@@ -28,11 +28,10 @@ infectious diseases from data on secondary cases.
 
 `{superspreading}` implements methods outlined in Antia et al.
 ([2003](#ref-antiaRoleEvolutionEmergence2003)), Lloyd-Smith et al.
-([2005](#ref-lloyd-smithSuperspreadingEffectIndividual2005)), Adam J.
-Kucharski et al. ([2020](#ref-kucharskiEarlyDynamicsTransmission2020)),
-and Kremer et al.
-([2021](#ref-kremerQuantifyingSuperspreadingCOVID192021)), as well as
-additional functions.
+([2005](#ref-lloyd-smithSuperspreadingEffectIndividual2005)), Kucharski
+et al. ([2020](#ref-kucharskiEarlyDynamicsTransmission2020)), and Kremer
+et al. ([2021](#ref-kremerQuantifyingSuperspreadingCOVID192021)), as
+well as additional functions.
 
 `{superspreading}` is developed at the [Centre for the Mathematical
 Modelling of Infectious
@@ -74,7 +73,7 @@ library(superspreading)
 ### Calculate the heterogeneity of transmission
 
 Case study using data from early Ebola outbreak in Guinea in 2014,
-stratified by index and non-index cases, as in Adam J. Kucharski et al.
+stratified by index and non-index cases, as in Kucharski et al.
 ([2016](#ref-kucharskiEffectivenessRingVaccination2016)). Data on
 transmission from index and secondary cases for Ebola in 2014.
 
@@ -267,8 +266,7 @@ This project has some overlap with other R packages:
 
 ## References
 
-<div id="refs" class="references csl-bib-body hanging-indent"
-entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 
 <div id="ref-althausEbolaSuperspreading2015" class="csl-entry">
 
@@ -297,21 +295,19 @@ Statistical Software* 64 (4). <https://doi.org/10.18637/jss.v064.i04>.
 
 <div id="ref-fayeChainsTransmissionControl2015" class="csl-entry">
 
-Faye, Ousmane, Pierre-Yves Boëlle, Emmanuel Heleze, Oumar Faye, Cheikh
-Loucoubar, N’Faly Magassouba, Barré Soropogui, et al. 2015. “Chains of
-Transmission and Control of Ebola Virus Disease in Conakry, Guinea, in
-2014: An Observational Study.” *The Lancet Infectious Diseases* 15 (3):
-320–26. <https://doi.org/10.1016/S1473-3099(14)71075-8>.
+Faye, Ousmane, Pierre-Yves Boëlle, Emmanuel Heleze, et al. 2015. “Chains
+of Transmission and Control of Ebola Virus Disease in Conakry, Guinea,
+in 2014: An Observational Study.” *The Lancet Infectious Diseases* 15
+(3): 320–26. <https://doi.org/10.1016/S1473-3099(14)71075-8>.
 
 </div>
 
 <div id="ref-kremerQuantifyingSuperspreadingCOVID192021"
 class="csl-entry">
 
-Kremer, Cécile, Andrea Torneri, Sien Boesmans, Hanne Meuwissen, Selina
-Verdonschot, Koen Vanden Driessche, Christian L. Althaus, Christel Faes,
-and Niel Hens. 2021. “Quantifying Superspreading for COVID-19 Using
-Poisson Mixture Distributions.” *Scientific Reports* 11 (1): 14107.
+Kremer, Cécile, Andrea Torneri, Sien Boesmans, et al. 2021. “Quantifying
+Superspreading for COVID-19 Using Poisson Mixture Distributions.”
+*Scientific Reports* 11 (1): 14107.
 <https://doi.org/10.1038/s41598-021-93578-x>.
 
 </div>
@@ -329,10 +325,9 @@ Infectious Diseases* 22 (1): 105–8.
 
 <div id="ref-kucharskiEarlyDynamicsTransmission2020" class="csl-entry">
 
-Kucharski, Adam J, Timothy W Russell, Charlie Diamond, Yang Liu, John
-Edmunds, Sebastian Funk, Rosalind M Eggo, et al. 2020. “Early Dynamics
-of Transmission and Control of COVID-19: A Mathematical Modelling
-Study.” *The Lancet Infectious Diseases* 20 (5): 553–58.
+Kucharski, Adam J, Timothy W Russell, Charlie Diamond, et al. 2020.
+“Early Dynamics of Transmission and Control of COVID-19: A Mathematical
+Modelling Study.” *The Lancet Infectious Diseases* 20 (5): 553–58.
 <https://doi.org/10.1016/S1473-3099(20)30144-4>.
 
 </div>
