@@ -2,7 +2,7 @@
 
 The rate of growth or decline in the incidence of a transmissible
 infectious disease is often quantified as the population-level
-reproduction number ($R$). However, there may be individual-level
+reproduction number ($`R`$). However, there may be individual-level
 heterogeneity in transmission that this metric does not capture.
 
 In their landmark work, Lloyd-Smith et al.
@@ -12,7 +12,7 @@ a Poisson model and in some cases that of a geometric model. They fit a
 negative binomial distribution to show that the distribution of
 secondary cases displayed overdispersion, in other words, the variance
 exceeded the mean. In the negative binomial distribution this is
-quantified by the dispersion ($k$) parameter being less than 1.
+quantified by the dispersion ($`k`$) parameter being less than 1.
 
 This vignette demonstrates how to use the {superspreading} and
 {fitdistrplus} R packages to estimate the parameters of individual-level
@@ -21,6 +21,7 @@ transmission and select the best fitting model.
 Additionally, {ggplot2} is used for plotting.
 
 ``` r
+
 library(superspreading)
 library(fitdistrplus)
 #> Loading required package: MASS
@@ -45,6 +46,7 @@ the effectiveness of ring- and mass-vaccination campaigns for ongoing
 Ebola outbreaks.
 
 ``` r
+
 # total number of cases (i.e. individuals in transmission chain)
 n <- 152
 
@@ -63,6 +65,7 @@ all_cases <- c(
 ```
 
 ``` r
+
 # fit a standard set of offspring distribution models:
 # - Poisson
 # - Geometric
@@ -74,6 +77,7 @@ nbinom_fit <- fitdist(data = all_cases, distr = "nbinom")
 ```
 
 ``` r
+
 model_tbl <- ic_tbl(pois_fit, geom_fit, nbinom_fit)
 col.names <- gsub(
   pattern = "^Delta", replacement = "$\\\\Delta$", x = colnames(model_tbl)
@@ -82,11 +86,11 @@ col.names <- gsub(pattern = "^w", replacement = "$w$", x = col.names)
 knitr::kable(model_tbl, col.names = col.names, row.names = FALSE, digits = 1)
 ```
 
-| distribution |   AIC | $\Delta$AIC | $w$AIC |   BIC | $\Delta$BIC | $w$BIC |
-|:-------------|------:|------------:|-------:|------:|------------:|-------:|
-| nbinom       | 358.4 |         0.0 |      1 | 364.4 |         0.0 |      1 |
-| geom         | 413.6 |        55.2 |      0 | 416.6 |        52.1 |      0 |
-| pois         | 602.4 |       244.0 |      0 | 605.4 |       241.0 |      0 |
+| distribution |   AIC | $`\Delta`$AIC | $`w`$AIC |   BIC | $`\Delta`$BIC | $`w`$BIC |
+|:-------------|------:|--------------:|---------:|------:|--------------:|---------:|
+| nbinom       | 358.4 |           0.0 |        1 | 364.4 |           0.0 |        1 |
+| geom         | 413.6 |          55.2 |        0 | 416.6 |          52.1 |        0 |
+| pois         | 602.4 |         244.0 |        0 | 605.4 |         241.0 |        0 |
 
 The best performing model, for both AIC and BIC comparison, is the
 negative binomial.
@@ -99,15 +103,16 @@ models have a single parameter, whereas the negative binomial has two
 parameters.
 
 ``` r
+
 nbinom_fit$estimate
 #>      size        mu 
 #> 0.1814260 0.9537995
 ```
 
 The parameter for the negative binomial show that there is
-overdispersion (`size` is the dispersion parameter $k$, and `mu` is the
-mean, or $R$) in transmission and thus the EVD transmission chain data
-shows that superspreading events are a possible realisation of EVD
+overdispersion (`size` is the dispersion parameter $`k`$, and `mu` is
+the mean, or $`R`$) in transmission and thus the EVD transmission chain
+data shows that superspreading events are a possible realisation of EVD
 transmission dynamics.
 
 These values match those reported in Althaus
@@ -116,6 +121,7 @@ figure 1 from that paper to display the tail of the distribution from
 which superspreading events can be possible.
 
 ``` r
+
 # tally cases
 tally <- table(all_cases)
 
@@ -142,6 +148,7 @@ nbinom_data <- data.frame(
 ```
 
 ``` r
+
 ggplot(data = nbinom_data) +
   geom_col(
     mapping = aes(x = x, y = prop_num_cases),
@@ -189,6 +196,7 @@ following Kucharski et al.
 ([2016](#ref-kucharskiEffectivenessRingVaccination2016)).
 
 ``` r
+
 index_case_transmission <- c(2, 17, 5, 1, 8, 2, 14)
 secondary_case_transmission <- c(
   1, 2, 1, 4, 4, 1, 3, 3, 1, 1, 4, 9, 9, 1, 2, 1, 1, 1, 4, 3, 3, 4, 2,
@@ -210,6 +218,7 @@ We fit the negative binomial model for both the index and non-index case
 transmission events.
 
 ``` r
+
 # Estimate R and k for index and non-index cases
 param_index <- fitdist(
   data = index_case_transmission,
@@ -282,6 +291,7 @@ These functions can be used with {fitdistrplus}, as shown for the other
 distributions above.
 
 ``` r
+
 # fit an expanded set of offspring distribution models:
 # - Poisson
 # - Geometric
@@ -305,6 +315,7 @@ poisweibull_fit <- fitdist(
 ```
 
 ``` r
+
 model_tbl <- ic_tbl(
   pois_fit, geom_fit, nbinom_fit, poislnorm_fit, poisweibull_fit
 )
@@ -315,24 +326,25 @@ col.names <- gsub(pattern = "^w", replacement = "$w$", x = col.names)
 knitr::kable(model_tbl, col.names = col.names, row.names = FALSE, digits = 1)
 ```
 
-| distribution |   AIC | $\Delta$AIC | $w$AIC |   BIC | $\Delta$BIC | $w$BIC |
-|:-------------|------:|------------:|-------:|------:|------------:|-------:|
-| nbinom       | 358.4 |         0.0 |    0.6 | 364.4 |         0.0 |    0.6 |
-| poisweibull  | 359.8 |         1.4 |    0.3 | 365.9 |         1.4 |    0.3 |
-| poislnorm    | 362.8 |         4.4 |    0.1 | 368.9 |         4.4 |    0.1 |
-| geom         | 413.6 |        55.2 |    0.0 | 416.6 |        52.1 |    0.0 |
-| pois         | 602.4 |       244.0 |    0.0 | 605.4 |       241.0 |    0.0 |
+| distribution |   AIC | $`\Delta`$AIC | $`w`$AIC |   BIC | $`\Delta`$BIC | $`w`$BIC |
+|:-------------|------:|--------------:|---------:|------:|--------------:|---------:|
+| nbinom       | 358.4 |           0.0 |      0.6 | 364.4 |           0.0 |      0.6 |
+| poisweibull  | 359.8 |           1.4 |      0.3 | 365.9 |           1.4 |      0.3 |
+| poislnorm    | 362.8 |           4.4 |      0.1 | 368.9 |           4.4 |      0.1 |
+| geom         | 413.6 |          55.2 |      0.0 | 416.6 |          52.1 |      0.0 |
+| pois         | 602.4 |         244.0 |      0.0 | 605.4 |         241.0 |      0.0 |
 
 The negative binomial is still the best performing fitting model, even
 with the addition of the Poisson-lognormal and Poisson-Weibull models.
 Although the second best model, the Poisson-Weibull, performs similarly
-well to the negative binomial ($\Delta$AIC \< 2 & $\Delta$BIC \< 2).
+well to the negative binomial ($`\Delta`$AIC \< 2 & $`\Delta`$BIC \< 2).
 
 Here we plot the density of each distribution given the maximum
 likelihood estimates to inspect differences between the two
 distributions.
 
 ``` r
+
 # create data frame with proportion of cases, density of each distribution
 dist_compare_data <- data.frame(
   x = seq(0, 20, 1),
@@ -354,6 +366,7 @@ dist_compare_data <- data.frame(
 ```
 
 ``` r
+
 ggplot(data = dist_compare_data) +
   geom_col(
     mapping = aes(x = x, y = prop_num_cases),
@@ -418,16 +431,14 @@ Althaus, Christian L. 2015. “Ebola Superspreading.” *The Lancet
 Infectious Diseases* 15 (5): 507–8.
 <https://doi.org/10.1016/S1473-3099(15)70135-0>.
 
-Faye, Ousmane, Pierre-Yves Boëlle, Emmanuel Heleze, Oumar Faye, Cheikh
-Loucoubar, N’Faly Magassouba, Barré Soropogui, et al. 2015. “Chains of
-Transmission and Control of Ebola Virus Disease in Conakry, Guinea, in
-2014: An Observational Study.” *The Lancet Infectious Diseases* 15 (3):
-320–26. <https://doi.org/10.1016/S1473-3099(14)71075-8>.
+Faye, Ousmane, Pierre-Yves Boëlle, Emmanuel Heleze, et al. 2015. “Chains
+of Transmission and Control of Ebola Virus Disease in Conakry, Guinea,
+in 2014: An Observational Study.” *The Lancet Infectious Diseases* 15
+(3): 320–26. <https://doi.org/10.1016/S1473-3099(14)71075-8>.
 
-Kremer, Cécile, Andrea Torneri, Sien Boesmans, Hanne Meuwissen, Selina
-Verdonschot, Koen Vanden Driessche, Christian L. Althaus, Christel Faes,
-and Niel Hens. 2021. “Quantifying Superspreading for COVID-19 Using
-Poisson Mixture Distributions.” *Scientific Reports* 11 (1): 14107.
+Kremer, Cécile, Andrea Torneri, Sien Boesmans, et al. 2021. “Quantifying
+Superspreading for COVID-19 Using Poisson Mixture Distributions.”
+*Scientific Reports* 11 (1): 14107.
 <https://doi.org/10.1038/s41598-021-93578-x>.
 
 Kucharski, Adam J., Rosalind M. Eggo, Conall H. Watson, Anton Camacho,

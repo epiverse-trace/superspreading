@@ -10,25 +10,26 @@ the top 10% of infectious individuals?”)
 To perform this calculation, we assume that the offspring distribution
 of disease transmission depends both on the distribution of individual
 variability in transmissibility, which we define using a Gamma
-distribution with mean $R$, as well as stochastic transmission within a
-population, which we define using a Poisson process, following
+distribution with mean $`R`$, as well as stochastic transmission within
+a population, which we define using a Poisson process, following
 Lloyd-Smith et al.
 ([2005](#ref-lloyd-smithSuperspreadingEffectIndividual2005)).
 
 If we put a Gamma distributed individual transmissibility into a Poisson
 distribution, the result a negative binomial distribution. This is
-defined by two parameters: $R$, the mean of the negative binomial
+defined by two parameters: $`R`$, the mean of the negative binomial
 distribution and the average number of secondary cases caused by a
-typical primary case; and $k$, the dispersion parameter of the negative
-binomial distribution and controls the heterogeneity in transmission. A
-smaller $k$ results is more variability (overdispersion) in transmission
-and thus superspreading events are more likely.
+typical primary case; and $`k`$, the dispersion parameter of the
+negative binomial distribution and controls the heterogeneity in
+transmission. A smaller $`k`$ results is more variability
+(overdispersion) in transmission and thus superspreading events are more
+likely.
 
 Poisson and geometric offspring distributions are special cases of the
-negative binomial offspring distribution. By setting $k$ to `Inf` (or
-approximately infinite, $> 10^{5}$) then the offspring distribution is a
-Poisson distribution. By setting $k$ to 1 the offspring distribution is
-a geometric distribution.
+negative binomial offspring distribution. By setting $`k`$ to `Inf` (or
+approximately infinite, $`> 10^5`$) then the offspring distribution is a
+Poisson distribution. By setting $`k`$ to 1 the offspring distribution
+is a geometric distribution.
 
 It is currently not possible to calculate the proportion transmission
 using the Poisson-Lognormal and Poisson-Weibull distributions (whose
@@ -44,8 +45,8 @@ for variation in the mean number of secondary cases at the individual
 *and* the stochastic nature of onwards transmission within a population;
 the second method focuses only on variation in the mean number of
 secondary cases at the individual level. The first method is denoted
-$p_{80}$ and the second $t_{20}$. The $p_{80}$ method is the default
-(`method = "p_80"`).
+$`p_{80}`$ and the second $`t_{20}`$. The $`p_{80}`$ method is the
+default (`method = "p_80"`).
 
 The output of `method = "p_80"` and `method = "t_20"` have different
 interpretations and cannot be used interchangeably without understanding
@@ -78,45 +79,52 @@ drawn from a Poisson process.
 
 ## Definitions
 
-The formula for the $p_{80}$ method as stated in Endo et al.
+The formula for the $`p_{80}`$ method as stated in Endo et al.
 ([2020](#ref-endoEstimatingOverdispersionCOVID192020)) is:
 
-$$1 - p_{80} = \int_{0}^{X}\text{NB}(\lfloor x\rfloor;k,\left( \frac{k}{\left( R_{0} \right) + k} \right)dx$$
-where $X$ satisfies
+``` math
+1 - p_{80} = \int^{X}_{0} \text{NB} ( \lfloor x \rfloor; k, \left( \frac{k}{(R_0) + k} \right) dx
+```
+where $`X`$ satisfies
 
-$$1 - 0.8 = \frac{1}{R_{0}}\int_{0}^{X}\lfloor x\rfloor\text{NB}\left( \lfloor x\rfloor;k,\frac{k}{R_{0} + k} \right)dx$$
+``` math
+1 - 0.8 = \frac{1}{R_0} \int^{X}_{0} \lfloor x \rfloor \text{NB} \left( \lfloor x \rfloor; k, \frac{k}{R_0 + k} \right) dx
+```
 Additionally, Endo et al.
 ([2020](#ref-endoEstimatingOverdispersionCOVID192020)) showed that:
 
-$$\frac{1}{R_{0}}\int_{0}^{X}\lfloor x\rfloor\text{NB}\left( \lfloor x\rfloor;k,\frac{k}{R_{0} + k} \right)dx = \int_{0}^{X - 1}\text{NB}\left( \lfloor x\rfloor;k + 1,\frac{k}{R_{0} + k} \right)$$
+``` math
+\frac{1}{R_0} \int^{X}_{0} \lfloor x \rfloor \text{NB} \left( \lfloor x \rfloor; k, \frac{k}{R_0 + k} \right) dx = \int^{X-1}_{0} \text{NB} \left( \lfloor x \rfloor; k + 1, \frac{k}{R_0 + k} \right)
+```
 
-The $t_{20}$ method calculates, as stated by Lloyd-Smith et al.
+The $`t_{20}`$ method calculates, as stated by Lloyd-Smith et al.
 ([2005](#ref-lloyd-smithSuperspreadingEffectIndividual2005)): “the
 expected proportion of transmission due to the most infectious 20% of
-cases, $t_{20}$”, given by
-$t_{20} = 1 - F_{trans}\left( x_{20} \right)$, where $F_{trans}$ is
-defined as:
+cases, $`t_{20}`$”, given by $`t_{20} = 1 - F_{trans}(x_{20})`$, where
+$`F_{trans}`$ is defined as:
 
-$$F_{trans}(x) = \frac{1}{R_{0}}\int_{0}^{x}uf_{v}(u)du$$
+``` math
+F_{trans}(x) = \frac{1}{R_0} \int^{x}_{0} u f_v (u) du
+```
 
-$f_{\nu}(x)$ is the probability density function (pdf) of the gamma
-distribution of the individual reproduction number $\nu$.
+$`f_\nu(x)`$ is the probability density function (pdf) of the gamma
+distribution of the individual reproduction number $`\nu`$.
 
 For both methods the proportion of transmission can be modified using
 the `prop_transmission` argument in
 [`proportion_transmission()`](https://epiverse-trace.github.io/superspreading/dev/reference/proportion_transmission.md)
-so they are not fixed at 80 and 20, respectively, for $p_{80}$ and
-$t_{20}$.
+so they are not fixed at 80 and 20, respectively, for $`p_{80}`$ and
+$`t_{20}`$.
 
-There are two methods for calculating the $p_{80}$ method, analytically
-as given by Endo et al.
+There are two methods for calculating the $`p_{80}`$ method,
+analytically as given by Endo et al.
 ([2020](#ref-endoEstimatingOverdispersionCOVID192020)), or numerically
 by sampling from a negative binomial distribution
 (`proportion_transmission(..., simulate = TRUE)`. For the purpose of
 this vignette to compare all of the methods we will term the analytical
-calculation $p_{80}$, and the numerical calculation $p_{80}^{sim}$.
+calculation $`p_{80}`$, and the numerical calculation $`p_{80}^{sim}`$.
 
-Now that the $p_{80}$ and $t_{20}$ methods have been defined we’ll
+Now that the $`p_{80}`$ and $`t_{20}`$ methods have been defined we’ll
 explore the functionality of each, their characteristics and compare
 them, making note of any unexpected behaviour to watch out for.
 
@@ -124,6 +132,7 @@ First we load the {superspreading}, {ggplot2}, {purrr} and {dplyr} R
 packages.
 
 ``` r
+
 library(superspreading)
 library(ggplot2)
 library(purrr)
@@ -141,7 +150,7 @@ library(dplyr)
 ## Exploring each method
 
 To show the proportion of transmission using both methods we can load
-the estimates of $R$ and $k$ estimated from Lloyd-Smith et al.
+the estimates of $`R`$ and $`k`$ estimated from Lloyd-Smith et al.
 ([2005](#ref-lloyd-smithSuperspreadingEffectIndividual2005)), which are
 stored in the library of epidemiological parameters in the
 {epiparameter} R package, and the interoperability of {epiparameter} and
@@ -151,6 +160,7 @@ argument in
 [`proportion_transmission()`](https://epiverse-trace.github.io/superspreading/dev/reference/proportion_transmission.md).
 
 ``` r
+
 library(epiparameter)
 offspring_dists <- epiparameter_db(
   epi_name = "offspring distribution"
@@ -160,11 +170,12 @@ offspring_dists <- epiparameter_db(
 #> To retrieve the citation for each use the 'get_citation' function
 ```
 
-Here we create a table with the estimates of the mean ($R$) and
-dispersion ($k$) for each disease from Lloyd-Smith et al.
+Here we create a table with the estimates of the mean ($`R`$) and
+dispersion ($`k`$) for each disease from Lloyd-Smith et al.
 ([2005](#ref-lloyd-smithSuperspreadingEffectIndividual2005)).
 
 ``` r
+
 diseases <- vapply(offspring_dists, `[[`, FUN.VALUE = character(1), "disease")
 offspring_dists <- offspring_dists[!duplicated(diseases)]
 diseases <- diseases[!duplicated(diseases)]
@@ -190,10 +201,11 @@ offspring_dist_params
 Using these parameter estimates for the negative binomial offspring
 distribution of each disease we can append the calculated proportion of
 transmission caused by the most infectious 20% of cases, using the
-$t_{20}$ method, and the calculated proportion of transmission causing
-80% of onward transmission, using the $p_{80}$ method.
+$`t_{20}`$ method, and the calculated proportion of transmission causing
+80% of onward transmission, using the $`p_{80}`$ method.
 
 ``` r
+
 offspring_dist_params$t20 <- do.call(
   rbind,
   apply(
@@ -232,7 +244,7 @@ offspring_dist_params
 ```
 
 It can be seen in the table above that when an offspring distribution
-has a smaller dispersion ($k$) parameter the proportion of cases
+has a smaller dispersion ($`k`$) parameter the proportion of cases
 produced by the most infectious 20% of cases is high, and the proportion
 of cases that produce 80% of transmission is low. The estimates for SARS
 demonstrate this point. Both metrics lead to the same conclusion that
@@ -241,7 +253,7 @@ are heterogeneous and superspreading is a important aspect of the
 outbreak.
 
 The variability in individual-level transmission comes from modelling
-the individual reproduction number, $\nu$ as a gamma distribution,
+the individual reproduction number, $`\nu`$ as a gamma distribution,
 instead of assuming that the individual-level reproduction number is
 equal for all individuals, which would result in a Poisson offspring
 distribution (see Lloyd-Smith et al.
@@ -256,6 +268,7 @@ proportion of transmission against the proportion of infectious cases.
 For this we will need to write a couple of custom functions.
 
 ``` r
+
 # nolint start for `:::`
 get_infectious_curve <- function(R, k) {
   # upper limit of x when y = 0
@@ -283,6 +296,7 @@ We can now reproduce Figure 1b in Lloyd-Smith et al.
 offspring distribution parameters obtained above.
 
 ``` r
+
 infect_curve <- map(offspring_dist_params %>% # nolint nested_pipe_linter
       group_split(disease), function(x) {
         get_infectious_curve(R = x$mean, k = x$dispersion) %>%
@@ -296,6 +310,7 @@ infect_curve <- do.call(rbind, infect_curve)
 ```
 
 ``` r
+
 ggplot(
   data = infect_curve,
   aes(x = prop_i, y = exp_t, colour = disease)
@@ -341,13 +356,14 @@ transmission heterogeneity, with the top ~20% of cases accounting for
 threshold.](proportion_transmission_files/figure-html/unnamed-chunk-6-1.png)
 
 This plot shows the variability in transmission owing to the
-gamma-distributed individual reproduction number ($\nu$). If we take a
+gamma-distributed individual reproduction number ($`\nu`$). If we take a
 slice through the above plot when the proportion of infectious cases
 equals 0.2 (shown by the dashed line) we can calculate the proportion of
 transmission caused by the most infectious 20% of cases using the
 `proportion_tranmission(..., method = "t_20")` function.
 
 ``` r
+
 k_seq <- superspreading:::lseq(from = 0.01, to = 100, length.out = 1000) # nolint
 y <- map_dbl(
   k_seq,
@@ -362,6 +378,7 @@ prop_t20 <- data.frame(k_seq, y)
 ```
 
 ``` r
+
 ggplot() +
   geom_line(data = prop_t20, mapping = aes(x = k_seq, y = y)) +
   geom_point(
@@ -412,16 +429,17 @@ The above plot replicates Figure 1c from Lloyd-Smith et al.
 ([2005](#ref-lloyd-smithSuperspreadingEffectIndividual2005)). It shows
 how different diseases have different proportion of transmission from
 the most infectious 20% owing to varying degrees of overdispersion
-($k$).
+($`k`$).
 
-The plot uses an $R$ of 2, however, one characteristic of the $t_{20}$
-method is that different values of $R$ do not influence the proportion
-of transmission, so the plot would look identical with other value of
-$R$. This is because as shown the equation defining the $t_{20}$ method
-above the integral is divided by $R_{0}$ so that only $f_{\nu}(u)$
-control the proportion of transmission.
+The plot uses an $`R`$ of 2, however, one characteristic of the
+$`t_{20}`$ method is that different values of $`R`$ do not influence the
+proportion of transmission, so the plot would look identical with other
+value of $`R`$. This is because as shown the equation defining the
+$`t_{20}`$ method above the integral is divided by $`R_0`$ so that only
+$`f_{\nu}(u)`$ control the proportion of transmission.
 
 ``` r
+
 # For k = 0.5
 proportion_transmission(
   R = 0.1, k = 0.5, prop_transmission = 0.8, method = "t_20"
@@ -457,10 +475,11 @@ proportion_transmission(
 #> 1 5 2   94.9%
 ```
 
-This is not the case for $p_{80}$, where changes in both $R$ and $k$
-influence the proportion of transmission.
+This is not the case for $`p_{80}`$, where changes in both $`R`$ and
+$`k`$ influence the proportion of transmission.
 
 ``` r
+
 # For k = 0.5
 proportion_transmission(
   R = 0.1, k = 0.5, prop_transmission = 0.8, method = "p_80"
@@ -497,20 +516,21 @@ proportion_transmission(
 ```
 
 One thing that was mentioned above is that the interpretation of the
-$p_{80}$ and $t_{20}$ methods are not interchangeable, additionally,
-$t_{80}$ and $p_{20}$ are not equal. Stated differently, the $p_{80}$
-method to calculate the proportion of transmission that cause 20% of
-cases, and the $t_{20}$ method to calculate the proportion of
+$`p_{80}`$ and $`t_{20}`$ methods are not interchangeable, additionally,
+$`t_{80}`$ and $`p_{20}`$ are not equal. Stated differently, the
+$`p_{80}`$ method to calculate the proportion of transmission that cause
+20% of cases, and the $`t_{20}`$ method to calculate the proportion of
 transmission caused by the most infectious 80% are not equivalent. It is
-also the case that $1 - p_{80} \neq t_{20}$, thus
-$1 - t_{20} \neq p_{80}$.
+also the case that $`1 - p_{80} \neq t_{20}`$, thus
+$`1 - t_{20} \neq p_{80}`$.
 
-Here we vary $R$ and $k$ and show that by setting the $p_{80}$ method to
-`prop_transmission = 0.2`, and the $t_{20}$ method to
+Here we vary $`R`$ and $`k`$ and show that by setting the $`p_{80}`$
+method to `prop_transmission = 0.2`, and the $`t_{20}`$ method to
 `prop_transmission = 0.8` the two cannot be interchangeably interpreted
 as outlined in the box above.
 
 ``` r
+
 # R = 1, k = 0.5
 proportion_transmission(
   R = 1, k = 0.5, prop_transmission = 0.2, method = "p_80"
@@ -536,9 +556,11 @@ proportion_transmission(
 #> 1 3 2   94.9%
 ```
 
-Here we show that $1 - p_{80} \neq t_{20}$ and $1 - t_{20} \neq p_{80}$.
+Here we show that $`1 - p_{80} \neq t_{20}`$ and
+$`1 - t_{20} \neq p_{80}`$.
 
 ``` r
+
 1 - proportion_transmission(
   R = 1, k = 0.5, prop_transmission = 0.8, method = "p_80",
   format_prop = FALSE
@@ -562,12 +584,12 @@ proportion_transmission(
 #> 1 1 0.5   22.6%
 ```
 
-The $t_{20}$ method allows for true homogeneity when
-$\left. k\rightarrow\infty \right.$ ($t_{20} = 20\%$), whereas the
-$p_{80}$ method does not allow for true homogeneity
-($p_{80} \neq 80\%$).
+The $`t_{20}`$ method allows for true homogeneity when
+$`k \rightarrow \infty`$ ($`t_{20} = 20\%`$), whereas the $`p_{80}`$
+method does not allow for true homogeneity ($`p_{80} \neq 80\%`$).
 
 ``` r
+
 proportion_transmission(
   R = 1, k = Inf, prop_transmission = 0.8, method = "p_80"
 )

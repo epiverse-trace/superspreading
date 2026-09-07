@@ -8,11 +8,10 @@ data on secondary cases.
 [superspreading](https://github.com/epiverse-trace/superspreading)
 implements methods outlined in Antia et al.
 ([2003](#ref-antiaRoleEvolutionEmergence2003)), Lloyd-Smith et al.
-([2005](#ref-lloyd-smithSuperspreadingEffectIndividual2005)), Adam J.
-Kucharski et al. ([2020](#ref-kucharskiEarlyDynamicsTransmission2020)),
-and Kremer et al.
-([2021](#ref-kremerQuantifyingSuperspreadingCOVID192021)), as well as
-additional functions.
+([2005](#ref-lloyd-smithSuperspreadingEffectIndividual2005)), Kucharski
+et al. ([2020](#ref-kucharskiEarlyDynamicsTransmission2020)), and Kremer
+et al. ([2021](#ref-kremerQuantifyingSuperspreadingCOVID192021)), as
+well as additional functions.
 
 [superspreading](https://github.com/epiverse-trace/superspreading) is
 developed at the [Centre for the Mathematical Modelling of Infectious
@@ -26,6 +25,7 @@ Medicine](https://www.lshtm.ac.uk/) as part of
 The package can be installed from CRAN using
 
 ``` r
+
 install.packages("superspreading")
 ```
 
@@ -35,6 +35,7 @@ The easiest way to install the development version of
 [pak](https://pak.r-lib.org/) package:
 
 ``` r
+
 # check whether {pak} is installed
 if(!require("pak")) install.packages("pak")
 pak::pak("epiverse-trace/superspreading")
@@ -44,19 +45,21 @@ Alternatively, install pre-compiled binaries from [the Epiverse TRACE
 R-universe](https://epiverse-trace.r-universe.dev/superspreading)
 
 ``` r
+
 install.packages("superspreading", repos = c("https://epiverse-trace.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
 ## Quick start
 
 ``` r
+
 library(superspreading)
 ```
 
 ### Calculate the heterogeneity of transmission
 
 Case study using data from early Ebola outbreak in Guinea in 2014,
-stratified by index and non-index cases, as in Adam J. Kucharski et al.
+stratified by index and non-index cases, as in Kucharski et al.
 ([2016](#ref-kucharskiEffectivenessRingVaccination2016)). Data on
 transmission from index and secondary cases for Ebola in 2014.
 
@@ -80,13 +83,14 @@ documentation (specifically
 to explore the full range of functionality.
 
 In this example we fit the negative binomial distribution to estimate
-the reproduction number ($R$, which is the mean of the distribution) and
-the dispersion ($k$, which a measure of the variance of the
+the reproduction number ($`R`$, which is the mean of the distribution)
+and the dispersion ($`k`$, which a measure of the variance of the
 distribution). The parameters are estimated via maximum likelihood (the
 default method for
 [`fitdist()`](https://lbbe-software.github.io/fitdistrplus/reference/fitdist.html)).
 
 ``` r
+
 # we use {fitdistrplus} to fit the models
 library(fitdistrplus)
 #> Loading required package: MASS
@@ -125,13 +129,13 @@ param_non_index$estimate
 #> 0.1937490 0.6619608
 ```
 
-The reproduction number ($R$) is higher for index cases than for
+The reproduction number ($`R`$) is higher for index cases than for
 non-index cases, but the heterogeneity in transmission is higher for
-non-index cases (i.e. $k$ is lower).
+non-index cases (i.e. $`k`$ is lower).
 
 ### Calculate the probability of a large epidemic
 
-Given the reproduction number ($R$) and the dispersion ($k$), the
+Given the reproduction number ($`R`$) and the dispersion ($`k`$), the
 probability that a infectious disease will cause an epidemic, in other
 words the probability it does not go extinct, can be calculated using
 [`probability_epidemic()`](https://epiverse-trace.github.io/superspreading/dev/reference/probability_epidemic.md).
@@ -141,6 +145,7 @@ for the parameters estimated in the above section for Ebola, assuming
 there are three initial infections seeding the potential outbreak.
 
 ``` r
+
 # Compare probability of a large outbreak when k varies according to
 # index/non-index values, assuming 3 initial spillover infections
 
@@ -207,6 +212,7 @@ By contributing to this project, you agree to abide by its terms.
 ## Citing this package
 
 ``` r
+
 citation("superspreading")
 #> To cite package 'superspreading' in publications use:
 #> 
@@ -281,16 +287,14 @@ Delignette-Muller, Marie Laure, and Christophe Dutang. 2015.
 “Fitdistrplus: An R Package for Fitting Distributions.” *Journal of
 Statistical Software* 64 (4). <https://doi.org/10.18637/jss.v064.i04>.
 
-Faye, Ousmane, Pierre-Yves Boëlle, Emmanuel Heleze, Oumar Faye, Cheikh
-Loucoubar, N’Faly Magassouba, Barré Soropogui, et al. 2015. “Chains of
-Transmission and Control of Ebola Virus Disease in Conakry, Guinea, in
-2014: An Observational Study.” *The Lancet Infectious Diseases* 15 (3):
-320–26. <https://doi.org/10.1016/S1473-3099(14)71075-8>.
+Faye, Ousmane, Pierre-Yves Boëlle, Emmanuel Heleze, et al. 2015. “Chains
+of Transmission and Control of Ebola Virus Disease in Conakry, Guinea,
+in 2014: An Observational Study.” *The Lancet Infectious Diseases* 15
+(3): 320–26. <https://doi.org/10.1016/S1473-3099(14)71075-8>.
 
-Kremer, Cécile, Andrea Torneri, Sien Boesmans, Hanne Meuwissen, Selina
-Verdonschot, Koen Vanden Driessche, Christian L. Althaus, Christel Faes,
-and Niel Hens. 2021. “Quantifying Superspreading for COVID-19 Using
-Poisson Mixture Distributions.” *Scientific Reports* 11 (1): 14107.
+Kremer, Cécile, Andrea Torneri, Sien Boesmans, et al. 2021. “Quantifying
+Superspreading for COVID-19 Using Poisson Mixture Distributions.”
+*Scientific Reports* 11 (1): 14107.
 <https://doi.org/10.1038/s41598-021-93578-x>.
 
 Kucharski, Adam J., Rosalind M. Eggo, Conall H. Watson, Anton Camacho,
@@ -299,10 +303,9 @@ Vaccination as Control Strategy for Ebola Virus Disease.” *Emerging
 Infectious Diseases* 22 (1): 105–8.
 <https://doi.org/10.3201/eid2201.151410>.
 
-Kucharski, Adam J, Timothy W Russell, Charlie Diamond, Yang Liu, John
-Edmunds, Sebastian Funk, Rosalind M Eggo, et al. 2020. “Early Dynamics
-of Transmission and Control of COVID-19: A Mathematical Modelling
-Study.” *The Lancet Infectious Diseases* 20 (5): 553–58.
+Kucharski, Adam J, Timothy W Russell, Charlie Diamond, et al. 2020.
+“Early Dynamics of Transmission and Control of COVID-19: A Mathematical
+Modelling Study.” *The Lancet Infectious Diseases* 20 (5): 553–58.
 <https://doi.org/10.1016/S1473-3099(20)30144-4>.
 
 Lloyd-Smith, J. O., S. J. Schreiber, P. E. Kopp, and W. M. Getz. 2005.

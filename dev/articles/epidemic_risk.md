@@ -12,7 +12,7 @@ transmission clusters and heterogeneity in individual-level transmission
 can provide insight into the occurrence of superspreading events and
 from this the probability an outbreak will cause an epidemic. This has
 implications for policy decisions on how to bring disease transmission
-under control (e.g. $R$ \< 1) and increase the probability that an
+under control (e.g. $`R`$ \< 1) and increase the probability that an
 outbreak goes extinct.
 
 A recent example of where individual-level transmission and
@@ -27,6 +27,7 @@ This vignette explores the applications of the functions included in the
 informing decision-makers for a variety of outbreak scenarios.
 
 ``` r
+
 library(superspreading)
 library(ggplot2)
 library(ggtext)
@@ -48,6 +49,7 @@ an epidemic. In this case we are varying the heterogeneity of
 transmission (`k`) and number of initial infections (`num_init_infect`).
 
 ``` r
+
 epidemic_params <- expand.grid(
   R = 2.35,
   R_lw = 1.5,
@@ -61,6 +63,7 @@ Then we calculate the probability of an epidemic for each parameter
 combination. The results are combined with the the parameters.
 
 ``` r
+
 # results are transposed to pivot to long rather than wide data
 prob_epidemic <- t(apply(epidemic_params, 1, function(x) {
   central <- probability_epidemic(
@@ -88,11 +91,13 @@ results to only include those with a single initial infection seeding
 transmission (`num_init_infect = 1`).
 
 ``` r
+
 # subset data for a single initial infection
 homogeneity <- subset(epidemic_params, num_init_infect == 1)
 ```
 
 ``` r
+
 # plot probability of epidemic across dispersion
 ggplot(data = homogeneity) +
   geom_ribbon(
@@ -144,11 +149,11 @@ of outbreak – calculated using
 – is on the y-axis. This plot is reproduced from Kucharski et al.
 ([2020](#ref-kucharskiEarlyDynamicsTransmission2020)) figure 3A.
 
-The degree of variability in transmission increases as $k$ decreases
+The degree of variability in transmission increases as $`k`$ decreases
 ([Lloyd-Smith et al.
 2005](#ref-lloyd-smithSuperspreadingEffectIndividual2005)). So the
-probability of a large outbreak is smaller for smaller values of $k$,
-for a given value of $R$, meaning that if COVID-19 is more similar to
+probability of a large outbreak is smaller for smaller values of $`k`$,
+for a given value of $`R`$, meaning that if COVID-19 is more similar to
 SARS than MERS it will be less likely to establish and cause an outbreak
 if introduced into a newly susceptible population.
 
@@ -158,10 +163,12 @@ populations. The more introductions, the higher the chance one will lead
 to an epidemic.
 
 ``` r
+
 introductions <- subset(epidemic_params, k == 0.5)
 ```
 
 ``` r
+
 # plot probability of epidemic across introductions
 ggplot(data = introductions) +
   geom_pointrange(
@@ -206,6 +213,7 @@ Different levels of heterogeneity in transmission will produce different
 probabilities of epidemics.
 
 ``` r
+
 # plot probability of epidemic across introductions for multiple k
 ggplot(data = epidemic_params) +
   geom_point(
@@ -250,7 +258,7 @@ the effect of increased transmission variability on an epidemic
 establishing
 
 In the above plot we drop the uncertainty around each point and assume a
-known value of $R$ in order to more clearly show the pattern.
+known value of $`R`$ in order to more clearly show the pattern.
 
 These calculations enable us to understand epidemics and applications,
 such as Shiny apps, to explore this functionality and compare between
@@ -265,9 +273,10 @@ random mixing during the COVID-19 pandemic.
 
 Conversely to the probability of an epidemic, the probability that an
 outbreak will go extinct (i.e. transmission will subside), can also be
-plotted for different values of $R$.
+plotted for different values of $`R`$.
 
 ``` r
+
 extinction_params <- expand.grid(
   R = seq(0, 5, 0.1),
   k = c(0.01, 0.1, 0.5, 1, 4, Inf),
@@ -286,6 +295,7 @@ extinction_params <- cbind(extinction_params, prob_extinct)
 ```
 
 ``` r
+
 # plot probability of extinction across R for multiple k
 ggplot(data = extinction_params) +
   geom_point(
@@ -327,7 +337,7 @@ dispersion have a more gradual decline with higher reproduction
 numbers.](epidemic_risk_files/figure-html/plot-extinction-1.png)
 
 The probability that an infectious disease will go extinct for a given
-value of $R$ and $k$. This is calculated using
+value of $`R`$ and $`k`$. This is calculated using
 [`probability_extinct()`](https://epiverse-trace.github.io/superspreading/dev/reference/probability_extinct.md)
 function. This plot is reproduced from Lloyd-Smith et al.
 ([2005](#ref-lloyd-smithSuperspreadingEffectIndividual2005)) figure 2B.
@@ -366,6 +376,7 @@ cases, at different numbers of initial infections and for two
 reproduction numbers to see how this affects cluster sizes.
 
 ``` r
+
 # For R = 0.8
 proportion_cluster_size(
   R = 0.8,
@@ -406,7 +417,7 @@ proportion_cluster_size(
 These results show that as the level of heterogeneity in
 individual-level transmission increases, a larger percentage of cases
 come from larger cluster sizes, and that large clusters can be produced
-when $R$ is higher even with low levels of transmission variation.
+when $`R`$ is higher even with low levels of transmission variation.
 
 It indicates whether preventing gatherings of a certain size can reduce
 the epidemic by preventing potential superspreading events.
@@ -429,6 +440,7 @@ to calculate the probability that an outbreak will go extinct before
 reaching a threshold size.
 
 ``` r
+
 contain_params <- expand.grid(
   R = 3, k = c(0.1, 0.5, 1, Inf), num_init_infect = 1, control = seq(0, 1, 0.05)
 )
@@ -444,6 +456,7 @@ contain_params <- cbind(contain_params, prob_contain)
 ```
 
 ``` r
+
 # plot probability of epidemic across introductions for multiple k
 ggplot(data = contain_params) +
   geom_point(
@@ -487,10 +500,9 @@ This plot is reproduced from Lloyd-Smith et al. (2005) figure 3C.
 
 ## References
 
-Kucharski, Adam J, Timothy W Russell, Charlie Diamond, Yang Liu, John
-Edmunds, Sebastian Funk, Rosalind M Eggo, et al. 2020. “Early Dynamics
-of Transmission and Control of COVID-19: A Mathematical Modelling
-Study.” *The Lancet Infectious Diseases* 20 (5): 553–58.
+Kucharski, Adam J, Timothy W Russell, Charlie Diamond, et al. 2020.
+“Early Dynamics of Transmission and Control of COVID-19: A Mathematical
+Modelling Study.” *The Lancet Infectious Diseases* 20 (5): 553–58.
 <https://doi.org/10.1016/S1473-3099(20)30144-4>.
 
 Lloyd-Smith, J. O., S. J. Schreiber, P. E. Kopp, and W. M. Getz. 2005.

@@ -1,13 +1,14 @@
 # Outbreaks in heterogeneous networks
 
 ``` r
+
 library(superspreading)
 library(ggplot2)
 library(scales)
 ```
 
 Determining if an outbreak will grow and spread through a susceptible
-population is quantified by the basic reproduction number ($R_{0}$).
+population is quantified by the basic reproduction number ($`R_0`$).
 When there is individual-level variability in the connectedness of
 different individuals in a network (i.e. higher variance in the degree
 of each node) it can lead to heterogeneity in transmission dynamics.
@@ -20,24 +21,29 @@ Under the basic assumption of homogeneous contact patterns (i.e. no
 network effects), we have the following expression for the basic
 reproduction number:
 
-$$R_{0} = \frac{\beta M}{\gamma}$$ where $\beta$ is the probability of
-transmission per contact, $1/\gamma$ is the duration of infectiousness
-($\gamma$ is the rate of loss of infectiousness) and $M$ is the mean
-number of contacts (or partners) per unit time (e.g., per year).
+``` math
+R_0 = \frac{\beta M}{\gamma}
+```
+where $`\beta`$ is the probability of transmission per contact,
+$`1/\gamma`$ is the duration of infectiousness ($`\gamma`$ is the rate
+of loss of infectiousness) and $`M`$ is the mean number of contacts (or
+partners) per unit time (e.g., per year).
 
 In contrast, May and Anderson
 ([1988](#ref-mayTransmissionDynamicsHuman1988)) showed that the
 transmissibility of an infectious disease in a heterogeneous network can
 be defined as follows:
 
-$$R_{0} = \frac{\beta}{\gamma}\frac{M^{2} + V}{M}$$ where $V$ is the
-variance of the number of contacts per unit time. This formulation can
-be appropriate if heterogeneity is predictable over time (i.e. highly
-connected individuals typically remain highly connected), the duration
-of infectiousness is similar or longer to the frequency of partner
-change among highly connected individuals, and the disease has the
-potential to cause a substantial outbreak (i.e. larger value of $\beta$
-and/or $1/\gamma$).
+``` math
+R_0 = \frac{\beta}{\gamma} \frac{M^2 + V}{M}
+```
+where $`V`$ is the variance of the number of contacts per unit time.
+This formulation can be appropriate if heterogeneity is predictable over
+time (i.e. highly connected individuals typically remain highly
+connected), the duration of infectiousness is similar or longer to the
+frequency of partner change among highly connected individuals, and the
+disease has the potential to cause a substantial outbreak (i.e. larger
+value of $`\beta`$ and/or $`1/\gamma`$).
 
 The {superspreading} package provides the
 [`calc_network_R()`](https://epiverse-trace.github.io/superspreading/dev/reference/calc_network_R.md)
@@ -62,6 +68,7 @@ and variance in the number of sexual partners and age range ([Mercer et
 al. 2013](#ref-mercerChangesSexualAttitudes2013)).
 
 ``` r
+
 infect_duration <- exp(seq(log(0.01), log(10), length.out = 100))
 prob_transmission <- exp(seq(log(0.01), log(1), length.out = 100))
 params <- expand.grid(
@@ -93,6 +100,7 @@ res <- reshape(
 ```
 
 ``` r
+
 ggplot(data = res) +
   geom_tile(
     mapping = aes(
@@ -150,7 +158,7 @@ calculated using
 [`calc_network_R()`](https://epiverse-trace.github.io/superspreading/dev/reference/calc_network_R.md)
 – with mean duration of infection on the x-axis and transmission
 probability per sexual partner on the y-axis. The line shows the points
-that $R_{0}$ is equal to one. Both axes are plotted on a natural log
+that $`R_0`$ is equal to one. Both axes are plotted on a natural log
 scale. This plot is similar to Figure 1 from Yakob et al.
 ([2016](#ref-yakobLowRiskSexuallytransmitted2016)), but is plotted as a
 heat map and without annotation.
@@ -173,11 +181,12 @@ For comparison, we produce a figure similar to Endo et al.
 ([2022](#ref-endoHeavytailedSexualContact2022)), using
 [`calc_network_R()`](https://epiverse-trace.github.io/superspreading/dev/reference/calc_network_R.md)
 instead to show how highly connected individuals – who are more likely
-to acquire and pass on infection – alter the estimated $R_{0}$ compared
-to the simpler assumption of $R_{0} = SAR \times contacts$, under the
-assumptions described above, where $SAR$ is the secondary attack rate.
+to acquire and pass on infection – alter the estimated $`R_0`$ compared
+to the simpler assumption of $`R_0 = SAR \times contacts`$, under the
+assumptions described above, where $`SAR`$ is the secondary attack rate.
 
 ``` r
+
 beta <- seq(0.001, 1, length.out = 1000)
 duration_years <- 21 / 365
 res <- lapply(
@@ -201,6 +210,7 @@ res <- reshape(
 ```
 
 ``` r
+
 ggplot(data = res) +
   geom_line(mapping = aes(x = beta, y = R, colour = group)) +
   geom_hline(mapping = aes(yintercept = 1)) +
@@ -238,7 +248,7 @@ The reproduction number using the unadjusted and adjusted calculation –
 calculated using
 [`calc_network_R()`](https://epiverse-trace.github.io/superspreading/dev/reference/calc_network_R.md)
 – with secondary attack rate on the x-axis and reproduction number
-($R_{0}$) on the y-axis. This plot is similar to Figure 2A from Endo et
+($`R_0`$) on the y-axis. This plot is similar to Figure 2A from Endo et
 al. ([2022](#ref-endoHeavytailedSexualContact2022)).
 
 *Methodological caveat*: There is a link with the theory for the main
@@ -248,10 +258,10 @@ have a Gamma distributed mean), because the above Anderson and May
 formulation requires the ‘true’ mean and variance of the underlying
 static contact distribution, rather than the observed mean and variance.
 To give the superspreading version: in a simple branching process with
-fixed $R_{0}$ (i.e. zero variance in the individual-level reproduction
+fixed $`R_0`$ (i.e. zero variance in the individual-level reproduction
 number, perhaps because everyone has an identical number of contacts),
 the Poisson distributed number of transmissions per year measured
-exhibits more variation than the ‘true’ $R_{0}$ (which has zero
+exhibits more variation than the ‘true’ $`R_0`$ (which has zero
 variance). For the above STI model, taking the lifetime average deals
 with this problem some extent, because if we look at the sum of contacts
 over a large number of years, then calculate the mean per year, the
@@ -260,10 +270,9 @@ large.
 
 ## References
 
-Endo, Akira, Hiroaki Murayama, Sam Abbott, Ruwan Ratnayake, Carl A. B.
-Pearson, W. John Edmunds, Elizabeth Fearon, and Sebastian Funk. 2022.
-“Heavy-Tailed Sexual Contact Networks and Monkeypox Epidemiology in the
-Global Outbreak, 2022.” *Science* 378 (6615): 90–94.
+Endo, Akira, Hiroaki Murayama, Sam Abbott, et al. 2022. “Heavy-Tailed
+Sexual Contact Networks and Monkeypox Epidemiology in the Global
+Outbreak, 2022.” *Science* 378 (6615): 90–94.
 <https://doi.org/10.1126/science.add4507>.
 
 May, Robert, and Roy Anderson. 1988. “The Transmission Dynamics of Human
@@ -271,8 +280,7 @@ Immunodeficiency Virus (HIV).” *Philosophical Transactions of the Royal
 Society of London. B, Biological Sciences* 321 (1207): 565–607.
 <https://doi.org/10.1098/rstb.1988.0108>.
 
-Mercer, Catherine H, Clare Tanton, Philip Prah, Bob Erens, Pam
-Sonnenberg, Soazig Clifton, Wendy Macdowall, et al. 2013. “Changes in
+Mercer, Catherine H, Clare Tanton, Philip Prah, et al. 2013. “Changes in
 Sexual Attitudes and Lifestyles in Britain Through the Life Course and
 over Time: Findings from the National Surveys of Sexual Attitudes and
 Lifestyles (Natsal).” *The Lancet* 382 (9907): 1781–94.

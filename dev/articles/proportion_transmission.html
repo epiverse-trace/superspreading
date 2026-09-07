@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Methods for calculating the proportion of transmission">
 <meta name="robots" content="noindex">
@@ -187,7 +187,7 @@ drawn from a Poisson process.</p>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mn>80</mn></msub><annotation encoding="application/x-tex">p_{80}</annotation></semantics></math>
 method as stated in <span class="citation">Endo et al. (<a href="#ref-endoEstimatingOverdispersionCOVID192020">2020</a>)</span>
 is:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><msub><mi>p</mi><mn>80</mn></msub><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>X</mi></msubsup><mtext mathvariant="normal">NB</mtext><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">⌊</mo><mi>x</mi><mo stretchy="false" form="postfix">⌋</mo><mo>;</mo><mi>k</mi><mo>,</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>k</mi><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>R</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>k</mi></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><msub><mi>p</mi><mn>80</mn></msub><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>X</mi></msubsup><mtext mathvariant="normal">NB</mtext><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">⌊</mo><mi>x</mi><mo stretchy="false" form="postfix">⌋</mo><mo>;</mo><mi>k</mi><mo>,</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>k</mi><mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>R</mi><mn>0</mn></msub><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>k</mi></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">
 1 - p_{80} = \int^{X}_{0} \text{NB} ( \lfloor x \rfloor; k, \left( \frac{k}{(R_0) + k} \right) dx
 </annotation></semantics></math> where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
@@ -207,14 +207,14 @@ al. (<a href="#ref-lloyd-smithSuperspreadingEffectIndividual2005">2005</a>)</spa
 of cases,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>t</mi><mn>20</mn></msub><annotation encoding="application/x-tex">t_{20}</annotation></semantics></math>”,
 given by
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mn>20</mn></msub><mo>=</mo><mn>1</mn><mo>−</mo><msub><mi>F</mi><mrow><mi>t</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>s</mi></mrow></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mn>20</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">t_{20} = 1 - F_{trans}(x_{20})</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mn>20</mn></msub><mo>=</mo><mn>1</mn><mo>−</mo><msub><mi>F</mi><mrow><mi>t</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>s</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mn>20</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">t_{20} = 1 - F_{trans}(x_{20})</annotation></semantics></math>,
 where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>F</mi><mrow><mi>t</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>s</mi></mrow></msub><annotation encoding="application/x-tex">F_{trans}</annotation></semantics></math>
 is defined as:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mrow><mi>t</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>s</mi></mrow></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><msub><mi>R</mi><mn>0</mn></msub></mfrac><msubsup><mo>∫</mo><mn>0</mn><mi>x</mi></msubsup><mi>u</mi><msub><mi>f</mi><mi>v</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>u</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>d</mi><mi>u</mi></mrow><annotation encoding="application/x-tex">
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mrow><mi>t</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>s</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><msub><mi>R</mi><mn>0</mn></msub></mfrac><msubsup><mo>∫</mo><mn>0</mn><mi>x</mi></msubsup><mi>u</mi><msub><mi>f</mi><mi>v</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>u</mi></mrow><annotation encoding="application/x-tex">
 F_{trans}(x) = \frac{1}{R_0} \int^{x}_{0} u f_v (u) du
 </annotation></semantics></math></p>
-<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>ν</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f_\nu(x)</annotation></semantics></math>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>ν</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f_\nu(x)</annotation></semantics></math>
 is the probability density function (pdf) of the gamma distribution of
 the individual reproduction number
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ν</mi><annotation encoding="application/x-tex">\nu</annotation></semantics></math>.</p>
@@ -508,7 +508,7 @@ This is because as shown the equation defining the
 method above the integral is divided by
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>R</mi><mn>0</mn></msub><annotation encoding="application/x-tex">R_0</annotation></semantics></math>
 so that only
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>ν</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>u</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f_{\nu}(u)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>ν</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f_{\nu}(u)</annotation></semantics></math>
 control the proportion of transmission.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># For k = 0.5</span></span>
@@ -685,7 +685,7 @@ method does not allow for true homogeneity
 <span><span class="co">#&gt; Infinite values of k are being approximated by 1e+05 for calculations.</span></span>
 <span><span class="co">#&gt;   R     k prop_80</span></span>
 <span><span class="co">#&gt; 1 1 1e+05   80.1%</span></span></code></pre></div>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-endoEstimatingOverdispersionCOVID192020" class="csl-entry">
 Endo, Akira, Centre for the Mathematical Modelling of Infectious
 Diseases COVID-19 Working Group, Sam Abbott, Adam J. Kucharski, and
@@ -711,7 +711,7 @@ Emergence.”</span> <em>Nature</em> 438 (7066): 355–59. <a href="https://doi.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0. Theme provided by <a href="https://github.com/epiverse-trace/epiversetheme" class="external-link">epiversetheme</a> 0.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1. Theme provided by <a href="https://github.com/epiverse-trace/epiversetheme" class="external-link">epiversetheme</a> 0.1.0.</p>
 </div>
 
     </footer>

@@ -22,6 +22,7 @@ reproduction number greater than 1 and thus be able to cause a sustained
 epidemic from human-to-human transmission.
 
 ``` r
+
 library(superspreading)
 library(ggplot2)
 library(scales)
@@ -33,11 +34,12 @@ to replicate Figure 2b from Antia et al.
 ([2003](#ref-antiaRoleEvolutionEmergence2003)) showing how the
 probability of emergence changes for different wild-type reproduction
 numbers and different mutation rates. This assumes a 2-type branching
-process with a wild-type pathogen with $R_{0} < 1$ and a mutant pathogen
-with $R_{0} > 1$, we test with mutant reproduction numbers of 1.2, 1.5,
+process with a wild-type pathogen with $`R_0 < 1`$ and a mutant pathogen
+with $`R_0 > 1`$, we test with mutant reproduction numbers of 1.2, 1.5,
 1,000.
 
 ``` r
+
 R_wild <- seq(0, 1.2, by = 0.01)
 R_mutant <- c(1.2, 1.5, 1000)
 mutation_rate <- c(10^-1, 10^-3)
@@ -64,6 +66,7 @@ res <- cbind(params, prob_emerge = prob_emerge)
 ```
 
 ``` r
+
 ggplot(data = res) +
   geom_line(
     mapping = aes(
@@ -113,18 +116,19 @@ Next we’ll replicate Figure 3a from Antia et al.
 ([2003](#ref-antiaRoleEvolutionEmergence2003)). This uses an extension
 of the 2-type (or one-step) branching process model to include multiple
 intermediate mutants/variants between the introduced wild-type and the
-fully-evolved pathogen with an $R > 1$. In Antia et al.
+fully-evolved pathogen with an $`R > 1`$. In Antia et al.
 ([2003](#ref-antiaRoleEvolutionEmergence2003)) this is called the
-*jackpot model*. The introduced pathogen is subcritical ($R < 1$), and
+*jackpot model*. The introduced pathogen is subcritical ($`R < 1`$), and
 the intermediate variants have the same reproduction number as the
 wild-type. Only the final fully-evolved variant is supercritical
-($R > 1$).
+($`R > 1`$).
 
 We use the same number of intermediate mutants between the wild-type and
 the fully-evolved strain as Antia et al.
 ([2003](#ref-antiaRoleEvolutionEmergence2003)).
 
 ``` r
+
 R_wild <- seq(0, 1.2, by = 0.01)
 R_mutant <- 1.5
 mutation_rate <- c(10^-1)
@@ -153,6 +157,7 @@ res <- cbind(params, prob_emerge = prob_emerge)
 ```
 
 ``` r
+
 ggplot(data = res) +
   geom_line(
     mapping = aes(
@@ -203,6 +208,7 @@ we extend the method of Antia et al.
 initial human infections using the `num_init_infect` argument.
 
 ``` r
+
 R_wild <- seq(0, 1.2, by = 0.01)
 R_mutant <- 1.5
 mutation_rate <- 10^-1
@@ -233,6 +239,7 @@ res <- cbind(params, prob_emerge = prob_emerge)
 ```
 
 ``` r
+
 ggplot(data = res) +
   geom_line(
     mapping = aes(
